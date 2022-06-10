@@ -1,0 +1,40 @@
+@value makerOrange from '../../common/colors.css';
+@value makerWhite from '../../common/colors.css';
+@value makerBrown from '../../common/colors.css';
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  padding: 0.1em 0.3em;
+  font-size: 1.1em;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: makerOrange;
+}
+
+.detail {
+  text-align: start;
+  color: makerWhite;
+  margin: 1.2em 3em;
+}
+
+.name {
+  font-size: 1.8em;
+  margin: 0;
+}
+
+.siteAddress {
+  color: makerBrown;
+}
+
+.address {
+  background-color: makerBrown;
+  font-size: 1.1rem;
+}
