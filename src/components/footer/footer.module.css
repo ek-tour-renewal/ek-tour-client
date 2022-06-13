@@ -8,7 +8,7 @@ ul {
 
 li {
   list-style: none;
-  padding: 0.1em 0.3em;
+  padding: 0.2em 0.3em;
   font-size: 1.1em;
 }
 
@@ -17,6 +17,7 @@ li {
   justify-content: center;
   align-items: center;
   background-color: makerOrange;
+  user-select: none;
 }
 
 .detail {
