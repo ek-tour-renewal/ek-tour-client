@@ -1,0 +1,112 @@
+@value makerWhite, makerOrange, makerLightGrey, makerYellow from '../../common/colors.css';
+
+p {
+  margin: 0.3em 0;
+  margin-right: 0.8em;
+}
+
+button {
+  cursor: pointer;
+}
+
+input, select {
+  border: 1px solid makerLightGrey;
+}
+
+.estimate {
+  flex-basis: 50%;
+}
+
+.estimateButton {
+  display: block;
+  text-align: start;
+  text-align: center;
+  font-size: 1.2em;
+  padding: 0;
+  margin-top: 1.5em;
+  margin-bottom: 0.6rem;
+  width: 12em;
+  height: 2em;
+  border-radius: 0.4em;
+  border: none;
+  background-color: makerOrange;
+  color: makerWhite;
+}
+
+.data {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.8em;
+  margin: 0;
+  background-color: makerYellow;
+  width: 85%;
+}
+
+.travel,
+.name,
+.phone,
+.password,
+.email,
+.departurePlace,
+.departureDate,
+.returnDate,
+.destination,
+.vehicle,
+.vehicleNumber {
+  display: flex;
+  font-size: 0.8em;
+  height: 1.8em;
+  margin-bottom: 1em;
+}
+
+.departureDate,
+.returnDate,
+.departurePlace,
+.destination {
+  flex-basis: 100%;
+}
+
+.vehicle, 
+.vehicleNumber,
+.travel,
+.name,
+.phone,
+.password {
+  flex: 1 1 40%;
+}
+
+.name>input, 
+.password>input {
+  width: 10em;
+}
+
+.select {
+  margin-right: 1em;
+}
+
+.destination>input, .departurePlace>input {
+  width: 20em;
+}
+
+.phone>.select {
+  margin: 0;
+}
+
+.phone>input {
+  width: 3em;
+}
+
+.phone>.hyphen {
+  margin: 0.3em 0.5em;
+}
+
+.detailButton {
+  flex-basis: 100%;
+  text-align: end;
+  padding: 0;
+}
+
+.detailButton>button {
+  background-color: unset;
+  border: none;
+}

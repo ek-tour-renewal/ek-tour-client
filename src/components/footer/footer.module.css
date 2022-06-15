@@ -18,6 +18,7 @@ li {
   align-items: center;
   background-color: makerOrange;
   user-select: none;
+  margin-top: 2em;
 }
 
 .detail {

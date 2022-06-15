@@ -1,0 +1,13 @@
+
+.main {
+  width: 75em;
+}
+
+.body {
+  display: flex;
+}
+
+.contact {
+  background-color: skyblue;
+  flex-basis: 50%
+}

@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styles from './app.module.css';
-import Detail from './components/detail/detail';
+import Main from './components/main/main';
 
 function App() {
   return (
     <div className={styles.app}>
       <BrowserRouter>
         <Routes>
-          <Route path='/' exact element={<Detail />} />
+          <Route path='/' exact element={<Main />} />
         </Routes>
       </BrowserRouter>
     </div>

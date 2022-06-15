@@ -1,7 +1,8 @@
-@value makerOrange from '../../common/colors.css';
+@value makerOrange, makerBlack, makerWhite, makerPaleOrange, makerYellow from '../../common/colors.css';
 
 a {
   text-decoration: none;
+  color: makerBlack;
 }
 
 button {
@@ -12,20 +13,22 @@ button {
   user-select: none;
 }
 
-.subMenu {
+.headerNav {
   text-align: end;
-  margin-right: 3em;
+  border-top: 3px solid makerOrange;
 }
 
-.subMenuButton {
+.headerNavButton {
   background-color: unset;
   border: none;
-  margin: 0 0.8em;
+  margin-right: 2em;
+  font-size: 13px;
 }
 
 .logo {
   cursor: pointer;
-  height: 5em;
+  height: 4.5em;
+  margin: 0 2em;
 }
 
 .navbar {
@@ -37,22 +40,81 @@ button {
 .container {
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
 .navbarMenu {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  padding: 0 4em 0.5em 4em;
+  padding-bottom: 0.5em;
   border-bottom: 0.5em solid makerOrange;
+  margin-bottom: 0;
 }
 
 .menu {
-  font-size: 1.2em;
+  font-size: 1.1em;
+  width: 100%;
 }
 
 .menu:hover {
   color: makerOrange;
   font-weight: bold;
+}
+
+.subNavbar {
+  width: 100%;
+  background-color: makerYellow;
+  opacity:0.8;
+  margin: 0;
+}
+
+.subContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.subMenu {
+  font-size: 0.8em;
+}
+
+.subMenu:hover {
+  color: makerOrange;
+}
+
+.toggle {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 30px;
+  background-color: makerOrange;
+  color: makerWhite;
+  border: none;
+  border-radius: 0.5em;
+  font-size: 20px;
+}
+
+.toggle:hover {
+  background-color: makerPaleOrange;
+}
+
+@media screen and (max-width:868px) {
+  .navbar {
+    align-items: center;
+  }
+
+  .container {
+    flex-direction: column;
+    border-left: 0.5em solid makerOrange;
+  }
+
+  .navbarMenu {
+    flex-direction: column;
+    border-bottom: none;
+  }
+
+  .toggle {
+    display: inline;
+  }
 }
