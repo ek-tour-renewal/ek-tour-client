@@ -1,0 +1,15 @@
+.main {
+  display: flex;
+  margin-left: 4rem;
+  margin-right: 2rem;
+}
+
+.sideMenu {
+  flex: 1 1 25%;
+  background-color: cornflowerblue;
+}
+
+.mainDetail {
+  flex: 1 1 75%;
+  background-color: yellowgreen;
+}

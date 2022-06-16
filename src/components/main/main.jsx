@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './main.module.css';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import Estimate from '../estimate/estimate';
 
-const Main = (props) => {
+const Main = ({ getData }) => {
+
   return (
     <section className={styles.main}>
       <Header />
       <main className={styles.body}>
-        <Estimate />
+        <Estimate getData={getData} />
         <section className={styles.info}>
           <ul className={styles.contact}>
             <li className={styles.contactPhone}>

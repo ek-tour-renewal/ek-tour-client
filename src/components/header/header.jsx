@@ -18,7 +18,7 @@ const Header = (props) => {
   return (
     <header className={styles.header}>
       <section className={styles.headerNav}>
-        <a className={styles.headerNavButton} href='#'>내견적확인</a>
+        <a className={styles.headerNavButton} href='/my'>내견적확인</a>
       </section>
       <nav className={styles.navbar}>
         <a href='/'>
@@ -26,10 +26,10 @@ const Header = (props) => {
         </a>
         <section className={styles.container} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
           <ul className={styles.navbarMenu}>
-            <li ><a className={styles.menu} href='#'>회사소개</a></li>
-            <li ><a className={styles.menu} href='#'>버스안내</a></li>
-            <li ><a className={styles.menu} href='#'>견적요청</a></li>
-            <li ><a className={styles.menu} href='#'>고객센터</a></li>
+            <li ><a className={styles.menu} href='/introduce'>회사소개</a></li>
+            <li ><a className={styles.menu} href='/notice'>버스안내</a></li>
+            <li ><a className={styles.menu} href='/request'>견적요청</a></li>
+            <li ><a className={styles.menu} href='/service'>고객센터</a></li>
           </ul>
           {/* dropdown menu */}
           {/* {isHovering && (

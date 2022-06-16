@@ -1,0 +1,69 @@
+@value makerYellow, makerBrown from '../../common/colors.css';
+
+.company {
+  width: 75em;
+}
+
+.main {
+  display: flex;
+  margin-left: 4rem;
+}
+
+.sideMenu {
+  flex: 1 1 25%;
+  background-color: cornflowerblue;
+  margin: 0 auto;
+}
+
+.mainDetail {
+  flex: 1 1 75%;
+  padding: 0 3em;
+}
+
+.shortContent {
+  width: max-content;
+  padding: 0.2em 0;
+  padding-left: 1em;
+  padding-right: 3em;
+  margin-bottom: 2.5em;
+  background-color: makerYellow;
+  color: makerBrown;
+  box-shadow: 2px 2px 5px 5px makerYellow;
+  opacity: 60%;
+}
+
+.detail {
+  background-color: makerYellow;
+  color: makerBrown;
+  opacity: 90%;
+  padding: 1em 0.5em;
+  width: 90%;
+  border-radius: 2.5em;
+  box-shadow: 5px 5px 10px 15px makerYellow;
+  margin: 0 auto;
+  margin-bottom: 1.5em;
+}
+
+.title {
+  font-size: 1.8em;
+}
+
+.contents {
+ text-align: left;
+ display: flex;
+ flex-direction: column;
+}
+
+.contentDetail {
+  margin-bottom: 0.8em;
+}
+
+.ceo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ceoName {
+  font-size: 1.3em;
+}
