@@ -11,22 +11,26 @@ button {
 
 input, select {
   border: 1px solid makerLightGrey;
+  text-align: center;
+}
+
+input:focus {
+  outline: none;
 }
 
 .estimate {
   flex-basis: 50%;
 }
 
-.estimateButton {
+.estimateBox {
   display: block;
-  text-align: start;
-  text-align: center;
-  font-size: 1.2em;
-  padding: 0;
+  padding-top: 0.5rem;
+  font-size: 1.4em;
   margin-top: 1.5em;
   margin-bottom: 0.6rem;
-  width: 12em;
-  height: 2em;
+  margin-left: 1.5em;
+  width: 9em;
+  height: 1.8em;
   border-radius: 0.4em;
   border: none;
   background-color: makerOrange;
@@ -38,6 +42,7 @@ input, select {
   flex-wrap: wrap;
   padding: 0.8em;
   margin: 0;
+  margin-left: 2em;
   background-color: makerYellow;
   width: 85%;
 }
@@ -80,20 +85,40 @@ input, select {
   width: 10em;
 }
 
-.select {
+select {
   margin-right: 1em;
 }
 
-.destination>input, .departurePlace>input {
+.travel>select {
+  width: 8em;
+}
+
+.phone>select, 
+.destination>select, 
+.departurePlace>select {
+  width: 4.5em;
+}
+
+.destination>input, 
+.departurePlace>input {
   width: 20em;
 }
 
-.phone>.select {
+.departureDate>input, 
+.returnDate>input {
+  width: 12em;
+}
+
+.vehicle>select {
+  width: 10em;
+}
+
+.phone>select {
   margin: 0;
 }
 
 .phone>input {
-  width: 3em;
+  width: 3.3em;
 }
 
 .phone>.hyphen {

@@ -21,7 +21,7 @@ const Header = (props) => {
         <a className={styles.headerNavButton} href='#'>내견적확인</a>
       </section>
       <nav className={styles.navbar}>
-        <a href='#'>
+        <a href='/'>
           <img src='/image/logo.png' alt='EK tour logo' className={styles.logo} />
         </a>
         <section className={styles.container} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
@@ -31,7 +31,8 @@ const Header = (props) => {
             <li ><a className={styles.menu} href='#'>견적요청</a></li>
             <li ><a className={styles.menu} href='#'>고객센터</a></li>
           </ul>
-          {isHovering && (
+          {/* dropdown menu */}
+          {/* {isHovering && (
             <ul className={styles.subNavbar}>
               <div className={styles.subContainer} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
                 <ul>
@@ -53,7 +54,7 @@ const Header = (props) => {
                 </ul>
               </div>
             </ul>
-          )}
+          )} */}
         </section>
 
         <button className={styles.toggle}>

@@ -65,7 +65,7 @@ button {
 
 .subNavbar {
   width: 100%;
-  background-color: makerYellow;
+  background-color: #fffacb91;
   opacity:0.8;
   margin: 0;
 }
@@ -86,13 +86,13 @@ button {
 .toggle {
   display: none;
   position: absolute;
-  top: 40px;
-  right: 30px;
+  top: 55px;
+  right: 40px;
   background-color: makerOrange;
   color: makerWhite;
   border: none;
-  border-radius: 0.5em;
-  font-size: 20px;
+  border-radius: 0.3rem;
+  font-size: 25px;
 }
 
 .toggle:hover {
@@ -100,18 +100,8 @@ button {
 }
 
 @media screen and (max-width:868px) {
-  .navbar {
-    align-items: center;
-  }
-
-  .container {
-    flex-direction: column;
-    border-left: 0.5em solid makerOrange;
-  }
-
   .navbarMenu {
-    flex-direction: column;
-    border-bottom: none;
+    display: none;
   }
 
   .toggle {

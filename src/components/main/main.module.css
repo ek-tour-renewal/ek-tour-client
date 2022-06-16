@@ -1,3 +1,8 @@
+@value makerYellow, makerPaleOrange, makerBrown, makerGreen, makerWhite from '../../common/colors.css';
+
+h1 {
+  margin: 0;
+}
 
 .main {
   width: 75em;
@@ -7,7 +12,101 @@
   display: flex;
 }
 
+.info {
+  flex-basis: 50%;
+  margin-top: 3em;
+}
+
 .contact {
-  background-color: skyblue;
-  flex-basis: 50%
+  background-color: makerYellow;
+  text-align: center;
+  padding: 2em 0;
+  border-radius: 0.5em;
+  color: makerBrown;
+}
+
+.contactPhone,
+.kakao {
+  margin-bottom: 0.5em;
+}
+
+.contactPhone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phoneDetail {
+  margin: 0;
+  margin-left: 0.5em;
+  font-size: 1.8rem;
+}
+
+.kakao, 
+.email {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.kakaoDetail, 
+.emailDetail {
+  font-size: 1.5rem;
+  margin: 0;
+  margin-left: 0.8rem;
+}
+
+.notice {
+  display: flex;
+  background-color: makerPaleOrange;
+  padding: 2em 0;
+  border-radius: 0.5em;
+}
+
+.serviceCenter, 
+.account {
+  flex-basis: 50%;
+  text-align: start;
+  padding-left: 1em;
+}
+
+.serviceCenterTitle, 
+.accountTitle {
+  color: makerGreen;
+  font-size: 1.9rem;
+}
+
+.accountTitle {
+  margin-bottom: 0.5em;
+}
+
+.serviceCenterNumber {
+  font-size: 1.7em;
+  font-weight: bold;
+  color: #7A5E29;
+}
+
+.serviceCenterTime {
+  font-size: 1.4em;
+  color: #C27807;
+}
+
+.serviceCenterDetail {
+  color: makerWhite;
+}
+
+.kbbankImg {
+  background-color: #CA904C;
+  box-shadow: 0 0 5px 5px #CA904C;
+}
+
+.accountNumber {
+  font-size: 1.7em;
+  font-weight: bold;
+  padding-left: 0;
+  color: #C27807;
+}
+
+.accountDetail {
+  color: makerWhite;
 }
