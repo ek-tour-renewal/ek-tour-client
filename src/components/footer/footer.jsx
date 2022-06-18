@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './footer.module.css';
 
-const Footer = (props) => {
+const Footer = memo((props) => {
   return (
     <footer className={styles.footer}>
       <section className={styles.detail}>
@@ -19,7 +19,7 @@ const Footer = (props) => {
         <li className={styles.address}>버스대절/여행 문의 010-6387-6086 ektour0914@naver.com</li>
       </section>
     </footer>
-  );
-}
+  )
+});
 
 export default Footer;

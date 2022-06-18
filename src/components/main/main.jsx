@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { memo } from 'react';
 import styles from './main.module.css';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import Estimate from '../estimate/estimate';
 
-const Main = ({ getData }) => {
-
+const Main = memo(({ getData }) => {
   return (
     <section className={styles.main}>
       <Header />
@@ -47,7 +46,7 @@ const Main = ({ getData }) => {
       </main>
       <Footer />
     </section>
-  );
-};
+  )
+});
 
 export default Main;
