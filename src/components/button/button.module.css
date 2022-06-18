@@ -1,0 +1,71 @@
+@value makerYellow, makerWhite, makerBrown, makerGreen from '../../common/colors.css';
+
+.contactButton, .estimateButton {
+  display: flex;
+  align-items: center;
+  padding: 1em 0.5em;
+  margin: 0;
+  background-color: makerYellow;
+  border-radius: 0.4em;
+  box-shadow: -1px -2px 5px 1px rgb(160, 159, 156) inset;
+  height: 6em;
+}
+
+.contactImage {
+  width: 4em;
+  height: 4em;
+  transform: rotate(-10deg);
+}
+
+.contactInfo {
+  text-align: start;
+  padding-left: 0.7em;
+}
+
+.contactTitle, .estimateTitle {
+  font-size: 1.4em;
+  font-weight: bold;
+  padding-right: 0;
+}
+
+.contactNumber {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: makerWhite;
+  text-shadow: -1px 0 makerBrown, 0 1px makerBrown, 1px 0 makerBrown, 0 -1px makerBrown;
+}
+
+.contactPhoneNumber {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: makerBrown;
+  text-shadow: -1px 0 makerGreen, 0 1px makerGreen, 1px 0 makerGreen, 0 -1px makerGreen;
+}
+
+.estimateImage {
+  width: 4em;
+  height: 4em;
+}
+
+.estimateInfo {
+  text-align: start;
+  padding-right: 0;
+  padding-left: 0.7em;
+}
+
+.estimateRequest {
+  font-size: 1rem;
+  color: makerBrown;
+}
+
+.estimateGo {
+  font-size: 1em;
+  padding-left: 0.7rem;
+  color: makerBrown;
+}
+
+.contactPhoneNumber,
+.contactNumber,
+.contactTitle {
+  padding-bottom: 0;
+}
