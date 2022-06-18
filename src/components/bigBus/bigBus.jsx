@@ -25,7 +25,6 @@ const BigBus = ({ menu, changeMenu }) => {
 
   useEffect(() => {
     changeMenu('45인승 대형');
-    console.log(menu);
   }, []);
 
   return (
