@@ -1,15 +1,50 @@
+@value makerYellow, makerBrown from '../../common/colors.css';
+
+.smallBus {
+  width: 75em;
+}
+
 .main {
   display: flex;
   margin-left: 4rem;
-  margin-right: 2rem;
 }
 
 .sideMenu {
   flex: 1 1 25%;
-  background-color: cornflowerblue;
+  margin: 0 auto;
 }
 
 .mainDetail {
   flex: 1 1 75%;
-  background-color: yellowgreen;
+  padding: 0 3em;
+}
+
+.smallBusTitle {
+  width: max-content;
+  padding: 0.5em 1.8em;
+  margin-left: 1em;
+  font-size: 1.3em;
+  background-color: makerYellow;
+  border-top: 4px solid makerBrown;
+  border-bottom: 4px solid makerBrown;
+}
+
+.container {
+  margin: 0 3em;
+  padding: 1em 0;
+}
+
+.busDetail {
+  text-align: start;
+}
+
+.busPersonnelDetail{
+  text-align: end;
+}
+
+.busImageTitle {
+  font-size: 1.2em;
+  width: max-content;
+  padding: 0.3em 0.5em;
+  border-bottom: 4px solid makerBrown;
 }
