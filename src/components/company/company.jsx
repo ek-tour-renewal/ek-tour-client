@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 import styles from './company.module.css';
 
-const Company = (props) => {
+const Company = ({ menu, changeMenu }) => {
+  useEffect(() => {
+    changeMenu('CEO 인삿말');
+    console.log(menu);
+  },[]);
+  
   return (
     <main className={styles.company}>
       <Header />
@@ -15,7 +20,7 @@ const Company = (props) => {
         </section>
 
         <section className={styles.mainDetail}>
-          <SubHeader />
+          <SubHeader menu={menu}/>
           <p className={styles.shortContent}>고객의 행복을 함께 만들어갑니다.</p>
           <div className={styles.detail}>
             <h1 className={styles.title}>TRUST & HONEST!</h1>
