@@ -12,7 +12,9 @@ import RequestEstimate from './components/requestEstimate/requestEstimate';
 import ServiceCenter from './components/serviceCenter/serviceCenter';
 import SmallBus from './components/smallBus/smallBus';
 
-function App() {
+function App({ ektour }) {
+  const [menu, setMenu] = useState(null);
+
   const [data, setData] = useState([
     {
       travel: null,
@@ -25,28 +27,36 @@ function App() {
       departPlace: null,
       arrivalPlace: null,
       vehicle: null,
-      vehicleNumber : null
+      vehicleNumber: null
     }
   ]);
 
-  const getData = estimation => {
-    setData(estimation);
-    console.log(estimation);
+  const changeMenu = (menu) => {
+    setMenu(menu);
   };
+
+  const getData = (data) => {
+    setData(data);
+    ektour
+      .pushData(data)
+      .then((response) => {console.log(`success : ${response}`)})
+      .catch((error) => {console.log(data, error)});
+  };
+
   return (
     <div className={styles.app}>
       <BrowserRouter>
         <Routes>
-          <Route path='/' exact element={<Main getData={getData}/>} />
-          <Route path='/introduce' element={<Company />} />
-          <Route path='/notice' element={<BusNotice />} />
-          <Route path='/smallbus' element={<SmallBus />} />
-          <Route path='/limousine' element={<Limousine />} />
-          <Route path='/bigbus' element={<BigBus />} />
-          <Route path='/list' element={<EstimateList />} />
-          <Route path='/request' element={<RequestEstimate />} />
-          <Route path='/my' element={<MyEstimate />} />
-          <Route path='/service' element={<ServiceCenter />} />
+          <Route path='/' exact element={<Main getData={getData} />} />
+          <Route path='/introduce' element={<Company menu={menu} changeMenu={changeMenu} />} />
+          <Route path='/notice' element={<BusNotice menu={menu} changeMenu={changeMenu} />} />
+          <Route path='/smallbus' element={<SmallBus menu={menu} changeMenu={changeMenu} />} />
+          <Route path='/limousine' element={<Limousine menu={menu} changeMenu={changeMenu} />} />
+          <Route path='/bigbus' element={<BigBus menu={menu} changeMenu={changeMenu} />} />
+          <Route path='/list' element={<EstimateList menu={menu} changeMenu={changeMenu} />} />
+          <Route path='/request' element={<RequestEstimate data={data} menu={menu} changeMenu={changeMenu} getData={getData} />} />
+          <Route path='/my' element={<MyEstimate menu={menu} changeMenu={changeMenu} />} />
+          <Route path='/service' element={<ServiceCenter menu={menu} changeMenu={changeMenu} />} />
         </Routes>
       </BrowserRouter>
     </div>
