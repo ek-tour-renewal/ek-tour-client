@@ -15,32 +15,15 @@ import SmallBus from './components/smallBus/smallBus';
 function App({ ektour }) {
   const [menu, setMenu] = useState(null);
 
-  const [data, setData] = useState([
-    {
-      travel: null,
-      name: null,
-      phone: null,
-      password: null,
-      email: null,
-      departDate: null,
-      arrivalDate: null,
-      departPlace: null,
-      arrivalPlace: null,
-      vehicle: null,
-      vehicleNumber: null
-    }
-  ]);
-
   const changeMenu = (menu) => {
     setMenu(menu);
   };
 
   const getData = (data) => {
-    setData(data);
     ektour
       .pushData(data)
-      .then((response) => {console.log(`success : ${response}`)})
-      .catch((error) => {console.log(data, error)});
+      .then(response => console.log(response))
+      .catch(errors => console.log(errors));
   };
 
   return (
@@ -54,7 +37,7 @@ function App({ ektour }) {
           <Route path='/limousine' element={<Limousine menu={menu} changeMenu={changeMenu} />} />
           <Route path='/bigbus' element={<BigBus menu={menu} changeMenu={changeMenu} />} />
           <Route path='/list' element={<EstimateList menu={menu} changeMenu={changeMenu} />} />
-          <Route path='/request' element={<RequestEstimate data={data} menu={menu} changeMenu={changeMenu} getData={getData} />} />
+          <Route path='/request' element={<RequestEstimate menu={menu} changeMenu={changeMenu} getData={getData} />} />
           <Route path='/my' element={<MyEstimate menu={menu} changeMenu={changeMenu} />} />
           <Route path='/service' element={<ServiceCenter menu={menu} changeMenu={changeMenu} />} />
         </Routes>
