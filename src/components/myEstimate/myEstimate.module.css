@@ -1,15 +1,72 @@
+@value makerBrown, makerWhite from '../../common/colors.css';
+
+.myEstimate {
+  width: 75em;
+}
+
 .main {
   display: flex;
   margin-left: 4rem;
-  margin-right: 2rem;
 }
 
 .sideMenu {
   flex: 1 1 25%;
-  background-color: cornflowerblue;
+  margin: 0 auto;
 }
 
 .mainDetail {
   flex: 1 1 75%;
-  background-color: yellowgreen;
+  padding: 0 3em;
+}
+
+.container {
+  height: 100%;
+}
+
+.form {
+  width: 33rem;
+  height: 6em;
+  border-top: 3px solid makerBrown;
+  border-bottom: 3px solid makerBrown;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3em 0;
+  margin: auto;
+}
+
+.phone,
+.password {
+  display: flex;
+  font-size: 0.9em;
+  margin: 0;
+  margin-bottom: 1em;
+  align-items: center;
+}
+
+.phoneSelect {
+  margin: 0;
+}
+
+.phoneInput {
+  width: 3.3em;
+}
+
+.passwordInput {
+  width: 10em;
+}
+
+.checkButton {
+  background-color: makerBrown;
+  color: makerWhite;
+  border: 1px solid makerBrown;
+  border-radius: 0.3rem;
+}
+
+.explanation {
+  font-size: 0.8rem;
+  text-align: end;
+  margin-top: 0.5rem;
+  margin-right: 10em;
 }
