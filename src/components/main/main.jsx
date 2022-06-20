@@ -4,12 +4,16 @@ import Footer from '../footer/footer';
 import Header from '../header/header';
 import Estimate from '../estimate/estimate';
 
-const Main = memo(({ getData }) => {
+const Main = memo(({ submitData }) => {
   return (
     <section className={styles.main}>
+      {/* 네비게이션바 */}
       <Header />
+      <img className={styles.mainImage} src="./image/main.jpg" alt="메인 이미지" />
       <main className={styles.body}>
-        <Estimate getData={getData} />
+        {/* 견적요청 폼 */}
+        <Estimate submitData={submitData} />
+        {/* 문의 */}
         <section className={styles.info}>
           <ul className={styles.contact}>
             <li className={styles.contactPhone}>
@@ -25,9 +29,9 @@ const Main = memo(({ getData }) => {
             <li className={styles.email}>
               <i class="fa-solid fa-envelope fa-2x"></i>
               <p className={styles.emailDetail}>이메일 문의 ektour0917@naver.com</p>
-              </li>
+            </li>
           </ul>
-
+          {/* 고객센터 & 계좌 */}
           <ul className={styles.notice}>
             <ul className={styles.serviceCenter}>
               <li><h1 className={styles.serviceCenterTitle}>고객센터</h1></li>

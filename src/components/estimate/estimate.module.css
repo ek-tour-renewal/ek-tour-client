@@ -1,4 +1,22 @@
-@value makerWhite, makerOrange, makerLightGrey, makerYellow from '../../common/colors.css';
+@value makerWhite, makerOrange, makerLightGrey, makerYellow, makerBrown from '../../common/colors.css';
+
+body {
+  user-select: none;
+}
+
+input, select {
+  border: 1px solid makerLightGrey;
+  text-align: center;
+  height: 1.5em;
+}
+
+select {
+  margin-right: 1em;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+}
 
 p {
   margin: 0.3em 0;
@@ -7,15 +25,6 @@ p {
 
 button {
   cursor: pointer;
-}
-
-input, select {
-  border: 1px solid makerLightGrey;
-  text-align: center;
-}
-
-input:focus {
-  outline: none;
 }
 
 .estimate {
@@ -27,7 +36,7 @@ input:focus {
   padding-top: 0.5rem;
   font-size: 1.4em;
   margin-bottom: 0.6rem;
-  margin-left: 1.5em;
+  margin-left: 1em;
   width: 9em;
   height: 1.8em;
   border-radius: 0.4em;
@@ -41,9 +50,9 @@ input:focus {
   flex-wrap: wrap;
   padding: 0.8em;
   margin: 0;
-  margin-left: 2em;
+  margin-left: 1em;
   background-color: makerYellow;
-  width: 85%;
+  width: 90%;
 }
 
 .travel,
@@ -56,17 +65,29 @@ input:focus {
 .arrivalDate,
 .arrivalPlace,
 .vehicle,
-.vehicleNumber {
+.vehicleNumber,
+.stopPlace,
+.memberCount,
+.wayType,
+.payment,
+.taxBill,
+.memo {
   display: flex;
-  font-size: 0.8em;
-  height: 1.8em;
-  margin-bottom: 1em;
+  font-size: 0.9em;
+  margin: 0;
+  margin-bottom: 0.5em;
+  align-items: center;
 }
 
 .departDate,
 .arrivalDate,
 .departPlace,
-.arrivalPlace {
+.arrivalPlace,
+.stopPlace,
+.wayType,
+.payment,
+.taxBill,
+.memo {
   flex-basis: 100%;
 }
 
@@ -79,58 +100,89 @@ input:focus {
   flex: 1 1 40%;
 }
 
-.name>input, 
-.password>input {
+.travelSelect,
+.nameInput,
+.passwordInput {
   width: 10em;
 }
 
-select {
-  margin-right: 1em;
-}
-
-.travel>select {
-  width: 8em;
-}
-
-.phone>select, 
-.arrivalPlace>select, 
-.departPlace>select {
-  width: 4.5em;
-}
-
-.arrivalPlace>input, 
-.departPlace>input {
+.placeInput {
   width: 20em;
 }
 
-.departDate>input, 
-.arrivalDate>input {
+.travelSelect {
+  width: 8em;
+}
+
+.placeSelect {
+  width: 4.7em;
+}
+
+.departDateInput, 
+.arrivalDateInput {
   width: 12em;
 }
 
-.vehicle>select {
+.memberCountInput {
+  width: 2em;
+  margin-right: 0.5rem;
+}
+
+.vehicleSelect {
   width: 10em;
 }
 
-.phone>select {
+.phoneSelect {
   margin: 0;
 }
 
-.phone>input {
+.phoneInput {
   width: 3.3em;
 }
 
-.phone>.hyphen {
+.hyphen {
   margin: 0.3em 0.5em;
 }
 
-.detailButton {
+.viewMore {
   flex-basis: 100%;
   text-align: end;
   padding: 0;
 }
 
-.detailButton>button {
+.moreButton, .hideButton {
   background-color: unset;
   border: none;
+}
+
+.hidden {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  background-color: makerYellow;
+}
+
+.memoTextarea {
+  height: 4em;
+  width: 20em;
+}
+
+.requestButtonContainer {
+  flex: 100%;
+  text-align: end;
+}
+
+.requestButton {
+  background-color: makerBrown;
+  color: white;
+  width: 8em;
+  padding: 0.3em 0.5em;
+  font-size: 1.3em;
+  border-radius: 0.5em;
+  border: none;
+}
+
+.requestButton:hover {
+  opacity: 80%;
+  font-weight: bold;
 }

@@ -1,52 +1,70 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './estimate.module.css';
 
-const Estimate = ({ getData }) => {
+const Estimate = ({ submitData }) => {
+  const [visible, setVisible] = useState(false);
+
   const formRef = useRef();
   const travelRef = useRef();
   const nameRef = useRef();
-  const phoneRef = useRef();
+  const phoneFirstRef = useRef();
+  const phoneMiddleRef = useRef();
+  const phoneLastRef = useRef();
   const passwordRef = useRef();
   const emailRef = useRef();
   const departDateRef = useRef();
   const arrivalDateRef = useRef();
   const departPlaceRef = useRef();
+  const departPlaceDetailRef = useRef();
   const arrivalPlaceRef = useRef();
+  const arrivalPlaceDetailRef = useRef();
+  const stopPlaceRef = useRef();
   const vehicleRef = useRef();
   const vehicleNumberRef = useRef();
+  const memberCountRef = useRef();
+  const aroundWayTypeRef = useRef();
+  const cashRef = useRef();
+  const taxBillRef = useRef();
+  const memoRef = useRef();
+  const buttonRef = useRef();
 
-  const onSubmit = (event) => {
+  const getData = (event) => {
     event.preventDefault();
     const estimation = {
-      name: nameRef.current.value || '',
-      email: emailRef.current.value || '',
-      phone: phoneRef.current.value || '',
-      password: passwordRef.current.value || '',
-      travelType: travelRef.current.value || '',
-      vehicleType: vehicleRef.current.value || '',
-      vehicleNumber: vehicleNumberRef.current.value || '',
-      memberCount: '',
-      departDate: departDateRef.current.value || '',
-      arrivalDate: arrivalDateRef.current.value || '',
-      departPlace: departPlaceRef.current.value || '',
-      arrivalPlace: arrivalPlaceRef.current.value || '',
-      memo: '',
-      stopPlace: '',
-      wayType: '',
-      payment: '',
-      taxBill: false
+      ame: nameRef.current.value,
+      email: emailRef.current.value,
+      phone: phoneFirstRef.current.value + phoneMiddleRef.current.value + phoneLastRef.current.value,
+      password: passwordRef.current.value,
+      travelType: travelRef.current.value,
+      vehicleType: vehicleRef.current.value,
+      vehicleNumber: vehicleNumberRef.current.value,
+      memberCount: memberCountRef.current.value,
+      departDate: departDateRef.current.value,
+      arrivalDate: arrivalDateRef.current.value,
+      departPlace: `${departPlaceRef.current.value} ${departPlaceDetailRef.current.value}`,
+      arrivalPlace: `${arrivalPlaceRef.current.value} ${arrivalPlaceDetailRef.current.value}`,
+      memo: memoRef.current.value ? memoRef.current.value : null,
+      stopPlace: stopPlaceRef.current.value,
+      wayType: aroundWayTypeRef.current.checked ? 'aroundWay' : 'oneWay',
+      payment: cashRef.current.checked ? 'cash' : 'card',
+      taxBill: taxBillRef.current.checked,
     };
+
+    submitData(estimation);
     formRef.current.reset();
-    getData(estimation);
+  };
+
+  const openDetail = () => {
+    setVisible(!visible);
   };
 
   return (
     <section className={styles.estimate}>
       <p className={styles.estimateBox}>실시간 견적요청</p>
-      <form ref={formRef} className={styles.data} onSubmit={onSubmit}>
+      <form ref={formRef} className={styles.data} onSubmit={getData}>
         <li className={styles.travel}>
           <p>여행구분</p>
-          <select ref={travelRef} onSelect={getData} name="travel">
+          <select className={styles.travelSelect} ref={travelRef} name="travel">
             <option value="normal">일반여행</option>
             <option value="ceremonial">관혼상제</option>
             <option value="school">학교단체</option>
@@ -55,11 +73,11 @@ const Estimate = ({ getData }) => {
         </li>
         <li className={styles.name}>
           <p>성명</p>
-          <input ref={nameRef}type="text" placeholder='Name' />
+          <input ref={nameRef} className={styles.nameInput} type="text" placeholder='Name' />
         </li>
         <li className={styles.phone}>
           <p>핸드폰</p>
-          <select ref={phoneRef}name="phone">
+          <select className={styles.phoneSelect} ref={phoneFirstRef} name="phone">
             <option value="010">010</option>
             <option value="016">016</option>
             <option value="017">017</option>
@@ -67,81 +85,87 @@ const Estimate = ({ getData }) => {
             <option value="019">019</option>
           </select>
           <p className={styles.hyphen}>-</p>
-          <input type="text" />
+          <input className={styles.phoneInput} ref={phoneMiddleRef} type="text" />
           <p className={styles.hyphen}>-</p>
-          <input type="text" />
+          <input className={styles.phoneInput} ref={phoneLastRef}type="text" />
         </li>
         <li className={styles.password}>
           <p>확인용 비밀번호</p>
-          <input ref={passwordRef}type="text" placeholder='Password' />
+          <input ref={passwordRef} className={styles.passwordInput} type="text" placeholder='Password' />
         </li>
         <li className={styles.email}>
           <p>이메일 주소</p>
-          <input ref={emailRef}type="text" placeholder='E-mail' />
+          <input ref={emailRef} type="text" placeholder='E-mail' />
         </li>
         <li className={styles.departDate}>
           <p>출발일자</p>
-          <input ref={departDateRef}type="date" name="depart-date" />
+          <input className={styles.departDateInput} ref={departDateRef} type="date" name="depart-date" />
         </li>
         <li className={styles.arrivalDate}>
           <p>귀행일자</p>
-          <input ref={arrivalDateRef}type="date" name="arrival-date" />
+          <input className={styles.arrivalDateInput} ref={arrivalDateRef} type="date" name="arrival-date" />
         </li>
         <li className={styles.departPlace}>
           <p>출발지</p>
-          <select ref={departPlaceRef}name="depart-place">
-            <option value="seoul">서울</option>
-            <option value="gyeonggi">경기</option>
-            <option value="gangwon">강원</option>
-            <option value="gyeongbug">경북</option>
-            <option value="gyeongnam">경남</option>
-            <option value="jeonbug">전북</option>
-            <option value="jeonnam">전남</option>
-            <option value="jeju">제주</option>
-            <option value="chungbuk">충북</option>
-            <option value="chungnam">충남</option>
-            <option value="gwangju">광주</option>
-            <option value="daegu">대구</option>
-            <option value="daejeon">대전</option>
-            <option value="busan">부산</option>
-            <option value="ulsan">울산</option>
-            <option value="incheon">인천</option>
+          <select className={styles.placeSelect} ref={departPlaceRef} name="depart-place">
+            <option value="서울특별시">서울</option>
+            <option value="경기도">경기</option>
+            <option value="강원도">강원</option>
+            <option value="경상북도">경북</option>
+            <option value="경상남도">경남</option>
+            <option value="전라북도">전북</option>
+            <option value="전라남도">전남</option>
+            <option value="제주특별자치도">제주</option>
+            <option value="충청북도">충북</option>
+            <option value="충청남도">충남</option>
+            <option value="광주광역시">광주</option>
+            <option value="대구광역시">대구</option>
+            <option value="대전광역시">대전</option>
+            <option value="부산광역시">부산</option>
+            <option value="울산광역시">울산</option>
+            <option value="인천광역시">인천</option>
           </select>
-          <input type="text" placeholder='depart place' />
+          <input className={styles.placeInput} ref={departPlaceDetailRef} type="text" placeholder='depart place' />
         </li>
         <li className={styles.arrivalPlace}>
           <p>도착지</p>
-          <select ref={arrivalPlaceRef}name="arrival place">
-            <option value="seoul">서울</option>
-            <option value="gyeonggi">경기</option>
-            <option value="gangwon">강원</option>
-            <option value="gyeongbug">경북</option>
-            <option value="gyeongnam">경남</option>
-            <option value="jeonbug">전북</option>
-            <option value="jeonnam">전남</option>
-            <option value="jeju">제주</option>
-            <option value="chungbuk">충북</option>
-            <option value="chungnam">충남</option>
-            <option value="gwangju">광주</option>
-            <option value="daegu">대구</option>
-            <option value="daejeon">대전</option>
-            <option value="busan">부산</option>
-            <option value="ulsan">울산</option>
-            <option value="incheon">인천</option>
+          <select className={styles.placeSelect} ref={arrivalPlaceRef} name="arrival place">
+            <option value="서울특별시">서울</option>
+            <option value="경기도">경기</option>
+            <option value="강원도">강원</option>
+            <option value="경상북도">경북</option>
+            <option value="경상남도">경남</option>
+            <option value="전라북도">전북</option>
+            <option value="전라남도">전남</option>
+            <option value="제주특별자치도">제주</option>
+            <option value="충청북도">충북</option>
+            <option value="충청남도">충남</option>
+            <option value="광주광역시">광주</option>
+            <option value="대구광역시">대구</option>
+            <option value="대전광역시">대전</option>
+            <option value="부산광역시">부산</option>
+            <option value="울산광역시">울산</option>
+            <option value="인천광역시">인천</option>
           </select>
-          <input type="text" placeholder='arrival place' />
+          <input className={styles.placeInput} ref={arrivalPlaceDetailRef} type="text" placeholder='arrival place' />
         </li>
+        <li className={styles.stopPlace}>
+          <p className={styles.stopPlaceTitle}>경유지</p>
+          <input className={styles.placeInput} ref={stopPlaceRef} type="text" placeholder='Location' />
+        </li>
+        {visible && 
+        <section className={styles.hidden}>
         <li className={styles.vehicle}>
           <p>차량구분</p>
-          <select ref={vehicleRef}name="vehicle">
+          <select className={styles.vehicleSelect} ref={vehicleRef} name="vehicle">
             <option value="small">25인승 소형</option>
             <option value="limousine">28인승 리무진</option>
             <option value="large">45인승 대형</option>
           </select>
         </li>
         <li className={styles.vehicleNumber}>
-          <p>차량댓수</p>
-          <select ref={vehicleNumberRef}name="vehicleNumber">
+          <p>차량대수</p>
+          <select className={styles.vehicleSelect} ref={vehicleNumberRef} name="vehicleNumber">
             <option value="1">1대</option>
             <option value="2">2대</option>
             <option value="3">3대</option>
@@ -154,8 +178,38 @@ const Estimate = ({ getData }) => {
             <option value="over10">10대 이상</option>
           </select>
         </li>
-        <li className={styles.detailButton}><button>더보기</button></li>
-        <button onSubmit={onSubmit}>견적요청</button>
+        <li className={styles.memberCount}>
+          <p className={styles.memberCountTitle}>인원</p>
+          <input className={styles.memberCountInput} ref={memberCountRef} type="text" />
+          명
+        </li>
+        <li className={styles.wayType}>
+          <p className={styles.wayTypeTitle}>왕복구분</p>
+          <input className={styles.checkbox} ref={aroundWayTypeRef} type="checkbox" value="aroundWay" />왕복
+          <input className={styles.checkbox} type="checkbox" value="oneWay" />편도
+        </li>
+        <li className={styles.payment}>
+          <p className={styles.paymentTitle}>결제방법</p>
+          <input className={styles.checkbox} ref={cashRef} type="checkbox" name="현금" />현금
+          <input className={styles.checkbox} type="checkbox" name="카드" />카드
+        </li>
+        <li className={styles.taxBill}>
+          <p className={styles.taxBillTitle}>세금계산서 발급</p>
+          <input className={styles.checkbox} ref={taxBillRef} type="checkbox" name="발급" />발급
+          <input className={styles.checkbox} type="checkbox" name="발급안함" />발급안함
+        </li>
+        <li className={styles.memo}>
+          <p className={styles.memoTitle}>기타 메모 사항</p>
+          <textarea className={styles.memoTextarea} ref={memoRef} name="Other inquiries.." cols="30" rows="10"></textarea>
+        </li>
+        {/* 견적요청 버튼 */}
+        <li className={styles.requestButtonContainer}>
+          <button type='submit' className={styles.requestButton}>견적요청</button>
+        </li>
+      </section>}
+        <li className={styles.viewMore}>
+          <button className={styles.moreButton} ref={buttonRef} type='button' onClick={openDetail}>{visible ? buttonRef.current.value = '숨기기' : '더보기'}</button>
+        </li>
       </form>
     </section>
   )

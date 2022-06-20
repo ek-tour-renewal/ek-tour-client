@@ -8,8 +8,13 @@ h1 {
   width: 75em;
 }
 
+.mainImage {
+  width: 97%;
+}
+
 .body {
   display: flex;
+  align-items: center;
 }
 
 .info {
@@ -21,8 +26,17 @@ h1 {
   background-color: makerYellow;
   text-align: center;
   padding: 2em 0;
+  margin: 1em 1em;
   border-radius: 0.5em;
   color: makerBrown;
+}
+
+.notice {
+  display: flex;
+  background-color: makerPaleOrange;
+  padding: 2em 0;
+  border-radius: 0.5em;
+  margin: 0 1em;
 }
 
 .contactPhone,
@@ -54,13 +68,6 @@ h1 {
   font-size: 1.5rem;
   margin: 0;
   margin-left: 0.8rem;
-}
-
-.notice {
-  display: flex;
-  background-color: makerPaleOrange;
-  padding: 2em 0;
-  border-radius: 0.5em;
 }
 
 .serviceCenter, 
@@ -109,4 +116,10 @@ h1 {
 
 .accountDetail {
   color: makerWhite;
+}
+
+@media screen and (max-width:768px) {
+  .body {
+    flex-direction: column;
+  }
 }

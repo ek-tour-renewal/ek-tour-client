@@ -1,0 +1,10 @@
+@value makerOrange from '../../common/colors.css';
+
+.menu {
+  height: 15em;
+  border-right: 0.2em solid makerOrange;
+  margin-top: 2em;
+  margin-bottom: 4em;
+  padding-right: 2em;
+  text-align: right;
+}
