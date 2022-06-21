@@ -24,6 +24,7 @@ const MyEstimate = ({ menu, changeMenu, getMyEstimateData }) => {
       password: passwordRef.current.value,
     };
     getMyEstimateData(data);
+    console.log(data);
   }
 
   return (
@@ -46,13 +47,13 @@ const MyEstimate = ({ menu, changeMenu, getMyEstimateData }) => {
                   <option value="019">019</option>
                 </select>
                 <p className={styles.hyphen}>-</p>
-                <input className={styles.phoneInput} ref={phoneMiddleRef} type="text" />
+                <input className={styles.phoneInput} ref={phoneMiddleRef} type='text' maxlength='4' />
                 <p className={styles.hyphen}>-</p>
-                <input className={styles.phoneInput} ref={phoneLastRef} type="text" />
+                <input className={styles.phoneInput} ref={phoneLastRef} type='text' maxlength='4' />
               </li>
               <li className={styles.password}>
                 <p>비밀번호</p>
-                <input ref={passwordRef} className={styles.passwordInput} type="text" placeholder='Password' />
+                <input ref={passwordRef} className={styles.passwordInput} type='text' maxlength='4' placeholder='Password' />
               </li>
               <button className={styles.checkButton}>확인</button>
             </form>

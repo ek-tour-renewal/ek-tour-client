@@ -49,6 +49,11 @@
   margin: 0;
 }
 
+.hyphen {
+  margin: 0 0.5em;
+  margin-bottom: 0.3em;
+}
+
 .phoneInput {
   width: 3.3em;
 }
