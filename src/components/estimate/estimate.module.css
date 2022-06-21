@@ -141,7 +141,8 @@ button {
 }
 
 .hyphen {
-  margin: 0.3em 0.5em;
+  margin: 0 0.5em;
+  margin-bottom: 0.3em;
 }
 
 .viewMore {
