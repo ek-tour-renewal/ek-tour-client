@@ -57,6 +57,7 @@ const RequestEstimate = ({ menu, changeMenu, submitData }) => {
 
     submitData(estimation);
     formRef.current.reset();
+    console.log(estimation)
   };
 
   return (
