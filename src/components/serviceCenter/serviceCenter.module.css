@@ -1,15 +1,119 @@
+@value makerBrown, makerYellow, makerOrange, makerLightGrey, makerGrey, makerBlack, makerGreen from '../../common/colors.css';
+
+h3, h4 {
+  margin: 0;
+}
+
+.serviceCenter {
+  width: 75em;
+}
+
 .main {
   display: flex;
   margin-left: 4rem;
-  margin-right: 2rem;
 }
 
 .sideMenu {
   flex: 1 1 25%;
-  background-color: cornflowerblue;
+  margin: 0 auto;
 }
 
 .mainDetail {
   flex: 1 1 75%;
-  background-color: yellowgreen;
+  padding: 0 3em;
+}
+
+.title {
+  width: max-content;
+  padding: 0.5em 1.8em;
+  margin-left: 1em;
+  font-size: 1.3em;
+  color: makerBlack;
+  background-color: makerYellow;
+  border-top: 4px solid makerBrown;
+  border-bottom: 4px solid makerBrown;
+}
+
+.useInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.useStep {
+  width: max-content;
+  border: 2px solid makerBrown;
+  border-radius: 1.8rem;
+  padding: 0.5em 0.8em;
+}
+
+.icon {
+  color: makerOrange;
+}
+
+.useStepNumber {
+  margin: 0;
+  margin-bottom: 0.3em;
+  color: makerLightGrey;
+}
+
+.mainUseStep {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.subUseStep {
+  font-size: 0.5rem;
+}
+
+.useInfoDetailContainer {
+  font-size: 0.7rem;
+  text-align: start;
+  color: makerBrown;
+  margin-left: 3.5em;
+  margin-top: 2em;
+  margin-bottom: 3em;
+}
+
+.useInfoDetail {
+  list-style: disc;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  color: makerBlack;
+  text-align: start;
+  margin-left: 3.5em;
+  margin-bottom: 2em;
+}
+
+.list {
+  font-size: 0.8rem;
+  list-style: disc;
+  margin: 1em 0;
+}
+
+.policyDetail, 
+.serviceDetail,
+.accountDetail {
+  color: makerGrey;
+  font-size: 0.7rem;
+}
+
+.dateDetail {
+  color: makerGreen;
+  font-size: 0.9rem;
+}
+
+.dateDetailContainer,
+.serviceDetailContainer,
+.accountDetailContainer {
+  text-indent: 1.5em;
+}
+
+.serviceNotice, 
+.accountNotice {
+  font-size: 1rem;
+  color: makerGreen;
 }
