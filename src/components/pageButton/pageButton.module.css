@@ -1,0 +1,13 @@
+@value makerBlack, makerOrange from '../../common/colors.css';
+
+.button {
+  background-color: unset;
+  border: none;
+  color: makerBlack;
+}
+
+.button:hover {
+  text-decoration: underline;
+  font-weight: bold;
+  color: makerOrange;
+}

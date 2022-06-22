@@ -50,8 +50,8 @@ const RequestEstimate = ({ menu, changeMenu, submitData }) => {
       arrivalPlace: `${arrivalPlaceRef.current.value} ${arrivalPlaceDetailRef.current.value}`,
       memo: memoRef.current.value?memoRef.current.value:null,
       stopPlace: stopPlaceRef.current.value,
-      wayType: aroundWayTypeRef.current.checked?'aroundWay':'oneWay',
-      payment:  cashRef.current.checked?'cash':'card',
+      wayType: aroundWayTypeRef.current.checked?'왕복':'편도',
+      payment:  cashRef.current.checked?'현금':'카드',
       taxBill: taxBillRef.current.checked,
     };
 
@@ -110,18 +110,18 @@ const RequestEstimate = ({ menu, changeMenu, submitData }) => {
               <li className={styles.travel}>
                 <p className={styles.travelTitle}>여행구분</p>
                 <select ref={travelRef} name="travel">
-                  <option value="normal">일반여행</option>
-                  <option value="ceremonial">관혼상제</option>
-                  <option value="school">학교단체</option>
-                  <option value="etc">기타단체</option>
+                  <option value="일반여행">일반여행</option>
+                  <option value="관혼상제">관혼상제</option>
+                  <option value="학교단체">학교단체</option>
+                  <option value="기타단체">기타단체</option>
                 </select>
               </li>
               <li className={styles.vehicle}>
                 <p className={styles.vehicleTitle}>차량구분</p>
                 <select ref={vehicleRef} name="vehicle">
-                  <option value="small">25인승 소형</option>
-                  <option value="limousine">28인승 리무진</option>
-                  <option value="large">45인승 대형</option>
+                  <option value="25인승 소형">25인승 소형</option>
+                  <option value="28인승 리무진">28인승 리무진</option>
+                  <option value="45인승 대형">45인승 대형</option>
                 </select>
               </li>
               <li className={styles.vehicleNumber}>
@@ -136,7 +136,7 @@ const RequestEstimate = ({ menu, changeMenu, submitData }) => {
                   <option value="7">7대</option>
                   <option value="8">8대</option>
                   <option value="9">9대</option>
-                  <option value="over10">10대 이상</option>
+                  <option value="10">10대 이상</option>
                 </select>
               </li>
               <li className={styles.memberCount}>

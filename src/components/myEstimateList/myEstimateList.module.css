@@ -1,6 +1,6 @@
 @value makerYellow, makerBrown, makerLightGrey, makerGrey from '../../common/colors.css';
 
-.estimateList {
+.estimateList{
   width: 75em;
 }
 
@@ -45,30 +45,4 @@
   font-size: 13px;
   font-weight: bold;
   color: makerBrown;
-}
-
-.searchBar {
-  display: flex;
-  border: 1px solid makerLightGrey;
-  border-radius: 0.4rem;
-  width: max-content;
-  margin: auto;
-  padding: 0.2rem 0.5rem;
-  align-items: center;
-}
-
-.searchInput {
-  font-size: 15px;
-  width: 30rem;
-  height: 2rem;
-  border: none;
-  text-align: start;
-  padding-left: 5px;
-}
-
-.searchButton {
-  background-color: unset;
-  border: none;
-  font-size: 1.5rem;
-  color: makerGrey;
 }

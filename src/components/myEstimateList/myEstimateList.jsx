@@ -1,17 +1,15 @@
 import React, { useEffect } from 'react';
-import styles from './estimateList.module.css';
+import styles from './myEstimateList.module.css';
+import Footer from '../footer/footer';
 import Header from '../header/header';
 import Menu from '../menu/menu';
-import SubHeader from '../subHeader/subHeader';
-import Footer from '../footer/footer';
-import EstimateListItem from '../estimateListItem/estimateListItem';
+import MyEstimateListItem from '../myEstimateListItem/myEstimateListItem';
 import PageButton from '../pageButton/pageButton';
+import SubHeader from '../subHeader/subHeader';
 
-
-const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, requestDataList }) => {
-
+const MyEstimateList = ({ menu, changeMenu, exit, getEstimateListPage, allPage, requestDataList }) => {
   useEffect(() => {
-    changeMenu('견적요청목록');
+    changeMenu('나의견적확인');
     getEstimateListPage();
     console.log(menu);
   }, []);
@@ -44,16 +42,13 @@ const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, requestD
               <span className={styles.requestDate}>요청일</span>
             </div>
             <ul>
-              {requestDataList.map(data => (<EstimateListItem data={data} />))}
+            {requestDataList.map(data => (<MyEstimateListItem data={data} />))}
             </ul>
             <ul className={styles.pageList}>
               {allPageArray(allPage).map(number => (<PageButton page={number} />))}
             </ul>
+            <button onClick={exit}>나가기</button>
           </section>
-          <div className={styles.searchBar}>
-            <input className={styles.searchInput} type="text" />
-            <button className={styles.searchButton}><i className="fa-solid fa-magnifying-glass"></i></button>
-          </div>
         </section>
       </section>
       <Footer />
@@ -61,4 +56,4 @@ const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, requestD
   )
 };
 
-export default EstimateList;
+export default MyEstimateList;
