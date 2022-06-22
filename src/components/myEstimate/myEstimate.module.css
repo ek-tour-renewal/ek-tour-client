@@ -60,6 +60,7 @@
 
 .passwordInput {
   width: 10em;
+  -webkit-text-security: disc;
 }
 
 .checkButton {

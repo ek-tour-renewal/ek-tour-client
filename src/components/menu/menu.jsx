@@ -7,7 +7,9 @@ const Menu = (props) => {
   return (
     <main>
       <section className={styles.menu}>
-        <DetailMenu />
+        <ul>
+          <DetailMenu />
+        </ul>
       </section>
       <Button />
     </main>

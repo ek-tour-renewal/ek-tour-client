@@ -8,7 +8,6 @@ import SubHeader from '../subHeader/subHeader';
 const BusNotice = ({ menu, changeMenu }) => {
   useEffect(() => {
     changeMenu('버스안내');
-    console.log(menu);
   }, []);
 
   return (

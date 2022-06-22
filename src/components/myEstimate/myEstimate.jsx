@@ -24,7 +24,7 @@ const MyEstimate = ({ menu, changeMenu, getMyEstimateData }) => {
       password: passwordRef.current.value,
     };
     getMyEstimateData(data);
-    console.log(data);
+    formRef.current.reset();
   }
 
   return (
