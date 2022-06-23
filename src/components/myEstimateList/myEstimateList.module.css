@@ -30,6 +30,41 @@
   padding: 0.5rem;
 }
 
+.id,
+.name,
+.travelType,
+.departPlace,
+.arrivalPlace,
+.vehicleType,
+.createdDate {
+  text-align: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+.id,
+.name {
+  width: 50px;
+  height: 20px;
+}
+
+.travelType {
+  width: 70px;
+  height: 20px;
+}
+
+.departPlace,
+.arrivalPlace,
+.vehicleType {
+  width: 130px;
+  height: 20px;
+}
+
+.createdDate {
+  width: 80px;
+  height: 20px;
+}
+
 .pageList {
   color: makerBrown;
   background-color: makerYellow;

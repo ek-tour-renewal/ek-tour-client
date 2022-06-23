@@ -49,10 +49,6 @@ const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, requestD
               {allPageArray(allPage).map(number => (<PageButton page={number} getEstimateList={getEstimateList} />))}
             </ul>
           </section>
-          <div className={styles.searchBar}>
-            <input className={styles.searchInput} type="text" />
-            <button className={styles.searchButton}><i className="fa-solid fa-magnifying-glass"></i></button>
-          </div>
         </section>
       </section>
       <Footer />
