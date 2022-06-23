@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './button.module.css';
 
-const Button = (props) => {
+const Button = memo((props) => {
   return (
     <section>
       <a href='tel:010-6387-6086'>
@@ -27,6 +27,6 @@ const Button = (props) => {
         </a>
     </section>
   )
-};
+});
 
 export default Button;
