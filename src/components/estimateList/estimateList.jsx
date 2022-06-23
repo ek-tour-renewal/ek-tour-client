@@ -8,12 +8,11 @@ import EstimateListItem from '../estimateListItem/estimateListItem';
 import PageButton from '../pageButton/pageButton';
 
 
-const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, requestDataList }) => {
+const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, requestDataList, getEstimateList }) => {
 
   useEffect(() => {
     changeMenu('견적요청목록');
     getEstimateListPage();
-    console.log(menu);
   }, []);
 
   const allPageArray = (number) => {
@@ -21,7 +20,7 @@ const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, requestD
     for (let i=0; i<number; i++) {
       array.push(i+1)
     }
-    return array
+    return array;
   };
 
   return (
@@ -35,19 +34,19 @@ const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, requestD
           <SubHeader menu={menu} />
           <section>
             <div className={styles.dataList}>
-              <span className={styles.number}>순번</span>
+              <span className={styles.id}>순번</span>
               <span className={styles.name}>등록자</span>
-              <span className={styles.travel}>여행구분</span>
+              <span className={styles.travelType}>여행구분</span>
               <span className={styles.departPlace}>출발지</span>
               <span className={styles.arrivalPlace}>도착지</span>
-              <span className={styles.vehicle}>차량구분</span>
-              <span className={styles.requestDate}>요청일</span>
+              <span className={styles.vehicleType}>차량구분</span>
+              <span className={styles.createdDate}>요청일</span>
             </div>
             <ul>
               {requestDataList.map(data => (<EstimateListItem data={data} />))}
             </ul>
             <ul className={styles.pageList}>
-              {allPageArray(allPage).map(number => (<PageButton page={number} />))}
+              {allPageArray(allPage).map(number => (<PageButton page={number} getEstimateList={getEstimateList} />))}
             </ul>
           </section>
           <div className={styles.searchBar}>
