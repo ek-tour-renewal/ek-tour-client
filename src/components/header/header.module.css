@@ -41,7 +41,6 @@ button {
 .container {
   width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
@@ -49,7 +48,7 @@ button {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding-bottom: 0.5em;
+  padding: 0 4em 0.5em 4em;
   border-bottom: 0.5em solid makerOrange;
   margin-bottom: 0;
 }
@@ -69,11 +68,6 @@ button {
   background-color: #fffacb91;
   opacity:0.8;
   margin: 0;
-}
-
-.subContainer {
-  display: flex;
-  justify-content: space-between;
 }
 
 .subMenu {

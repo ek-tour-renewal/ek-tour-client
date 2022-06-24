@@ -17,7 +17,6 @@ const MyEstimate = ({ menu, myData, changeMenu, getMyEstimateData }) => {
 
   useEffect(() => {
     changeMenu('나의견적확인');
-    console.log(menu);
   }, []);
 
   const checkMyEstimate = event => {

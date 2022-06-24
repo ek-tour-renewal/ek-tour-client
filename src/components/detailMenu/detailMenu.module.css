@@ -1,0 +1,12 @@
+@value makerOrange from '../../common/colors.css';
+
+.menu {
+  font-size: 35px;
+  color: makerOrange;
+}
+
+.menu:hover {
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}

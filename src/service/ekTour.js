@@ -1,10 +1,6 @@
-import axios from 'axios';
-
 class Ektour {
-  constructor() {
-    this.ektour = axios.create({
-      baseURL: `#`,
-    });
+  constructor(httpClient) {
+    this.ektour = httpClient;
   }
 
   async pushData(data) {
@@ -23,12 +19,12 @@ class Ektour {
   }
 
   async requestData(pageNumber) {
-    const response = await this.ektour.get('/all', {
+    const response = await this.ektour.get('/estimate/all', {
       params: {
         page: pageNumber,
       },
     });
-    return response;
+    return response.data.estimateList;
   }
 
   async getMyEstimate(data) {
@@ -37,7 +33,7 @@ class Ektour {
       phone: phone,
       password: password,
     });
-    return response;
+    return response.data.estimates;
   }
 }
 

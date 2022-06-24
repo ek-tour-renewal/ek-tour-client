@@ -1,5 +1,8 @@
+@value makerWhite from './common/colors.css';
+
 .app {
   display: flex;
   justify-content: center;
   text-align: center;
+  background-color: makerWhite;
 }

@@ -103,6 +103,10 @@
   padding-left: 3.3em;
 }
 
+.passwordInput {
+  -webkit-text-security: disc;
+}
+
 .travel,
 .vehicle,
 .departDate,

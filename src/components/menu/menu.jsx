@@ -1,9 +1,9 @@
-import React from 'react';
+import React,{ memo } from 'react';
 import Button from '../button/button';
 import DetailMenu from '../detailMenu/detailMenu';
 import styles from './menu.module.css';
 
-const Menu = (props) => {
+const Menu = memo((props) => {
   return (
     <main>
       <section className={styles.menu}>
@@ -14,6 +14,6 @@ const Menu = (props) => {
       <Button />
     </main>
   )
-};
+});
 
 export default Menu;
