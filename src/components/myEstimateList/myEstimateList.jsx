@@ -8,10 +8,13 @@ import PageButton from '../pageButton/pageButton';
 import SubHeader from '../subHeader/subHeader';
 import { useNavigate } from 'react-router-dom';
 
-const MyEstimateList = ({ menu, myData, changeMenu, exit, getEstimateListPage, allPage, requestDataList, getMyEstimateData }) => {
+const MyEstimateList = ({ menu, myData, changeMenu, exit, requestDataList, getMyEstimateData }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!myData) {
+      navigate('/search');
+    }
     changeMenu('나의견적확인');
   }, []);
 

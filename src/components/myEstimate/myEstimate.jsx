@@ -1,34 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './myEstimate.module.css';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
-import { Navigate, useNavigate } from 'react-router-dom';
 
-const MyEstimate = ({ menu, myData, changeMenu, getMyEstimateData }) => {
-  const formRef = useRef();
-  const phoneFirstRef = useRef();
-  const phoneMiddleRef = useRef();
-  const phoneLastRef = useRef();
-  const passwordRef = useRef();
-
+const MyEstimate = ({ menu, myRef, changeMenu, checkMyEstimate }) => {
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     changeMenu('나의견적확인');
   }, []);
 
-  const checkMyEstimate = event => {
-    event.preventDefault();
-    const data = {
-      phone: phoneFirstRef.current.value + phoneMiddleRef.current.value + phoneLastRef.current.value,
-      password: passwordRef.current.value,
-    };
-    getMyEstimateData(data);
+  const onSubmit = event => {
+    checkMyEstimate(event);
     navigate('/search/my');
-    formRef.current.reset();
-  }
+  };
 
   return (
     <main className={styles.myEstimate}>
@@ -39,10 +27,10 @@ const MyEstimate = ({ menu, myData, changeMenu, getMyEstimateData }) => {
         </section>
         <section className={styles.mainDetail}>
           <SubHeader menu={menu} />
-          <form className={styles.form} ref={formRef} onSubmit={checkMyEstimate}>
+          <form className={styles.form} ref={myRef.formRef} onSubmit={onSubmit}>
             <li className={styles.phone}>
               <p>핸드폰</p>
-              <select className={styles.phoneSelect} ref={phoneFirstRef} name="phone">
+              <select className={styles.phoneSelect} ref={myRef.phoneFirstRef} name="phone">
                 <option value="010">010</option>
                 <option value="016">016</option>
                 <option value="017">017</option>
@@ -50,13 +38,13 @@ const MyEstimate = ({ menu, myData, changeMenu, getMyEstimateData }) => {
                 <option value="019">019</option>
               </select>
               <p className={styles.hyphen}>-</p>
-              <input className={styles.phoneInput} ref={phoneMiddleRef} type='text' maxlength='4' />
+              <input className={styles.phoneInput} ref={myRef.phoneMiddleRef} type='text' maxlength='4' />
               <p className={styles.hyphen}>-</p>
-              <input className={styles.phoneInput} ref={phoneLastRef} type='text' maxlength='4' />
+              <input className={styles.phoneInput} ref={myRef.phoneLastRef} type='text' maxlength='4' />
             </li>
             <li className={styles.password}>
               <p>비밀번호</p>
-              <input ref={passwordRef} className={styles.passwordInput} type='text' maxlength='4' placeholder='Password' />
+              <input className={styles.passwordInput} ref={myRef.passwordRef} type='text' maxlength='4' />
             </li>
             <button className={styles.checkButton}>확인</button>
           </form>
