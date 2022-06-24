@@ -15,6 +15,7 @@ const Main = memo(({ submitData }) => {
         <Estimate submitData={submitData} />
         {/* 문의 */}
         <section className={styles.info}>
+          {/* 연락처 */}
           <ul className={styles.contact}>
             <li className={styles.contactPhone}>
               <i className="fa-solid fa-phone fa-3x"></i>

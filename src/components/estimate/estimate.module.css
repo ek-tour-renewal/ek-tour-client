@@ -47,12 +47,19 @@ button {
 
 .data {
   display: flex;
+  justify-content: center;
+  background-color: makerYellow;
+  border-radius: 1em;
+}
+
+.estimate_1,
+.estimate_2 {
+  flex: 1 1 50%;
+  display: flex;
   flex-wrap: wrap;
   padding: 0.8em;
-  margin: 0;
-  margin-left: 1em;
-  background-color: makerYellow;
-  width: 90%;
+  margin: auto;
+  width: 80%;
 }
 
 .travel,
@@ -79,6 +86,13 @@ button {
   align-items: center;
 }
 
+.travel,
+.name,
+.vehicle,
+.vehicleNumber {
+  margin-top: 0.5em;
+}
+
 .departDate,
 .arrivalDate,
 .departPlace,
@@ -97,7 +111,7 @@ button {
 .name,
 .phone,
 .password {
-  flex: 1 1 40%;
+  flex: 1 1 45%;
 }
 
 .travelSelect,
@@ -149,24 +163,6 @@ button {
   margin-bottom: 0.3em;
 }
 
-.viewMore {
-  flex-basis: 100%;
-  text-align: end;
-  padding: 0;
-}
-
-.moreButton, .hideButton {
-  background-color: unset;
-  border: none;
-}
-
-.hidden {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  background-color: makerYellow;
-}
-
 .memoTextarea {
   height: 4em;
   width: 20em;
@@ -190,4 +186,10 @@ button {
 .requestButton:hover {
   opacity: 80%;
   font-weight: bold;
+}
+
+@media screen and (max-width:768px) {
+  .data {
+    flex-direction: column;
+  }
 }

@@ -114,7 +114,7 @@ button {
   background-color: makerPaleOrange;
 }
 
-@media screen and (max-width:786px) {
+@media screen and (max-width:768px) {
   .navbarMenu {
     display: none;
   }
