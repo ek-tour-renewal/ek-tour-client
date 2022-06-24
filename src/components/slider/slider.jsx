@@ -20,14 +20,14 @@ const Slider = ({ imageList }) => {
 
   return (
     <section className={styles.slideContainer}>
-      <button onClick={() => { handleSwipe(-1) }} className={styles.Button}>
-        <i className="fa-solid fa-angles-left"></i>
+      <button className={styles.Button} onClick={() => { handleSwipe(-1) }}>
+        <i className='fa-solid fa-angles-left'></i>
       </button>
       <ul className={styles.slideInner}>
-        <img className={styles.slideImage} src={`${imageList[slideIndex].url}`} alt="bus interior image" />
+        <img className={styles.slideImage} src={`${imageList[slideIndex].url}`} alt='bus interior image' />
       </ul>
       <button onClick={() => { handleSwipe(1) }} className={styles.Button}>
-        <i className="fa-solid fa-angles-right"></i>
+        <i className='fa-solid fa-angles-right'></i>
       </button>
     </section>
   )

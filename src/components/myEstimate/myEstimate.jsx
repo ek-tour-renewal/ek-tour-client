@@ -30,12 +30,12 @@ const MyEstimate = ({ menu, myRef, changeMenu, checkMyEstimate }) => {
           <form className={styles.form} ref={myRef.formRef} onSubmit={onSubmit}>
             <li className={styles.phone}>
               <p>핸드폰</p>
-              <select className={styles.phoneSelect} ref={myRef.phoneFirstRef} name="phone">
-                <option value="010">010</option>
-                <option value="016">016</option>
-                <option value="017">017</option>
-                <option value="018">018</option>
-                <option value="019">019</option>
+              <select className={styles.phoneSelect} ref={myRef.phoneFirstRef}>
+                <option value='010'>010</option>
+                <option value='016'>016</option>
+                <option value='017'>017</option>
+                <option value='018'>018</option>
+                <option value='019'>019</option>
               </select>
               <p className={styles.hyphen}>-</p>
               <input className={styles.phoneInput} ref={myRef.phoneMiddleRef} type='text' maxlength='4' />

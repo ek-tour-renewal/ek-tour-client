@@ -27,7 +27,7 @@ const ServiceCenter = ({ menu, changeMenu }) => {
               <p className={styles.mainUseStep}>견적요청 <br /> 전화상담</p>
             </li>
             <li className={styles.icon}>
-              <i class="fa-solid fa-circle-arrow-right"></i>
+              <i class='fa-solid fa-circle-arrow-right'></i>
             </li>
             <li className={styles.useStep}>
               <p className={styles.useStepNumber}>02</p>
@@ -35,14 +35,14 @@ const ServiceCenter = ({ menu, changeMenu }) => {
               <p className={styles.subUseStep}>(전화, 메일, SMS 문자)</p>
             </li>
             <li className={styles.icon}>
-              <i class="fa-solid fa-circle-arrow-right"></i>
+              <i class='fa-solid fa-circle-arrow-right'></i>
             </li>
             <li className={styles.useStep}>
               <p className={styles.useStepNumber}>03</p>
               <p className={styles.mainUseStep}>계약금 입급 <br /> 계약서 작성</p>
             </li>
             <li className={styles.icon}>
-              <i class="fa-solid fa-circle-arrow-right"></i>
+              <i class='fa-solid fa-circle-arrow-right'></i>
             </li>
             <li className={styles.useStep}>
               <p className={styles.useStepNumber}>04</p>
@@ -50,14 +50,14 @@ const ServiceCenter = ({ menu, changeMenu }) => {
               <p className={styles.subUseStep}>(1일~3일 전)</p>
             </li>
             <li className={styles.icon}>
-              <i class="fa-solid fa-circle-arrow-right"></i>
+              <i class='fa-solid fa-circle-arrow-right'></i>
             </li>
             <li className={styles.useStep}>
               <p className={styles.useStepNumber}>05</p>
               <p className={styles.mainUseStep}>배차 후 <br /> 기사님 확인전화</p>
             </li>
             <li className={styles.icon}>
-              <i class="fa-solid fa-circle-arrow-right"></i>
+              <i class='fa-solid fa-circle-arrow-right'></i>
             </li>
             <li className={styles.useStep}>
               <p className={styles.useStepNumber}>06</p>

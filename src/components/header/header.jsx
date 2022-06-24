@@ -52,7 +52,7 @@ const Header = memo((props) => {
           </ul>
         </div>
         <button className={styles.toggle} onClick={onOpenMenu}>
-          <i className="fa-solid fa-bars"></i>
+          <i className='fa-solid fa-bars'></i>
         </button>
       </nav>
     </header>

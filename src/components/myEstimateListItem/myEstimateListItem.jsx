@@ -6,9 +6,9 @@ const MyEstimateCheckList = ({ data }) => {
 
   const masking = name => {
     switch (name.length) {
-      case 2 : return name.replace(name.substring(1,),"*");
-      case 3 : return name.replace(name.substring(1,),"**");
-      default : return name.replace(name.substring(1,),"***");
+      case 2 : return name.replace(name.substring(1,),'*');
+      case 3 : return name.replace(name.substring(1,),'**');
+      default : return name.replace(name.substring(1,),'***');
     }
   };
 

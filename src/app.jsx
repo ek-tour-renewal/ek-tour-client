@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styles from './app.module.css';
 import BigBus from './components/bigBus/bigBus';
 import BusNotice from './components/busNotice/busNotice';
@@ -21,6 +20,32 @@ function App({ ektour }) {
   const [requestDataList, setRequestDataList] = useState([]);
   const [myData, setMyData] = useState(false);
 
+  const formRef = useRef();
+  const travelRef = useRef();
+  const nameRef = useRef();
+  const phoneFirstRef = useRef();
+  const phoneMiddleRef = useRef();
+  const phoneLastRef = useRef();
+  const passwordRef = useRef();
+  const emailRef = useRef();
+  const departDateRef = useRef();
+  const arrivalDateRef = useRef();
+  const departPlaceRef = useRef();
+  const departPlaceDetailRef = useRef();
+  const arrivalPlaceRef = useRef();
+  const arrivalPlaceDetailRef = useRef();
+  const vehicleRef = useRef();
+  const vehicleNumberRef = useRef();
+  const memberCountRef = useRef();
+  const memoRef = useRef();
+  const stopPlaceRef = useRef();
+  const aroundWayTypeRef = useRef();
+  const cashRef = useRef();
+  const taxBillRef = useRef();
+  
+  const Ref = { formRef, travelRef, nameRef, phoneFirstRef, phoneMiddleRef, phoneLastRef, passwordRef, emailRef, departDateRef, arrivalDateRef, departPlaceRef, departPlaceDetailRef, arrivalPlaceRef, arrivalPlaceDetailRef, vehicleRef, vehicleNumberRef, memberCountRef, memoRef, stopPlaceRef, aroundWayTypeRef, cashRef, taxBillRef };
+  const myRef = { formRef, phoneFirstRef, phoneMiddleRef, phoneLastRef, passwordRef };
+
   useEffect(() => {
     ektour
       .requestData(0)
@@ -38,7 +63,7 @@ function App({ ektour }) {
   const submitData = (data) => {
     ektour
       .pushData(data)
-      .then(response => console.log(response))
+      .then(() => alert('견적 요청이 완료되었습니다.'))
       .catch(error => console.log(error));
   };
 
@@ -67,8 +92,87 @@ function App({ ektour }) {
         setRequestDataList(response);
         console.log(response);
       })
-      .catch(error => alert('정확한 정보를 입력해 주세요'));
+      .catch(error => console.log(error));
   };
+
+  const checkAll = () => {
+    const emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
+    const numberRegex = /^[0-9]{4}$/;
+    if (!nameRef.current.value) {
+      return false;
+    } else if (!emailRef.current.value || !emailRegex.test(emailRef.current.value)) {
+      return false;
+    } else if (!phoneMiddleRef.current.value || !numberRegex.test(phoneMiddleRef.current.value)) {
+      return false;
+    } else if (!phoneLastRef.current.value || !numberRegex.test(phoneLastRef.current.value)) {
+      return false;
+    } else if (!passwordRef.current.value || !numberRegex.test(passwordRef.current.value)) {
+      return false;
+    } else if (!memberCountRef.current.value) {
+      return false;
+    } else if (!departDateRef.current.value || !arrivalDateRef.current.value) {
+      return false;
+    }
+    return true;
+  };
+
+  const checkMy = () => {
+    const numberRegex = /^[0-9]{4}$/;
+    if (!phoneMiddleRef.current.value || !numberRegex.test(phoneMiddleRef.current.value)) {
+      return false;
+    } else if (!phoneLastRef.current.value || !numberRegex.test(phoneLastRef.current.value)) {
+      return false;
+    } else if (!passwordRef.current.value || !numberRegex.test(passwordRef.current.value)) {
+      return false;
+    }
+    return true;
+  };
+
+  const getData = (event) => {
+    event.preventDefault();
+    const estimation = {
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+      phone: phoneFirstRef.current.value + phoneMiddleRef.current.value + phoneLastRef.current.value,
+      password: passwordRef.current.value,
+      travelType: travelRef.current.value,
+      vehicleType: vehicleRef.current.value,
+      vehicleNumber: vehicleNumberRef.current.value,
+      memberCount: memberCountRef.current.value,
+      departDate: departDateRef.current.value,
+      arrivalDate: arrivalDateRef.current.value,
+      departPlace: `${departPlaceRef.current.value} ${departPlaceDetailRef.current.value}`,
+      arrivalPlace: `${Ref.arrivalPlaceRef.current.value} ${arrivalPlaceDetailRef.current.value}`,
+      memo: memoRef.current.value ? memoRef.current.value : null,
+      stopPlace: stopPlaceRef.current.value,
+      wayType: aroundWayTypeRef.current.checked ? '왕복' : '편도',
+      payment: cashRef.current.checked ? '현금' : '카드',
+      taxBill: taxBillRef.current.checked,
+    };
+
+    if (!checkAll()) {
+      alert('정확하게 입력해 주세요');
+    } else {
+      submitData(estimation);
+      formRef.current.reset();
+    }
+  };
+  
+  const checkMyEstimate = event => {
+    event.preventDefault();
+    const data = {
+      phone: phoneFirstRef.current.value + phoneMiddleRef.current.value + phoneLastRef.current.value,
+      password: passwordRef.current.value,
+    };
+
+    if (!checkMy()) {
+      alert('정확하게 입력해 주세요');
+      return false;
+    } else {
+      getMyEstimateData(data);
+      formRef.current.reset();
+    }
+  }
 
   const exit = () => {
     setMyData(false);
@@ -78,7 +182,7 @@ function App({ ektour }) {
     <div className={styles.app}>
       <BrowserRouter>
         <Routes>
-          <Route path='/' exact element={<Main submitData={submitData} />} />
+          <Route path='/' exact element={<Main Ref={Ref} getData={getData} />} />
           <Route path='/introduce' element={<Company menu={menu} changeMenu={changeMenu} />} />
           <Route path='/notice' element={<BusNotice menu={menu} changeMenu={changeMenu} />} />
           <Route path='/smallbus' element={<SmallBus menu={menu} changeMenu={changeMenu} />} />
@@ -92,8 +196,13 @@ function App({ ektour }) {
             allPage={allPage}
             requestDataList={requestDataList} />}
           />
-          <Route path='/request' element={<RequestEstimate menu={menu} changeMenu={changeMenu} submitData={submitData} />} />
-          <Route path='/search' element={<MyEstimate menu={menu} myData={myData} changeMenu={changeMenu} getMyEstimateData={getMyEstimateData} />} />
+          <Route path='/request' element={<RequestEstimate 
+          menu={menu} 
+          changeMenu={changeMenu} 
+          Ref={Ref}
+          getData={getData}
+          />} />
+          <Route path='/search' element={<MyEstimate menu={menu} myData={myData} changeMenu={changeMenu} getMyEstimateData={getMyEstimateData} myRef={myRef} checkMyEstimate={checkMyEstimate} />} />
           <Route path='/search/my' element={<MyEstimateList
             menu={menu}
             myData={myData}

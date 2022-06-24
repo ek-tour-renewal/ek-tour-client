@@ -27,7 +27,7 @@ const BusNotice = ({ menu, changeMenu }) => {
             </div>
             <li className={styles.smallBus}>
               <div>
-                <img src="/image/smallBus.jpg" alt="소형버스" />
+                <img src='/image/smallBus.jpg' alt='소형버스' />
                 <p>소형</p>
               </div>
               <p className={styles.busDetail}>
@@ -39,7 +39,7 @@ const BusNotice = ({ menu, changeMenu }) => {
             </li>
             <li className={styles.limousine}>
               <div>
-                <img src="/image/limousine.jpg" alt="중형 리무진" />
+                <img src='/image/limousine.jpg' alt='중형 리무진' />
                 <p>중형</p>
               </div>
               <p className={styles.busDetail}>
@@ -52,7 +52,7 @@ const BusNotice = ({ menu, changeMenu }) => {
             </li>
             <li className={styles.bigBus}>
               <div>
-                <img src="/image/bigBus.jpg" alt="대형버스" />
+                <img src='/image/bigBus.jpg' alt='대형버스' />
                 <p>대형</p>
               </div>
               <p className={styles.busDetail}>

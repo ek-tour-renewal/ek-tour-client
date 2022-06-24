@@ -37,7 +37,7 @@ const SmallBus = ({ menu, changeMenu }) => {
               소규모 단체의 여행에 이용됩니다.
             </p>
             <div>
-              <img src="./image/smallBusExterior.jpg" width='600px' alt="25인승 소형버스 외관" />
+              <img src='./image/smallBusExterior.jpg' width='600px' alt='25인승 소형버스 외관' />
               <p className={styles.busPersonnelDetail}>* 운전기사 1인 + 최대 24명 탑승 가능</p>
             </div>
             <h2 className={styles.busImageTitle}>차량 사진</h2>

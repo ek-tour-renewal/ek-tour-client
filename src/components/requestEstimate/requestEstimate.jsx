@@ -39,7 +39,7 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
               <ul className={styles.personalData2}>
                 <li className={styles.phone}>
                   <p className={styles.phoneTitle}>핸드폰</p>
-                  <select className={styles.selectPhone} ref={Ref.phoneFirstRef} name='phone'>
+                  <select className={styles.selectPhone} ref={Ref.phoneFirstRef}>
                     <option value='010'>010</option>
                     <option value='016'>016</option>
                     <option value='017'>017</option>
@@ -65,7 +65,7 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
             <ul className={styles.detailData}>
               <li className={styles.travel}>
                 <p className={styles.travelTitle}>여행구분</p>
-                <select ref={Ref.travelRef} name='travel'>
+                <select ref={Ref.travelRef}>
                   <option value='일반여행'>일반여행</option>
                   <option value='관혼상제'>관혼상제</option>
                   <option value='학교단체'>학교단체</option>
@@ -74,7 +74,7 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
               </li>
               <li className={styles.vehicle}>
                 <p className={styles.vehicleTitle}>차량구분</p>
-                <select ref={Ref.vehicleRef} name='vehicle'>
+                <select ref={Ref.vehicleRef}>
                   <option value='25인승 소형'>25인승 소형</option>
                   <option value='28인승 리무진'>28인승 리무진</option>
                   <option value='45인승 대형'>45인승 대형</option>
@@ -82,7 +82,7 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
               </li>
               <li className={styles.vehicleNumber}>
                 <p className={styles.vehicleNumberTitle}>차량대수</p>
-                <select ref={Ref.vehicleNumberRef} name='vehicleNumber'>
+                <select ref={Ref.vehicleNumberRef}>
                   <option value='1'>1대</option>
                   <option value='2'>2대</option>
                   <option value='3'>3대</option>
@@ -102,16 +102,16 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
               </li>
               <li className={styles.departDate}>
                 <p className={styles.departDateTitle}>출발일자</p>
-                <input ref={Ref.departDateRef} type='date' name='depart-date' />
+                <input ref={Ref.departDateRef} type='date' />
               </li>
               <li className={styles.arrivalDate}>
                 <p className={styles.arrivalDateTitle}>귀행일자</p>
-                <input ref={Ref.arrivalDateRef} type='date' name='arrival-date' />
+                <input ref={Ref.arrivalDateRef} type='date' />
               </li>
               <ul className={styles.departPlaceContainer}>
                 <li className={styles.departPlace}>
                   <p className={styles.departPlaceTitle}>출발지</p>
-                  <select ref={Ref.departPlaceRef} name='depart-place'>
+                  <select ref={Ref.departPlaceRef}>
                     <option value='[서울]'>서울</option>
                     <option value='[경기]'>경기</option>
                     <option value='[강원]'>강원</option>
@@ -138,7 +138,7 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
               <ul className={styles.arrivalPlaceContainer}>
                 <li className={styles.arrivalPlace}>
                   <p className={styles.arrivalPlaceTitle}>도착지</p>
-                  <select ref={Ref.arrivalPlaceRef} name='arrival place'>
+                  <select ref={Ref.arrivalPlaceRef}>
                     <option value='[서울]'>서울</option>
                     <option value='[경기]'>경기</option>
                     <option value='[강원]'>강원</option>
@@ -173,13 +173,13 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
               </li>
               <li className={styles.payment}>
                 <p className={styles.paymentTitle}>결제방법</p>
-                <input className={styles.checkbox} ref={Ref.cashRef} type='checkbox' name='현금' />현금
+                <input className={styles.checkbox} ref={Ref.cashRef} type='checkbox' />현금
                 <input className={styles.checkbox} type='checkbox' name='카드' />카드
               </li>
               <li className={styles.taxBill}>
                 <p className={styles.taxBillTitle}>세금계산서 발급</p>
-                <input className={styles.checkbox} ref={Ref.taxBillRef} type='checkbox' name='발급' />발급
-                <input className={styles.checkbox} type='checkbox' name='발급안함' />발급안함
+                <input className={styles.checkbox} ref={Ref.taxBillRef} type='checkbox' />발급
+                <input className={styles.checkbox} type='checkbox' />발급안함
               </li>
               <li className={styles.memo}>
                 <p className={styles.memoTitle}>기타 메모 사항</p>

@@ -43,7 +43,7 @@ const BigBus = ({ menu, changeMenu }) => {
               40~45인승의 단체 여행에 적합하고 기업체, 관공서, 동호회, 일반단체의 국내 버스여행에 <br />
               많이 이용되며 기업체와 관공서 출퇴근 차량, 대학생 MT, OT, 외국인 투어에도 많이 이용됩니다.
             </p>
-            <img src="./image/bigBusExterior.jpg" alt="45인승 대형버스 외관" />
+            <img src='./image/bigBusExterior.jpg' alt='45인승 대형버스 외관' />
             <h2 className={styles.busImageTitle}>차량 사진</h2>
             <Slider imageList={ImageList}/>
           </section>
