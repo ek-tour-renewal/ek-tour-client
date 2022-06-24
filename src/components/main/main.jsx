@@ -4,7 +4,7 @@ import Footer from '../footer/footer';
 import Header from '../header/header';
 import Estimate from '../estimate/estimate';
 
-const Main = memo(({ submitData }) => {
+const Main = memo(({ Ref, getData }) => {
   return (
     <section className={styles.main}>
       {/* 네비게이션바 */}
@@ -12,7 +12,7 @@ const Main = memo(({ submitData }) => {
       <img className={styles.mainImage} src="./image/main.jpg" alt="메인 이미지" />
       <main className={styles.body}>
         {/* 견적요청 폼 */}
-        <Estimate submitData={submitData} />
+        <Estimate Ref={Ref} getData={getData} />
         {/* 문의 */}
         <section className={styles.info}>
           {/* 연락처 */}
