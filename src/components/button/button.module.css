@@ -12,8 +12,8 @@
 }
 
 .contactImage {
-  width: 4em;
-  height: 4em;
+  width: 4rem;
+  height: 4rem;
   transform: rotate(-10deg);
 }
 
@@ -23,13 +23,13 @@
 }
 
 .contactTitle, .estimateTitle {
-  font-size: 1.4em;
+  font-size: 1.3rem;
   font-weight: bold;
   padding-right: 0;
 }
 
 .contactNumber {
-  font-size: 1.3em;
+  font-size: 1.2rem;
   font-weight: bold;
   color: makerWhite;
   text-shadow: -1px 0 makerBrown, 0 1px makerBrown, 1px 0 makerBrown, 0 -1px makerBrown;
@@ -43,8 +43,8 @@
 }
 
 .estimateImage {
-  width: 4em;
-  height: 4em;
+  width: 4rem;
+  height: 4rem;
 }
 
 .estimateInfo {

@@ -88,11 +88,11 @@ function App({ ektour }) {
     ektour
       .getMyEstimate(data)
       .then(response => {
-        setMyData(true);
         setRequestDataList(response);
-        console.log(response);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   const checkAll = () => {
@@ -125,6 +125,7 @@ function App({ ektour }) {
     } else if (!passwordRef.current.value || !numberRegex.test(passwordRef.current.value)) {
       return false;
     }
+    setMyData(true);
     return true;
   };
 
@@ -200,8 +201,8 @@ function App({ ektour }) {
           menu={menu} 
           changeMenu={changeMenu} 
           Ref={Ref}
-          getData={getData}
-          />} />
+          getData={getData} />} 
+          />
           <Route path='/search' element={<MyEstimate menu={menu} myData={myData} changeMenu={changeMenu} getMyEstimateData={getMyEstimateData} myRef={myRef} checkMyEstimate={checkMyEstimate} />} />
           <Route path='/search/my' element={<MyEstimateList
             menu={menu}

@@ -1,6 +1,7 @@
 @value makerWhite from './common/colors.css';
 
 .app {
+  width: 100vw;
   display: flex;
   justify-content: center;
   text-align: center;

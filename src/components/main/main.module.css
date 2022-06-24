@@ -1,4 +1,4 @@
-@value makerYellow, makerPaleOrange, makerBrown, makerGreen, makerWhite from '../../common/colors.css';
+@value makerYellow, makerPaleOrange, makerBrown, makerGreen, makerWhite, makerOrange from '../../common/colors.css';
 
 h1 {
   margin: 0;
@@ -28,7 +28,7 @@ h1 {
   background-color: makerYellow;
   text-align: center;
   padding: 2em 0;
-  margin: 1em 1em;
+  margin: 1em 0;
   border-radius: 0.5em;
   color: makerBrown;
 }
@@ -53,6 +53,10 @@ h1 {
   justify-content: center;
 }
 
+.contactPhoneIcon {
+  color: makerBrown;
+}
+
 .phoneDetail {
   margin: 0;
   margin-left: 0.5em;
@@ -64,6 +68,10 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.emailIcon {
+  color: makerBrown;
 }
 
 .kakaoDetail, 
@@ -91,13 +99,13 @@ h1 {
 }
 
 .serviceCenterNumber {
-  font-size: 1.7em;
+  font-size: 1.7rem;
   font-weight: bold;
   color: #7A5E29;
 }
 
 .serviceCenterTime {
-  font-size: 1.4em;
+  font-size: 1.3rem;
   color: #C27807;
 }
 
@@ -111,7 +119,7 @@ h1 {
 }
 
 .accountNumber {
-  font-size: 1.7em;
+  font-size: 1.6rem;
   font-weight: bold;
   padding-left: 0;
   color: #C27807;

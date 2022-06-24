@@ -23,7 +23,7 @@ const Header = memo((props) => {
             <li className={styles.introduce}>
               <a className={styles.menuTitle} href='/introduce'>회사소개</a>
               <ul className={styles.dropdownMenu}>
-                <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/introduce'>CEO 인삿말</a></li>
+                <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/introduce'>CEO 인사말</a></li>
               </ul>
             </li>
             <li className={styles.busNotice} >

@@ -5,10 +5,11 @@ const Footer = memo((props) => {
   return (
     <footer className={styles.footer}>
       <section className={styles.detail}>
-        <h1 className={styles.name}>주식회사 이케이투어</h1>
+        <h1 className={styles.title}>주식회사 이케이투어</h1>
         <ul>
           <li>대표 배승원 개인정보취급자명 조운</li>
-          <li>사업자번호 324-87-00192 법인등록번호 284911-0144524</li>
+          <li>사업자번호 324-87-00192</li>
+          <li>법인등록번호 284911-0144524</li>
           <li>일반여행업등록법인 (국내여행/해외여행)</li>
         </ul>
         <li className={styles.siteAddress}>copyright. www.ekhanabus.com All Right Reserved.</li>

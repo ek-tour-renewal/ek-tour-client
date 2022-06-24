@@ -6,11 +6,12 @@ import Header from '../header/header';
 import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 
-const MyEstimate = ({ menu, myRef, changeMenu, checkMyEstimate }) => {
+const MyEstimate = ({ menu, myRef, changeMenu, checkMyEstimate, myData }) => {
   const navigate = useNavigate();
   
   useEffect(() => {
     changeMenu('나의견적확인');
+    console.log(myData)
   }, []);
 
   const onSubmit = event => {

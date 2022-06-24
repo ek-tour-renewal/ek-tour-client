@@ -18,17 +18,17 @@ const Main = memo(({ Ref, getData }) => {
           {/* 연락처 */}
           <ul className={styles.contact}>
             <li className={styles.contactPhone}>
-              <i className='fa-solid fa-phone fa-3x'></i>
+              <span className={styles.contactPhoneIcon}><i className='fa-solid fa-phone fa-3x'></i></span>
               <h1 className={styles.phoneDetail}>
                 버스대절/여행상담 문의 <br /> 010-6387-6086
               </h1>
             </li>
             <li className={styles.kakao}>
-              <img src='/image/kakaotalk.png' alt='kakaotalk logo' height='35px' />
+              <span><img src='/image/kakaotalk.png' alt='kakaotalk logo' height='35px' /></span>
               <p className={styles.kakaoDetail}>카톡상담 seanpapa</p>
             </li>
             <li className={styles.email}>
-              <i class='fa-solid fa-envelope fa-2x'></i>
+              <span className={styles.emailIcon}><i class='fa-solid fa-envelope fa-2x'></i></span>
               <p className={styles.emailDetail}>이메일 문의 ektour0917@naver.com</p>
             </li>
           </ul>

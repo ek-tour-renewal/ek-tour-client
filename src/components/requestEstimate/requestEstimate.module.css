@@ -1,4 +1,4 @@
-@value makerBrown, makerLightGrey, makerOrange, makerYellow from '../../common/colors.css';
+@value makerBrown, makerLightGrey, makerOrange, makerYellow, makerBlack from '../../common/colors.css';
 
 .requestEstimate{
   width: 75em;
@@ -64,6 +64,7 @@
   margin-right: 0.5em;
   padding-right: 1em;
   border-right: 2px solid makerBrown;
+  color: makerBlack;
 }
 
 .travelTitle,
@@ -187,6 +188,7 @@
   background: linear-gradient(makerYellow, makerOrange);
   font-size: 1.5rem;
   padding: 0.2em 1.5em;
+  color: makerBlack;
 }
 
 .checkbox {

@@ -12,9 +12,10 @@ const MyEstimateList = ({ menu, myData, changeMenu, exit, requestDataList, getMy
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(myData);
     if (!myData) {
       navigate('/search');
-    }
+    };
     changeMenu('나의견적확인');
   }, []);
 
@@ -23,7 +24,7 @@ const MyEstimateList = ({ menu, myData, changeMenu, exit, requestDataList, getMy
     for (let i = 0; i < number; i++) {
       array.push(i + 1)
     }
-    return array
+    return array;
   };
 
   const onClick = () => {

@@ -7,7 +7,7 @@ import styles from './company.module.css';
 
 const Company = ({ menu, changeMenu }) => {
   useEffect(() => {
-    changeMenu('CEO 인삿말');
+    changeMenu('CEO 인사말');
     console.log(menu);
   },[]);
   

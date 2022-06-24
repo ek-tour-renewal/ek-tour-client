@@ -1,7 +1,4 @@
-@value makerOrange from '../../common/colors.css';
-@value makerWhite from '../../common/colors.css';
-@value makerBrown from '../../common/colors.css';
-
+@value makerOrange, makerWhite, makerBrown from '../../common/colors.css';
 ul {
   padding: 0;
 }
@@ -27,16 +24,20 @@ li {
   margin: 1.2em 3em;
 }
 
-.name {
+.title {
   font-size: 1.8em;
   margin: 0;
 }
 
 .siteAddress {
   color: makerBrown;
+  width: max-content;
+  font-size: 1.1rem;
 }
 
 .address {
+  width: max-content;
   background-color: makerBrown;
   font-size: 1.1rem;
+  padding: 0.3rem;
 }

@@ -1,4 +1,4 @@
-@value makerYellow, makerBrown from '../../common/colors.css';
+@value makerYellow, makerBrown, makerBlack from '../../common/colors.css';
 
 .company {
   width: 75em;
@@ -33,7 +33,7 @@
 
 .detail {
   background-color: makerYellow;
-  color: makerBrown;
+  color: makerBlack;
   opacity: 90%;
   padding: 1em 0.5em;
   width: 90%;
