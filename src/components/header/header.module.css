@@ -1,4 +1,4 @@
-@value makerOrange, makerBlack, makerWhite, makerPaleOrange, makerYellow from '../../common/colors.css';
+@value makerOrange, makerBlack, makerWhite, makerPaleOrange, makerYellow, makerLightYellow from '../../common/colors.css';
 
 a {
   text-decoration: none;
@@ -14,22 +14,16 @@ button {
   margin-bottom: 2em;
 }
 
-.headerNav {
+.headerMyEstimate {
   text-align: end;
   border-top: 3px solid makerOrange;
 }
 
-.headerNavButton {
+.headerMyEstimateButton {
   background-color: unset;
   border: none;
   margin-right: 2em;
   font-size: 13px;
-}
-
-.logo {
-  cursor: pointer;
-  height: 4.5em;
-  margin: 0 2em;
 }
 
 .navbar {
@@ -38,51 +32,77 @@ button {
   justify-content: center;
 }
 
+.logo {
+  cursor: pointer;
+  height: 4.5em;
+  margin: 0 2em;
+}
+
 .container {
   width: 100%;
   display: flex;
   align-items: center;
 }
 
-.navbarMenu {
+.navbarMenu,
+.hiddenNavbarMenu {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0 4em 0.5em 4em;
+  padding: 0 4em 0 4em;
   border-bottom: 0.5em solid makerOrange;
   margin-bottom: 0;
 }
 
-.menu {
+.introduce,
+.busNotice,
+.request,
+.service {
+  display: inline-block;
   font-size: 1.1em;
-  width: 100%;
+  width: 7rem;
+  height: 2rem;
+  position: relative;
 }
 
-.menu:hover {
+.menuTitle:hover {
   color: makerOrange;
-  font-weight: bold;
 }
 
-.subNavbar {
-  width: 100%;
-  background-color: #fffacb91;
-  opacity:0.8;
-  margin: 0;
+.dropdownMenu {
+  font-size: 0.7em;
+  display: none;
+  position: absolute;
+  background-color: makerLightYellow;
+  padding: 0.5rem 0;
+  top: 38px;
 }
 
-.subMenu {
-  font-size: 0.8em;
+.dropdownMenu:hover {
+  color: makerOrange;
+}
+
+.subMenuContainer {
+  width: 7rem;
+  text-align: center;
 }
 
 .subMenu:hover {
   color: makerOrange;
 }
 
+.introduce:hover>.dropdownMenu,
+.busNotice:hover>.dropdownMenu,
+.request:hover>.dropdownMenu,
+.service:hover>.dropdownMenu {
+  display: block;
+}
+
 .toggle {
   display: none;
   position: absolute;
   top: 55px;
-  right: 40px;
+  right: 15px;
   background-color: makerOrange;
   color: makerWhite;
   border: none;
@@ -94,9 +114,28 @@ button {
   background-color: makerPaleOrange;
 }
 
-@media screen and (max-width:868px) {
+@media screen and (max-width:786px) {
   .navbarMenu {
     display: none;
+  }
+
+  .hiddenNavbarMenu {
+    flex-direction: column;
+    padding: 0;
+    border-bottom: none;
+    border-left: 0.5em solid makerOrange;
+  }
+
+  .introduce,
+  .busNotice,
+  .request,
+  .service {
+    margin-left: 20px;
+  }
+
+  .dropdownMenu {
+    top: 0;
+    left: 7.3rem;
   }
 
   .toggle {
