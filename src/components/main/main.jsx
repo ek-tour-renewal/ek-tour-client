@@ -4,11 +4,11 @@ import Footer from '../footer/footer';
 import Header from '../header/header';
 import Estimate from '../estimate/estimate';
 
-const Main = memo(({ Ref, getData }) => {
+const Main = memo(({ logoURL, Ref, getData }) => {
   return (
     <section className={styles.main}>
       {/* 네비게이션바 */}
-      <Header />
+      <Header logoURL={logoURL} />
       <img className={styles.mainImage} src='./image/main.jpg' alt='메인 이미지' />
       <main className={styles.body}>
         {/* 견적요청 폼 */}

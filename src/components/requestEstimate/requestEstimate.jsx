@@ -5,7 +5,7 @@ import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 import Footer from '../footer/footer';
 
-const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
+const RequestEstimate = ({ logoURL, menu, changeMenu, Ref, getData }) => {
 
   useEffect(() => {
     changeMenu('견적요청하기');
@@ -17,7 +17,7 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
 
   return (
     <main className={styles.requestEstimate}>
-      <Header />
+      <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
           <Menu />

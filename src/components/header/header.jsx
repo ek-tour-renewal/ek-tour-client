@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { useState } from 'react';
 import styles from './header.module.css';
 
-const Header = memo((props) => {
+const Header = memo(({ logoURL }) => {
   const [active, setActive] = useState(false);
 
   const onOpenMenu = () => {
@@ -16,7 +16,7 @@ const Header = memo((props) => {
       </section>
       <nav className={styles.navbar}>
         <a href='/'>
-          <img src='/image/logo.png' alt='EK tour logo' className={styles.logo} />
+          <img src={logoURL} alt='EK tour logo' className={styles.logo} />
         </a>
         <div className={styles.container}>
           <ul className={!active ? styles.navbarMenu : styles.hiddenNavbarMenu}>

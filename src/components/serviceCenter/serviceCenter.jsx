@@ -5,14 +5,14 @@ import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 import Footer from '../footer/footer';
 
-const ServiceCenter = ({ menu, changeMenu }) => {
+const ServiceCenter = ({ logoURL, menu, changeMenu }) => {
   useEffect(() => {
     changeMenu('고객센터');
   }, []);
 
   return (
     <main className={styles.serviceCenter}>
-      <Header />
+      <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
           <Menu />

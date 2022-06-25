@@ -6,7 +6,7 @@ import SubHeader from '../subHeader/subHeader';
 import Footer from '../footer/footer';
 import Slider from '../slider/slider';
 
-const Limousine = ({ menu, changeMenu }) => {
+const Limousine = ({ logoURL, menu, changeMenu }) => {
   const ImageList = [
     { url: './image/limousine/interior1.jpg' },
     { url: './image/limousine/interior2.jpg' },
@@ -28,7 +28,7 @@ const Limousine = ({ menu, changeMenu }) => {
 
   return (
     <main className={styles.limousine}>
-      <Header />
+      <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
           <Menu />

@@ -6,7 +6,7 @@ import SubHeader from '../subHeader/subHeader';
 import Footer from '../footer/footer';
 import Slider from '../slider/slider';
 
-const SmallBus = ({ menu, changeMenu }) => {
+const SmallBus = ({ logoURL, menu, changeMenu }) => {
   const ImageList = [
     { url: './image/smallBus/interior1.jpg' },
     { url: './image/smallBus/interior2.jpg' },
@@ -22,7 +22,7 @@ const SmallBus = ({ menu, changeMenu }) => {
 
   return (
     <main className={styles.smallBus}>
-      <Header />
+      <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
           <Menu />

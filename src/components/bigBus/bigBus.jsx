@@ -6,7 +6,7 @@ import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 import Slider from '../slider/slider';
 
-const BigBus = ({ menu, changeMenu }) => {
+const BigBus = ({ logoURL, menu, changeMenu }) => {
   const ImageList = [
     { url: './image/bigBus/interior1.jpg' },
     { url: './image/bigBus/interior2.jpg' },
@@ -29,7 +29,7 @@ const BigBus = ({ menu, changeMenu }) => {
 
   return (
     <main className={styles.bigBus}>
-      <Header />
+      <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
           <Menu />

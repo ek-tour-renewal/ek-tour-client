@@ -5,7 +5,7 @@ import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 import styles from './company.module.css';
 
-const Company = ({ menu, changeMenu }) => {
+const Company = ({ logoURL, menu, changeMenu }) => {
   useEffect(() => {
     changeMenu('CEO 인사말');
     console.log(menu);
@@ -13,7 +13,7 @@ const Company = ({ menu, changeMenu }) => {
   
   return (
     <main className={styles.company}>
-      <Header />
+      <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
           <Menu />

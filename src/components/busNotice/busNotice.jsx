@@ -5,14 +5,14 @@ import Header from '../header/header';
 import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 
-const BusNotice = ({ menu, changeMenu }) => {
+const BusNotice = ({ logoURL, menu, changeMenu }) => {
   useEffect(() => {
     changeMenu('버스안내');
   }, []);
 
   return (
     <main className={styles.busNotice}>
-      <Header />
+      <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
           <Menu />

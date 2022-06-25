@@ -6,7 +6,7 @@ import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 import Footer from '../footer/footer';
 
-const MyEstimateData = ({ menu, myData, changeMenu, Ref, updateMyData, deleteMyData, exit }) => {
+const MyEstimateData = ({ logoURL, menu, myData, changeMenu, Ref, updateMyData, deleteMyData, exit }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const MyEstimateData = ({ menu, myData, changeMenu, Ref, updateMyData, deleteMyD
 
   return (
     <main className={styles.myEstimateData}>
-      <Header />
+      <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
           <Menu />

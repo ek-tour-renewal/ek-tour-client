@@ -8,7 +8,7 @@ import EstimateListItem from '../estimateListItem/estimateListItem';
 import PageButton from '../pageButton/pageButton';
 
 
-const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, requestDataList, getEstimateList }) => {
+const EstimateList = ({ logoURL, menu, changeMenu, getEstimateListPage, allPage, requestDataList, getEstimateList }) => {
 
   useEffect(() => {
     changeMenu('견적요청목록');
@@ -25,7 +25,7 @@ const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, requestD
 
   return (
     <main className={styles.estimateList}>
-      <Header />
+      <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
           <Menu />
