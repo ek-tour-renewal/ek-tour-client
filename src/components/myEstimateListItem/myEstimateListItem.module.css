@@ -1,6 +1,6 @@
 @value makerBlack, makerLightGrey from '../../common/colors.css';
 
-.estimateListItem {
+.myEstimateListItem {
   margin: 0 0.5rem;
   padding: 0.5rem 0;
   border-bottom: 1px solid makerLightGrey;

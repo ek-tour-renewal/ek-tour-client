@@ -191,6 +191,11 @@
   color: makerBlack;
 }
 
+.buttonEstimate:hover {
+  font-weight: bold;
+  color: makerYellow;
+}
+
 .checkbox {
   cursor: pointer;
 }
