@@ -5,13 +5,21 @@ const PageButton = ({ page, getEstimateList }) => {
   const buttonRef = useRef();
 
   const onPageClick = () => {
-    getEstimateList(buttonRef.current.value-1);
+    getEstimateList(buttonRef.current.value - 1);
   }
 
   return (
-    <button className={styles.button} ref={buttonRef} value={page} onClick={onPageClick}>
-      {page}
-    </button>
+    <div>
+      <button className={styles.prevPageButton}>
+        <i class="fa-solid fa-caret-left"></i>
+      </button>
+      <button className={styles.button} ref={buttonRef} value={page} onClick={onPageClick}>
+        {page}
+      </button>
+      <button className={styles.nextPageButton}>
+        <i class="fa-solid fa-caret-right"></i>
+      </button>
+    </div>
   )
 };
 
