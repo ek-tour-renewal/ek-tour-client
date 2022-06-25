@@ -135,18 +135,20 @@ const Estimate = ({ Ref, getData }) => {
           </li>
           <li className={styles.wayType}>
             <p className={styles.wayTypeTitle}>왕복구분</p>
-            <input className={styles.checkbox} ref={Ref.aroundWayTypeRef} type='checkbox' value='aroundWay' />왕복
-            <input className={styles.checkbox} type='checkbox' value='편도' />편도
+            <label>
+              <input className={styles.checkbox} ref={Ref.aroundWayTypeRef} type="radio" name='wayType' />왕복
+              <input className={styles.checkbox} type="radio" name='wayType' />편도
+            </label>
           </li>
           <li className={styles.payment}>
             <p className={styles.paymentTitle}>결제방법</p>
-            <input className={styles.checkbox} ref={Ref.cashRef} type='checkbox' />현금
-            <input className={styles.checkbox} type='checkbox' />카드
+            <input className={styles.checkbox} ref={Ref.cashRef} type='radio' name='payType' />현금
+            <input className={styles.checkbox} type='radio' name='payType' />카드
           </li>
           <li className={styles.taxBill}>
             <p className={styles.taxBillTitle}>세금계산서 발급</p>
-            <input className={styles.checkbox} ref={Ref.taxBillRef} type='checkbox' />발급
-            <input className={styles.checkbox} type='checkbox' />발급안함
+            <input className={styles.checkbox} ref={Ref.taxBillRef} type='radio' name='taxBillType' />발급
+            <input className={styles.checkbox} type='radio' name='taxBillType' />발급안함
           </li>
           <li className={styles.memo}>
             <p className={styles.memoTitle}>기타 메모 사항</p>
