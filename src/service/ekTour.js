@@ -3,13 +3,22 @@ class Ektour {
     this.ektour = httpClient;
   }
 
-  async pushData(data) {
-    const response = await this.ektour.post('/estimate', data);
+  async getLogo() {
+    const response = await this.ektour.get('/img/logo.png', {});
     return response;
   }
 
-  async updateData(data) {
-    const response = await this.ektour.put('/estimate/search/my', data);
+  // async getCompanyData(data) {
+  //   const response = await this.ektour.get('/estimate', {
+  //     params: {
+
+  //     },
+  //   });
+  //   return response;
+  // }
+
+  async postData(data) {
+    const response = await this.ektour.post('/estimate', data);
     return response;
   }
 
@@ -18,7 +27,7 @@ class Ektour {
     return response;
   }
 
-  async requestData(pageNumber) {
+  async getData(pageNumber) {
     const response = await this.ektour.get('/estimate/all', {
       params: {
         page: pageNumber,
@@ -27,7 +36,7 @@ class Ektour {
     return response.data.estimateList;
   }
 
-  async getMyEstimate(data) {
+  async postMyEstimate(data) {
     const { phone, password } = data;
     const response = await this.ektour.post(`/estimate/search/my`, {
       phone: phone,
@@ -35,6 +44,19 @@ class Ektour {
     });
     return response.data.estimates;
   }
+
+  // async putData(data) {
+  //   const response = await this.ektour.put('', data);
+  //   return response;
+  // }
+
+  // async deleteData(data) {
+  //   const response = await this.ektour.put('/estimate/estimateId', {
+  //     data,
+  // });
+  //   return response;
+  // }
+
 }
 
 export default Ektour;
