@@ -5,11 +5,11 @@ h1 {
 }
 
 .main {
-  width: 75em;
+  width: 75%;
 }
 
 .mainImage {
-  width: 97%;
+  width: 90%;
 }
 
 .body {
@@ -20,14 +20,16 @@ h1 {
 
 .info {
   display: flex;
+  align-items: center;
   margin-top: 1em;
 }
 
 .contact {
   flex: 1 1 50%;
+  width: 80%;
   background-color: makerYellow;
-  text-align: center;
-  padding: 2em 0;
+  justify-content: center;
+  padding: 2rem 0.5rem;
   margin: 1em 0;
   border-radius: 0.5em;
   color: makerBrown;
@@ -35,9 +37,11 @@ h1 {
 
 .notice {
   flex: 1 1 50%;
+  width: 80%;
   display: flex;
   background-color: makerPaleOrange;
-  padding: 2em 0;
+  text-align: center;
+  padding: 2rem 0.5rem;
   border-radius: 0.5em;
   margin: 0 1em;
 }
@@ -47,43 +51,37 @@ h1 {
   margin-bottom: 0.5em;
 }
 
-.contactPhone {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.contactPhoneIcon {
-  color: makerBrown;
-}
-
-.phoneDetail {
-  margin: 0;
-  margin-left: 0.5em;
-  font-size: 1.8rem;
-}
-
+.contactPhone,
 .kakao, 
 .email {
   display: flex;
-  justify-content: center;
   align-items: center;
+  margin: auto;
 }
 
+.contactPhoneIcon,
 .emailIcon {
   color: makerBrown;
 }
 
+.phoneDetail {
+  width: 100%;
+  margin: 0;
+  margin-left: 0.5rem;
+  font-size: 1.5em;
+}
+
 .kakaoDetail, 
 .emailDetail {
-  font-size: 1.5rem;
+  width: 100%;
+  font-size: 1.3em;
   margin: 0;
   margin-left: 0.8rem;
 }
 
 .serviceCenter, 
 .account {
-  flex-basis: 50%;
+  flex-wrap: wrap;
   text-align: start;
   padding-left: 1em;
 }
@@ -91,7 +89,8 @@ h1 {
 .serviceCenterTitle, 
 .accountTitle {
   color: makerGreen;
-  font-size: 1.9rem;
+  font-size: 1.4em;
+  width: 100%;
 }
 
 .accountTitle {
@@ -99,39 +98,50 @@ h1 {
 }
 
 .serviceCenterNumber {
-  font-size: 1.7rem;
+  font-size: 1.5em;
   font-weight: bold;
   color: #7A5E29;
 }
 
 .serviceCenterTime {
-  font-size: 1.3rem;
+  font-size: 1.3em;
   color: #C27807;
 }
 
-.serviceCenterDetail {
+.serviceCenterDetail,
+.accountDetail {
+  width: 100%;
   color: makerWhite;
 }
 
 .kbbankImg {
   background-color: #CA904C;
-  box-shadow: 0 0 5px 5px #CA904C;
+  box-shadow: 0 0 0.3em 0.3em #CA904C;
 }
 
 .accountNumber {
-  font-size: 1.6rem;
+  font-size: 1.5em;
   font-weight: bold;
   padding-left: 0;
   color: #C27807;
 }
 
-.accountDetail {
-  color: makerWhite;
-}
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:1024px) {
   .body,
   .info {
     flex-direction: column;
+  }
+}
+
+@media screen and (max-width:480px) {
+  .notice {
+    flex-direction: column;
+  }
+  .contactPhone,
+  .kakao,
+  .email {
+    flex-direction: column;
+    margin: auto;
   }
 }

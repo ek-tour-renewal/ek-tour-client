@@ -13,9 +13,9 @@ const Main = memo(({ logoURL, Ref, getData }) => {
       <main className={styles.body}>
         {/* 견적요청 폼 */}
         <Estimate Ref={Ref} getData={getData} />
-        {/* 문의 */}
+        {/* 정보 */}
         <section className={styles.info}>
-          {/* 연락처 */}
+          {/* 문의 연락처 */}
           <ul className={styles.contact}>
             <li className={styles.contactPhone}>
               <span className={styles.contactPhoneIcon}><i className='fa-solid fa-phone fa-3x'></i></span>
@@ -48,8 +48,9 @@ const Main = memo(({ logoURL, Ref, getData }) => {
             </ul>
           </ul>
         </section>
+        <Footer />
       </main>
-      <Footer />
+      
     </section>
   )
 });
