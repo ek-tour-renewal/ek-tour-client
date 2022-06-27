@@ -48,10 +48,10 @@ button {
 
 .navbarMenu,
 .hiddenNavbarMenu {
-  width: 100%;
   display: flex;
+  width: 90%;
   justify-content: space-between;
-  padding: 0 4em 0 4em;
+  padding: 0 2em;
   border-bottom: 0.5em solid makerOrange;
   margin-bottom: 0;
 }
@@ -61,8 +61,7 @@ button {
 .request,
 .service {
   display: inline-block;
-  font-size: 23px;
-  width: 7rem;
+  font-size: 1.2em;
   height: 2rem;
   position: relative;
   color: makerBlack;
@@ -117,7 +116,17 @@ button {
   background-color: makerPaleOrange;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:1024px) {
+
+  .introduce,
+  .busNotice,
+  .request,
+  .service {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width:720px) {
   .navbarMenu {
     display: none;
     transition: ease-in;
@@ -135,6 +144,7 @@ button {
   .request,
   .service {
     margin-left: 20px;
+    font-size: 0.8em;
   }
 
   .dropdownMenu {
@@ -145,4 +155,8 @@ button {
   .toggle {
     display: inline;
   }
+}
+
+@media screen and (max-width:480px) {
+  
 }
