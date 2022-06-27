@@ -8,7 +8,6 @@ input, select {
   border: 1px solid makerLightGrey;
   text-align: center;
   height: 1.5em;
-  margin-right: 0.5em;
 }
 
 select {
@@ -20,6 +19,7 @@ input:focus, textarea:focus {
 }
 
 p {
+  width: max-content;
   margin: 0.3em 0;
   margin-right: 0.8em;
 }
@@ -29,7 +29,7 @@ button {
 }
 
 .estimate {
-  flex-basis: 50%;
+  width: 100%;
 }
 
 .estimateBox {
@@ -126,7 +126,7 @@ button {
 }
 
 .placeInput {
-  width: 20em;
+  width: 50%;
 }
 
 .travelSelect {
@@ -135,6 +135,7 @@ button {
 
 .placeSelect {
   width: 4.7em;
+  margin-right: 0.5em;
 }
 
 .departDateInput, 
@@ -160,13 +161,13 @@ button {
 }
 
 .hyphen {
-  margin: 0 0.5em;
+  margin: 0 0.3em;
   margin-bottom: 0.3em;
 }
 
 .memoTextarea {
   height: 4em;
-  width: 20em;
+  width: 60%;
 }
 
 .requestButtonContainer {
@@ -191,8 +192,17 @@ button {
   font-weight: bold;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:1024px) {
   .data {
     flex-direction: column;
   }
+
+  .estimate_1 {
+    padding-bottom: 0;
+  }
+
+  .estimate_2 {
+    padding-top: 0;
+  }
 }
+
