@@ -1,16 +1,14 @@
 @value makerYellow, makerBrown, makerBlack from '../../common/colors.css';
 
 .company {
-  width: 100%;
+  width: 70%;
+  margin: auto;
+  margin-bottom: 4em;
 }
 
-.main {
-  display: flex;
-}
-
-.mainDetail {
-  flex: 1 1 80%;
-  padding: 0 1em;
+.shortContentContainer {
+  margin: auto;
+  width: 80%;
 }
 
 .shortContent {
@@ -18,7 +16,6 @@
   padding: 0.2em 0;
   padding-left: 1em;
   padding-right: 3em;
-  margin: auto;
   margin-bottom: 2.5em;
   background-color: makerYellow;
   color: makerBrown;
@@ -40,12 +37,15 @@
 
 .title {
   font-size: 1.8em;
+  margin-bottom: 1em;
 }
 
 .contents {
+  width: 80%;
  text-align: left;
  display: flex;
  flex-direction: column;
+ margin: auto;
 }
 
 .contentDetail {

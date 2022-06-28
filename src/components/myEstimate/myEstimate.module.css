@@ -1,26 +1,12 @@
 @value makerBrown, makerWhite from '../../common/colors.css';
 
 .myEstimate {
-  width: 75em;
+  width: 100%;
 }
 
 .main {
-  display: flex;
-  margin-left: 4rem;
-}
-
-.sideMenu {
-  flex: 1 1 25%;
-  margin: 0 auto;
-}
-
-.mainDetail {
-  flex: 1 1 75%;
-  padding: 0 3em;
-}
-
-.container {
-  height: 100%;
+  width: 70%;
+  margin: auto;
 }
 
 .form {

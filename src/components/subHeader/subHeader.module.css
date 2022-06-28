@@ -1,7 +1,7 @@
 @value makerOrange, makerWhite from '../../common/colors.css';
 
 .subHeader {
-  width: 90%;
+  width: 80%;
   background-color: makerOrange;
   border-radius: 0.5em;
   padding: 0.7em 0;

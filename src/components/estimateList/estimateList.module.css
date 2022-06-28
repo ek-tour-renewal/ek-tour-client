@@ -1,22 +1,12 @@
 @value makerYellow, makerBrown, makerLightGrey, makerGrey from '../../common/colors.css';
 
 .estimateList {
-  width: 75em;
+  width: 100%;
 }
 
-.main {
-  display: flex;
-  margin-left: 4rem;
-}
-
-.sideMenu {
-  flex: 1 1 25%;
-  margin: 0 auto;
-}
-
-.mainDetail {
-  flex: 1 1 75%;
-  padding: 0 3em;
+.dataListContainer {
+  width: 75%;
+  margin: auto;
 }
 
 .dataList {

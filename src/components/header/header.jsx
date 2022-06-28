@@ -1,8 +1,7 @@
-import React, { memo } from 'react';
-import { useState } from 'react';
+import React, { memo, useState } from 'react';
 import styles from './header.module.css';
 
-const Header = memo(({ logoURL }) => {
+const Header = memo(({ changePage }) => {
   const [active, setActive] = useState(false);
 
   const onOpenMenu = () => {
@@ -16,20 +15,20 @@ const Header = memo(({ logoURL }) => {
       </section>
       <nav className={styles.navbar}>
         <a href='/'>
-          <img src={logoURL} alt='EK tour logo' className={styles.logo} />
+          <img className={styles.logo} src='http://52.79.242.242:8080/img/logo.png' alt='EK tour logo' />
         </a>
         <div className={styles.container}>
           <ul className={!active ? styles.navbarMenu : styles.hiddenNavbarMenu}>
             <li className={styles.introduce}>
-              <a className={styles.menuTitle} href='/introduce'>회사소개</a>
+              <button className={styles.menuTitle} onClick={() => changePage('introduce')}>회사소개</button>
             </li>
             <li className={styles.busNotice} >
-              <a className={styles.menuTitle} href='/notice'>버스안내</a>
+              <button className={styles.menuTitle} onClick={() => changePage('notice')}>버스안내</button>
               <ul className={styles.dropdownMenu}>
-                <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/notice'>버스안내</a></li>
-                <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/smallbus'>25인승 소형</a></li>
-                <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/limousine'>28인승 리무진</a></li>
-                <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/bigbus'>45인승 대형</a></li>
+                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => changePage('notice')}>버스안내</button></li>
+                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => changePage('smallBus')}>25인승 소형</button></li>
+                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => changePage('limousine')}>28인승 리무진</button></li>
+                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => changePage('bigBus')}>45인승 대형</button></li>
               </ul>
             </li>
             <li className={styles.request}>
@@ -41,7 +40,7 @@ const Header = memo(({ logoURL }) => {
               </ul>
             </li>
             <li className={styles.service}>
-              <a className={styles.menuTitle} href='/service'>고객센터</a>
+              <button className={styles.menuTitle} onClick={() => changePage('serviceCenter')}>고객센터</button>
             </li>
           </ul>
         </div>

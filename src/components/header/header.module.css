@@ -68,6 +68,11 @@ button {
   color: makerBlack;
 }
 
+.menuTitle {
+  border: none;
+  background-color: unset;
+}
+
 .menuTitle:hover {
   color: makerOrange;
 }
@@ -88,6 +93,8 @@ button {
 
 .subMenu {
   color: makerWhite;
+  border: none;
+  background-color: unset;
 }
 
 .subMenu:hover {

@@ -1,22 +1,8 @@
 @value makerYellow, makerBrown from '../../common/colors.css';
 
 .limousine {
-  width: 75em;
-}
-
-.main {
-  display: flex;
-  margin-left: 4rem;
-}
-
-.sideMenu {
-  flex: 1 1 25%;
-  margin: 0 auto;
-}
-
-.mainDetail {
-  flex: 1 1 75%;
-  padding: 0 3em;
+  width: 70%;
+  margin: auto;
 }
 
 .limousineTitle {

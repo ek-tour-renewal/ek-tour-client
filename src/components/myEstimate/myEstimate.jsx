@@ -3,63 +3,63 @@ import { useNavigate } from 'react-router-dom';
 import styles from './myEstimate.module.css';
 import Footer from '../footer/footer';
 import Header from '../header/header';
-import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
+import MyEstimateList from '../myEstimateList/myEstimateList';
 
-const MyEstimate = ({ logoURL, menu, myRef, changeMenu, checkMyEstimate, menus }) => {
+const MyEstimate = (props) => {
   const navigate = useNavigate();
 
-  // side menu
-  const menuList = [
-    {url:'/list', menu: '견적요청목록'}, 
-    {url:'/request', menu: '견적요청하기'}, 
-    {url:'/my', menu: '나의견적확인'},
-  ];
-  
   useEffect(() => {
-    changeMenu('나의견적확인', menuList);
+    props.changeMenu('나의견적확인');
   }, []);
 
   // 나의 견적 확인 (내 정보 입력)
   const onSubmit = event => {
-    checkMyEstimate(event);
-    navigate('/my/list');
+    props.checkMyEstimate(event);
   };
 
   return (
     <main className={styles.myEstimate}>
-      <Header logoURL={logoURL} />
-      <main className={styles.main}>
-        <section className={styles.sideMenu}>
-          <Menu menus={menus} />
-        </section>
-        <section className={styles.mainDetail}>
-          <SubHeader menu={menu} />
-          {/* 정보 입력란 */}
-          <form className={styles.form} ref={myRef.formRef} onSubmit={onSubmit}>
-            <li className={styles.phone}>
-              <p>핸드폰</p>
-              <select className={styles.phoneSelect} ref={myRef.phoneFirstRef}>
-                <option value='010'>010</option>
-                <option value='016'>016</option>
-                <option value='017'>017</option>
-                <option value='018'>018</option>
-                <option value='019'>019</option>
-              </select>
-              <p className={styles.hyphen}>-</p>
-              <input className={styles.phoneInput} ref={myRef.phoneMiddleRef} type='text' maxlength='4' />
-              <p className={styles.hyphen}>-</p>
-              <input className={styles.phoneInput} ref={myRef.phoneLastRef} type='text' maxlength='4' />
-            </li>
-            <li className={styles.password}>
-              <p>비밀번호</p>
-              <input className={styles.passwordInput} ref={myRef.passwordRef} type='text' maxlength='4' />
-            </li>
-            <button className={styles.checkButton}>확인</button>
-          </form>
-          <p className={styles.explanation}>견적확인은 등록 시 입력한 핸드폰번호와 비밀번호로 확인합니다.</p>
-        </section>
-      </main>
+      <Header />
+        {!props.myData &&
+          <main className={styles.main}>
+            <SubHeader menu={props.menu} />
+            {/* 정보 입력란 */}
+            <form className={styles.form} ref={props.myRef.formRef} onSubmit={onSubmit}>
+              <li className={styles.phone}>
+                <p>핸드폰</p>
+                <select className={styles.phoneSelect} ref={props.myRef.phoneFirstRef}>
+                  <option value='010'>010</option>
+                  <option value='016'>016</option>
+                  <option value='017'>017</option>
+                  <option value='018'>018</option>
+                  <option value='019'>019</option>
+                </select>
+                <p className={styles.hyphen}>-</p>
+                <input className={styles.phoneInput} ref={props.myRef.phoneMiddleRef} type='text' maxlength='4' />
+                <p className={styles.hyphen}>-</p>
+                <input className={styles.phoneInput} ref={props.myRef.phoneLastRef} type='text' maxlength='4' />
+              </li>
+              <li className={styles.password}>
+                <p>비밀번호</p>
+                <input className={styles.passwordInput} ref={props.myRef.passwordRef} type='text' maxlength='4' />
+              </li>
+              <button className={styles.checkButton}>확인</button>
+            </form>
+            <p className={styles.explanation}>견적확인은 등록 시 입력한 핸드폰번호와 비밀번호로 확인합니다.</p>
+          </main>}
+        {props.myData &&
+          <MyEstimateList
+            menu={props.menu}
+            myData={props.myData}
+            changeMenu={props.changeMenu}
+            getEstimateListPage={props.getEstimateListPage}
+            postMyEstimateData={props.postMyEstimateData}
+            allPage={props.allPage}
+            requestDataList={props.requestDataList}
+            exit={props.exit}
+            currentMyData={props.currentMyData} />
+        }
       <Footer />
     </main>
   )

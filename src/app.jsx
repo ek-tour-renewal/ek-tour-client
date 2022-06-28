@@ -1,23 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styles from './app.module.css';
-import BigBus from './components/bigBus/bigBus';
-import BusNotice from './components/busNotice/busNotice';
-import Company from './components/company/company';
 import EstimateList from './components/estimateList/estimateList';
-import Limousine from './components/limousine/limousine';
-import Main from './components/main/main';
 import MyEstimate from './components/myEstimate/myEstimate';
 import MyEstimateData from './components/myEstimateData/myEstimateData';
 import MyEstimateList from './components/myEstimateList/myEstimateList';
 import NotFoundPage from './components/notFoundPage/notFoundPage';
+import Page from './components/page/page';
 import RequestEstimate from './components/requestEstimate/requestEstimate';
-import ServiceCenter from './components/serviceCenter/serviceCenter';
-import SmallBus from './components/smallBus/smallBus';
 
 function App({ ektour }) {
+  const [state, setState] = useState('main');
   const [menu, setMenu] = useState(null);
-  const [menus, setMenus] = useState([]);
   const [allPage, setAllPage] = useState(0);
   const [requestDataList, setRequestDataList] = useState([]);
   const [myData, setMyData] = useState(false);
@@ -25,7 +19,6 @@ function App({ ektour }) {
     phone: null,
     password: null,
   }]);
-  const [logoURL, setLogoURL] = useState();
 
   const formRef = useRef();
   const travelRef = useRef();
@@ -63,19 +56,15 @@ function App({ ektour }) {
         console.log(response);
       })
       .catch(error => console.log(error))
-    ektour
-      .getLogo()
-      .then(response => {
-        setLogoURL(response);
-        console.log(response);
-      })
-      .catch(error => console.log(error))
   }, [])
 
+  const changePage = (name) => {
+    setState(name);
+  };
+
   // subHeader, side 메뉴
-  const changeMenu = (menu, menuList) => {
+  const changeMenu = (menu) => {
     setMenu(menu);
-    setMenus(menuList);
   };
 
   // 견적 요청
@@ -222,106 +211,53 @@ function App({ ektour }) {
     <div className={styles.app}>
       <BrowserRouter>
         <Routes>
-          <Route path='/' exact element={<Main
-            logoURL={logoURL}
-            Ref={Ref}
-            getData={getData} />}
-          />
-
-          <Route path='/introduce' element={<Company
-            logoURL={logoURL}
-            menu={menu}
-            changeMenu={changeMenu}
-            menus={menus} />}
-          />
-
-          <Route path='/notice' element={<BusNotice
-            logoURL={logoURL}
-            menu={menu}
-            changeMenu={changeMenu}
-            menus={menus} />}
-          />
-
-          <Route path='/smallbus' element={<SmallBus
-            logoURL={logoURL}
-            menu={menu}
-            changeMenu={changeMenu}
-            menus={menus} />}
-          />
-
-          <Route path='/limousine' element={<Limousine
-            menu={menu}
-            changeMenu={changeMenu}
-            menus={menus} />}
-          />
-
-          <Route path='/bigbus' element={<BigBus
-            logoURL={logoURL}
-            menu={menu}
-            changeMenu={changeMenu}
-            menus={menus} />}
+          <Route path='/' exact element={
+            <Page
+              changePage={changePage}
+              state={state}
+              menu={menu}
+              changeMenu={changeMenu}
+              Ref={Ref}
+              getData={getData} />}
           />
 
           <Route path='/list' element={<EstimateList
-            logoURL={logoURL}
+            changePage={changePage}
+            state={state}
             menu={menu}
             changeMenu={changeMenu}
             getEstimateListPage={getEstimateListPage}
             getEstimateList={getEstimateList}
             allPage={allPage}
-            requestDataList={requestDataList}
-            menus={menus} />}
+            requestDataList={requestDataList} />}
           />
 
           <Route path='/request' element={<RequestEstimate
-            logoURL={logoURL}
+            changePage={changePage}
+            state={state}
             menu={menu}
             changeMenu={changeMenu}
             Ref={Ref}
-            getData={getData}
-            menus={menus} />}
+            getData={getData} />}
           />
 
           <Route path='/my' element={<MyEstimate
-            logoURL={logoURL}
+            changePage={changePage}
+            state={state}
             menu={menu}
             myData={myData}
             changeMenu={changeMenu}
             myRef={myRef}
             checkMyEstimate={checkMyEstimate}
-            menus={menus}
             getMyEstimateListPage={getMyEstimateListPage} />}
           />
 
-          <Route path='/my/list' element={<MyEstimateList
-            logoURL={logoURL}
-            menu={menu}
-            myData={myData}
-            changeMenu={changeMenu}
-            getEstimateListPage={getEstimateListPage}
-            postMyEstimateData={postMyEstimateData}
-            allPage={allPage}
-            requestDataList={requestDataList}
-            exit={exit}
-            menus={menus}
-            currentMyData={currentMyData} />}
-          />
-
           <Route path='/search/my/estimate' element={<MyEstimateData
-            logoURL={logoURL}
             menu={menu}
             myData={myData}
             changeMenu={changeMenu}
             Ref={Ref}
-            exit={exit}
-            menus={menus} />}
-          />
-
-          <Route path='/service' element={<ServiceCenter
-            logoURL={logoURL}
-            menu={menu}
-            changeMenu={changeMenu}
-            menus={menus} />}
+            exit={exit} />}
           />
 
           <Route path='*' element={<NotFoundPage />} />

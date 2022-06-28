@@ -3,14 +3,12 @@ import Button from '../button/button';
 import DetailMenu from '../detailMenu/detailMenu';
 import styles from './menu.module.css';
 
-const Menu = memo(({ menus }) => {
+const Menu = memo(() => {
   return (
     <main className={styles.menu}>
       <section className={styles.container}>
         <ul>
-          {menus.map(menu => (
-            <DetailMenu menu={menu} />
-          ))}
+          <menu type="context"></menu>
         </ul>
       </section>
       <Button />
