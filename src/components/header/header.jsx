@@ -22,9 +22,6 @@ const Header = memo(({ logoURL }) => {
           <ul className={!active ? styles.navbarMenu : styles.hiddenNavbarMenu}>
             <li className={styles.introduce}>
               <a className={styles.menuTitle} href='/introduce'>회사소개</a>
-              <ul className={styles.dropdownMenu}>
-                <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/introduce'>CEO 인사말</a></li>
-              </ul>
             </li>
             <li className={styles.busNotice} >
               <a className={styles.menuTitle} href='/notice'>버스안내</a>
@@ -45,9 +42,6 @@ const Header = memo(({ logoURL }) => {
             </li>
             <li className={styles.service}>
               <a className={styles.menuTitle} href='/service'>고객센터</a>
-              <ul className={styles.dropdownMenu}>
-                <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/service'>고객센터</a></li>
-              </ul>
             </li>
           </ul>
         </div>

@@ -82,7 +82,10 @@ function App({ ektour }) {
   const submitData = (data) => {
     ektour
       .postData(data)
-      .then(() => alert('견적 요청이 완료되었습니다.'))
+      .then(() => {
+        alert('견적 요청이 완료되었습니다.');
+        console.log(data);
+      })
       .catch(error => console.log(error))
   };
 

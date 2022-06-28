@@ -51,7 +51,7 @@ const Estimate = ({ Ref, getData }) => {
           </li>
           <li className={styles.email}>
             <p>이메일 주소</p>
-            <input className={styles.emailInput} ref={Ref.emailRef} type='text' />
+            <input className={styles.emailInput} ref={Ref.emailRef} type='email' />
           </li>
           <li className={styles.departDate}>
             <p>출발일자</p>
