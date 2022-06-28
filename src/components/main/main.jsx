@@ -8,7 +8,7 @@ const Main = memo(({ logoURL, Ref, getData }) => {
   return (
     <section className={styles.main}>
       <Header logoURL={logoURL} />
-      <img className={styles.mainImage} src='./image/main.jpg' alt='메인 이미지' />
+      {/* <img className={styles.mainImage} src='./image/main.jpg' alt='메인 이미지' /> */}
       <main className={styles.body}>
         {/* 견적요청 폼 */}
         <Estimate Ref={Ref} getData={getData} />
