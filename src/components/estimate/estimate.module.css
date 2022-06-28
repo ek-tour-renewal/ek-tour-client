@@ -31,17 +31,14 @@ button {
 .estimate {
   width: 50%;
   margin-top: 2em;
-  background-color: makerLightYellow;
-  border-radius: 1em;
 }
 
 .estimateBox {
   display: block;
   font-size: 1.5em;
-  margin-bottom: 0.6rem;
-  margin-left: 1em;
+  font-weight: bold;
+  margin: 0.6rem 1em;
   padding: 0.5rem;
-  width: 30%;
   height: 1.5em;
   border-radius: 0.4em;
   border: none;
@@ -56,6 +53,7 @@ button {
   background-color: unset;
   border-radius: 1em;
   padding: 0 1em;
+  background-color: makerLightYellow;
 }
 
 .estimate_1,
@@ -198,11 +196,13 @@ button {
   font-size: 20px;
   border-radius: 0.5em;
   border: none;
+  transition: transform 250ms ease-in;
 }
 
 .requestButton:hover {
   opacity: 80%;
   font-weight: bold;
+  transform: scale(1.02)
 }
 
 .viewMore {

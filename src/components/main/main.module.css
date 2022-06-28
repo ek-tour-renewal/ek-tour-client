@@ -18,6 +18,7 @@ h1 {
   ), url('/image/main.jpg');
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
 }
 
 .info {
