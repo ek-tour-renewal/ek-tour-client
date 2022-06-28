@@ -1,7 +1,12 @@
 @value makerOrange from '../../common/colors.css';
 
+.detailMenu {
+  width: 100%;
+  text-align: end;
+}
+
 .menu {
-  font-size: 35px;
+  font-size: 1.5em;
   color: makerOrange;
 }
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './detailMenu.module.css';
 
-const DetailMenu = (props) => {
+const DetailMenu = ({ menu }) => {
   return (
-    <li>
-      <span className={styles.menu}>menu</span>
+    <li className={styles.detailMenu}>
+      <a className={styles.menu} href={menu.url}>{menu.menu}</a>
     </li>
   )
 };
