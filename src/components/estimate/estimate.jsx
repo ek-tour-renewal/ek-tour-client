@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './estimate.module.css';
 
 const Estimate = ({ Ref, getData }) => {
+  const buttonRef = useRef();
+  const [visible, setVisible] = useState(false);
+
+  const openDetail = () => {
+    setVisible(!visible)
+  };
 
   const onSubmit = (event) => {
     getData(event);
@@ -50,10 +56,12 @@ const Estimate = ({ Ref, getData }) => {
           <li className={styles.departDate}>
             <p>출발일자</p>
             <input className={styles.departDateInput} ref={Ref.departDateRef} type='date' />
+            <input className={styles.departTimeInput} ref={Ref.departTimeRef} type='time' />
           </li>
           <li className={styles.arrivalDate}>
             <p>귀행일자</p>
             <input className={styles.arrivalDateInput} ref={Ref.arrivalDateRef} type='date' />
+            <input className={styles.arrivalDTimeInput} ref={Ref.arrivalTimeRef} type='time' />
           </li>
           <li className={styles.departPlace}>
             <p>출발지</p>
@@ -99,12 +107,6 @@ const Estimate = ({ Ref, getData }) => {
             </select>
             <input className={styles.placeInput} ref={Ref.arrivalPlaceDetailRef} type='text' />
           </li>
-          <li className={styles.stopPlace}>
-            <p className={styles.stopPlaceTitle}>경유지</p>
-            <input className={styles.placeInput} ref={Ref.stopPlaceRef} type='text' />
-          </li>
-        </section>
-        <section className={styles.estimate_2}>
           <li className={styles.vehicle}>
             <p>차량구분</p>
             <select className={styles.vehicleSelect} ref={Ref.vehicleRef}>
@@ -128,6 +130,19 @@ const Estimate = ({ Ref, getData }) => {
               <option value='10'>10대 이상</option>
             </select>
           </li>
+          <li className={styles.memo}>
+            <p className={styles.memoTitle}>기타 메모 사항</p>
+            <textarea className={styles.memoTextarea} ref={Ref.memoRef} cols='30' rows='10'></textarea>
+          </li>
+
+        </section>
+        {visible &&
+        <section className={styles.estimate_2}>
+          <li className={styles.stopPlace}>
+            <p className={styles.stopPlaceTitle}>경유지</p>
+            <input className={styles.placeInput} ref={Ref.stopPlaceRef} type='text' />
+          </li>
+
           <li className={styles.memberCount}>
             <p className={styles.memberCountTitle}>인원</p>
             <input className={styles.memberCountInput} ref={Ref.memberCountRef} type='text' />
@@ -150,15 +165,15 @@ const Estimate = ({ Ref, getData }) => {
             <input className={styles.checkbox} ref={Ref.taxBillRef} type='radio' name='taxBillType' />발급
             <input className={styles.checkbox} type='radio' name='taxBillType' />발급안함
           </li>
-          <li className={styles.memo}>
-            <p className={styles.memoTitle}>기타 메모 사항</p>
-            <textarea className={styles.memoTextarea} ref={Ref.memoRef} cols='30' rows='10'></textarea>
-          </li>
+
           {/* 견적요청 버튼 */}
           <li className={styles.requestButtonContainer}>
             <button type='submit' className={styles.requestButton}>견적요청</button>
           </li>
-        </section>
+        </section>}
+        <li className={styles.viewMore}>
+          <button className={styles.moreButton} ref={buttonRef} type='button' onClick={openDetail}>{visible ? buttonRef.current.value = '숨기기' : '더보기'}</button>
+        </li>
       </form>
     </section>
   )

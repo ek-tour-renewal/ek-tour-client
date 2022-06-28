@@ -1,7 +1,6 @@
 @value makerWhite from './common/colors.css';
 
 .app {
-  width: 70%;
   margin: auto;
   height: 100vh;
   display: flex;

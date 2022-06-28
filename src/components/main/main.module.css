@@ -8,14 +8,16 @@ h1 {
   width: 100%;
 }
 
-.mainImage {
-  width: 90%;
-}
-
 .body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: linear-gradient(
+    rgba(94, 94, 94, 0.4),
+    rgba(255, 255, 255, 0.4)
+  ), url('/image/main.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .info {

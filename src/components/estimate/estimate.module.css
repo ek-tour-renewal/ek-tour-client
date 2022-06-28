@@ -1,4 +1,4 @@
-@value makerWhite, makerOrange, makerLightGrey, makerYellow, makerBrown from '../../common/colors.css';
+@value makerWhite, makerOrange, makerLightGrey, makerYellow, makerBrown, makerLightYellow from '../../common/colors.css';
 
 body {
   user-select: none;
@@ -29,7 +29,10 @@ button {
 }
 
 .estimate {
-  width: 90%;
+  width: 50%;
+  margin-top: 2em;
+  background-color: makerLightYellow;
+  border-radius: 1em;
 }
 
 .estimateBox {
@@ -48,16 +51,18 @@ button {
 
 .data {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  background-color: makerYellow;
+  background-color: unset;
   border-radius: 1em;
+  padding: 0 1em;
 }
 
 .estimate_1,
 .estimate_2 {
   display: flex;
   flex-wrap: wrap;
-  padding: 0.8em;
+  padding: 0 0.8em;
   margin: auto;
   width: 80%;
 }
@@ -146,7 +151,7 @@ button {
 
 .departDateInput, 
 .arrivalDateInput {
-  width: 50%;
+  width: 30%;
 }
 
 .memberCountInput {
@@ -174,6 +179,8 @@ button {
 .memoTextarea {
   height: 4em;
   width: 60%;
+  resize: none;
+  border: none;
 }
 
 .requestButtonContainer {
@@ -197,6 +204,18 @@ button {
   opacity: 80%;
   font-weight: bold;
 }
+
+.viewMore {
+  width: 100%;
+  text-align: end;
+  padding: 0;
+  margin-bottom: 1em;
+}
+
+.moreButton {
+  background-color: unset;
+  border: none;
+} 
 
 @media screen and (max-width:1360px) {
   .data {
