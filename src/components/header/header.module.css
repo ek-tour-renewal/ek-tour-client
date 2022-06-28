@@ -1,4 +1,4 @@
-@value makerOrange, makerBlack, makerWhite, makerPaleOrange, makerYellow, makerLightYellow, makerBrown from '../../common/colors.css';
+@value makerOrange, makerBlack, makerWhite, makerPaleOrange, makerYellow, makerBrown, makerLightGreen from '../../common/colors.css';
 
 a {
   text-decoration: none;
@@ -76,7 +76,7 @@ button {
   font-size: 13px;
   display: none;
   position: absolute;
-  background-color: makerLightYellow;
+  background-color: makerLightGreen;
   padding: 0.5rem 0;
   top: 38px;
 }
@@ -87,11 +87,11 @@ button {
 }
 
 .subMenu {
-  color: makerBrown;
+  color: makerWhite;
 }
 
 .subMenu:hover {
-  color: makerOrange;
+  color: makerPaleOrange;
 }
 
 .introduce:hover>.dropdownMenu,
