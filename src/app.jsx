@@ -49,8 +49,10 @@ function App({ ektour }) {
   const aroundWayTypeRef = useRef();
   const cashRef = useRef();
   const taxBillRef = useRef();
+  const departTimeRef = useRef();
+  const arrivalTimeRef = useRef();
 
-  const Ref = { formRef, travelRef, nameRef, phoneFirstRef, phoneMiddleRef, phoneLastRef, passwordRef, emailRef, departDateRef, arrivalDateRef, departPlaceRef, departPlaceDetailRef, arrivalPlaceRef, arrivalPlaceDetailRef, vehicleRef, vehicleNumberRef, memberCountRef, memoRef, stopPlaceRef, aroundWayTypeRef, cashRef, taxBillRef };
+  const Ref = { formRef, travelRef, nameRef, phoneFirstRef, phoneMiddleRef, phoneLastRef, passwordRef, emailRef, departDateRef, departTimeRef, arrivalDateRef, arrivalTimeRef, departPlaceRef, departPlaceDetailRef, arrivalPlaceRef, arrivalPlaceDetailRef, vehicleRef, vehicleNumberRef, memberCountRef, memoRef, stopPlaceRef, aroundWayTypeRef, cashRef, taxBillRef };
   const myRef = { formRef, phoneFirstRef, phoneMiddleRef, phoneLastRef, passwordRef };
 
   useEffect(() => {
@@ -96,8 +98,8 @@ function App({ ektour }) {
       vehicleType: vehicleRef.current.value,
       vehicleNumber: vehicleNumberRef.current.value,
       memberCount: memberCountRef.current.value,
-      departDate: departDateRef.current.value,
-      arrivalDate: arrivalDateRef.current.value,
+      departDate: `${departDateRef.current.value} ${departTimeRef.current.value}`,
+      arrivalDate: `${arrivalDateRef.current.value} ${arrivalTimeRef.current.value}`,
       departPlace: `${departPlaceRef.current.value} ${departPlaceDetailRef.current.value}`,
       arrivalPlace: `${Ref.arrivalPlaceRef.current.value} ${arrivalPlaceDetailRef.current.value}`,
       memo: memoRef.current.value ? memoRef.current.value : null,
