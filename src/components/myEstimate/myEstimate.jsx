@@ -13,7 +13,7 @@ const MyEstimate = ({ logoURL, menu, myRef, changeMenu, checkMyEstimate, menus }
   const menuList = [
     {url:'/list', menu: '견적요청목록'}, 
     {url:'/request', menu: '견적요청하기'}, 
-    {url:'/search', menu: '나의견적확인'},
+    {url:'/my', menu: '나의견적확인'},
   ];
   
   useEffect(() => {
@@ -23,7 +23,7 @@ const MyEstimate = ({ logoURL, menu, myRef, changeMenu, checkMyEstimate, menus }
   // 나의 견적 확인 (내 정보 입력)
   const onSubmit = event => {
     checkMyEstimate(event);
-    navigate('/search/my');
+    navigate('/my/list');
   };
 
   return (

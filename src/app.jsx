@@ -277,7 +277,7 @@ function App({ ektour }) {
             menus={menus} />}
           />
 
-          <Route path='/search' element={<MyEstimate
+          <Route path='/my' element={<MyEstimate
             logoURL={logoURL}
             menu={menu}
             myData={myData}
@@ -288,7 +288,7 @@ function App({ ektour }) {
             getMyEstimateListPage={getMyEstimateListPage} />}
           />
 
-          <Route path='/search/my' element={<MyEstimateList
+          <Route path='/my/list' element={<MyEstimateList
             logoURL={logoURL}
             menu={menu}
             myData={myData}

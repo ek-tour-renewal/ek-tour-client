@@ -12,7 +12,7 @@ const Header = memo(({ logoURL }) => {
   return (
     <header className={styles.header}>
       <section className={styles.headerMyEstimate}>
-        <a className={styles.headerMyEstimateButton} href='/search'>내견적확인</a>
+        <a className={styles.headerMyEstimateButton} href='/my'>내견적확인</a>
       </section>
       <nav className={styles.navbar}>
         <a href='/'>
@@ -40,7 +40,7 @@ const Header = memo(({ logoURL }) => {
               <ul className={styles.dropdownMenu}>
                 <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/list'>견적요청목록</a></li>
                 <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/request'>견적요청하기</a></li>
-                <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/search'>나의견적확인</a></li>
+                <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/my'>나의견적확인</a></li>
               </ul>
             </li>
             <li className={styles.service}>

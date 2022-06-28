@@ -28,7 +28,7 @@ const MyEstimateData = ({ logoURL, menu, myData, changeMenu, Ref, exit }) => {
   // 나가기
   const onOut = () => {
     exit();
-    navigate('/search');
+    navigate('/my');
   };
 
   return (

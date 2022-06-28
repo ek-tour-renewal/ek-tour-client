@@ -15,12 +15,12 @@ const MyEstimateList = ({ logoURL, menu, myData, changeMenu, exit, requestDataLi
   const menuList = [
     {url:'/list', menu: '견적요청목록'}, 
     {url:'/request', menu: '견적요청하기'}, 
-    {url:'/search', menu: '나의견적확인'},
+    {url:'/my', menu: '나의견적확인'},
   ];
 
   useEffect(() => {
     if (!myData) {
-      navigate('/search');
+      navigate('/my');
     };
     changeMenu('나의견적확인', menuList);
   }, []);
@@ -42,7 +42,7 @@ const MyEstimateList = ({ logoURL, menu, myData, changeMenu, exit, requestDataLi
   //페이지 나가기
   const onOut = () => {
     exit();
-    navigate('/search');
+    navigate('/my');
   };
 
   return (

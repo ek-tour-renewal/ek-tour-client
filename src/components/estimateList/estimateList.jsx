@@ -13,7 +13,7 @@ const EstimateList = ({ logoURL, menu, menus, changeMenu, getEstimateListPage, a
   const menuList = [
     { url: '/list', menu: '견적요청목록' },
     { url: '/request', menu: '견적요청하기' },
-    { url: '/search', menu: '나의견적확인' },
+    { url: '/my', menu: '나의견적확인' },
   ];
 
   useEffect(() => {
