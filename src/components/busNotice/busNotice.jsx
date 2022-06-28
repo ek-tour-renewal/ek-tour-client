@@ -5,9 +5,17 @@ import Header from '../header/header';
 import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 
-const BusNotice = ({ logoURL, menu, changeMenu }) => {
+const BusNotice = ({ logoURL, menu, changeMenu, menus }) => {
+  // side menu
+  const menuList = [
+    {url: '/notice', menu: '버스안내'}, 
+    {url: '/smallbus', menu: '25인승 소형'}, 
+    {url: '/limousine', menu: '28인승 리무진'}, 
+    {url: '/bigbus', menu: '45인승 대형'}
+  ];
+
   useEffect(() => {
-    changeMenu('버스안내');
+    changeMenu('버스안내', menuList);
   }, []);
 
   return (
@@ -15,7 +23,7 @@ const BusNotice = ({ logoURL, menu, changeMenu }) => {
       <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
-          <Menu />
+          <Menu menus={menus} />
         </section>
         <section className={styles.mainDetail}>
           <SubHeader menu={menu} />

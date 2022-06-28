@@ -5,12 +5,19 @@ import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 import Footer from '../footer/footer';
 
-const RequestEstimate = ({ logoURL, menu, changeMenu, Ref, getData }) => {
+const RequestEstimate = ({ logoURL, menu, changeMenu, Ref, getData, menus }) => {
+  // side menu
+  const menuList = [
+    {url:'/list', menu: '견적요청목록'}, 
+    {url:'/request', menu: '견적요청하기'}, 
+    {url:'/search', menu: '나의견적확인'},
+  ];
 
   useEffect(() => {
-    changeMenu('견적요청하기');
+    changeMenu('견적요청하기', menuList);
   }, []);
 
+  // 견적 요청
   const onSubmit = (event) => {
     getData(event);
   }
@@ -20,10 +27,12 @@ const RequestEstimate = ({ logoURL, menu, changeMenu, Ref, getData }) => {
       <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
-          <Menu />
+          <Menu menus={menus} />
         </section>
         <section className={styles.mainDetail}>
           <SubHeader menu={menu} />
+
+          {/* 견적요청 폼 */}
           <form className={styles.container} ref={Ref.formRef} onSubmit={onSubmit}>
             <ul className={styles.personalData}>
               <ul className={styles.personalData1}>

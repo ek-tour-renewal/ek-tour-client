@@ -1,47 +1,62 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './myEstimateList.module.css';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import Menu from '../menu/menu';
 import MyEstimateListItem from '../myEstimateListItem/myEstimateListItem';
-import PageButton from '../pageButton/pageButton';
 import SubHeader from '../subHeader/subHeader';
-import { useNavigate } from 'react-router-dom';
+import PageButton from '../pageButton/pageButton';
 
-const MyEstimateList = ({ menu, myData, changeMenu, exit, requestDataList, getMyEstimateData }) => {
+const MyEstimateList = ({ logoURL, menu, myData, changeMenu, exit, requestDataList, menus, allPage, postMyEstimateData, currentMyData }) => {
   const navigate = useNavigate();
 
+  // side menu
+  const menuList = [
+    {url:'/list', menu: '견적요청목록'}, 
+    {url:'/request', menu: '견적요청하기'}, 
+    {url:'/search', menu: '나의견적확인'},
+  ];
+
   useEffect(() => {
-    console.log(myData);
     if (!myData) {
       navigate('/search');
     };
-    changeMenu('나의견적확인');
+    changeMenu('나의견적확인', menuList);
   }, []);
 
+  // 전체 페이지 배열로 만드는 함수
   const allPageArray = (number) => {
     const array = [];
     for (let i = 0; i < number; i++) {
       array.push(i + 1)
-    }
+    };
     return array;
   };
 
+  // 나의 견적 요청 정보 요청하는 함수
   const onClick = () => {
+    console.log('click');
+  };
+
+  //페이지 나가기
+  const onOut = () => {
     exit();
     navigate('/search');
   };
 
   return (
-    <main className={styles.estimateList}>
-      <Header />
+    <main className={styles.myEstimateList}>
+      <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
-          <Menu />
+          <Menu menus={menus} />
         </section>
         <section className={styles.mainDetail}>
           <SubHeader menu={menu} />
           <section>
+
+            {/* 정보 목록 */}
             <div className={styles.dataList}>
               <span className={styles.id}>순번</span>
               <span className={styles.name}>등록자</span>
@@ -51,13 +66,25 @@ const MyEstimateList = ({ menu, myData, changeMenu, exit, requestDataList, getMy
               <span className={styles.vehicleType}>차량구분</span>
               <span className={styles.createdDate}>요청일</span>
             </div>
+
+            {/* 나의 견적 요청 목록 */}
             <ul>
-              {requestDataList.map(data => (<MyEstimateListItem data={data} />))}
+              {requestDataList.map(data => (<MyEstimateListItem data={data} onClick={onClick} />))}
             </ul>
+
+            {/* 페이지 버튼 */}
             <ul className={styles.pageList}>
-              {allPageArray(1).map(number => (<PageButton page={number} getEstimateData={getMyEstimateData} />))}
+              <button className={styles.prevPageButton}>
+                <i class="fa-solid fa-caret-left"></i>
+              </button>
+              {allPageArray(allPage).map(number => (<PageButton page={number} getEstimateList={postMyEstimateData} currentMyData={currentMyData} />))}
+              <button className={styles.nextPageButton}>
+                <i class="fa-solid fa-caret-right"></i>
+              </button>
             </ul>
-            <button onClick={onClick}>나가기</button>
+
+            {/* 나가기 버튼 */}
+            <button onClick={onOut}>나가기</button>
           </section>
         </section>
       </section>

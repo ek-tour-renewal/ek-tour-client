@@ -5,9 +5,14 @@ import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 import Footer from '../footer/footer';
 
-const ServiceCenter = ({ logoURL, menu, changeMenu }) => {
+const ServiceCenter = ({ logoURL, menu, changeMenu, menus }) => {
+  // side menu
+  const menuList = [
+    {url: 'service', menu: '고객센터'}
+  ];
+
   useEffect(() => {
-    changeMenu('고객센터');
+    changeMenu('고객센터', menuList);
   }, []);
 
   return (
@@ -15,7 +20,7 @@ const ServiceCenter = ({ logoURL, menu, changeMenu }) => {
       <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
-          <Menu />
+          <Menu menus={menus} />
         </section>
         <section className={styles.mainDetail}>
           <SubHeader menu={menu} />

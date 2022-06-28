@@ -8,17 +8,24 @@ import EstimateListItem from '../estimateListItem/estimateListItem';
 import PageButton from '../pageButton/pageButton';
 
 
-const EstimateList = ({ logoURL, menu, changeMenu, getEstimateListPage, allPage, requestDataList, getEstimateList }) => {
+const EstimateList = ({ logoURL, menu, menus, changeMenu, getEstimateListPage, allPage, getEstimateList, requestDataList }) => {
+  // side menu
+  const menuList = [
+    { url: '/list', menu: '견적요청목록' },
+    { url: '/request', menu: '견적요청하기' },
+    { url: '/search', menu: '나의견적확인' },
+  ];
 
   useEffect(() => {
-    changeMenu('견적요청목록');
+    changeMenu('견적요청목록', menuList);
     getEstimateListPage();
   }, []);
 
+  // 페이지 리스트
   const allPageArray = (number) => {
     const array = [];
-    for (let i=0; i<number; i++) {
-      array.push(i+1)
+    for (let i = 0; i < number; i++) {
+      array.push(i + 1)
     }
     return array;
   };
@@ -28,7 +35,7 @@ const EstimateList = ({ logoURL, menu, changeMenu, getEstimateListPage, allPage,
       <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
-          <Menu />
+          <Menu menus={menus} />
         </section>
         <section className={styles.mainDetail}>
           <SubHeader menu={menu} />
@@ -46,7 +53,13 @@ const EstimateList = ({ logoURL, menu, changeMenu, getEstimateListPage, allPage,
               {requestDataList.map(data => (<EstimateListItem data={data} />))}
             </ul>
             <ul className={styles.pageList}>
+              <button className={styles.prevPageButton}>
+                <i class="fa-solid fa-caret-left"></i>
+              </button>
               {allPageArray(allPage).map(number => (<PageButton page={number} getEstimateList={getEstimateList} />))}
+              <button className={styles.nextPageButton}>
+                <i class="fa-solid fa-caret-right"></i>
+              </button>
             </ul>
           </section>
         </section>

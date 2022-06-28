@@ -6,7 +6,16 @@ import SubHeader from '../subHeader/subHeader';
 import Footer from '../footer/footer';
 import Slider from '../slider/slider';
 
-const Limousine = ({ logoURL, menu, changeMenu }) => {
+const Limousine = ({ logoURL, menu, changeMenu, menus }) => {
+  // side menu
+  const menuList = [
+    {url: '/notice', menu: '버스안내'}, 
+    {url: '/smallbus', menu: '25인승 소형'}, 
+    {url: '/limousine', menu: '28인승 리무진'}, 
+    {url: '/bigbus', menu: '45인승 대형'}
+  ];
+
+  // bus images
   const ImageList = [
     { url: './image/limousine/interior1.jpg' },
     { url: './image/limousine/interior2.jpg' },
@@ -22,8 +31,7 @@ const Limousine = ({ logoURL, menu, changeMenu }) => {
   ];
 
   useEffect(() => {
-    changeMenu('28인승 리무진');
-    console.log(menu);
+    changeMenu('28인승 리무진', menuList);
   }, []);
 
   return (
@@ -31,7 +39,7 @@ const Limousine = ({ logoURL, menu, changeMenu }) => {
       <Header logoURL={logoURL} />
       <section className={styles.main}>
         <section className={styles.sideMenu}>
-          <Menu />
+          <Menu menus={menus} />
         </section>
         <section className={styles.mainDetail}>
           <SubHeader menu={menu} />

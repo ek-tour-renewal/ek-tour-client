@@ -7,7 +7,6 @@ import Estimate from '../estimate/estimate';
 const Main = memo(({ logoURL, Ref, getData }) => {
   return (
     <section className={styles.main}>
-      {/* 네비게이션바 */}
       <Header logoURL={logoURL} />
       <img className={styles.mainImage} src='./image/main.jpg' alt='메인 이미지' />
       <main className={styles.body}>
@@ -24,12 +23,12 @@ const Main = memo(({ logoURL, Ref, getData }) => {
               </h1>
             </li>
             <li className={styles.kakao}>
-              <span><img src='/image/kakaotalk.png' alt='kakaotalk logo' height='35px' /></span>
+              <span><img className={styles.kakaoImage} src='/image/kakaotalk.png' alt='kakaotalk logo' height='35px' /></span>
               <p className={styles.kakaoDetail}>카톡상담 seanpapa</p>
             </li>
             <li className={styles.email}>
               <span className={styles.emailIcon}><i class='fa-solid fa-envelope fa-2x'></i></span>
-              <p className={styles.emailDetail}>이메일 문의 ektour0917@naver.com</p>
+              <li className={styles.emailDetail}>이메일 문의 ektour0917@naver.com</li>
             </li>
           </ul>
           {/* 고객센터 & 계좌 */}
@@ -50,7 +49,6 @@ const Main = memo(({ logoURL, Ref, getData }) => {
         </section>
         <Footer />
       </main>
-      
     </section>
   )
 });

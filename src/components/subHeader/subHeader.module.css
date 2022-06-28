@@ -1,13 +1,16 @@
 @value makerOrange, makerWhite from '../../common/colors.css';
 
 .subHeader {
+  width: 90%;
   background-color: makerOrange;
   border-radius: 0.5em;
   padding: 0.7em 0;
+  margin: auto;
   margin-bottom: 1.5em;
 }
 
 .title {
+  width: max-content;
   text-align: start;
   padding-left: 1.5em;
   font-size: 1.5em;

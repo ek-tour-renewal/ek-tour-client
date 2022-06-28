@@ -4,6 +4,7 @@ import styles from './slider.module.css';
 const Slider = ({ imageList }) => {
   const [slideIndex, setSlideIndex] = useState(0);
 
+  // 이미지 넘기기
   const handleSlide = (slideIndex) => {
     if (slideIndex === imageList.length - 1) {
       slideIndex = 0;
@@ -13,6 +14,7 @@ const Slider = ({ imageList }) => {
     setSlideIndex(slideIndex);
   };
 
+  // 이미지 넘김 버튼
   const handleSwipe = (direction) => {
     handleSlide(slideIndex + direction);
     console.log(slideIndex)

@@ -1,6 +1,6 @@
 @value makerYellow, makerBrown, makerLightGrey, makerGrey from '../../common/colors.css';
 
-.estimateList{
+.myEstimateList{
   width: 75em;
 }
 
@@ -72,6 +72,20 @@
   border-bottom: 2px solid makerBrown;
   padding: 0.3rem 0;
   margin-bottom: 2rem;
+}
+
+.prevPageButton,
+.nextPageButton {
+  background-color: unset;
+  border: none;
+  color: makerBrown;
+  font-size: 1rem;
+}
+
+.prevPageButton:hover,
+.nextPageButton:hover {
+  font-weight: bold;
+  color: makerOrange;
 }
 
 .pageButton {

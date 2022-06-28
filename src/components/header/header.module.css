@@ -50,8 +50,8 @@ button {
 .hiddenNavbarMenu {
   display: flex;
   width: 90%;
-  justify-content: space-between;
-  padding: 0 3em;
+  justify-content: space-evenly;
+  padding: 0;
   border-bottom: 0.5em solid makerOrange;
   margin-bottom: 0;
 }
@@ -105,7 +105,7 @@ button {
   display: none;
   position: absolute;
   top: 55px;
-  right: 15px;
+  right: 18%;
   background-color: makerOrange;
   color: makerWhite;
   border: none;
@@ -118,7 +118,6 @@ button {
 }
 
 @media screen and (max-width:1024px) {
-
   .introduce,
   .busNotice,
   .request,

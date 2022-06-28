@@ -1,22 +1,16 @@
 @value makerYellow, makerBrown, makerBlack from '../../common/colors.css';
 
 .company {
-  width: 75em;
+  width: 100%;
 }
 
 .main {
   display: flex;
-  margin-left: 4rem;
-}
-
-.sideMenu {
-  flex: 1 1 25%;
-  margin: 0 auto;
 }
 
 .mainDetail {
-  flex: 1 1 75%;
-  padding: 0 3em;
+  flex: 1 1 80%;
+  padding: 0 1em;
 }
 
 .shortContent {
@@ -24,6 +18,7 @@
   padding: 0.2em 0;
   padding-left: 1em;
   padding-right: 3em;
+  margin: auto;
   margin-bottom: 2.5em;
   background-color: makerYellow;
   color: makerBrown;
@@ -36,7 +31,7 @@
   color: makerBlack;
   opacity: 90%;
   padding: 1em 0.5em;
-  width: 90%;
+  width: 80%;
   border-radius: 2.5em;
   box-shadow: 5px 5px 10px 15px makerYellow;
   margin: 0 auto;
@@ -55,6 +50,7 @@
 
 .contentDetail {
   margin-bottom: 0.8em;
+  width: 100%;
 }
 
 .ceo {
@@ -65,4 +61,36 @@
 
 .ceoName {
   font-size: 1.3em;
+}
+
+@media screen and (max-width:1024px) {
+  .sideMenu {
+    display: none;
+  }
+
+  .mainDetail {
+    flex-direction: 100%;
+  }
+
+  .contentDetail {
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width:920px) {
+  .shortContent {
+    font-size: 0.8em;
+  }
+
+  .title {
+    font-size: 1.4em;
+  }
+
+  .contentDetail {
+    font-size: 0.8em;
+  }
+
+  .ceoName {
+    font-size: 1em;
+  }
 }

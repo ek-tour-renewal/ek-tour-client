@@ -6,7 +6,7 @@ import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 import Footer from '../footer/footer';
 
-const MyEstimateData = ({ logoURL, menu, myData, changeMenu, Ref, updateMyData, deleteMyData, exit }) => {
+const MyEstimateData = ({ logoURL, menu, myData, changeMenu, Ref, exit }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,13 +18,14 @@ const MyEstimateData = ({ logoURL, menu, myData, changeMenu, Ref, updateMyData, 
 
   const onSubmit = (event) => {
     event.preventDefault();
-    // updateMyData(event);
+    // 정보 변경 함수 (update)
   }
 
   const onDelete = (event) => {
-    // deleteMyData(event)
+    // 정보 삭제 함수
   };
 
+  // 나가기
   const onOut = () => {
     exit();
     navigate('/search');
@@ -39,6 +40,8 @@ const MyEstimateData = ({ logoURL, menu, myData, changeMenu, Ref, updateMyData, 
         </section>
         <section className={styles.mainDetail}>
           <SubHeader menu={menu} />
+
+          {/* 나의 견적 요청 정보 - 기존 정보 입력 필요 */}
           <form className={styles.container} ref={Ref.formRef} onSubmit={onSubmit}>
             <ul className={styles.personalData}>
               <ul className={styles.personalData1}>

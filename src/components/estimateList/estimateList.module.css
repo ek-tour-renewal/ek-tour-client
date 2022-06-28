@@ -72,12 +72,21 @@
   border-bottom: 2px solid makerBrown;
   padding: 0.3rem 0;
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.pageButton {
+.prevPageButton,
+.nextPageButton {
   background-color: unset;
   border: none;
-  font-size: 13px;
-  font-weight: bold;
   color: makerBrown;
+  font-size: 1rem;
+}
+
+.prevPageButton:hover,
+.nextPageButton:hover {
+  font-weight: bold;
+  color: makerOrange;
 }

@@ -5,7 +5,7 @@ h1 {
 }
 
 .main {
-  width: 75%;
+  width: 100%;
 }
 
 .mainImage {
@@ -54,9 +54,10 @@ h1 {
 .contactPhone,
 .kakao, 
 .email {
+  width: 100%;
   display: flex;
   align-items: center;
-  margin: auto;
+  justify-content: center;
 }
 
 .contactPhoneIcon,
@@ -65,7 +66,7 @@ h1 {
 }
 
 .phoneDetail {
-  width: 100%;
+  width: max-content;
   margin: 0;
   margin-left: 0.5rem;
   font-size: 1.5em;
@@ -73,7 +74,7 @@ h1 {
 
 .kakaoDetail, 
 .emailDetail {
-  width: 100%;
+  width: max-content;
   font-size: 1.3em;
   margin: 0;
   margin-left: 0.8rem;
@@ -81,7 +82,7 @@ h1 {
 
 .serviceCenter, 
 .account {
-  flex-wrap: wrap;
+  flex: 1 1 50%;
   text-align: start;
   padding-left: 1em;
 }
@@ -106,6 +107,7 @@ h1 {
 .serviceCenterTime {
   font-size: 1.3em;
   color: #C27807;
+  width: 100%;
 }
 
 .serviceCenterDetail,
@@ -126,11 +128,44 @@ h1 {
   color: #C27807;
 }
 
-
-@media screen and (max-width:1024px) {
+@media screen and (max-width:1110px) {
   .body,
   .info {
     flex-direction: column;
+  }
+}
+
+@media screen and (max-width:890px) {
+  .contactPhone {
+    font-size: 1.1em;
+  }
+
+  .email,
+  .kakao {
+    font-size: 1em;
+  }
+
+  .accountTitle,
+  .serviceCenterTitle {
+    font-size: 1.2em;
+  }
+
+  .accountNumber,
+  .serviceCenterNumber {
+    font-size: 1.1em;
+  }
+
+  .accountDetail,
+  .serviceCenterDetail {
+    font-size: 0.8em;
+  }
+
+  .serviceCenterTime {
+    font-size: 1em;
+  }
+
+  .kbbankImg {
+    height: 1.3em;
   }
 }
 
@@ -138,10 +173,34 @@ h1 {
   .notice {
     flex-direction: column;
   }
+
   .contactPhone,
   .kakao,
   .email {
     flex-direction: column;
     margin: auto;
+  }
+
+  .phoneDetail {
+    width: 100%;
+    font-size: 0.8em;
+  }
+
+  .emailDetail,
+  .kakaoDetail {
+    width: 100%;
+    font-size: 0.9em;
+  }
+
+  .kakaoImage {
+    height: 28px;
+  }
+
+  .contactPhoneIcon {
+    font-size: 0.7rem;
+  }
+
+  .emailIcon {
+    font-size: 0.7rem;
   }
 }

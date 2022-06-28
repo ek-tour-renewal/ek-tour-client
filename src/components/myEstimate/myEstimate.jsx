@@ -6,14 +6,21 @@ import Header from '../header/header';
 import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 
-const MyEstimate = ({ logoURL, menu, myRef, changeMenu, checkMyEstimate, myData }) => {
+const MyEstimate = ({ logoURL, menu, myRef, changeMenu, checkMyEstimate, menus }) => {
   const navigate = useNavigate();
+
+  // side menu
+  const menuList = [
+    {url:'/list', menu: '견적요청목록'}, 
+    {url:'/request', menu: '견적요청하기'}, 
+    {url:'/search', menu: '나의견적확인'},
+  ];
   
   useEffect(() => {
-    changeMenu('나의견적확인');
-    console.log(myData)
+    changeMenu('나의견적확인', menuList);
   }, []);
 
+  // 나의 견적 확인 (내 정보 입력)
   const onSubmit = event => {
     checkMyEstimate(event);
     navigate('/search/my');
@@ -24,10 +31,11 @@ const MyEstimate = ({ logoURL, menu, myRef, changeMenu, checkMyEstimate, myData 
       <Header logoURL={logoURL} />
       <main className={styles.main}>
         <section className={styles.sideMenu}>
-          <Menu />
+          <Menu menus={menus} />
         </section>
         <section className={styles.mainDetail}>
           <SubHeader menu={menu} />
+          {/* 정보 입력란 */}
           <form className={styles.form} ref={myRef.formRef} onSubmit={onSubmit}>
             <li className={styles.phone}>
               <p>핸드폰</p>

@@ -4,6 +4,7 @@ import styles from './myEstimateListItem.module.css';
 const MyEstimateCheckList = ({ data }) => {
   const { id, name, travelType, departPlace, arrivalPlace, vehicleType, createdDate, onClick } = data;
 
+  // 이름 마스킹
   const masking = name => {
     switch (name.length) {
       case 2 : return name.replace(name.substring(1,),'*');

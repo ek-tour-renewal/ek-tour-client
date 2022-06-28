@@ -1,14 +1,16 @@
-import React,{ memo } from 'react';
+import React, { memo } from 'react';
 import Button from '../button/button';
 import DetailMenu from '../detailMenu/detailMenu';
 import styles from './menu.module.css';
 
-const Menu = memo((props) => {
+const Menu = memo(({ menus }) => {
   return (
-    <main>
-      <section className={styles.menu}>
+    <main className={styles.menu}>
+      <section className={styles.container}>
         <ul>
-          <DetailMenu />
+          {menus.map(menu => (
+            <DetailMenu menu={menu} />
+          ))}
         </ul>
       </section>
       <Button />

@@ -5,9 +5,14 @@ import Menu from '../menu/menu';
 import SubHeader from '../subHeader/subHeader';
 import styles from './company.module.css';
 
-const Company = ({ logoURL, menu, changeMenu }) => {
+const Company = ({ logoURL, menu, changeMenu, menus }) => {
+  // side menu
+  const menuList = [
+    {url: 'introduce', menu: 'CEO 인사말'}
+  ];
+
   useEffect(() => {
-    changeMenu('CEO 인사말');
+    changeMenu('CEO 인사말', menuList);
     console.log(menu);
   },[]);
   
@@ -15,10 +20,7 @@ const Company = ({ logoURL, menu, changeMenu }) => {
     <main className={styles.company}>
       <Header logoURL={logoURL} />
       <section className={styles.main}>
-        <section className={styles.sideMenu}>
-          <Menu />
-        </section>
-
+        <Menu menus={menus} />
         <section className={styles.mainDetail}>
           <SubHeader menu={menu}/>
           <p className={styles.shortContent}>고객의 행복을 함께 만들어갑니다.</p>
