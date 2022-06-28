@@ -8,9 +8,9 @@ import Footer from '../footer/footer';
 const RequestEstimate = ({ logoURL, menu, changeMenu, Ref, getData, menus }) => {
   // side menu
   const menuList = [
-    {url:'/list', menu: '견적요청목록'}, 
-    {url:'/request', menu: '견적요청하기'}, 
-    {url:'/my', menu: '나의견적확인'},
+    { url: '/list', menu: '견적요청목록' },
+    { url: '/request', menu: '견적요청하기' },
+    { url: '/my', menu: '나의견적확인' },
   ];
 
   useEffect(() => {
@@ -112,10 +112,12 @@ const RequestEstimate = ({ logoURL, menu, changeMenu, Ref, getData, menus }) => 
               <li className={styles.departDate}>
                 <p className={styles.departDateTitle}>출발일자</p>
                 <input ref={Ref.departDateRef} type='date' />
+                <input className={styles.departTimeInput} ref={Ref.departTimeRef} type='time' />
               </li>
               <li className={styles.arrivalDate}>
                 <p className={styles.arrivalDateTitle}>귀행일자</p>
                 <input ref={Ref.arrivalDateRef} type='date' />
+                <input className={styles.arrivalDTimeInput} ref={Ref.arrivalTimeRef} type='time' />
               </li>
               <ul className={styles.departPlaceContainer}>
                 <li className={styles.departPlace}>
