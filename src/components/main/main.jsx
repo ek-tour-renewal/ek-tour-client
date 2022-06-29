@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import styles from './main.module.css';
 import Estimate from '../estimate/estimate';
 import Header from '../header/header';
+import Footer from '../footer/footer';
 
 const Main = memo(({ Ref, getData }) => {
   return (
@@ -46,6 +47,7 @@ const Main = memo(({ Ref, getData }) => {
           </ul>
         </section>
       </section>
+      <Footer />
     </main>
   )
 });
