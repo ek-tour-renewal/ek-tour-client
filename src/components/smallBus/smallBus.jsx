@@ -15,10 +15,6 @@ const SmallBus = ({ menu, changeMenu }) => {
     { url: './image/smallBus/interior6.jpg' },
   ];
 
-  useEffect(() => {
-    changeMenu('25인승 소형');
-  }, []);
-
   return (
     <main>
       <section className={styles.smallBus}>
