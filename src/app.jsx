@@ -74,7 +74,7 @@ function App({ ektour }) {
   const changeMenu = (menu) => {
     setMenu(menu);
   };
-//
+
   // 견적요청 (얘도 각 컴포넌트마다 정의해서 사용하는게 나을수도..)
   const getData = (event) => {
     event.preventDefault();
