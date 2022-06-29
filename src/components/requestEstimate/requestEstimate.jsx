@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './requestEstimate.module.css';
-import Header from '../header/header';
 import SubHeader from '../subHeader/subHeader';
-import Footer from '../footer/footer';
 
 const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
 
@@ -17,7 +15,6 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
 
   return (
     <main>
-      <Header />
       <section className={styles.requestEstimate}>
         <SubHeader menu={menu} />
         {/* 견적요청 폼 */}
@@ -196,7 +193,6 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
           <button className={styles.buttonEstimate}>견적요청</button>
         </form>
       </section>
-      <Footer />
     </main>
   )
 };

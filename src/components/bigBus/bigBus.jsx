@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import styles from './bigBus.module.css';
 import SubHeader from '../subHeader/subHeader';
 import Slider from '../slider/slider';
-import Header from '../header/header';
-import Footer from '../footer/footer';
 
 const BigBus = ({ menu, changeMenu }) => {
 
@@ -30,7 +28,6 @@ const BigBus = ({ menu, changeMenu }) => {
 
   return (
     <main>
-      <Header />
       <section className={styles.bigBus}>
         <SubHeader menu={menu} />
         <h1 className={styles.bigBusTitle}>45인승 대형</h1>
@@ -45,7 +42,6 @@ const BigBus = ({ menu, changeMenu }) => {
           <Slider imageList={ImageList} />
         </section>
       </section>
-      <Footer />
     </main>
   )
 };

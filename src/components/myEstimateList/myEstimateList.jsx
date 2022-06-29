@@ -56,11 +56,11 @@ const MyEstimateList = ({ menu, myData, changeMenu, exit, requestDataList, allPa
         {/* 페이지 버튼 */}
         <ul className={styles.pageList}>
           <button className={styles.prevPageButton}>
-            <i class="fa-solid fa-caret-left"></i>
+            <i className="fa-solid fa-caret-left"></i>
           </button>
           {allPageArray(allPage).map(number => (<PageButton page={number} getEstimateList={postMyEstimateData} currentMyData={currentMyData} />))}
           <button className={styles.nextPageButton}>
-            <i class="fa-solid fa-caret-right"></i>
+            <i className="fa-solid fa-caret-right"></i>
           </button>
         </ul>
         {/* 나가기 버튼 */}

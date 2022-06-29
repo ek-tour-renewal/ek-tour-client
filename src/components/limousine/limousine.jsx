@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import styles from './limousine.module.css';
 import SubHeader from '../subHeader/subHeader';
 import Slider from '../slider/slider';
-import Header from '../header/header';
-import Footer from '../footer/footer';
 
 const Limousine = ({ menu, changeMenu }) => {
   // bus images
@@ -27,7 +25,6 @@ const Limousine = ({ menu, changeMenu }) => {
 
   return (
     <main>
-      <Header />
       <section className={styles.limousine}>
         <SubHeader menu={menu} />
         <h1 className={styles.limousineTitle}>28인승 리무진</h1>
@@ -42,7 +39,6 @@ const Limousine = ({ menu, changeMenu }) => {
           <Slider imageList={ImageList} />
         </section>
       </section>
-      <Footer />
     </main>
   )
 };

@@ -5,6 +5,8 @@ import BigBus from './components/bigBus/bigBus';
 import BusNotice from './components/busNotice/busNotice';
 import Company from './components/company/company';
 import EstimateList from './components/estimateList/estimateList';
+import Footer from './components/footer/footer';
+import Header from './components/header/header';
 import Limousine from './components/limousine/limousine';
 import Main from './components/main/main';
 import MyEstimate from './components/myEstimate/myEstimate';
@@ -161,8 +163,11 @@ function App({ ektour }) {
       alert('정확하게 입력해 주세요');
       return false;
     } else {
-      postMyEstimateData(data, 0);
+      console.log(currentMyData);
+      postMyEstimateData(0);
+      console.log(requestDataList);
       getMyEstimateListPage(data);
+      console.log(allPage);
       formRef.current.reset();
     }
   }
@@ -212,6 +217,10 @@ function App({ ektour }) {
   return (
     <div className={styles.app}>
       <BrowserRouter>
+        <Header
+          myRef={myRef}
+          checkMyEstimate={checkMyEstimate}
+        />
         <Routes>
         <Route path='/' exact element={<Main
             Ref={Ref}
@@ -293,6 +302,7 @@ function App({ ektour }) {
           />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </div>
   );

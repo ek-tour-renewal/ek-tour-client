@@ -1,9 +1,11 @@
-import React, { memo, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import MyEstimateV1 from '../myEstimate/myEstimateV1';
 import styles from './header.module.css';
 
-const Header = memo((props) => {
+const Header = (props) => {
   const [active, setActive] = useState(false);
+  const [myOpen, setMyOpen] = useState(false);
   const navigate = useNavigate();
 
   const onOpenMenu = () => {
@@ -14,10 +16,19 @@ const Header = memo((props) => {
     navigate(path);
   };
 
+  const handleClickMyEstimate = () => { setMyOpen(true); }
+  const handleCloseMyEstimate = () => { setMyOpen(false); }
+
   return (
     <header className={styles.header}>
       <section className={styles.headerMyEstimate}>
-        <button className={styles.headerMyEstimateButton} onClick={() => onNavigate('/my')}>내견적확인</button>
+        <button className={styles.headerMyEstimateButton} onClick={handleClickMyEstimate}>내견적확인</button>  
+        <MyEstimateV1
+          myRef={props.myRef}
+          checkMyEstimate={props.checkMyEstimate}
+          handleCloseMyEstimate={handleCloseMyEstimate}
+          open={myOpen}
+        />
       </section>
       <nav className={styles.navbar}>
         <span onClick={() => onNavigate('/')}>
@@ -56,6 +67,6 @@ const Header = memo((props) => {
       </nav>
     </header>
   )
-});
+};
 
 export default Header;
