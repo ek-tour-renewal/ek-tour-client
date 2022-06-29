@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './estimateListItem.module.css';
 
 const EstimateListItem = ({ data }) => {
  const { id, name, travelType, departPlace, arrivalPlace, vehicleType, createdDate } = data;
+ const navigation = useNavigate();
 
  // 이름 마스킹
   const masking = name => {
@@ -13,8 +15,13 @@ const EstimateListItem = ({ data }) => {
     }
   };
 
+  //페이지이동
+  const onNavigate = (path) => {
+    navigation(path);
+  };
+
   return (
-    <a className={styles.estimateListItem} href='/search'>
+    <li className={styles.estimateListItem} onClick={() => onNavigate('/my')}>
       <span className={styles.id}>{id - 1}</span>
       <span className={styles.name}>{masking(name)}</span>
       <span className={styles.travelType}>{travelType}</span>
@@ -22,7 +29,7 @@ const EstimateListItem = ({ data }) => {
       <span className={styles.arrivalPlace}>{arrivalPlace}</span>
       <span className={styles.vehicleType}>{vehicleType}</span>
       <span className={styles.createdDate}>{createdDate.substring(0,10)}</span>
-    </a>
+    </li>
   )
 };
 

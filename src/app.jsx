@@ -1,24 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styles from './app.module.css';
+import BigBus from './components/bigBus/bigBus';
+import BusNotice from './components/busNotice/busNotice';
+import Company from './components/company/company';
 import EstimateList from './components/estimateList/estimateList';
+import Limousine from './components/limousine/limousine';
+import Main from './components/main/main';
 import MyEstimate from './components/myEstimate/myEstimate';
 import MyEstimateData from './components/myEstimateData/myEstimateData';
 import MyEstimateList from './components/myEstimateList/myEstimateList';
 import NotFoundPage from './components/notFoundPage/notFoundPage';
-import Page from './components/page/page';
 import RequestEstimate from './components/requestEstimate/requestEstimate';
+import ServiceCenter from './components/serviceCenter/serviceCenter';
+import SmallBus from './components/smallBus/smallBus';
 
 function App({ ektour }) {
-  const [state, setState] = useState('main');
-  const [menu, setMenu] = useState(null);
-  const [allPage, setAllPage] = useState(0);
-  const [requestDataList, setRequestDataList] = useState([]);
-  const [myData, setMyData] = useState(false);
+  const [state, setState] = useState('main'); //페이지 이동
+  const [menu, setMenu] = useState(null); //subheader
+  const [allPage, setAllPage] = useState(0); //견적목록 전체 페이지
+  const [requestDataList, setRequestDataList] = useState([]); //견적목록
+  const [myData, setMyData] = useState(false); //나의견적확인(정보입력유무)
   const [currentMyData, setCurrentMyData] = useState([{
     phone: null,
     password: null,
-  }]);
+  }]); //나의견적확인 -> 페이지마다 불러오기 위함 (정보 저장)
 
   const formRef = useRef();
   const travelRef = useRef();
@@ -49,6 +55,7 @@ function App({ ektour }) {
   const myRef = { formRef, phoneFirstRef, phoneMiddleRef, phoneLastRef, passwordRef };
 
   useEffect(() => {
+    // 견적 요청 목록으로 빼야할 것 같음
     ektour
       .getData(0)
       .then(response => {
@@ -58,27 +65,17 @@ function App({ ektour }) {
       .catch(error => console.log(error))
   }, [])
 
+  // 페이지 이동
   const changePage = (name) => {
     setState(name);
   };
 
-  // subHeader, side 메뉴
+  // subHeader
   const changeMenu = (menu) => {
     setMenu(menu);
   };
 
-  // 견적 요청
-  const submitData = (data) => {
-    ektour
-      .postData(data)
-      .then(() => {
-        alert('견적 요청이 완료되었습니다.');
-        console.log(data);
-      })
-      .catch(error => console.log(error))
-  };
-
-  // 견적요청하기
+  // 견적요청 (얘도 각 컴포넌트마다 정의해서 사용하는게 나을수도..)
   const getData = (event) => {
     event.preventDefault();
     const estimation = {
@@ -104,8 +101,13 @@ function App({ ektour }) {
     if (!checkAll()) {
       alert('정확하게 입력해 주세요');
     } else {
-      submitData(estimation);
-      formRef.current.reset();
+      ektour
+      .postData(estimation)
+      .then(() => {
+        alert('견적 요청이 완료되었습니다.');
+        formRef.current.reset();
+      })
+      .catch(error => console.log(error))
     };
   };
 
@@ -165,7 +167,7 @@ function App({ ektour }) {
     }
   }
 
-  //견적요청 유효성검사
+  //견적요청 유효성검사 (email input으로 하면 자동으로 검사해줘서 빼도될것 같음)
   const checkAll = () => {
     const emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     const numberRegex = /^[0-9]{4}$/;
@@ -211,19 +213,35 @@ function App({ ektour }) {
     <div className={styles.app}>
       <BrowserRouter>
         <Routes>
-          <Route path='/' exact element={
-            <Page
-              changePage={changePage}
-              state={state}
-              menu={menu}
-              changeMenu={changeMenu}
-              Ref={Ref}
-              getData={getData} />}
+        <Route path='/' exact element={<Main
+            Ref={Ref}
+            getData={getData} />}
+          />
+          <Route path='/introduce' element={<Company
+            menu={menu}
+            changeMenu={changeMenu} />}
+          />
+          <Route path='/bus' element={<BusNotice
+            menu={menu}
+            changeMenu={changeMenu} />}
           />
 
+          {/* 버스안내-> 수정후 삭제 */}
+          <Route path='/smallbus' element={<SmallBus
+            menu={menu}
+            changeMenu={changeMenu} />}
+          />
+          <Route path='/limousine' element={<Limousine
+            menu={menu}
+            changeMenu={changeMenu} />}
+          />
+          <Route path='/bigbus' element={<BigBus
+            menu={menu}
+            changeMenu={changeMenu} />}
+          />
+          {/* 버스안내 -> 수정후 삭제 */}
+
           <Route path='/list' element={<EstimateList
-            changePage={changePage}
-            state={state}
             menu={menu}
             changeMenu={changeMenu}
             getEstimateListPage={getEstimateListPage}
@@ -231,16 +249,14 @@ function App({ ektour }) {
             allPage={allPage}
             requestDataList={requestDataList} />}
           />
-
           <Route path='/request' element={<RequestEstimate
-            changePage={changePage}
-            state={state}
             menu={menu}
             changeMenu={changeMenu}
             Ref={Ref}
             getData={getData} />}
           />
 
+          {/* 나의견적확인 -> 수정후 삭제? */}
           <Route path='/my' element={<MyEstimate
             changePage={changePage}
             state={state}
@@ -251,7 +267,17 @@ function App({ ektour }) {
             checkMyEstimate={checkMyEstimate}
             getMyEstimateListPage={getMyEstimateListPage} />}
           />
-
+          <Route path='/my/list' element={<MyEstimateList
+            menu={menu}
+            myData={myData}
+            changeMenu={changeMenu}
+            getEstimateListPage={getEstimateListPage}
+            postMyEstimateData={postMyEstimateData}
+            allPage={allPage}
+            requestDataList={requestDataList}
+            exit={exit}
+            currentMyData={currentMyData} />}
+          />
           <Route path='/search/my/estimate' element={<MyEstimateData
             menu={menu}
             myData={myData}
@@ -259,7 +285,12 @@ function App({ ektour }) {
             Ref={Ref}
             exit={exit} />}
           />
+          {/* 나의견적확인 -> 수정후 삭제? */}
 
+          <Route path='/service' element={<ServiceCenter
+            menu={menu}
+            changeMenu={changeMenu} />}
+          />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>

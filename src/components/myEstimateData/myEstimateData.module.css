@@ -1,23 +1,10 @@
 @value makerBrown, makerLightGrey, makerOrange, makerYellow, makerBlack from '../../common/colors.css';
 
-.myEstimateData{
-  width: 75em;
-  user-select: none;
-}
-
-.main {
+.myEstimateData {
+  width: 70%;
   display: flex;
-  margin-left: 4rem;
-}
-
-.sideMenu {
-  flex: 1 1 25%;
-  margin: 0 auto;
-}
-
-.mainDetail {
-  flex: 1 1 75%;
-  padding: 0 3em;
+  margin: auto;
+  user-select: none;
 }
 
 .personalData,

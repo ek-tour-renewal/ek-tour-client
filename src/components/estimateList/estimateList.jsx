@@ -7,16 +7,9 @@ import EstimateListItem from '../estimateListItem/estimateListItem';
 import PageButton from '../pageButton/pageButton';
 
 
-const EstimateList = ({ changePage, state, menu, changeMenu, getEstimateListPage, allPage, getEstimateList, requestDataList }) => {
-  // side menu
-  const menuList = [
-    { url: '/list', menu: '견적요청목록' },
-    { url: '/request', menu: '견적요청하기' },
-    { url: '/my', menu: '나의견적확인' },
-  ];
-
+const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, getEstimateList, requestDataList }) => {
   useEffect(() => {
-    changeMenu('견적요청목록', menuList);
+    changeMenu('견적요청목록');
     getEstimateListPage();
   }, []);
 
@@ -30,31 +23,33 @@ const EstimateList = ({ changePage, state, menu, changeMenu, getEstimateListPage
   };
 
   return (
-    <main className={styles.estimateList}>
-      <Header changePage={changePage} state={state} />
-      <SubHeader menu={menu} />
-      <section className={styles.dataListContainer}>
-        <div className={styles.dataList}>
-          <span className={styles.id}>순번</span>
-          <span className={styles.name}>등록자</span>
-          <span className={styles.travelType}>여행구분</span>
-          <span className={styles.departPlace}>출발지</span>
-          <span className={styles.arrivalPlace}>도착지</span>
-          <span className={styles.vehicleType}>차량구분</span>
-          <span className={styles.createdDate}>요청일</span>
-        </div>
-        <ul>
-          {requestDataList.map(data => (<EstimateListItem data={data} />))}
-        </ul>
-        <ul className={styles.pageList}>
-          <button className={styles.prevPageButton}>
-            <i class="fa-solid fa-caret-left"></i>
-          </button>
-          {allPageArray(allPage).map(number => (<PageButton page={number} getEstimateList={getEstimateList} />))}
-          <button className={styles.nextPageButton}>
-            <i class="fa-solid fa-caret-right"></i>
-          </button>
-        </ul>
+    <main>
+      <Header />
+      <section className={styles.estimateList}>
+        <SubHeader menu={menu} />
+        <section className={styles.dataListContainer}>
+          <div className={styles.dataList}>
+            <span className={styles.id}>순번</span>
+            <span className={styles.name}>등록자</span>
+            <span className={styles.travelType}>여행구분</span>
+            <span className={styles.departPlace}>출발지</span>
+            <span className={styles.arrivalPlace}>도착지</span>
+            <span className={styles.vehicleType}>차량구분</span>
+            <span className={styles.createdDate}>요청일</span>
+          </div>
+          <ul>
+            {requestDataList.map(data => (<EstimateListItem data={data} />))}
+          </ul>
+          <ul className={styles.pageList}>
+            <button className={styles.prevPageButton}>
+              <i class="fa-solid fa-caret-left"></i>
+            </button>
+            {allPageArray(allPage).map(number => (<PageButton page={number} getEstimateList={getEstimateList} />))}
+            <button className={styles.nextPageButton}>
+              <i class="fa-solid fa-caret-right"></i>
+            </button>
+          </ul>
+        </section>
       </section>
       <Footer />
     </main>

@@ -1,7 +1,7 @@
 @value makerBrown, makerLightGrey, makerOrange, makerYellow, makerBlack from '../../common/colors.css';
-
-.requestEstimate{
-  width: 100%;
+.requestEstimate {
+  width: 70%;
+  margin: auto;
   user-select: none;
 }
 

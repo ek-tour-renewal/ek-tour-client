@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './myEstimate.module.css';
 import Footer from '../footer/footer';
 import Header from '../header/header';
@@ -7,7 +6,6 @@ import SubHeader from '../subHeader/subHeader';
 import MyEstimateList from '../myEstimateList/myEstimateList';
 
 const MyEstimate = (props) => {
-  const navigate = useNavigate();
 
   useEffect(() => {
     props.changeMenu('나의견적확인');
@@ -19,8 +17,9 @@ const MyEstimate = (props) => {
   };
 
   return (
-    <main className={styles.myEstimate}>
+    <main>
       <Header />
+      <section className={styles.myEstimate}>
         {!props.myData &&
           <main className={styles.main}>
             <SubHeader menu={props.menu} />
@@ -60,6 +59,7 @@ const MyEstimate = (props) => {
             exit={props.exit}
             currentMyData={props.currentMyData} />
         }
+      </section>
       <Footer />
     </main>
   )

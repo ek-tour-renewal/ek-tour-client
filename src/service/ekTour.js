@@ -3,14 +3,6 @@ class Ektour {
     this.ektour = httpClient;
   }
 
-  // 로고 요청
-  async getLogo() {
-    const response = await this.ektour.get('/img/logo.png', {
-      responseType: 'blob'
-    });
-    return response;
-  }
-
   // 회사 정보 요청
   // async getCompanyData(data) {
   //   const response = await this.ektour.get('/estimate', {

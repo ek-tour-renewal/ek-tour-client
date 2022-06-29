@@ -8,7 +8,7 @@
 .bigBusTitle {
   width: max-content;
   padding: 0.5em 1.8em;
-  margin-left: 1em;
+  margin-left: 6em;
   font-size: 1.1rem;
   background-color: makerYellow;
   border-top: 4px solid makerBrown;
@@ -25,6 +25,7 @@
 }
 
 .busImageTitle {
+  margin-left: 6em;
   font-size: 1.2em;
   width: max-content;
   padding: 0.3em 0.5em;

@@ -1,10 +1,4 @@
 @value makerOrange, makerBlack, makerWhite, makerPaleOrange, makerYellow, makerBrown, makerLightGreen from '../../common/colors.css';
-
-a {
-  text-decoration: none;
-  color: makerBlack;
-}
-
 button {
   cursor: pointer;
 }
@@ -40,7 +34,7 @@ button {
   margin: 0 2em;
 }
 
-.container {
+.navbarContainer {
   width: 100%;
   display: flex;
   align-items: center;

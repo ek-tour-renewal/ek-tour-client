@@ -1,22 +1,34 @@
 import React, { useEffect } from 'react';
 import styles from './busNotice.module.css';
 import SubHeader from '../subHeader/subHeader';
+import Header from '../header/header';
+import Footer from '../footer/footer';
 
-const BusNotice = ({ menu, changeMenu, menus }) => {
-  // side menu
-  const menuList = [
-    { url: '/notice', menu: '버스안내' },
-    { url: '/smallbus', menu: '25인승 소형' },
-    { url: '/limousine', menu: '28인승 리무진' },
-    { url: '/bigbus', menu: '45인승 대형' }
-  ];
-
+const BusNotice = ({ menu, changeMenu }) => {
   useEffect(() => {
-    changeMenu('버스안내', menuList);
+    changeMenu('버스안내');
   }, []);
 
+  {/*
+ <SmallBus
+  menu={menu}
+  changeMenu={changeMenu} 
+  />
+  <Limousine
+  menu={menu}
+  changeMenu={changeMenu}
+  />
+  <BigBus
+  menu={menu}
+  changeMenu={changeMenu}
+  />
+
+*/}
+
   return (
-    <main className={styles.busNotice}>
+    <main>
+      <Header />
+      <section className={styles.busNotice}>
         <SubHeader menu={menu} />
         <h1 className={styles.vehicleNoticeTitle}>차량안내</h1>
         <ul>
@@ -69,6 +81,8 @@ const BusNotice = ({ menu, changeMenu, menus }) => {
             여행하시는 탑승 인원에 따라 원하시는 버스 유형을 참고하세요.
           </p>
         </ul>
+      </section>
+      <Footer />
     </main>
   )
 };

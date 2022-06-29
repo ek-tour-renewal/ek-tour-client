@@ -1,9 +1,16 @@
 import React, { memo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './button.module.css';
 
 const Button = memo((props) => {
+  const navigate = useNavigate();
+
+  const onNavigate = (path) => {
+    navigate(path)
+  }
   return (
     <section>
+      {/* 문의 */}
       <a href='tel:010-6387-6086'>
         <ul className={styles.contactButton}>
           <img className={styles.contactImage} src="/image/phoneicon.png" alt="phone icon" />
@@ -14,17 +21,17 @@ const Button = memo((props) => {
           </ul>
         </ul>
       </a>
-      <a href='/request'>
-      <ul className={styles.estimateButton}>
+      {/* 견적요청 */}
+      <button onClick={() => onNavigate('/request')}>
+        <ul className={styles.estimateButton}>
           <img className={styles.estimateImage} src="/image/estimateicon.png" alt="phone icon" />
           <ul className={styles.estimateInfo}>
             <li className={styles.estimateTitle}>E-ESTIMATION</li>
             <li className={styles.estimateRequest}>실시간 견적요청하기</li>
             <li className={styles.estimateGo}>✨ Go</li>
           </ul>
-
         </ul>
-        </a>
+      </button>
     </section>
   )
 });

@@ -1,28 +1,18 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './myEstimateList.module.css';
-import Footer from '../footer/footer';
-import Header from '../header/header';
-import Menu from '../menu/menu';
 import MyEstimateListItem from '../myEstimateListItem/myEstimateListItem';
 import SubHeader from '../subHeader/subHeader';
 import PageButton from '../pageButton/pageButton';
 
-const MyEstimateList = ({ changePage, menu, myData, changeMenu, exit, requestDataList, menus, allPage, postMyEstimateData, currentMyData }) => {
+const MyEstimateList = ({ menu, myData, changeMenu, exit, requestDataList, allPage, postMyEstimateData, currentMyData }) => {
   const navigate = useNavigate();
-
-  // side menu
-  const menuList = [
-    { url: '/list', menu: '견적요청목록' },
-    { url: '/request', menu: '견적요청하기' },
-    { url: '/my', menu: '나의견적확인' },
-  ];
 
   useEffect(() => {
     if (!myData) {
       navigate('/my');
     };
-    changeMenu('나의견적확인', menuList);
+    changeMenu('나의견적확인');
   }, []);
 
   // 전체 페이지 배열로 만드는 함수
@@ -46,7 +36,8 @@ const MyEstimateList = ({ changePage, menu, myData, changeMenu, exit, requestDat
   };
 
   return (
-    <main className={styles.myEstimateList}>
+    <main>
+      <section className={styles.myEstimateList}>
       <SubHeader menu={menu} />
         {/* 정보 목록 */}
         <div className={styles.dataList}>
@@ -74,6 +65,7 @@ const MyEstimateList = ({ changePage, menu, myData, changeMenu, exit, requestDat
         </ul>
         {/* 나가기 버튼 */}
         <button onClick={onOut}>나가기</button>
+        </section>
     </main>
   )
 };

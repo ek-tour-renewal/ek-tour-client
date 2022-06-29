@@ -2,15 +2,10 @@ import React, { useEffect } from 'react';
 import styles from './smallBus.module.css';
 import SubHeader from '../subHeader/subHeader';
 import Slider from '../slider/slider';
+import Header from '../header/header';
+import Footer from '../footer/footer';
 
-const SmallBus = ({ menu, changeMenu, menus }) => {
-  // side menu
-  const menuList = [
-    { url: '/notice', menu: '버스안내' },
-    { url: '/smallbus', menu: '25인승 소형' },
-    { url: '/limousine', menu: '28인승 리무진' },
-    { url: '/bigbus', menu: '45인승 대형' }
-  ];
+const SmallBus = ({ menu, changeMenu }) => {
 
   //bus images
   const ImageList = [
@@ -23,11 +18,13 @@ const SmallBus = ({ menu, changeMenu, menus }) => {
   ];
 
   useEffect(() => {
-    changeMenu('25인승 소형', menuList);
+    changeMenu('25인승 소형');
   }, []);
 
   return (
-    <main className={styles.smallBus}>
+    <main>
+      <Header />
+      <section className={styles.smallBus}>
       <SubHeader menu={menu} />
       <h1 className={styles.smallBusTitle}>25인승 소형</h1>
       <section className={styles.container}>
@@ -43,6 +40,8 @@ const SmallBus = ({ menu, changeMenu, menus }) => {
         <h2 className={styles.busImageTitle}>차량 사진</h2>
         <Slider imageList={ImageList} />
       </section>
+      </section>
+      <Footer />
     </main>
   )
 };

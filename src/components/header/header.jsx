@@ -1,46 +1,52 @@
 import React, { memo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './header.module.css';
 
-const Header = memo(({ changePage }) => {
+const Header = memo((props) => {
   const [active, setActive] = useState(false);
+  const navigate = useNavigate();
 
   const onOpenMenu = () => {
     setActive(!active);
   };
 
+  const onNavigate = (path) => {
+    navigate(path);
+  };
+
   return (
     <header className={styles.header}>
       <section className={styles.headerMyEstimate}>
-        <a className={styles.headerMyEstimateButton} href='/my'>내견적확인</a>
+        <button className={styles.headerMyEstimateButton} onClick={() => onNavigate('/my')}>내견적확인</button>
       </section>
       <nav className={styles.navbar}>
-        <a href='/'>
+        <span onClick={() => onNavigate('/')}>
           <img className={styles.logo} src='http://52.79.242.242:8080/img/logo.png' alt='EK tour logo' />
-        </a>
-        <div className={styles.container}>
+        </span>
+        <div className={styles.navbarContainer}>
           <ul className={!active ? styles.navbarMenu : styles.hiddenNavbarMenu}>
             <li className={styles.introduce}>
-              <button className={styles.menuTitle} onClick={() => changePage('introduce')}>회사소개</button>
+              <button className={styles.menuTitle} onClick={() => onNavigate('/introduce')}>회사소개</button>
             </li>
             <li className={styles.busNotice} >
-              <button className={styles.menuTitle} onClick={() => changePage('notice')}>버스안내</button>
+              <button className={styles.menuTitle} onClick={() => onNavigate('/bus')}>버스안내</button>
               <ul className={styles.dropdownMenu}>
-                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => changePage('notice')}>버스안내</button></li>
-                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => changePage('smallBus')}>25인승 소형</button></li>
-                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => changePage('limousine')}>28인승 리무진</button></li>
-                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => changePage('bigBus')}>45인승 대형</button></li>
+                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => onNavigate('/bus')}>버스안내</button></li>
+                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => onNavigate('/smallBus')}>25인승 소형</button></li>
+                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => onNavigate('/limousine')}>28인승 리무진</button></li>
+                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => onNavigate('/bigBus')}>45인승 대형</button></li>
               </ul>
             </li>
             <li className={styles.request}>
-              <a className={styles.menuTitle} href='/list'>견적요청</a>
+              <button className={styles.menuTitle} onClick={() => onNavigate('/list')}>견적요청</button>
               <ul className={styles.dropdownMenu}>
-                <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/list'>견적요청목록</a></li>
-                <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/request'>견적요청하기</a></li>
-                <li className={styles.subMenuContainer}><a className={styles.subMenu} href='/my'>나의견적확인</a></li>
+                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => onNavigate('/list')}>견적요청목록</button></li>
+                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => onNavigate('/request')}>견적요청하기</button></li>
+                <li className={styles.subMenuContainer}><button className={styles.subMenu} onClick={() => onNavigate('/my')}>나의견적확인</button></li>
               </ul>
             </li>
             <li className={styles.service}>
-              <button className={styles.menuTitle} onClick={() => changePage('serviceCenter')}>고객센터</button>
+              <button className={styles.menuTitle} onClick={() => onNavigate('/service')}>고객센터</button>
             </li>
           </ul>
         </div>

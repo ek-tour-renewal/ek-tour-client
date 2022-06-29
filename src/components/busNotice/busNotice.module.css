@@ -8,7 +8,7 @@
 .vehicleNoticeTitle {
   width: max-content;
   padding: 0.5em 1.8em;
-  margin-left: 1em;
+  margin-left: 6em;
   font-size: 1.1rem;
   background-color: makerYellow;
   border-top: 4px solid makerBrown;
@@ -29,9 +29,10 @@
 .smallBus,
 .limousine,
 .bigBus {
+  width: 80%;
   border-top: 3px solid makerBrown;
   border-bottom: 3px solid makerBrown;
-  margin: 0 2em;
+  margin: auto;
   margin-bottom: 1.5em;
   padding: 1em 0;
   display: flex;

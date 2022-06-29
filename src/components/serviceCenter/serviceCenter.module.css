@@ -7,12 +7,13 @@ h3, h4 {
 .serviceCenter {
   width: 70%;
   margin: auto;
+  user-select: none;
 }
 
 .title {
   width: max-content;
   padding: 0.5em 1.8em;
-  margin-left: 1em;
+  margin-left: 6em;
   font-size: 1.1rem;
   color: makerBlack;
   background-color: makerYellow;
@@ -56,7 +57,7 @@ h3, h4 {
   font-size: 0.7rem;
   text-align: start;
   color: makerBrown;
-  margin-left: 3.5em;
+  margin-left: 6em;
   margin-top: 2em;
   margin-bottom: 3em;
 }
@@ -70,7 +71,7 @@ h3, h4 {
 .container {
   color: makerBlack;
   text-align: start;
-  margin-left: 3.5em;
+  margin-left: 6em;
   margin-bottom: 2em;
 }
 
