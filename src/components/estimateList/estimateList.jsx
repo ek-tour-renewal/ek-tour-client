@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './estimateList.module.css';
-import Header from '../header/header';
 import SubHeader from '../subHeader/subHeader';
-import Footer from '../footer/footer';
 import EstimateListItem from '../estimateListItem/estimateListItem';
 import PageButton from '../pageButton/pageButton';
 
@@ -24,7 +22,6 @@ const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, getEstim
 
   return (
     <main>
-      <Header />
       <section className={styles.estimateList}>
         <SubHeader menu={menu} />
         <section className={styles.dataListContainer}>
@@ -51,7 +48,6 @@ const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, getEstim
           </ul>
         </section>
       </section>
-      <Footer />
     </main>
   )
 };

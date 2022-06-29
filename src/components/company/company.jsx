@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-import Footer from '../footer/footer';
-import Header from '../header/header';
 import SubHeader from '../subHeader/subHeader';
 import styles from './company.module.css';
 
@@ -11,7 +9,6 @@ const Company = ({ menu, changeMenu }) => {
 
   return (
     <main>
-      <Header />
       <section className={styles.company}>
         <SubHeader menu={menu} />
         <section>
@@ -74,7 +71,6 @@ const Company = ({ menu, changeMenu }) => {
           </div>
         </section>
       </section>
-      <Footer />
     </main >
   );
 };

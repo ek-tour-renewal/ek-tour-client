@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './serviceCenter.module.css';
 import SubHeader from '../subHeader/subHeader';
-import Header from '../header/header';
-import Footer from '../footer/footer';
 
 const ServiceCenter = ({ menu, changeMenu, }) => {
   useEffect(() => {
@@ -11,7 +9,6 @@ const ServiceCenter = ({ menu, changeMenu, }) => {
 
   return (
     <main>
-      <Header />
     <section className={styles.serviceCenter}>
       <SubHeader menu={menu} />
       {/* 이용안내 */}
@@ -129,8 +126,7 @@ const ServiceCenter = ({ menu, changeMenu, }) => {
         <li className={styles.list}><h3>통장사본과 사업자등록증 사본은 이곳에서 다운로드 가능합니다.</h3></li>
       </ul>
       </section>
-      <Footer />
-    </main >
+    </main>
   )
 };
 

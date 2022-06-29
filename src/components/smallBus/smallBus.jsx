@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import styles from './smallBus.module.css';
 import SubHeader from '../subHeader/subHeader';
 import Slider from '../slider/slider';
-import Header from '../header/header';
-import Footer from '../footer/footer';
 
 const SmallBus = ({ menu, changeMenu }) => {
 
@@ -23,7 +21,6 @@ const SmallBus = ({ menu, changeMenu }) => {
 
   return (
     <main>
-      <Header />
       <section className={styles.smallBus}>
       <SubHeader menu={menu} />
       <h1 className={styles.smallBusTitle}>25인승 소형</h1>
@@ -41,7 +38,6 @@ const SmallBus = ({ menu, changeMenu }) => {
         <Slider imageList={ImageList} />
       </section>
       </section>
-      <Footer />
     </main>
   )
 };
