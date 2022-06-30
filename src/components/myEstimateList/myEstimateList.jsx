@@ -1,19 +1,10 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './myEstimateList.module.css';
 import MyEstimateListItem from '../myEstimateListItem/myEstimateListItem';
 import SubHeader from '../subHeader/subHeader';
 import PageButton from '../pageButton/pageButton';
 
 const MyEstimateList = ({ menu, myData, changeMenu, exit, requestDataList, allPage, postMyEstimateData, currentMyData }) => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!myData) {
-      navigate('/my');
-    };
-    changeMenu('나의견적확인');
-  }, []);
 
   // 전체 페이지 배열로 만드는 함수
   const allPageArray = (number) => {
@@ -32,7 +23,6 @@ const MyEstimateList = ({ menu, myData, changeMenu, exit, requestDataList, allPa
   //페이지 나가기
   const onOut = () => {
     exit();
-    navigate('/my');
   };
 
   return (

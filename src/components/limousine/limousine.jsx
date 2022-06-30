@@ -19,10 +19,6 @@ const Limousine = ({ menu, changeMenu }) => {
     { url: './image/limousine/interior11.jpg' },
   ];
 
-  useEffect(() => {
-    changeMenu('28인승 리무진');
-  }, []);
-
   return (
     <main>
       <section className={styles.limousine}>
