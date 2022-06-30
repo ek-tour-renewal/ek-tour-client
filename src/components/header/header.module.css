@@ -4,22 +4,14 @@ button {
 }
 
 .header {
+  position: sticky;
+  top: 0;
+  background-color: makerWhite;
+  width: 100%;
   user-select: none;
   margin-bottom: 2em;
-}
-
-.headerMyEstimate {
-  text-align: end;
   border-top: 3px solid makerOrange;
   padding-top: 0.5rem;
-}
-
-.headerMyEstimateButton {
-  background-color: unset;
-  border: none;
-  margin-right: 2em;
-  font-size: 13px;
-  color: makerBlack;
 }
 
 .navbar {
@@ -40,124 +32,24 @@ button {
   align-items: center;
 }
 
-.navbarMenu,
-.hiddenNavbarMenu {
+.navbarMenu {
   display: flex;
   width: 90%;
-  justify-content: space-evenly;
-  padding: 0;
+  justify-content: end;
   border-bottom: 0.5em solid makerOrange;
   margin-bottom: 0;
-}
-
-.introduce,
-.busNotice,
-.request,
-.service {
-  display: inline-block;
-  font-size: 1.2em;
-  height: 2rem;
-  width: 7rem;
-  position: relative;
-  color: makerBlack;
 }
 
 .menuTitle {
   border: none;
   background-color: unset;
+  font-size: 1em;
+  font-weight: bold;
+  color: makerBrown;
+  margin-right: 1em;
+  margin-bottom: 0.5em;
 }
 
 .menuTitle:hover {
   color: makerOrange;
-}
-
-.dropdownMenu {
-  font-size: 13px;
-  display: none;
-  position: absolute;
-  background-color: makerLightGreen;
-  padding: 0.5rem 0;
-  top: 38px;
-}
-
-.subMenuContainer {
-  width: 7rem;
-  text-align: center;
-}
-
-.subMenu {
-  color: makerWhite;
-  border: none;
-  background-color: unset;
-}
-
-.subMenu:hover {
-  color: makerPaleOrange;
-}
-
-.introduce:hover>.dropdownMenu,
-.busNotice:hover>.dropdownMenu,
-.request:hover>.dropdownMenu,
-.service:hover>.dropdownMenu {
-  display: block;
-}
-
-.toggle {
-  display: none;
-  position: absolute;
-  top: 55px;
-  right: 18%;
-  background-color: makerOrange;
-  color: makerWhite;
-  border: none;
-  border-radius: 0.3rem;
-  font-size: 25px;
-}
-
-.toggle:hover {
-  background-color: makerPaleOrange;
-}
-
-@media screen and (max-width:1024px) {
-  .introduce,
-  .busNotice,
-  .request,
-  .service {
-    font-size: 1em;
-  }
-}
-
-@media screen and (max-width:720px) {
-  .navbarMenu {
-    display: none;
-    transition: ease-in;
-  }
-
-  .hiddenNavbarMenu {
-    flex-direction: column;
-    padding: 0;
-    border-bottom: none;
-    border-left: 0.5em solid makerOrange;
-  }
-
-  .introduce,
-  .busNotice,
-  .request,
-  .service {
-    margin-left: 20px;
-    font-size: 0.8em;
-  }
-
-  .dropdownMenu {
-    top: 0;
-    left: 7.3rem;
-  }
-
-  .toggle {
-    display: inline;
-  }
-}
-
-@media screen and (max-width:480px) {
-  
 }
