@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import MyEstimateV1 from '../myEstimate/myEstimateV1';
 import RequestEstimateSlide from '../requestEstimate/requestEstimateSlide';
 import styles from './header.module.css';
@@ -7,11 +6,13 @@ import styles from './header.module.css';
 const Header = (props) => {
   const [myOpen, setMyOpen] = useState(false);
   const [requestOpen, setRequestOpen] = useState(false);
-  const navigate = useNavigate();
 
-  const onNavigate = (path) => {
-    navigate(path);
-  };
+  const handleClickMain = () => { props.changeMode('MAIN'); }
+  const handleClickCompany = () => { props.changeMode('COMPANY'); }
+  const handleClickBusInfo = () => { props.changeMode('BUSINFO'); }
+  const handleClickEstimateList = () => { props.changeMode('ESTIMATELIST'); }
+  const handleClickRequestEstimate = () => { props.changeMode('REQUESTESTIMATE'); }
+  const handleClickServiceCenter = () => { props.changeMode('SERVICECENTER'); }
 
   const handleClickMyEstimate = () => { setMyOpen(true); }
   const handleCloseMyEstimate = () => { setMyOpen(false); }
@@ -21,7 +22,7 @@ const Header = (props) => {
   return (
     <header className={styles.header}>
       <nav className={styles.navbar}>
-        <span onClick={() => onNavigate('/')}>
+        <span onClick={handleClickMain}>
           <img className={styles.logo} src='http://52.79.242.242:8080/img/logo.png' alt='EK tour logo' />
         </span>
         <div className={styles.navbarContainer}>

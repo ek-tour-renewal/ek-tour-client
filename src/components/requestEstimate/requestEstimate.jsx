@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './requestEstimate.module.css';
 import SubHeader from '../subHeader/subHeader';
 
-const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
-
-  useEffect(() => {
-    changeMenu('견적요청하기');
-  }, []);
+const RequestEstimate = ({ menu, Ref, getData }) => {
 
   // 견적 요청
   const onSubmit = (event) => {
@@ -18,22 +14,22 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
       <section className={styles.requestEstimate}>
         <SubHeader menu={menu} />
         {/* 견적요청 폼 */}
-        <form className={styles.form} ref={Ref.formRef} onSubmit={onSubmit}>
+        <form className={styles.form} onSubmit={onSubmit}>
           <ul className={styles.personalData}>
             <ul className={styles.personalData1}>
               <li className={styles.name}>
                 <p className={styles.nameTitle}>신청자명</p>
-                <input ref={Ref.nameRef} type='text' />
+                <input type='text' />
               </li>
               <li className={styles.email}>
                 <p className={styles.emailTitle}>이메일 주소</p>
-                <input ref={Ref.emailRef} type='text' />
+                <input type='text' />
               </li>
             </ul>
             <ul className={styles.personalData2}>
               <li className={styles.phone}>
                 <p className={styles.phoneTitle}>핸드폰</p>
-                <select className={styles.selectPhone} ref={Ref.phoneFirstRef}>
+                <select className={styles.selectPhone}>
                   <option value='010'>010</option>
                   <option value='016'>016</option>
                   <option value='017'>017</option>
@@ -41,13 +37,13 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
                   <option value='019'>019</option>
                 </select>
                 <p className={styles.hyphen}>-</p>
-                <input className={styles.phoneNumber} ref={Ref.phoneMiddleRef} type='text' maxLength={4} />
+                <input className={styles.phoneNumber} type='text' maxLength={4} />
                 <p className={styles.hyphen}>-</p>
-                <input className={styles.phoneNumber} ref={Ref.phoneLastRef} type='text' maxLength={4} />
+                <input className={styles.phoneNumber} type='text' maxLength={4} />
               </li>
               <li className={styles.password}>
                 <p className={styles.passwordTitle}>비밀번호</p>
-                <input className={styles.passwordInput} ref={Ref.passwordRef} type='text' maxLength={4} />
+                <input className={styles.passwordInput} type='text' maxLength={4} />
               </li>
             </ul>
           </ul>
@@ -59,7 +55,7 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
           <ul className={styles.detailData}>
             <li className={styles.travel}>
               <p className={styles.travelTitle}>여행구분</p>
-              <select ref={Ref.travelRef}>
+              <select >
                 <option value='일반여행'>일반여행</option>
                 <option value='관혼상제'>관혼상제</option>
                 <option value='학교단체'>학교단체</option>
@@ -68,7 +64,7 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
             </li>
             <li className={styles.vehicle}>
               <p className={styles.vehicleTitle}>차량구분</p>
-              <select ref={Ref.vehicleRef}>
+              <select >
                 <option value='25인승 소형'>25인승 소형</option>
                 <option value='28인승 리무진'>28인승 리무진</option>
                 <option value='45인승 대형'>45인승 대형</option>
@@ -76,7 +72,7 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
             </li>
             <li className={styles.vehicleNumber}>
               <p className={styles.vehicleNumberTitle}>차량대수</p>
-              <select ref={Ref.vehicleNumberRef}>
+              <select >
                 <option value='1'>1대</option>
                 <option value='2'>2대</option>
                 <option value='3'>3대</option>
@@ -91,23 +87,23 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
             </li>
             <li className={styles.memberCount}>
               <p className={styles.memberCountTitle}>인원</p>
-              <input ref={Ref.memberCountRef} type='text' />
+              <input type='text' />
               명
             </li>
             <li className={styles.departDate}>
               <p className={styles.departDateTitle}>출발일자</p>
-              <input ref={Ref.departDateRef} type='date' />
-              <input className={styles.departTimeInput} ref={Ref.departTimeRef} type='time' />
+              <input type='date' />
+              <input className={styles.departTimeInput} type='time' />
             </li>
             <li className={styles.arrivalDate}>
               <p className={styles.arrivalDateTitle}>귀행일자</p>
-              <input ref={Ref.arrivalDateRef} type='date' />
-              <input className={styles.arrivalDTimeInput} ref={Ref.arrivalTimeRef} type='time' />
+              <input type='date' />
+              <input className={styles.arrivalDTimeInput} type='time' />
             </li>
             <ul className={styles.departPlaceContainer}>
               <li className={styles.departPlace}>
                 <p className={styles.departPlaceTitle}>출발지</p>
-                <select ref={Ref.departPlaceRef}>
+                <select >
                   <option value='[서울]'>서울</option>
                   <option value='[경기]'>경기</option>
                   <option value='[강원]'>강원</option>
@@ -128,13 +124,13 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
               </li>
               <li className={styles.detailDepartPlace}>
                 <p className={styles.detailDepartPlaceTitle}>세부정보</p>
-                <input ref={Ref.departPlaceDetailRef} type='text' />
+                <input type='text' />
               </li>
             </ul>
             <ul className={styles.arrivalPlaceContainer}>
               <li className={styles.arrivalPlace}>
                 <p className={styles.arrivalPlaceTitle}>도착지</p>
-                <select ref={Ref.arrivalPlaceRef}>
+                <select >
                   <option value='[서울]'>서울</option>
                   <option value='[경기]'>경기</option>
                   <option value='[강원]'>강원</option>
@@ -155,33 +151,33 @@ const RequestEstimate = ({ menu, changeMenu, Ref, getData }) => {
               </li>
               <li className={styles.detailArrivalPlace}>
                 <p className={styles.detailArrivalPlaceTitle}>세부정보</p>
-                <input ref={Ref.arrivalPlaceDetailRef} type='text' />
+                <input type='text' />
               </li>
             </ul>
             <li className={styles.stopPlace}>
               <p className={styles.stopPlaceTitle}>경유지</p>
-              <input ref={Ref.stopPlaceRef} type='text' />
+              <input type='text' />
             </li>
             <li className={styles.wayType}>
               <p className={styles.wayTypeTitle}>왕복구분</p>
               <label>
-                <input className={styles.checkbox} ref={Ref.aroundWayTypeRef} type="radio" name='wayType' />왕복
+                <input className={styles.checkbox} type="radio" name='wayType' />왕복
                 <input className={styles.checkbox} type="radio" name='wayType' />편도
               </label>
             </li>
             <li className={styles.payment}>
               <p className={styles.paymentTitle}>결제방법</p>
-              <input className={styles.checkbox} ref={Ref.cashRef} type='radio' name='payType' />현금
+              <input className={styles.checkbox} type='radio' name='payType' />현금
               <input className={styles.checkbox} type='radio' name='payType' />카드
             </li>
             <li className={styles.taxBill}>
               <p className={styles.taxBillTitle}>세금계산서 발급</p>
-              <input className={styles.checkbox} ref={Ref.taxBillRef} type='radio' name='taxBillType' />발급
+              <input className={styles.checkbox} type='radio' name='taxBillType' />발급
               <input className={styles.checkbox} type='radio' name='taxBillType' />발급안함
             </li>
             <li className={styles.memo}>
               <p className={styles.memoTitle}>기타 메모 사항</p>
-              <textarea className={styles.memoTextarea} ref={Ref.memoRef}></textarea>
+              <textarea className={styles.memoTextarea}></textarea>
             </li>
           </ul>
           <ol>

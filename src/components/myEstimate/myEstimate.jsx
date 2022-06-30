@@ -5,10 +5,6 @@ import MyEstimateList from '../myEstimateList/myEstimateList';
 
 const MyEstimate = (props) => {
 
-  useEffect(() => {
-    props.changeMenu('나의견적확인');
-  }, []);
-
   // 나의 견적 확인 (내 정보 입력)
   const onSubmit = event => {
     props.checkMyEstimate(event);

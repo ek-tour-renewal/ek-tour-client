@@ -4,14 +4,6 @@ import styles from './myEstimateData.module.css';
 import SubHeader from '../subHeader/subHeader';
 
 const MyEstimateData = ({ menu, myData, changeMenu, Ref, exit }) => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // if (!myData) {
-    //   navigate('/search');
-    // };
-    changeMenu('나의견적확인');
-  }, []);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -25,7 +17,6 @@ const MyEstimateData = ({ menu, myData, changeMenu, Ref, exit }) => {
   // 나가기
   const onOut = () => {
     exit();
-    navigate('/my');
   };
 
   return (
