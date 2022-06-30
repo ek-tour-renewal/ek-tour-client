@@ -5,10 +5,6 @@ import styles from './header.module.css';
 const Header = (props) => {
   const [myOpen, setMyOpen] = useState(false);
 
-  const onOpenMenu = () => {
-    setActive(!active);
-  };
-
   const handleClickMain = () => { props.changeMode('MAIN'); }
   const handleClickCompany = () => { props.changeMode('COMPANY'); }
   const handleClickBusInfo = () => { props.changeMode('BUSINFO'); }
