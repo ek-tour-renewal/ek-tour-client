@@ -1,16 +1,13 @@
-import React, { memo } from 'react';
+import React from 'react';
 import styles from './main.module.css';
 import Estimate from '../estimate/estimate';
-import Header from '../header/header';
-import Footer from '../footer/footer';
 
-const Main = memo(({ Ref, getData }) => {
+const Main = ({ getData }) => {
   return (
     <main>
-      <Header />
       <section className={styles.main}>
         {/* 견적요청 폼 */}
-        <Estimate Ref={Ref} getData={getData} />
+        <Estimate getData={getData} />
         {/* 정보 */}
         <section className={styles.info}>
           {/* 문의 연락처 */}
@@ -26,8 +23,8 @@ const Main = memo(({ Ref, getData }) => {
               <p className={styles.kakaoDetail}>카톡상담 seanpapa</p>
             </li>
             <li className={styles.email}>
-              <span className={styles.emailIcon}><i class='fa-solid fa-envelope fa-2x'></i></span>
-              <li className={styles.emailDetail}>이메일 문의 ektour0917@naver.com</li>
+              <span className={styles.emailIcon}><i className='fa-solid fa-envelope fa-2x'></i></span>
+              <p className={styles.emailDetail}>이메일 문의 ektour0917@naver.com</p>
             </li>
           </ul>
           {/* 고객센터 & 계좌 */}
@@ -47,9 +44,8 @@ const Main = memo(({ Ref, getData }) => {
           </ul>
         </section>
       </section>
-      <Footer />
     </main>
   )
-});
+};
 
 export default Main;

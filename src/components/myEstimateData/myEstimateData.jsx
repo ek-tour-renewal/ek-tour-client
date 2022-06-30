@@ -1,19 +1,9 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './myEstimateData.module.css';
-import Header from '../header/header';
 import SubHeader from '../subHeader/subHeader';
-import Footer from '../footer/footer';
 
 const MyEstimateData = ({ menu, myData, changeMenu, Ref, exit }) => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // if (!myData) {
-    //   navigate('/search');
-    // };
-    changeMenu('나의견적확인');
-  }, []);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -27,12 +17,10 @@ const MyEstimateData = ({ menu, myData, changeMenu, Ref, exit }) => {
   // 나가기
   const onOut = () => {
     exit();
-    navigate('/my');
   };
 
   return (
     <main>
-      <Header />
       <section className={styles.myEstimateData}>
         <SubHeader menu={menu} />
 
@@ -212,7 +200,6 @@ const MyEstimateData = ({ menu, myData, changeMenu, Ref, exit }) => {
           <button className={styles.button} type='button' onClick={onOut}>취소</button>
         </form>
       </section>
-      <Footer />
     </main>
   )
 };

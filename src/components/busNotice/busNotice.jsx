@@ -1,13 +1,8 @@
 import React, { useEffect } from 'react';
 import styles from './busNotice.module.css';
 import SubHeader from '../subHeader/subHeader';
-import Header from '../header/header';
-import Footer from '../footer/footer';
 
 const BusNotice = ({ menu, changeMenu }) => {
-  useEffect(() => {
-    changeMenu('버스안내');
-  }, []);
 
   {/*
  <SmallBus
@@ -27,7 +22,6 @@ const BusNotice = ({ menu, changeMenu }) => {
 
   return (
     <main>
-      <Header />
       <section className={styles.busNotice}>
         <SubHeader menu={menu} />
         <h1 className={styles.vehicleNoticeTitle}>차량안내</h1>
@@ -82,7 +76,6 @@ const BusNotice = ({ menu, changeMenu }) => {
           </p>
         </ul>
       </section>
-      <Footer />
     </main>
   )
 };

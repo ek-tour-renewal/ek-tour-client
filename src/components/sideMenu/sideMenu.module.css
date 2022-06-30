@@ -1,0 +1,7 @@
+.sideMenu {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 20px;
+  top: 35%;
+}

@@ -87,7 +87,7 @@ const Estimate = ({ Ref, getData }) => {
   return (
     <section className={styles.estimate}>
       <p className={styles.estimateBox}>실시간 견적요청</p>
-      <form className={styles.data} ref={Ref.formRef} onSubmit={onSubmit}>
+      <form className={styles.data} onSubmit={onSubmit}>
         <section className={styles.estimate_1}>
           <li className={styles.travel}>
             <InputLabel id="demo-simple-select-helper-label">

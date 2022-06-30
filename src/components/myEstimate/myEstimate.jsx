@@ -1,15 +1,9 @@
 import React, { useEffect } from 'react';
 import styles from './myEstimate.module.css';
-import Footer from '../footer/footer';
-import Header from '../header/header';
 import SubHeader from '../subHeader/subHeader';
 import MyEstimateList from '../myEstimateList/myEstimateList';
 
 const MyEstimate = (props) => {
-
-  useEffect(() => {
-    props.changeMenu('나의견적확인');
-  }, []);
 
   // 나의 견적 확인 (내 정보 입력)
   const onSubmit = event => {
@@ -18,7 +12,6 @@ const MyEstimate = (props) => {
 
   return (
     <main>
-      <Header />
       <section className={styles.myEstimate}>
         {!props.myData &&
           <main className={styles.main}>
@@ -35,13 +28,13 @@ const MyEstimate = (props) => {
                   <option value='019'>019</option>
                 </select>
                 <p className={styles.hyphen}>-</p>
-                <input className={styles.phoneInput} ref={props.myRef.phoneMiddleRef} type='text' maxlength='4' />
+                <input className={styles.phoneInput} ref={props.myRef.phoneMiddleRef} type='text' maxLength='4' />
                 <p className={styles.hyphen}>-</p>
-                <input className={styles.phoneInput} ref={props.myRef.phoneLastRef} type='text' maxlength='4' />
+                <input className={styles.phoneInput} ref={props.myRef.phoneLastRef} type='text' maxLength='4' />
               </li>
               <li className={styles.password}>
                 <p>비밀번호</p>
-                <input className={styles.passwordInput} ref={props.myRef.passwordRef} type='text' maxlength='4' />
+                <input className={styles.passwordInput} ref={props.myRef.passwordRef} type='text' maxLength='4' />
               </li>
               <button className={styles.checkButton}>확인</button>
             </form>
@@ -60,7 +53,6 @@ const MyEstimate = (props) => {
             currentMyData={props.currentMyData} />
         }
       </section>
-      <Footer />
     </main>
   )
 };

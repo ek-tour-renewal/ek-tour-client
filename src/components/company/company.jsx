@@ -1,17 +1,11 @@
-import React, { useEffect } from 'react';
-import Footer from '../footer/footer';
-import Header from '../header/header';
+import React from 'react';
 import SubHeader from '../subHeader/subHeader';
 import styles from './company.module.css';
 
-const Company = ({ menu, changeMenu }) => {
-  useEffect(() => {
-    changeMenu('CEO 인사말');
-  }, []);
+const Company = ({ menu }) => {
 
   return (
     <main>
-      <Header />
       <section className={styles.company}>
         <SubHeader menu={menu} />
         <section>
@@ -74,7 +68,6 @@ const Company = ({ menu, changeMenu }) => {
           </div>
         </section>
       </section>
-      <Footer />
     </main >
   );
 };
