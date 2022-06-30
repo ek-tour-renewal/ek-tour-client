@@ -3,11 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './button.module.css';
 
 const Button = memo((props) => {
-  const navigate = useNavigate();
 
-  const onNavigate = (path) => {
-    navigate(path)
-  }
   return (
     <section>
       {/* 문의 */}
@@ -22,7 +18,7 @@ const Button = memo((props) => {
         </ul>
       </a>
       {/* 견적요청 */}
-      <button onClick={() => onNavigate('/request')}>
+      <button>
         <ul className={styles.estimateButton}>
           <img className={styles.estimateImage} src="/image/estimateicon.png" alt="phone icon" />
           <ul className={styles.estimateInfo}>

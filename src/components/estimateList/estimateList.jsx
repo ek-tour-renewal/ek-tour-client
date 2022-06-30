@@ -1,14 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './estimateList.module.css';
 import SubHeader from '../subHeader/subHeader';
 import EstimateListItem from '../estimateListItem/estimateListItem';
 import PageButton from '../pageButton/pageButton';
 
+const EstimateList = ({ menu, ektour }) => {
+  
+  const [requestDataList, setRequestDataList] = useState();
+  const [allPage, setAllPage] = useState();
 
-const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, getEstimateList, requestDataList }) => {
+  const getEstimateList = (pageNumber) => {
+    ektour
+      .getData(pageNumber)
+      .then(response => {
+        setRequestDataList(response);
+      })
+      .catch(error => console.log(error))
+  };
+
   useEffect(() => {
-    changeMenu('견적요청목록');
-    getEstimateListPage();
+    ektour
+    .getData(0)
+    .then(response => {
+      setRequestDataList(response);
+      console.log(response);
+    })
+    .catch(error => console.log(error));
+    ektour
+      .getAllPageCount()
+      .then(pages => setAllPage(pages.data.totalCount))
+      .catch(error => console.log(error))
   }, []);
 
   // 페이지 리스트
@@ -34,16 +55,40 @@ const EstimateList = ({ menu, changeMenu, getEstimateListPage, allPage, getEstim
             <span className={styles.vehicleType}>차량구분</span>
             <span className={styles.createdDate}>요청일</span>
           </div>
-          <ul>
-            {requestDataList.map(data => (<EstimateListItem data={data} />))}
-          </ul>
+          {
+            requestDataList ? requestDataList.map((e) => {
+              return (
+                <EstimateListItem 
+                  key={e.id}
+                  id={e.id}
+                  name={e.name}
+                  travelType={e.travelType}
+                  departPlace={e.departPlace}
+                  arrivalPlace={e.arrivalPlace}
+                  vehicleType={e.vehicleType}
+                  createdDate={e.createdDate}
+                />
+              );
+            }) :
+            <p>견적 내역이 없습니다.</p>
+          }
           <ul className={styles.pageList}>
             <button className={styles.prevPageButton}>
-              <i class="fa-solid fa-caret-left"></i>
+              <i className="fa-solid fa-caret-left"></i>
             </button>
-            {allPageArray(allPage).map(number => (<PageButton page={number} getEstimateList={getEstimateList} />))}
+            {
+              allPageArray(allPage).map((number) => {
+                return (
+                  <PageButton
+                    key={number}
+                    page={number} 
+                    getEstimateList={getEstimateList} 
+                  />
+                );
+              })
+            }
             <button className={styles.nextPageButton}>
-              <i class="fa-solid fa-caret-right"></i>
+              <i className="fa-solid fa-caret-right"></i>
             </button>
           </ul>
         </section>

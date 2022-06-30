@@ -1,13 +1,13 @@
-import React, { memo } from 'react';
+import React from 'react';
 import styles from './main.module.css';
 import Estimate from '../estimate/estimate';
 
-const Main = memo(({ Ref, getData }) => {
+const Main = ({ getData }) => {
   return (
     <main>
       <section className={styles.main}>
         {/* 견적요청 폼 */}
-        <Estimate Ref={Ref} getData={getData} />
+        <Estimate getData={getData} />
         {/* 정보 */}
         <section className={styles.info}>
           {/* 문의 연락처 */}
@@ -46,6 +46,6 @@ const Main = memo(({ Ref, getData }) => {
       </section>
     </main>
   )
-});
+};
 
 export default Main;
