@@ -40,20 +40,3 @@ button {
   border-bottom: 0.5em solid makerOrange;
   margin-bottom: 0;
 }
-
-.menuTitle {
-  border: none;
-  background-color: unset;
-  font-size: 1em;
-  font-weight: bold;
-  color: makerBrown;
-  margin-right: 1em;
-  margin-bottom: 0.5em;
-  transition: 0.5s;
-}
-
-.menuTitle:hover {
-  color: makerOrange;
-  background-color: makerLightYellow;
-  transform: scale(1.02);
-}

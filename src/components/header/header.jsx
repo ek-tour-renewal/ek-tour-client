@@ -30,7 +30,20 @@ const Header = (props) => {
           <ul className={styles.navbarMenu}>
             <li className={styles.request}>
               <Button
-                className={styles.menuTitle}
+                sx={{
+                  border: 'none',
+                  backgroundColor: 'unset',
+                  fontSize: '1em',
+                  fontWeight: 'bold',
+                  color: '#5A4231',
+                  marginRight: '1em',
+                  marginBottom: '0.5em',
+                  transition: '0.5s',
+                  '&:hover': {color: '#EC9F46',
+                    backgroundColor: 'rgba(255, 250, 203, 0.7)',
+                    transform: 'scale(1.02)',
+                  }
+                }}
                 onClick={handleOpenRequestEstimate}>
                 견적요청하기
               </Button>
@@ -45,7 +58,20 @@ const Header = (props) => {
             </li>
             <li className={styles.myEstimate}>
               <Button
-                className={styles.menuTitle}
+                sx={{
+                  border: 'none',
+                  backgroundColor: 'unset',
+                  fontSize: '1em',
+                  fontWeight: 'bold',
+                  color: '#5A4231',
+                  marginRight: '1em',
+                  marginBottom: '0.5em',
+                  transition: '0.5s',
+                  '&:hover': {color: '#EC9F46',
+                    backgroundColor: 'rgba(255, 250, 203, 0.7)',
+                    transform: 'scale(1.02)',
+                  }
+                }}
                 onClick={handleClickMyEstimate}>
                 나의견적확인
               </Button>
