@@ -1,21 +1,23 @@
-import { Box } from '@mui/material';
+import { Button } from "@mui/material";
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import MyEstimateV1 from '../myEstimate/myEstimateV1';
+import RequestEstimateSlide from '../requestEstimate/requestEstimateSlide';
 import styles from './header.module.css';
 
 const Header = (props) => {
-  const [myOpen, setMyOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const handleClickMain = () => { props.changeMode('MAIN'); }
-  const handleClickCompany = () => { props.changeMode('COMPANY'); }
-  const handleClickBusInfo = () => { props.changeMode('BUSINFO'); }
-  const handleClickEstimateList = () => { props.changeMode('ESTIMATELIST'); }
-  const handleClickRequestEstimate = () => { props.changeMode('REQUESTESTIMATE'); }
-  const handleClickMyEstimate = () => { props.changeMode('MYESTIMATE'); }
-  const handleClickServiceCenter = () => { props.changeMode('SERVICECENTER'); }
+  const [myOpen, setMyOpen] = useState(false);
+  const [requestOpen, setRequestOpen] = useState(false);
+
+  const handleClickMain = () => { navigate('/'); }
+  const handleClickMyEstimate = () => { navigate('/estimate/my'); }
 
   const handleClickMyEstimateV1 = () => { setMyOpen(true); }
-  const handleCloseMyEstimate = () => { setMyOpen(false); }
+  const handleCloseMyEstimateV1 = () => { setMyOpen(false); }
+  const handleOpenRequestEstimate = () => { setRequestOpen(true); };
+  const handleCloseRequestEstimate = () => { setRequestOpen(false); };
 
   return (
     <header className={styles.header}>
@@ -25,17 +27,54 @@ const Header = (props) => {
         </span>
         <nav className={styles.navbarContainer}>
           <ul className={styles.navbarMenu}>
-            {/* 슬라이딩패널 */}
             <li className={styles.request}>
-              <button className={styles.menuTitle} onClick={handleClickRequestEstimate}>견적요청하기</button>
+              <Button
+                sx={{
+                  border: 'none',
+                  backgroundColor: 'unset',
+                  fontSize: '1em',
+                  fontWeight: 'bold',
+                  color: '#5A4231',
+                  marginRight: '1em',
+                  marginBottom: '0.5em',
+                  transition: '0.5s',
+                  '&:hover': {color: '#EC9F46',
+                    backgroundColor: 'rgba(255, 250, 203, 0.7)',
+                    transform: 'scale(1.02)',
+                  }
+                }}
+                onClick={handleOpenRequestEstimate}>
+                견적요청하기
+              </Button>
+              <RequestEstimateSlide
+                handleCloseRequestEstimate={handleCloseRequestEstimate}
+                open={requestOpen}
+              />
             </li>
             <li className={styles.myEstimate}>
-              <button className={styles.menuTitle} onClick={handleClickMyEstimateV1}>나의견적확인V1</button>
+              <Button
+                sx={{
+                  border: 'none',
+                  backgroundColor: 'unset',
+                  fontSize: '1em',
+                  fontWeight: 'bold',
+                  color: '#5A4231',
+                  marginRight: '1em',
+                  marginBottom: '0.5em',
+                  transition: '0.5s',
+                  '&:hover': {color: '#EC9F46',
+                    backgroundColor: 'rgba(255, 250, 203, 0.7)',
+                    transform: 'scale(1.02)',
+                  }
+                }}
+                onClick={handleClickMyEstimate}>
+                나의견적확인
+              </Button>
+              <button className={styles.menuTitle} onClick={handleClickMyEstimateV1}>나의견적확인</button>
               <MyEstimateV1
-                handleCloseMyEstimate={handleCloseMyEstimate}
+                handleCloseMyEstimateV1={handleCloseMyEstimateV1}
                 open={myOpen}
               />
-              <button className={styles.menuTitle} onClick={handleClickMyEstimate}>나의견적확인</button>
             </li>
           </ul>
         </nav>

@@ -17,10 +17,10 @@ const MyEstimate = (props) => {
           <main className={styles.main}>
             <SubHeader menu={props.menu} />
             {/* 정보 입력란 */}
-            <form className={styles.form} ref={props.myRef.formRef} onSubmit={onSubmit}>
+            <form className={styles.form} onSubmit={onSubmit}>
               <li className={styles.phone}>
                 <p>핸드폰</p>
-                <select className={styles.phoneSelect} ref={props.myRef.phoneFirstRef}>
+                <select className={styles.phoneSelect}>
                   <option value='010'>010</option>
                   <option value='016'>016</option>
                   <option value='017'>017</option>
@@ -28,13 +28,13 @@ const MyEstimate = (props) => {
                   <option value='019'>019</option>
                 </select>
                 <p className={styles.hyphen}>-</p>
-                <input className={styles.phoneInput} ref={props.myRef.phoneMiddleRef} type='text' maxLength='4' />
+                <input className={styles.phoneInput} type='text' maxLength='4' />
                 <p className={styles.hyphen}>-</p>
-                <input className={styles.phoneInput} ref={props.myRef.phoneLastRef} type='text' maxLength='4' />
+                <input className={styles.phoneInput} type='text' maxLength='4' />
               </li>
               <li className={styles.password}>
                 <p>비밀번호</p>
-                <input className={styles.passwordInput} ref={props.myRef.passwordRef} type='text' maxLength='4' />
+                <input className={styles.passwordInput} type='text' maxLength='4' />
               </li>
               <button className={styles.checkButton}>확인</button>
             </form>
