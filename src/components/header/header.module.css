@@ -3,18 +3,6 @@ button {
   cursor: pointer;
 }
 
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background-color: makerWhite;
-  width: 100%;
-  user-select: none;
-  margin-bottom: 2em;
-  border-top: 3px solid makerOrange;
-  padding-top: 0.5rem;
-}
-
 .navbar {
   margin-top: 1em;
   display: flex;
