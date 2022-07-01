@@ -14,52 +14,78 @@ import SideMenu from './components/sideMenu/sideMenu';
 import FloatingActionButton from './components/sideMenu/floatingActionButton';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-function App({ ektour }) {
-  const [menu, setMenu] = useState(null); //subheader
+export default function App({ ektour }) {
+
+  const [page, setPage] = useState('1');
+  const changePage = (page) => {
+    console.log(page);
+    setPage(page);
+  }
 
   return (
     <div className={styles.app}>
       <BrowserRouter>
 
-        <SideMenu
+        <Header />
 
-        />
-        <Header
-
-        />
+        <SideMenu />
 
         {/* 페이지 라우팅 */}
         <Routes>
           <Route path='/' element={
-            <Main/>
+            <Main
+            
+            />
           }></Route>
 
           <Route path='/introduce' element={
-            <Company/>
+            <Company
+            
+            />
           }></Route>
 
           <Route path='/bus' element={
-            <BusNotice/>
+            <BusNotice
+            
+            />
           }></Route>
 
           <Route path='/estimate' element={
-            <RequestEstimate/>
+            <RequestEstimate
+            
+            />
           }></Route>
 
-          <Route path='/estimate/list' element={
-            <EstimateList/>
+          <Route path='/estimate/list/1' element={
+            <EstimateList
+              ektour={ektour}
+              page={page}
+              changePage={changePage}
+            />
+          }></Route>
+
+          <Route path={`/estimate/list/${page}`} element={
+            <EstimateList
+              ektour={ektour}
+              page={page}
+              changePage={changePage}
+            />
           }></Route>
 
           <Route path='/estimate/my' element={
-            <MyEstimate/>
+            <MyEstimate
+            
+            />
           }></Route>
 
           <Route path='/service-center' element={
-            <ServiceCenter/>
+            <ServiceCenter
+            
+            />
           }></Route>
 
           <Route path='*' element={
-            <NotFoundPage/>
+            <NotFoundPage />
           }></Route>
         </Routes>
 
@@ -71,5 +97,3 @@ function App({ ektour }) {
     </div>
   );
 }
-
-export default App;

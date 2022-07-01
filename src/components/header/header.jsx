@@ -44,14 +44,14 @@ const Header = (props) => {
 
   return (
     <AppBar 
-    sx={{
-      borderTop: '4px solid #EC9F46',
-      backgroundColor: '#FCFCFC',
-      userSelect: 'none',
-      position: 'sticky',
-      top: 0,
-      paddingBottom: '2em'
-    }}>
+      sx={{
+        borderTop: '4px solid #EC9F46',
+        backgroundColor: '#FCFCFC',
+        userSelect: 'none',
+        position: 'sticky',
+        top: 0,
+        paddingBottom: '2em'
+      }}>
       <nav className={styles.navbar}>
         <span onClick={handleClickMain}>
           <img className={styles.logo} src='http://52.79.242.242:8080/img/logo.png' alt='EK tour logo' />

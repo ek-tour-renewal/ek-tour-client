@@ -37,7 +37,7 @@ const SideMenu = (props) => {
 
   const handleClickCompany = () => { navigate('/introduce'); }
   const handleClickBusInfo = () => { navigate('/bus'); }
-  const handleClickRequestEstimateList = () => { navigate('/estimate/list'); }
+  const handleClickRequestEstimateList = () => { navigate('/estimate/list/1'); }
 
   return (
     <div className={styles.sideMenu}>

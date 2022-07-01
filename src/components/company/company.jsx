@@ -7,7 +7,7 @@ const Company = ({ menu }) => {
   return (
     <main>
       <section className={styles.company}>
-        <SubHeader menu={menu} />
+        <SubHeader menu='회사 소개' />
         <section>
           <div className={styles.shortContentContainer}>
             <p className={styles.shortContent}>고객의 행복을 함께 만들어갑니다.</p>
