@@ -1,6 +1,5 @@
 import { Box, Dialog, DialogContent, DialogTitle } from '@mui/material';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './myEstimate.module.css';
 
 export default function MyEstimateV1(props) {
@@ -29,7 +28,7 @@ export default function MyEstimateV1(props) {
   };
 
   return (
-    <Dialog open={props.open} onClose={props.handleCloseMyEstimate}>
+    <Dialog open={props.open} onClose={props.handleCloseMyEstimateV1}>
       <DialogTitle>
         내 견적 요청 확인하기
       </DialogTitle>
@@ -58,7 +57,7 @@ export default function MyEstimateV1(props) {
         </li>
         <Box>
           <button className={styles.checkButton} type='submit'>확인</button>
-          <button className={styles.checkButton} onClick={props.handleCloseMyEstimate}>취소</button>
+          <button className={styles.checkButton} type='button' onClick={props.handleCloseMyEstimateV1}>취소</button>
         </Box>
       </form>
       <p className={styles.explanation}>견적 확인은 등록 시 입력한 핸드폰번호와 비밀번호로 확인합니다.</p>
