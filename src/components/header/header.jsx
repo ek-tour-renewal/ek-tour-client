@@ -1,4 +1,4 @@
-import { AppBar, Button } from "@mui/material";
+import { AppBar, Button } from '@mui/material';
 import React, { useState } from 'react';
 import MyEstimateV1 from '../myEstimate/myEstimateV1';
 import RequestEstimateSlide from '../requestEstimate/requestEstimateSlide';
@@ -22,7 +22,6 @@ const Header = (props) => {
 
   return (
     <AppBar 
-    component="nav"
     sx={{
       borderTop: '4px solid #EC9F46',
       backgroundColor: '#FCFCFC',
