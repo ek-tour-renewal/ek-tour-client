@@ -68,10 +68,10 @@ const Header = (props) => {
                 open={requestOpen}
               />
             </li>
-            <li>
+            <li className={styles.myEstimate}>
               <HeaderButton
                 buttonText='나의견적확인'
-                onClick={handleClickMyEstimateV1}
+                onClick={handleClickMyEstimateV1}  
               />
               <MyEstimateV1
                 handleCloseMyEstimateV1={handleCloseMyEstimateV1}
