@@ -5,9 +5,6 @@ import SubHeader from '../subHeader/subHeader';
 import styles from './requestEstimate.module.css';
 
 const RequestEstimateSlide = (props) => {
-  useEffect(() => {
-    props.changeMenu('견적요청하기');
-  })
   const [info, setInfo] = useState({
     name: null,
     email: null,

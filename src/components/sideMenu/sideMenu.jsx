@@ -2,22 +2,21 @@ import { Button } from '@mui/material';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
-
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './sideMenu.module.css';
 
 const SideMenu = (props) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const onNavigate = (path) => {
-  //   navigate(path);
-  // };
+  const handleClickCompany = () => {  navigate('/introduce'); }
+  const handleClickBusInfo = () => {  navigate('/bus'); }
+  const handleClickRequestEstimate = () => { navigate('/estimate'); }
 
   return (
     <div className={styles.sideMenu}>
       <Button
+        onClick={handleClickCompany}
         variant='contained'
         sx={{
           height: '6em', color: '#5A4231', borderRadius: '20px', marginBottom: '10px', backgroundColor: 'rgba(255, 250, 203, 0.7)',
@@ -32,6 +31,7 @@ const SideMenu = (props) => {
         회사소개
       </Button>
       <Button
+        onClick={handleClickBusInfo}
         variant='contained'
         sx={{
           height: '6em', color: '#5A4231', borderRadius: '20px', marginBottom: '10px', backgroundColor: 'rgba(255, 250, 203, 0.7)',
@@ -46,6 +46,7 @@ const SideMenu = (props) => {
         버스안내
       </Button>
       <Button
+        onClick={handleClickRequestEstimate}
         variant='contained'
         sx={{
           height: '6em', color: '#5A4231', borderRadius: '20px', backgroundColor: 'rgba(255, 250, 203, 0.7)',
