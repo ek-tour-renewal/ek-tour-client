@@ -7,9 +7,9 @@ import Company from './components/company/company';
 import BusNotice from './components/busNotice/busNotice';
 import EstimateList from './components/estimateList/estimateList';
 import RequestEstimate from './components/requestEstimate/requestEstimate';
+import MyEstimate from './components/myEstimate/myEstimate';
 import ServiceCenter from './components/serviceCenter/serviceCenter';
 import NotFoundPage from './components/notFoundPage/notFoundPage';
-
 
 function App({ ektour }) {
   const [mode, setMode] = useState('MAIN');
@@ -39,6 +39,10 @@ function App({ ektour }) {
     />
   } else if (mode === 'REQUESTESTIMATE') {
     content = <RequestEstimate
+
+    />
+  } else if (mode === 'MYESTIMATE') { 
+    content = <MyEstimate
 
     />
   } else if (mode === 'SERVICECENTER') {
