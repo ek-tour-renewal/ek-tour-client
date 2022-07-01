@@ -19,22 +19,44 @@ const SideMenu = (props) => {
     <div className={styles.sideMenu}>
       <Button
         variant='contained'
-        className={styles.button}
-        >
+        sx={{
+          height: '6em', color: '#5A4231', borderRadius: '20px', marginBottom: '10px', backgroundColor: 'rgba(255, 250, 203, 0.7)',
+          display: 'flex', flexDirection: 'column',transition:'1s',
+          '&:hover': {
+            backgroundColor: '#FCFCFC',
+            color: 'EC9F46',
+            transform: 'scale(1.04)'
+          },
+        }}>
         <ApartmentIcon fontSize='large' />
         회사소개
       </Button>
       <Button
         variant='contained'
-        className={styles.button}
-        >
+        sx={{
+          height: '6em', color: '#5A4231', borderRadius: '20px', marginBottom: '10px', backgroundColor: 'rgba(255, 250, 203, 0.7)',
+          display: 'flex', flexDirection: 'column',transition:'1s',
+          '&:hover': {
+            backgroundColor: '#FCFCFC',
+            color: 'EC9F46',
+            transform: 'scale(1.04)'
+          },
+        }}>
         <DirectionsBusIcon fontSize='large' />
         버스안내
       </Button>
       <Button
         variant='contained'
-        className={styles.button}
-      >
+        sx={{
+          height: '6em', color: '#5A4231', borderRadius: '20px', backgroundColor: 'rgba(255, 250, 203, 0.7)',
+          display: 'flex', flexDirection: 'column', transition:'1s',
+          '&:hover': {
+            backgroundColor: '#FCFCFC',
+            color: 'EC9F46',
+            transform: 'scale(1.04)'
+          },
+        }}
+        className={styles.button}>
         <ReceiptLongIcon fontSize='large' />
         견적요청
       </Button>
