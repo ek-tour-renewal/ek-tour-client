@@ -45,8 +45,16 @@ function App({ ektour }) {
             <RequestEstimate/>
           }></Route>
 
+          <Route path='/estimate/list' element={
+            <EstimateList/>
+          }></Route>
+
           <Route path='/estimate/my' element={
             <MyEstimate/>
+          }></Route>
+
+          <Route path='/service-center' element={
+            <ServiceCenter/>
           }></Route>
 
           <Route path='*' element={

@@ -5,6 +5,30 @@ import MyEstimateV1 from '../myEstimate/myEstimateV1';
 import RequestEstimateSlide from '../requestEstimate/requestEstimateSlide';
 import styles from './header.module.css';
 
+function HeaderButton(props) {
+  return (
+    <Button
+      onClick={props.onClick}
+      sx={{
+        border: 'none',
+        backgroundColor: 'unset',
+        fontSize: '1em',
+        fontWeight: 'bold',
+        color: '#5A4231',
+        marginRight: '1em',
+        marginBottom: '0.5em',
+        transition: '0.5s',
+        '&:hover': {
+          color: '#EC9F46',
+          backgroundColor: 'rgba(255, 250, 203, 0.7)',
+          transform: 'scale(1.02)',
+        }
+      }}>
+      {props.buttonText}
+    </Button>
+  );
+}
+
 const Header = (props) => {
   const navigate = useNavigate();
 
@@ -36,51 +60,26 @@ const Header = (props) => {
         <nav className={styles.navbarContainer}>
           <ul className={styles.navbarMenu}>
             <li className={styles.request}>
-              <Button
-                sx={{
-                  border: 'none',
-                  backgroundColor: 'unset',
-                  fontSize: '1em',
-                  fontWeight: 'bold',
-                  color: '#5A4231',
-                  marginRight: '1em',
-                  marginBottom: '0.5em',
-                  transition: '0.5s',
-                  '&:hover': {
-                    color: '#EC9F46',
-                    backgroundColor: 'rgba(255, 250, 203, 0.7)',
-                    transform: 'scale(1.02)',
-                  }
-                }}
-                onClick={handleOpenRequestEstimate}>
-                견적요청하기
-              </Button>
+              <HeaderButton
+                buttonText='견적요청하기'
+                onClick={handleOpenRequestEstimate}
+              />
               <RequestEstimateSlide
                 handleCloseRequestEstimate={handleCloseRequestEstimate}
                 open={requestOpen}
               />
             </li>
             <li className={styles.myEstimate}>
-              <Button
-                sx={{
-                  border: 'none',
-                  backgroundColor: 'unset',
-                  fontSize: '1em',
-                  fontWeight: 'bold',
-                  color: '#5A4231',
-                  marginRight: '1em',
-                  marginBottom: '0.5em',
-                  transition: '0.5s',
-                  '&:hover': {
-                    color: '#EC9F46',
-                    backgroundColor: 'rgba(255, 250, 203, 0.7)',
-                    transform: 'scale(1.02)',
-                  }
-                }}
-                onClick={handleClickMyEstimate}>
-                나의견적확인
-              </Button>
-              <button className={styles.menuTitle} onClick={handleClickMyEstimateV1}>나의견적확인</button>
+              <HeaderButton
+                buttonText='나의견적확인'
+                onClick={handleClickMyEstimate}  
+              />
+            </li>
+            <li>
+              <HeaderButton
+                buttonText='나의견적확인V1'
+                onClick={handleClickMyEstimateV1}
+              />
               <MyEstimateV1
                 handleCloseMyEstimateV1={handleCloseMyEstimateV1}
                 open={myOpen}
