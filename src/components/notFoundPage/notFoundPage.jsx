@@ -1,11 +1,11 @@
+import { Box } from '@mui/system';
 import React from 'react';
-import styles from './notFoundPage.module.css';
 
 const NotFoundPage = (props) => {
   return (
-    <main className={styles.notFoundPage}>
-      <h1 className={styles.notFoundText}>Not Found Page</h1>
-    </main>
+    <Box sx={{marginTop: 20, marginBottom: 20}}>
+      <h1>Not Fount Page</h1>
+    </Box>
   )
 };
 

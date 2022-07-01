@@ -1,7 +1,6 @@
 import { Button } from '@mui/material';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
-import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -38,8 +37,7 @@ const SideMenu = (props) => {
 
   const handleClickCompany = () => { navigate('/introduce'); }
   const handleClickBusInfo = () => { navigate('/bus'); }
-  const handleClickRequestEstimate = () => { navigate('/estimate'); }
-  const handleClickRequestEstimateList = () => { navigate('/estimate/list'); }
+  const handleClickRequestEstimateList = () => { navigate('/estimate/list/1'); }
 
   return (
     <div className={styles.sideMenu}>
@@ -52,11 +50,6 @@ const SideMenu = (props) => {
         clickPath={handleClickBusInfo}
         buttonIcon={<DirectionsBusIcon fontSize='large' />}
         buttonText='버스안내'
-      />
-      <SideButton
-        clickPath={handleClickRequestEstimate}
-        buttonIcon={<ReceiptLongIcon fontSize='large' />}
-        buttonText='견적요청'
       />
       <SideButton
         clickPath={handleClickRequestEstimateList}
