@@ -9,6 +9,7 @@ import EstimateList from './components/estimateList/estimateList';
 import RequestEstimate from './components/requestEstimate/requestEstimate';
 import ServiceCenter from './components/serviceCenter/serviceCenter';
 import NotFoundPage from './components/notFoundPage/notFoundPage';
+import SideMenu from './components/sideMenu/sideMenu';
 
 
 function App({ ektour }) {
@@ -51,9 +52,11 @@ function App({ ektour }) {
 
   return (
     <div className={styles.app}>
+      <SideMenu />
       <Header
         changeMode={changeMode}
       />
+      
       {content}
       <Footer/>
     </div>

@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React, { useState } from 'react';
 import MyEstimateV1 from '../myEstimate/myEstimateV1';
 import RequestEstimateSlide from '../requestEstimate/requestEstimateSlide';
@@ -28,7 +29,11 @@ const Header = (props) => {
         <div className={styles.navbarContainer}>
           <ul className={styles.navbarMenu}>
             <li className={styles.request}>
-              <button className={styles.menuTitle} onClick={handleOpenRequestEstimate}>견적요청하기</button>
+              <Button
+                className={styles.menuTitle}
+                onClick={handleOpenRequestEstimate}>
+                견적요청하기
+              </Button>
               <RequestEstimateSlide
                 handleCloseRequestEstimate={handleCloseRequestEstimate}
                 open={requestOpen}
@@ -39,7 +44,11 @@ const Header = (props) => {
               />
             </li>
             <li className={styles.myEstimate}>
-              <button className={styles.menuTitle} onClick={handleClickMyEstimate}>나의견적확인</button>
+              <Button
+                className={styles.menuTitle}
+                onClick={handleClickMyEstimate}>
+                나의견적확인
+              </Button>
               <MyEstimateV1
                 myRef={props.myRef}
                 checkMyEstimate={props.checkMyEstimate}
