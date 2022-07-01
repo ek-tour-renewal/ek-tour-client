@@ -36,7 +36,6 @@ const Header = (props) => {
   const [requestOpen, setRequestOpen] = useState(false);
 
   const handleClickMain = () => { navigate('/'); }
-  const handleClickMyEstimate = () => { navigate('/estimate/my'); }
 
   const handleClickMyEstimateV1 = () => { setMyOpen(true); }
   const handleCloseMyEstimateV1 = () => { setMyOpen(false); }
@@ -72,13 +71,7 @@ const Header = (props) => {
             <li className={styles.myEstimate}>
               <HeaderButton
                 buttonText='나의견적확인'
-                onClick={handleClickMyEstimate}  
-              />
-            </li>
-            <li>
-              <HeaderButton
-                buttonText='나의견적확인V1'
-                onClick={handleClickMyEstimateV1}
+                onClick={handleClickMyEstimateV1}  
               />
               <MyEstimateV1
                 handleCloseMyEstimateV1={handleCloseMyEstimateV1}
