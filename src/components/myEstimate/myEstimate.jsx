@@ -7,7 +7,7 @@ const MyEstimate = (props) => {
 
   // 나의 견적 확인 (내 정보 입력)
   const onSubmit = event => {
-    props.checkMyEstimate(event);
+    
   };
 
   return (
