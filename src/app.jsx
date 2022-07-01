@@ -11,6 +11,7 @@ import MyEstimate from './components/myEstimate/myEstimate';
 import ServiceCenter from './components/serviceCenter/serviceCenter';
 import NotFoundPage from './components/notFoundPage/notFoundPage';
 import SideMenu from './components/sideMenu/sideMenu';
+import FloatingActionButton from './components/sideMenu/floatingActionButton';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App({ ektour }) {
@@ -61,6 +62,8 @@ function App({ ektour }) {
             <NotFoundPage/>
           }></Route>
         </Routes>
+
+        <FloatingActionButton />
 
         <Footer/>
       
