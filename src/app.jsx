@@ -4,7 +4,7 @@ import Footer from './components/footer/footer';
 import Header from './components/header/header';
 import Main from './components/main/main';
 import Company from './components/company/company';
-import Bus from './components/busNotice/bus';
+import Bus from './components/bus/bus';
 import EstimateList from './components/estimateList/estimateList';
 import RequestEstimate from './components/requestEstimate/requestEstimate';
 import MyEstimate from './components/myEstimate/myEstimate';

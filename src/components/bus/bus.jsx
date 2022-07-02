@@ -1,9 +1,9 @@
 import { Button } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
-import BigBus from '../bigBus/bigBus';
-import Limousine from '../limousine/limousine';
-import SmallBus from '../smallBus/smallBus';
+import BigBus from './bigBus';
+import Limousine from './limousine';
+import SmallBus from './smallBus';
 import BusNotice from './busNotice';
 
 const Bus = (props) => {
