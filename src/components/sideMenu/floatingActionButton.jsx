@@ -13,9 +13,14 @@ const FloatingActionButton = (props) => {
   const handleClickServiceCenterDetail = () => {
     setOpenCenter(!openCenter);
   };
-  const handleClickServiceCenter = () => {
+
+  const goServiceCenter = () => {
     navigate('/service-center');
     handleClickServiceCenterDetail();
+  }
+
+  const handleClickServiceCenter = () => {
+    navigate('/service-center');
   };
 
   return (
@@ -83,7 +88,7 @@ const FloatingActionButton = (props) => {
             maxWidth: 310,
             position: 'fixed',
             right: '2%',
-            bottom: '15%',
+            bottom: '20%',
             backgroundColor: '#FFCC49',
             borderRadius: '20px',
             zIndex: '1200' //버튼 위로 올라오게 할 경우 // 버튼 위에 배치할 경우에는 없애도됨
@@ -184,7 +189,7 @@ const FloatingActionButton = (props) => {
 
           <CardActions sx={{ justifyContent: 'end', pt: 0 }}>
             <Button
-              onClick={handleClickServiceCenter}
+              onClick={goServiceCenter}
               sx={{
                 p: 0,
                 color: '#42772F',
