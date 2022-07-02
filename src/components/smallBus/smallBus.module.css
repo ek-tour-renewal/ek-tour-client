@@ -3,6 +3,7 @@
 .smallBus {
   width: 70%;
   margin: auto;
+  margin-top: 2em;
 }
 
 .smallBusTitle {
@@ -22,15 +23,18 @@
 
 .busDetail {
   text-align: start;
+  margin-left: 6em;
+  margin-bottom: 2rem;
 }
 
 .busPersonnelDetail{
-  text-align: end;
+  margin-left: 6em;
 }
 
 .busImageTitle {
   font-size: 1.2em;
   width: max-content;
+  margin-left: 4em;
   padding: 0.3em 0.5em;
   border-bottom: 4px solid makerBrown;
 }

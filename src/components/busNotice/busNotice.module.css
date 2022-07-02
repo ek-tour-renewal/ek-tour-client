@@ -3,6 +3,7 @@
 .busNotice {
   width: 70%;
   margin: auto;
+  margin-top: 2em;
 }
 
 .vehicleNoticeTitle {
@@ -15,15 +16,18 @@
   border-bottom: 4px solid makerBrown;
 }
 
+.Precaution {
+  text-align: start;
+  width: max-content;
+  margin-left: 6em;
+  margin-bottom: 2em;
+  padding: 0.5em 1em;
+}
+
 .subTitle {
   display: flex;
   justify-content: center;
   margin: 0 3em;
-}
-
-.busExteriorTitle,
-.personnelTitle {
-  flex: 1 1 50%;
 }
 
 .smallBus,
@@ -40,16 +44,12 @@
   align-items: center;
 }
 
-.busDetail {
-  width: 40%;
-  margin-left: 1.5em;
-  text-align: start;
+.busStyle {
+  margin: auto;
 }
 
-.Precaution {
+.busDetail {
+  width: 25;
+  padding-left: 4em;
   text-align: start;
-  width: max-content;
-  margin: 0 2em;
-  padding: 0.5em 1em;
-  background-color: makerYellow;
 }
