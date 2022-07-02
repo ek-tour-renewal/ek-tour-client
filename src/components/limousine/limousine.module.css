@@ -3,6 +3,7 @@
 .limousine {
   width: 70%;
   margin: auto;
+  margin-top: 2em;
 }
 
 .limousineTitle {
@@ -22,12 +23,14 @@
 
 .limousineDetail {
   text-align: start;
+  margin-left: 6em;
+  margin-bottom: 2rem;
 }
 
 .busImageTitle {
   font-size: 1.2em;
   width: max-content;
+  margin-left: 4em;
   padding: 0.3em 0.5em;
-  margin-left: 6em;
   border-bottom: 4px solid makerBrown;
 }
