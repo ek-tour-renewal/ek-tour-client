@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import styles from './bigBus.module.css';
-import SubHeader from '../subHeader/subHeader';
 import Slider from '../slider/slider';
 
-const BigBus = ({ menu, changeMenu }) => {
+const BigBus = (props) => {
 
   // bus images
   const ImageList = [
@@ -22,14 +21,9 @@ const BigBus = ({ menu, changeMenu }) => {
     { url: './image/bigBus/interior13.jpg' },
   ];
 
-  useEffect(() => {
-    changeMenu('45인승 대형');
-  }, []);
-
   return (
     <main>
       <section className={styles.bigBus}>
-        <SubHeader menu={menu} />
         <h1 className={styles.bigBusTitle}>45인승 대형</h1>
         <section className={styles.container}>
           <p className={styles.busDetail}>
@@ -37,7 +31,7 @@ const BigBus = ({ menu, changeMenu }) => {
             40~45인승의 단체 여행에 적합하고 기업체, 관공서, 동호회, 일반단체의 국내 버스여행에 <br />
             많이 이용되며 기업체와 관공서 출퇴근 차량, 대학생 MT, OT, 외국인 투어에도 많이 이용됩니다.
           </p>
-          <img src='./image/bigBusExterior.jpg' alt='45인승 대형버스 외관' />
+          <img src='./image/bigBusExterior.jpg' width='600px' alt='45인승 대형버스 외관' />
           <h2 className={styles.busImageTitle}>차량 사진</h2>
           <Slider imageList={ImageList} />
         </section>
