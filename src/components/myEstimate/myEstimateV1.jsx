@@ -1,14 +1,25 @@
-import { Box, Dialog, DialogContent, DialogTitle } from '@mui/material';
+import { Dialog, DialogContent, DialogTitle, IconButton, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './myEstimate.module.css';
+import CloseIcon from '@mui/icons-material/Close';
+import axios from 'axios';
 
-export default function MyEstimateV1(props) {
+// props 정보
+// open : Dialog의 open 여부를 결정할 state
+// onClose : Dialog를 close할 function
+// estimateId : 확인할 견적의 ID
+// userName : 확인할 견적의 등록자명
+// ektour : 통신 처리할 ektour Class
+export default function MyEstimate(props, { ektour }) {
+
+  const navigate = useNavigate();
 
   const [myInfo, setMyInfo] = useState({
     firstNum: '010',
-    middleNum: null,
-    lastNum: null,
-    password: null
+    middleNum: '',
+    lastNum: '',
+    password: ''
   });
 
   const handleValueChange = (e) => {
@@ -20,17 +31,32 @@ export default function MyEstimateV1(props) {
   }
 
   // 나의 견적 확인 (내 정보 입력)
-  const onSubmit = event => {
-    const form = [myInfo.firstNum + myInfo.middleNum + myInfo.lastNum, myInfo.password];
-    props.changeCurrentMyData(form[0], form[1]);
-    props.checkMyEstimate(event);
-    props.handleCloseMyEstimate(false);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    var form = {phone: myInfo.firstNum + myInfo.middleNum + myInfo.lastNum, password: myInfo.password};
+    if (props.estimateId) {
+      
+    } else {
+      axios.post('/estimate/search/my', form)
+      .then((response) => {
+        props.onClose();
+        navigate('/estimate/my/list/' + 1);
+      })
+      .catch((error) => { console.log(error); });
+    }
   };
 
   return (
-    <Dialog open={props.open} onClose={props.handleCloseMyEstimateV1}>
+    <Dialog open={props.open} onClose={props.onClose}>
       <DialogTitle>
-        내 견적 요청 확인하기
+        <Stack direction='row'>
+          <Typography variant='h5' sx={{width: '100%', paddingTop: '6px'}}>
+            {props.userName ? props.userName + '님의 견적 요청 확인하기' : '내 견적 요청 내역 확인하기'}
+          </Typography>
+          <IconButton onClick={props.onClose}>
+            <CloseIcon />
+          </IconButton>
+        </Stack>
       </DialogTitle>
       <DialogContent>
       <form className={styles.form} onSubmit={onSubmit}>
@@ -45,20 +71,20 @@ export default function MyEstimateV1(props) {
           </select>
           <p className={styles.hyphen}>-</p>
           <input className={styles.phoneInput} onChange={handleValueChange} name="middleNum" 
-            type='text' maxLength='4' />
+            type='tel' maxLength='4' />
           <p className={styles.hyphen}>-</p>
           <input className={styles.phoneInput} onChange={handleValueChange} name="lastNum" 
-            type='text' maxLength='4' />
+            type='tel' maxLength='4' />
         </li>
         <li className={styles.password}>
           <p>비밀번호</p>
           <input className={styles.passwordInput} onChange={handleValueChange} name="password"
             type='text' maxLength='4' />
         </li>
-        <Box>
+        <Stack direction='row' spacing={0.5}>
           <button className={styles.checkButton} type='submit'>확인</button>
-          <button className={styles.checkButton} type='button' onClick={props.handleCloseMyEstimateV1}>취소</button>
-        </Box>
+          <button className={styles.checkButton} type='button' onClick={props.onClose}>취소</button>
+        </Stack>
       </form>
       <p className={styles.explanation}>견적 확인은 등록 시 입력한 핸드폰번호와 비밀번호로 확인합니다.</p>
       </DialogContent>

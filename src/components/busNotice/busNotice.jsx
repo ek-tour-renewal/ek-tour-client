@@ -23,7 +23,7 @@ const BusNotice = ({ menu, changeMenu }) => {
   return (
     <main>
       <section className={styles.busNotice}>
-        <SubHeader menu='버스 안내' />
+        <SubHeader menu='버스' />
         <h1 className={styles.vehicleNoticeTitle}>차량안내</h1>
         <ul>
           <div className={styles.subTitle}>

@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styles from './estimateList.module.css';
 import SubHeader from '../subHeader/subHeader';
 import EstimateListItem from '../estimateListItem/estimateListItem';
-import PageButton from '../pageButton/pageButton';
-import { Box } from '@mui/material';
+import { Box, Pagination, Stack } from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const EstimateList = ({ changePage, ektour, page }) => {
+const EstimateList = ({ ektour }) => {
+
+  const navigate = useNavigate();
+  
+  const { page } = useParams(1);
   
   const [requestDataList, setRequestDataList] = useState();
   const [allPage, setAllPage] = useState();
@@ -19,19 +23,15 @@ const EstimateList = ({ changePage, ektour, page }) => {
 
     ektour.getEstimateListByPage(page)
     .then(response => {
+      console.log(response);
       setRequestDataList(response);
     })
     .catch(error => console.log(error));
   }, [page]);
 
-  // 페이지 리스트
-  const allPageArray = (number) => {
-    const array = [];
-    for (let i = 0; i < number; i++) {
-      array.push(i + 1);
-    }
-    return array;
-  };
+  const handleChangePage = (event, value) => {
+    navigate('/estimate/list/' + value);
+  }
 
   return (
     <main>
@@ -59,6 +59,7 @@ const EstimateList = ({ changePage, ektour, page }) => {
                   arrivalPlace={e.arrivalPlace}
                   vehicleType={e.vehicleType}
                   createdDate={e.createdDate}
+                  ektour={ektour}
                 />
               );
             }) :
@@ -66,26 +67,15 @@ const EstimateList = ({ changePage, ektour, page }) => {
               견적 요청 내역이 없습니다.
             </Box>
           }
-          <ul className={styles.pageList}>
-            <button className={styles.prevPageButton}>
-              <i className="fa-solid fa-caret-left"></i>
-            </button>
-            {
-              allPageArray(allPage).map((number) => {
-                return (
-                  <PageButton
-                    key={number}
-                    page={number} 
-                    ektour={ektour}
-                    changePage={changePage}
-                  />
-                );
-              })
-            }
-            <button className={styles.nextPageButton}>
-              <i className="fa-solid fa-caret-right"></i>
-            </button>
-          </ul>
+          <Stack spacing={0} m={1}>
+            <Pagination 
+              count={allPage} 
+              shape='rounded' 
+              size='small'
+              onChange={handleChangePage} 
+              sx={{ margin: '0 auto' }}
+            />
+          </Stack>
         </section>
       </section>
     </main>

@@ -1,4 +1,4 @@
-import { Drawer, Typography, Box, ButtonGroup, Button, TextField, InputLabel, Select, MenuItem } from '@mui/material';
+import { Drawer, Typography, Box, ButtonGroup, Button, TextField, InputLabel, Select, MenuItem, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import React, { useState } from 'react';
 import styles from './requestEstimateSlide.module.css';
 
@@ -304,10 +304,9 @@ const RequestEstimateSlide = (props) => {
                 }}>
                 <div>
                   <InputLabel>왕복구분</InputLabel>
-                  <ButtonGroup>
-                    <Button
-                      onChange={handleValueChange}
-                      name='around'
+                  <ToggleButtonGroup onChange={handleValueChange} name='wayType' aria-label='wayType'>
+                    <ToggleButton
+                      value='왕복'
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -323,10 +322,9 @@ const RequestEstimateSlide = (props) => {
                       }}
                     >
                       왕복
-                    </Button>
-                    <Button
-                      onChange={handleValueChange}
-                      name='oneWay'
+                    </ToggleButton>
+                    <ToggleButton
+                      value='편도'
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -342,15 +340,14 @@ const RequestEstimateSlide = (props) => {
                       }}
                     >
                       편도
-                    </Button>
-                  </ButtonGroup>
+                    </ToggleButton>
+                  </ToggleButtonGroup>
                 </div>
                 <div>
                   <InputLabel>결제방법</InputLabel>
-                  <ButtonGroup>
-                    <Button
-                      onChange={handleValueChange}
-                      name='cash'
+                  <ToggleButtonGroup onChange={handleValueChange} name='payment' aria-label='payment'>
+                    <ToggleButton
+                      value='현금'
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -366,10 +363,9 @@ const RequestEstimateSlide = (props) => {
                       }}
                     >
                       현금
-                    </Button>
-                    <Button
-                      onChange={handleValueChange}
-                      name='card'
+                    </ToggleButton>
+                    <ToggleButton
+                      value='카드'
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -385,15 +381,14 @@ const RequestEstimateSlide = (props) => {
                       }}
                     >
                       카드
-                    </Button>
-                  </ButtonGroup>
+                    </ToggleButton>
+                  </ToggleButtonGroup>
                 </div>
                 <div>
                   <InputLabel>세금계산서 발급</InputLabel>
-                  <ButtonGroup>
-                    <Button
-                      onChange={handleValueChange}
-                      name='taxBill'
+                  <ToggleButtonGroup onChange={handleValueChange} name='taxBill' aria-label='taxBill'>
+                    <ToggleButton
+                      value={true}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -409,10 +404,9 @@ const RequestEstimateSlide = (props) => {
                       }}
                     >
                       발급
-                    </Button>
-                    <Button
-                      onChange={handleValueChange}
-                      name='nonTaxBill'
+                    </ToggleButton>
+                    <ToggleButton
+                      value={false}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -428,8 +422,8 @@ const RequestEstimateSlide = (props) => {
                       }}
                     >
                       발급안함
-                    </Button>
-                  </ButtonGroup>
+                    </ToggleButton>
+                  </ToggleButtonGroup>
                 </div>
               </Box>
               <TextField

@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import MyEstimateV1 from '../myEstimate/myEstimateV1';
 import styles from './estimateListItem.module.css';
 
-const EstimateListItem = (props) => {
+const EstimateListItem = (props, { ektour }) => {
+
+  const navigate = useNavigate();
+  const estimateId = useParams();
+
+  const [open, setOpen] = useState(false);
+
   // 이름 마스킹
   const masking = name => {
     switch (name.length) {
@@ -11,20 +19,33 @@ const EstimateListItem = (props) => {
     }
   };
 
-  const handleClickListItem = (id) => {
-    // TODO 해당 견적 클릭 시 실행 코드
+  const handleClickListItem = () => {
+    setOpen(true);
+  }
+
+  const handleCloseMyEstimate = () => {
+    setOpen(false);
   }
 
   return (
-    <li className={styles.estimateListItem} onClick={handleClickListItem(props.id)}>
-      <span className={styles.id}>{props.id}</span>
-      <span className={styles.name}>{masking(props.name)}</span>
-      <span className={styles.travelType}>{props.travelType}</span>
-      <span className={styles.departPlace}>{props.departPlace}</span>
-      <span className={styles.arrivalPlace}>{props.arrivalPlace}</span>
-      <span className={styles.vehicleType}>{props.vehicleType}</span>
-      <span className={styles.createdDate}>{props.createdDate.substring(0,10)}</span>
-    </li>
+    <>
+      <li className={styles.estimateListItem} onClick={handleClickListItem}>
+        <span className={styles.id}>{props.id}</span>
+        <span className={styles.name}>{masking(props.name)}</span>
+        <span className={styles.travelType}>{props.travelType}</span>
+        <span className={styles.departPlace}>{props.departPlace}</span>
+        <span className={styles.arrivalPlace}>{props.arrivalPlace}</span>
+        <span className={styles.vehicleType}>{props.vehicleType}</span>
+        <span className={styles.createdDate}>{props.createdDate.substring(0,10)}</span>
+      </li>
+      <MyEstimateV1
+        open={open}
+        onClose={handleCloseMyEstimate}
+        estimateId={props.id}
+        userName={masking(props.name)}
+        ektour={ektour}
+      />
+    </>
   );
 };
 
