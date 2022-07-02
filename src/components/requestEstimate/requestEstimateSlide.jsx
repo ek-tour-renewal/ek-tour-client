@@ -13,9 +13,7 @@ const RequestEstimateSlide = (props) => {
     vehicleNumber: '1',
     memberCount: null,
     departDate: new Date().toISOString().slice(0, 16),
-    departTime: new Date().toISOString().slice(0, 16),
-    arrivalDate: null,
-    arrivalTime: null,
+    arrivalDate: new Date().toISOString().slice(0, 16),
     departPlace: '[서울]',
     departPlaceDetail: null,
     arrivalPlace: '[서울]',
@@ -46,7 +44,7 @@ const RequestEstimateSlide = (props) => {
 
   return (
     <Drawer
-      anchor='left'
+      anchor='right'
       open={props.open}
       onClose={props.handleCloseRequestEstimate}
     >
@@ -201,7 +199,7 @@ const RequestEstimateSlide = (props) => {
                 label='귀행일자'
                 type='datetime-local'
                 name='arrivalDate'
-                value={info.departDate}
+                value={info.arrivalDate}
                 onChange={handleValueChange}
                 sx={{
                   marginBottom: 1,
@@ -309,6 +307,7 @@ const RequestEstimateSlide = (props) => {
                     <Button
                       onChange={handleValueChange}
                       name='around'
+                      value={info.around}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -328,6 +327,7 @@ const RequestEstimateSlide = (props) => {
                     <Button
                       onChange={handleValueChange}
                       name='oneWay'
+                      value={info.oneWay}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -352,6 +352,7 @@ const RequestEstimateSlide = (props) => {
                     <Button
                       onChange={handleValueChange}
                       name='cash'
+                      value={info.cash}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -371,6 +372,7 @@ const RequestEstimateSlide = (props) => {
                     <Button
                       onChange={handleValueChange}
                       name='card'
+                      value={info.card}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -395,6 +397,7 @@ const RequestEstimateSlide = (props) => {
                     <Button
                       onChange={handleValueChange}
                       name='taxBill'
+                      value={info.taxBill}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -414,6 +417,7 @@ const RequestEstimateSlide = (props) => {
                     <Button
                       onChange={handleValueChange}
                       name='nonTaxBill'
+                      value={info.nonTaxBill}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -441,6 +445,7 @@ const RequestEstimateSlide = (props) => {
                 onChange={handleValueChange}
                 multiline
                 minRows={3}
+                value={info.memo}
                 autoComplete='off'
                 sx={{ width: '500px', marginBottom: 2 }}
               />

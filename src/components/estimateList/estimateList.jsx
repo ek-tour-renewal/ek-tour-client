@@ -5,39 +5,30 @@ import EstimateListItem from '../estimateListItem/estimateListItem';
 import PageButton from '../pageButton/pageButton';
 import { Box } from '@mui/material';
 
-const EstimateList = ({ menu, ektour }) => {
+const EstimateList = ({ changePage, ektour, page }) => {
   
   const [requestDataList, setRequestDataList] = useState();
   const [allPage, setAllPage] = useState();
 
-  const getEstimateList = (pageNumber) => {
-    ektour
-      .getData(pageNumber)
-      .then(response => {
-        setRequestDataList(response);
-      })
-      .catch(error => console.log(error))
-  };
-
   useEffect(() => {
-    ektour
-    .getData(0)
-    .then(response => {
-      setRequestDataList(response);
-      console.log(response);
+    ektour.getTotalPageNum()
+    .then(pages => {
+      setAllPage(pages);
     })
     .catch(error => console.log(error));
-    ektour
-      .getAllPageCount()
-      .then(pages => setAllPage(pages.data.totalCount))
-      .catch(error => console.log(error))
-  }, []);
+
+    ektour.getEstimateListByPage(page)
+    .then(response => {
+      setRequestDataList(response);
+    })
+    .catch(error => console.log(error));
+  }, [page]);
 
   // 페이지 리스트
   const allPageArray = (number) => {
     const array = [];
     for (let i = 0; i < number; i++) {
-      array.push(i + 1)
+      array.push(i + 1);
     }
     return array;
   };
@@ -45,7 +36,7 @@ const EstimateList = ({ menu, ektour }) => {
   return (
     <main>
       <section className={styles.estimateList}>
-        <SubHeader menu={menu} />
+        <SubHeader menu='견적 목록' />
         <section className={styles.dataListContainer}>
           <div className={styles.dataList}>
             <span className={styles.id}>순번</span>
@@ -85,7 +76,8 @@ const EstimateList = ({ menu, ektour }) => {
                   <PageButton
                     key={number}
                     page={number} 
-                    getEstimateList={getEstimateList} 
+                    ektour={ektour}
+                    changePage={changePage}
                   />
                 );
               })

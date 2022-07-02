@@ -20,13 +20,13 @@ class Ektour {
   }
 
   // 견적 요청 목록 전체 페이지 요청
-  async getAllPageCount() {
+  async getTotalPageNum() {
     const response = await this.ektour.get('/estimate/all/page',{});
-    return response;
+    return response.data.totalCount;
   }
 
-  // 견적 목록 요청
-  async getData(pageNumber) {
+  // 해당 페이지의 견적 리스트 GET
+  async getEstimateListByPage(pageNumber) {
     const response = await this.ektour.get('/estimate/all', {
       params: {
         page: pageNumber,

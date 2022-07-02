@@ -36,7 +36,6 @@ const Header = (props) => {
   const [requestOpen, setRequestOpen] = useState(false);
 
   const handleClickMain = () => { navigate('/'); }
-  const handleClickMyEstimate = () => { navigate('/estimate/my'); }
 
   const handleClickMyEstimateV1 = () => { setMyOpen(true); }
   const handleCloseMyEstimateV1 = () => { setMyOpen(false); }
@@ -45,14 +44,14 @@ const Header = (props) => {
 
   return (
     <AppBar 
-    sx={{
-      borderTop: '4px solid #EC9F46',
-      backgroundColor: '#FCFCFC',
-      userSelect: 'none',
-      position: 'sticky',
-      top: 0,
-      paddingBottom: '2em'
-    }}>
+      sx={{
+        borderTop: '4px solid #EC9F46',
+        backgroundColor: '#FCFCFC',
+        userSelect: 'none',
+        position: 'sticky',
+        top: 0,
+        paddingBottom: '2em'
+      }}>
       <nav className={styles.navbar}>
         <span onClick={handleClickMain}>
           <img className={styles.logo} src='http://52.79.242.242:8080/img/logo.png' alt='EK tour logo' />
@@ -72,13 +71,7 @@ const Header = (props) => {
             <li className={styles.myEstimate}>
               <HeaderButton
                 buttonText='나의견적확인'
-                onClick={handleClickMyEstimate}  
-              />
-            </li>
-            <li>
-              <HeaderButton
-                buttonText='나의견적확인V1'
-                onClick={handleClickMyEstimateV1}
+                onClick={handleClickMyEstimateV1}  
               />
               <MyEstimateV1
                 handleCloseMyEstimateV1={handleCloseMyEstimateV1}

@@ -1,16 +1,18 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './pageButton.module.css';
 
-const PageButton = ({ page, getEstimateList }) => {
-  const buttonRef = useRef();
+const PageButton = ({ page, changePage }) => {
 
-  // 페이지 클릭 이벤트 - 수정필요(나의 견적 확인하기)
-  const onPageClick = () => {
-    getEstimateList(buttonRef.current.value - 1);
+  const navigate = useNavigate();
+
+  const onPageClick = (e) => {
+    changePage(e.target.value);
+    navigate('/estimate/list/' + e.target.value);
   }
 
   return (
-    <button className={styles.button} ref={buttonRef} value={page} onClick={onPageClick}>
+    <button className={styles.button} value={page} onClick={onPageClick}>
       {page}
     </button>
   )
