@@ -13,9 +13,7 @@ const RequestEstimateSlide = (props) => {
     vehicleNumber: '1',
     memberCount: null,
     departDate: new Date().toISOString().slice(0, 16),
-    departTime: new Date().toISOString().slice(0, 16),
-    arrivalDate: null,
-    arrivalTime: null,
+    arrivalDate: new Date().toISOString().slice(0, 16),
     departPlace: '[서울]',
     departPlaceDetail: null,
     arrivalPlace: '[서울]',
@@ -46,7 +44,7 @@ const RequestEstimateSlide = (props) => {
 
   return (
     <Drawer
-      anchor='left'
+      anchor='right'
       open={props.open}
       onClose={props.handleCloseRequestEstimate}
     >
@@ -104,6 +102,7 @@ const RequestEstimateSlide = (props) => {
                 inputProps={{ maxLength: 4 }}
                 onChange={handleValueChange}
                 name='password'
+                type='password'
                 autoComplete='off'
                 sx={{
                   marginLeft: 10
@@ -200,7 +199,7 @@ const RequestEstimateSlide = (props) => {
                 label='귀행일자'
                 type='datetime-local'
                 name='arrivalDate'
-                value={info.departDate}
+                value={info.arrivalDate}
                 onChange={handleValueChange}
                 sx={{
                   marginBottom: 1,
@@ -304,9 +303,11 @@ const RequestEstimateSlide = (props) => {
                 }}>
                 <div>
                   <InputLabel>왕복구분</InputLabel>
-                  <ToggleButtonGroup onChange={handleValueChange} name='wayType' aria-label='wayType'>
-                    <ToggleButton
-                      value='왕복'
+                  <ButtonGroup>
+                    <Button
+                      onChange={handleValueChange}
+                      name='around'
+                      value={info.around}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -322,9 +323,11 @@ const RequestEstimateSlide = (props) => {
                       }}
                     >
                       왕복
-                    </ToggleButton>
-                    <ToggleButton
-                      value='편도'
+                    </Button>
+                    <Button
+                      onChange={handleValueChange}
+                      name='oneWay'
+                      value={info.oneWay}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -340,14 +343,16 @@ const RequestEstimateSlide = (props) => {
                       }}
                     >
                       편도
-                    </ToggleButton>
-                  </ToggleButtonGroup>
+                    </Button>
+                  </ButtonGroup>
                 </div>
                 <div>
                   <InputLabel>결제방법</InputLabel>
-                  <ToggleButtonGroup onChange={handleValueChange} name='payment' aria-label='payment'>
-                    <ToggleButton
-                      value='현금'
+                  <ButtonGroup>
+                    <Button
+                      onChange={handleValueChange}
+                      name='cash'
+                      value={info.cash}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -363,9 +368,11 @@ const RequestEstimateSlide = (props) => {
                       }}
                     >
                       현금
-                    </ToggleButton>
-                    <ToggleButton
-                      value='카드'
+                    </Button>
+                    <Button
+                      onChange={handleValueChange}
+                      name='card'
+                      value={info.card}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -381,14 +388,16 @@ const RequestEstimateSlide = (props) => {
                       }}
                     >
                       카드
-                    </ToggleButton>
-                  </ToggleButtonGroup>
+                    </Button>
+                  </ButtonGroup>
                 </div>
                 <div>
                   <InputLabel>세금계산서 발급</InputLabel>
-                  <ToggleButtonGroup onChange={handleValueChange} name='taxBill' aria-label='taxBill'>
-                    <ToggleButton
-                      value={true}
+                  <ButtonGroup>
+                    <Button
+                      onChange={handleValueChange}
+                      name='taxBill'
+                      value={info.taxBill}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -404,9 +413,11 @@ const RequestEstimateSlide = (props) => {
                       }}
                     >
                       발급
-                    </ToggleButton>
-                    <ToggleButton
-                      value={false}
+                    </Button>
+                    <Button
+                      onChange={handleValueChange}
+                      name='nonTaxBill'
+                      value={info.nonTaxBill}
                       sx={{
                         color: '#5A4231',
                         borderColor: '#D3D3D3',
@@ -422,8 +433,8 @@ const RequestEstimateSlide = (props) => {
                       }}
                     >
                       발급안함
-                    </ToggleButton>
-                  </ToggleButtonGroup>
+                    </Button>
+                  </ButtonGroup>
                 </div>
               </Box>
               <TextField
@@ -434,6 +445,7 @@ const RequestEstimateSlide = (props) => {
                 onChange={handleValueChange}
                 multiline
                 minRows={3}
+                value={info.memo}
                 autoComplete='off'
                 sx={{ width: '500px', marginBottom: 2 }}
               />

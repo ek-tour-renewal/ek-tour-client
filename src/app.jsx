@@ -10,6 +10,7 @@ import RequestEstimate from './components/requestEstimate/requestEstimate';
 import ServiceCenter from './components/serviceCenter/serviceCenter';
 import NotFoundPage from './components/notFoundPage/notFoundPage';
 import SideMenu from './components/sideMenu/sideMenu';
+import FloatingActionButton from './components/sideMenu/floatingActionButton';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MyEstimateList from './components/myEstimateList/myEstimateList';
 
@@ -82,7 +83,9 @@ export default function App({ ektour }) {
           }></Route>
         </Routes>
 
-        <Footer />
+        <FloatingActionButton />
+
+        <Footer/>
       
       </BrowserRouter>
     </div>
