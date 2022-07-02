@@ -104,6 +104,7 @@ const RequestEstimateSlide = (props) => {
                 inputProps={{ maxLength: 4 }}
                 onChange={handleValueChange}
                 name='password'
+                type='password'
                 autoComplete='off'
                 sx={{
                   marginLeft: 10

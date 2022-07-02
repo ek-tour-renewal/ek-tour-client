@@ -2,12 +2,12 @@ import React from 'react';
 import styles from './main.module.css';
 import Estimate from '../estimate/estimate';
 
-const Main = ({ getData }) => {
+const Main = ({ postData }) => {
   return (
     <main>
       <section className={styles.main}>
         {/* 견적요청 폼 */}
-        <Estimate getData={getData} />
+        <Estimate/>
         {/* 정보 */}
         <section className={styles.info}>
           {/* 문의 연락처 */}

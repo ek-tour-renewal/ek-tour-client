@@ -19,19 +19,19 @@ const EstimateList = ({ menu, ektour }) => {
       .catch(error => console.log(error))
   };
 
-  // useEffect(() => {
-  //   ektour
-  //   .getData(0)
-  //   .then(response => {
-  //     setRequestDataList(response);
-  //     console.log(response);
-  //   })
-  //   .catch(error => console.log(error));
-  //   ektour
-  //     .getAllPageCount()
-  //     .then(pages => setAllPage(pages.data.totalCount))
-  //     .catch(error => console.log(error))
-  // }, []);
+  useEffect(() => {
+    ektour
+    .getData(0)
+    .then(response => {
+      setRequestDataList(response);
+      console.log(response);
+    })
+    .catch(error => console.log(error));
+    ektour
+      .getAllPageCount()
+      .then(pages => setAllPage(pages.data.totalCount))
+      .catch(error => console.log(error))
+  }, []);
 
   // 페이지 리스트
   const allPageArray = (number) => {
