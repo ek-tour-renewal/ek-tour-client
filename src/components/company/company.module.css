@@ -1,9 +1,10 @@
 @value makerYellow, makerBrown, makerBlack from '../../common/colors.css';
 
 .company {
-  width: 70%;
+  width: 60%;
   margin: auto;
   margin-bottom: 4em;
+  margin-top: 2em;
 }
 
 .shortContentContainer {
@@ -13,7 +14,7 @@
 
 .shortContent {
   width: max-content;
-  padding: 0.2em 0;
+  padding: 0.2em 0.5em;
   padding-left: 1em;
   padding-right: 3em;
   margin-bottom: 2.5em;

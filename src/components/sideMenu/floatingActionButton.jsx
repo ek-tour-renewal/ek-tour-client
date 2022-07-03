@@ -2,26 +2,21 @@ import { Fab, Box, Tooltip, Zoom, Card, CardContent, Typography, Grow, CardHeade
 import ChatIcon from '@mui/icons-material/Chat';
 import CloseIcon from '@mui/icons-material/Close';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
-import React from 'react';
+import PhoneRoundedIcon from '@mui/icons-material/PhoneRounded';
+import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 const FloatingActionButton = (props) => {
   const navigate = useNavigate();
   const [openCenter, setOpenCenter] = useState(false);
 
-  const handleClickServiceCenterDetail = () => {
-    setOpenCenter(!openCenter);
-  };
+  const handleClickServiceCenterDetail = () => { setOpenCenter(!openCenter) };
 
   const goServiceCenter = () => {
     navigate('/service-center');
     handleClickServiceCenterDetail();
   }
-
-  const handleClickServiceCenter = () => {
-    navigate('/service-center');
-  };
 
   return (
     <Box>
@@ -31,7 +26,7 @@ const FloatingActionButton = (props) => {
         placement='left'
         TransitionComponent={Zoom}>
         <Fab
-          onClick={handleClickServiceCenter}
+          onClick={handleClickServiceCenterDetail}
           variant='extended'
           sx={{
             position: 'fixed',
@@ -48,36 +43,7 @@ const FloatingActionButton = (props) => {
               transform: 'scale(1.02)'
             }
           }}>
-          고객센터N
-          <ChatIcon sx={{ ml: '5px', fontSize: '1.3em' }} />
-        </Fab>
-      </Tooltip>
-
-
-      <Tooltip
-        arrow
-        title='상담문의 01063876086'
-        placement='left'
-        TransitionComponent={Zoom}>
-        <Fab
-          onClick={handleClickServiceCenterDetail}
-          variant='extended'
-          sx={{
-            position: 'fixed',
-            right: '2%',
-            bottom: '12%',
-            backgroundColor: '#EC9F46',
-            color: '#FCFCFC',
-            fontSize: '1.3em',
-            p: '1em',
-            transition: '1s',
-            '&:hover': {
-              backgroundColor: '#FFFACB',
-              color: '#5A4231',
-              transform: 'scale(1.02)'
-            }
-          }}>
-          고객센터D
+          상담문의
           <ChatIcon sx={{ marginLeft: '5px', fontSize: '1.3em' }} />
         </Fab>
       </Tooltip>
@@ -85,13 +51,12 @@ const FloatingActionButton = (props) => {
       <Grow in={openCenter}>
         <Card
           sx={{
-            maxWidth: 310,
+            maxWidth: 340,
             position: 'fixed',
             right: '2%',
-            bottom: '20%',
+            bottom: '12%',
             backgroundColor: '#FFCC49',
-            borderRadius: '20px',
-            zIndex: '1200' //버튼 위로 올라오게 할 경우 // 버튼 위에 배치할 경우에는 없애도됨
+            borderRadius: '20px'
           }}>
 
           <CardHeader
@@ -103,7 +68,7 @@ const FloatingActionButton = (props) => {
                 <CloseIcon sx={{ color: '#5A4231' }} />
               </IconButton>
             }
-            sx={{ paddingBottom: 0, color: '#5A4231'}}
+            sx={{ paddingBottom: 0, color: '#5A4231' }}
           />
 
           <CardContent sx={{ textAlign: 'start' }}>
@@ -119,8 +84,7 @@ const FloatingActionButton = (props) => {
                   pb: '8px',
                   fontWeight: 'bold',
                   color: '#42772F'
-                }}
-              >
+                }}>
                 고객센터
               </Typography>
 
@@ -141,14 +105,12 @@ const FloatingActionButton = (props) => {
               <Typography
                 sx={{
                   fontSize: '14px',
-                  width: '100%',
-                  textAlign: 'start'
-                }}
-              >
+                  width: '100%'
+                }}>
                 업무시간 이외에도 전화 주시면 친절히 상담해 드립니다.
               </Typography>
 
-              <Divider  variant="middle" sx={{ m: '15px 0' }} />
+              <Divider variant="middle" sx={{ m: '15px 0' }} />
 
               <Typography
                 variant='h6'
@@ -156,8 +118,7 @@ const FloatingActionButton = (props) => {
                   pb: '8px',
                   fontWeight: 'bold',
                   color: '#42772F'
-                }}
-              >
+                }}>
                 무통장 입금 안내
               </Typography>
 
@@ -167,8 +128,7 @@ const FloatingActionButton = (props) => {
                   fontWeight: 'bold',
                   color: '#7A5E29',
                   mb: '5px'
-                }}
-              >
+                }}>
                 810137-04-006627
               </Typography>
 
@@ -184,6 +144,55 @@ const FloatingActionButton = (props) => {
               <Typography sx={{ fontSize: '15px' }}>
                 예금주 이케이투어
               </Typography>
+
+              <Divider variant="middle" sx={{ m: '15px 0' }} />
+
+              <Typography
+                variant='h6'
+                sx={{
+                  pb: '8px',
+                  fontWeight: 'bold',
+                  color: '#42772F'
+                }}>
+                문의 안내
+              </Typography>
+
+              <Typography
+                sx={{
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  color: '#7A5E29',
+                  mb: '5px',
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                <PhoneRoundedIcon sx={{ mr: '5px' }} />
+                010-6387-6086
+              </Typography>
+
+              <Typography
+                sx={{
+                  fontSize: '16px',
+                  mb: '5px',
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                <img src='/image/kakaotalk.png' alt='kakaotalk logo' height='25px' />
+                &nbsp; 카톡 상담 : seanpapa
+              </Typography>
+
+              <Typography
+                sx={{
+                  fontSize: '16px',
+                  mb: '5px',
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                <EmailRoundedIcon sx={{ color: '#5A4231', mr: '5px' }} />
+                이메일 : ektour0917@naver.com
+              </Typography>
+
             </Box>
           </CardContent>
 
