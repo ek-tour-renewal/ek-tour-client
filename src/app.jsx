@@ -31,21 +31,15 @@ export default function App({ ektour }) {
         {/* 페이지 라우팅 */}
         <Routes>
           <Route path='/' element={
-            <Main
-            
-            />
+            <Main />
           }></Route>
 
           <Route path='/introduce' element={
-            <Company
-            
-            />
+            <Company />
           }></Route>
 
           <Route path='/bus' element={
-            <Bus
-            
-            />
+            <Bus />
           }></Route>
 
           <Route path='/estimate' element={
@@ -73,9 +67,7 @@ export default function App({ ektour }) {
           }></Route>
 
           <Route path='/service-center' element={
-            <ServiceCenter
-            
-            />
+            <ServiceCenter />
           }></Route>
 
           <Route path='*' element={
