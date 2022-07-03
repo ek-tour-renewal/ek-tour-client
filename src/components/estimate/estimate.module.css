@@ -1,27 +1,11 @@
-@value makerWhite, makerOrange, makerLightGrey, makerYellow, makerBrown, makerLightYellow from '../../common/colors.css';
+@value makerWhite, makerOrange, makerBrown from '../../common/colors.css';
 
 body {
   user-select: none;
 }
 
-input, select {
-  border: 1px solid makerLightGrey;
+input {
   text-align: center;
-  height: 1.5em;
-}
-
-select {
-  height: 1.5rem;
-}
-
-input:focus, textarea:focus {
-  outline: none;
-}
-
-p {
-  width: max-content;
-  margin: 0.3em 0;
-  margin-right: 0.8em;
 }
 
 .estimate {
@@ -31,11 +15,12 @@ p {
 
 .estimateBox {
   display: block;
+  width: max-content;
+  height: 1.5em;
   font-size: 1.5em;
   font-weight: bold;
   margin: 0.6rem 1em;
   padding: 0.5rem;
-  height: 1.5em;
   border-radius: 0.4em;
   border: none;
   background-color: makerOrange;
@@ -50,131 +35,6 @@ p {
   border-radius: 1em;
   padding: 0 1em;
   background-color: whitesmoke;
-}
-
-.estimate_1,
-.estimate_2 {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 0.8em;
-  margin: auto;
-  width: 80%;
-}
-
-.travel,
-.name,
-.phone,
-.password,
-.email,
-.departPlace,
-.departDate,
-.arrivalDate,
-.arrivalPlace,
-.vehicle,
-.vehicleNumber,
-.stopPlace,
-.memberCount,
-.wayType,
-.payment,
-.taxBill,
-.memo {
-  display: flex;
-  font-size: 15px;
-  margin: 0;
-  margin-bottom: 0.5em;
-  align-items: center;
-}
-
-.travel,
-.name,
-.vehicle,
-.vehicleNumber {
-  margin-top: 0.5em;
-}
-
-.departDate,
-.arrivalDate,
-.departPlace,
-.arrivalPlace,
-.stopPlace,
-.wayType,
-.payment,
-.taxBill,
-.memo,
-.email {
-  flex-basis: 100%;
-}
-
-.vehicle, 
-.vehicleNumber,
-.travel,
-.name,
-.phone,
-.password {
-  flex-basis: 45%;
-}
-
-.travelSelect,
-.nameInput,
-.emailInput,
-.vehicleNumber,
-.vehicleSelect {
-  width: 50%;
-}
-
-.passwordInput {
-  width: 20%;
-}
-
-.passwordInput {
--webkit-text-security: disc;
-}
-
-.placeInput {
-  width: 50%;
-}
-
-.travelSelect {
-  width: 8em;
-}
-
-.placeSelect {
-  width: 4.7em;
-  margin-right: 0.5em;
-}
-
-.departDateInput, 
-.arrivalDateInput {
-  width: 30%;
-}
-
-.memberCountInput {
-  width: 2em;
-  margin-right: 0.5rem;
-}
-
-.vehicleSelect {
-  width: 10em;
-}
-
-.phoneSelect {
-  margin: 0;
-}
-
-.phoneInput {
-  width: 15%;
-}
-
-.hyphen {
-  margin: 0 0.3em;
-  margin-bottom: 0.3em;
-}
-
-.memoTextarea {
-  height: 4em;
-  width: 60%;
-  resize: none;
-  border: none;
 }
 
 .requestButtonContainer {
@@ -216,14 +76,6 @@ p {
 @media screen and (max-width:1360px) {
   .data {
     flex-direction: column;
-  }
-
-  .estimate_1 {
-    padding-bottom: 0;
-  }
-
-  .estimate_2 {
-    padding-top: 0;
   }
 }
 

@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 
-const Estimate = () => {
+const Estimate = (props) => {
   const buttonRef = useRef();
   const [visible, setVisible] = useState(false);
 
