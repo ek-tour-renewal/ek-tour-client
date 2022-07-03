@@ -29,18 +29,18 @@ function HeaderButton(props) {
   );
 }
 
-const Header = (props) => {
+const Header = (props, { ektour }) => {
   const navigate = useNavigate();
 
   const [myOpen, setMyOpen] = useState(false);
   const [requestOpen, setRequestOpen] = useState(false);
 
-  const handleClickMain = () => { navigate('/'); }
-
-  const handleClickMyEstimateV1 = () => { setMyOpen(true); }
-  const handleCloseMyEstimateV1 = () => { setMyOpen(false); }
+  const handleClickMyEstimate = () => { setMyOpen(true); }
+  const handleCloseMyEstimate = () => { setMyOpen(false); }
   const handleOpenRequestEstimate = () => { setRequestOpen(true); };
   const handleCloseRequestEstimate = () => { setRequestOpen(false); };
+
+  const handleClickMain = () => { navigate('/'); }
 
   return (
     <AppBar 
@@ -71,11 +71,13 @@ const Header = (props) => {
             <li className={styles.myEstimate}>
               <HeaderButton
                 buttonText='나의견적확인'
-                onClick={handleClickMyEstimateV1}  
+                onClick={handleClickMyEstimate}
               />
               <MyEstimateV1
-                handleCloseMyEstimateV1={handleCloseMyEstimateV1}
+                ektour={ektour}
+                onClose={handleCloseMyEstimate}
                 open={myOpen}
+                changeDataAndPages={props.changeDataAndPages}s
               />
             </li>
           </ul>
