@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './serviceCenter.module.css';
 import SubHeader from '../subHeader/subHeader';
 

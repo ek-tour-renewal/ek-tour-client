@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import MyEstimateV1 from '../myEstimate/myEstimateV1';
+import MyEstimate from '../myEstimate/myEstimateV1';
 import styles from './estimateListItem.module.css';
 
 const EstimateListItem = (props, { ektour }) => {
 
   const navigate = useNavigate();
-  const estimateId = useParams();
+  const { page } = useParams();
 
   const [open, setOpen] = useState(false);
 
@@ -20,7 +20,11 @@ const EstimateListItem = (props, { ektour }) => {
   };
 
   const handleClickListItem = () => {
-    setOpen(true);
+    // 내 견적 목록에서 요청 (바로 견적 상세보기로)
+    if (props.myEstimate) navigate(`/estimate/my/list/${page}/${props.id}`);
+
+    // 모든 견적 목록에서 요청 (요청 폼 거쳐서 상세보기로)
+    else setOpen(true);
   }
 
   const handleCloseMyEstimate = () => {
@@ -38,7 +42,7 @@ const EstimateListItem = (props, { ektour }) => {
         <span className={styles.vehicleType}>{props.vehicleType}</span>
         <span className={styles.createdDate}>{props.createdDate.substring(0,10)}</span>
       </li>
-      <MyEstimateV1
+      <MyEstimate
         open={open}
         onClose={handleCloseMyEstimate}
         estimateId={props.id}

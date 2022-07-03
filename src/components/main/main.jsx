@@ -4,11 +4,11 @@ import Estimate from '../estimate/estimate';
 
 const Main = (props) => {
   return (
-    <main>
+    <>
       <section className={styles.main}>
         <Estimate/>
       </section>
-    </main>
+    </>
   )
 };
 

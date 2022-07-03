@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './myEstimateList.module.css';
 import SubHeader from '../subHeader/subHeader';
 import EstimateListItem from '../estimateListItem/estimateListItem';
@@ -9,13 +9,26 @@ import { useEffect } from 'react';
 const MyEstimateList = ({ ektour }) => {
 
   const navigate = useNavigate();
-  const { page } = useParams(1);
+  const { page } = useParams();
+  const { state } = useLocation();
+  
+  const [requestDataList, setRequestDataList] = useState();
+  const [allPage, setAllPage] = useState();
 
-  const location = useLocation();
-  const form = location.state;
+  useEffect(() => {
+    if (!state) throw new Error('잘못된 접근입니다.');
+    ektour.getMyEstimateListByFormAndPage(state.form, page)
+    .then(response => {
+      if (response.totalPage < parseInt(page) || 1 > parseInt(page)) navigate('/error');
+      setRequestDataList(response.estimateList);
+      setAllPage(response.totalPage);
+    })
+    .catch(error => { console.log(error); });
+    if (page > allPage) throw new Error('해당 페이지를 찾을 수 없습니다.');
+  }, [page]);
 
   const handleChangePage = (event, value) => {
-    navigate('/estimate/my/list/' + value);
+    navigate('/estimate/my/list/' + value, { state: { form: state.form } });
   }
 
   return (
@@ -32,7 +45,7 @@ const MyEstimateList = ({ ektour }) => {
             <span className={styles.vehicleType}>차량구분</span>
             <span className={styles.createdDate}>요청일</span>
           </div>
-          {/* {
+          {
             requestDataList ? requestDataList.map((e) => {
               return (
                 <EstimateListItem 
@@ -44,16 +57,18 @@ const MyEstimateList = ({ ektour }) => {
                   arrivalPlace={e.arrivalPlace}
                   vehicleType={e.vehicleType}
                   createdDate={e.createdDate}
+                  myEstimate={'true'}
                 />
               );
             }) :
             <Box p={5}>
               견적 요청 내역이 없습니다.
             </Box>
-          } */}
+          }
           <Stack spacing={0} m={1}>
             <Pagination
-              count={1} 
+              count={allPage}
+              page={parseInt(page)}
               shape='rounded' 
               size='small'
               onChange={handleChangePage} 

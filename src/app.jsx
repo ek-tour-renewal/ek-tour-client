@@ -6,13 +6,26 @@ import Main from './components/main/main';
 import Company from './components/company/company';
 import Bus from './components/bus/bus';
 import EstimateList from './components/estimateList/estimateList';
-import RequestEstimate from './components/requestEstimate/requestEstimate';
+// import RequestEstimate from './components/requestEstimate/requestEstimate';
 import ServiceCenter from './components/serviceCenter/serviceCenter';
-import NotFoundPage from './components/notFoundPage/notFoundPage';
 import SideMenu from './components/sideMenu/sideMenu';
 import FloatingActionButton from './components/sideMenu/floatingActionButton';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MyEstimateList from './components/myEstimateList/myEstimateList';
+import { Divider, Stack, Typography } from '@mui/material';
+import { ErrorBoundary } from 'react-error-boundary';
+import EstimateDetail from './components/estimateDetail/estimateDetail';
+import NotFoundPage from './components/notFoundPage/notFoundPage';
+
+function ExceptionHandler({error}) {
+  return (
+    <Stack p={10} spacing={3}>
+      <Typography variant='h4' sx={{color: 'red', fontWeight: 'bold'}}>에러 발생</Typography>
+      <Divider />
+      <Typography>{error.message ? error.message : '알 수 없는 오류'}</Typography>
+    </Stack>
+  );
+}
 
 export default function App({ ektour }) {
   const [companyData, setCompanyData] = useState({
@@ -33,10 +46,11 @@ export default function App({ ektour }) {
   useEffect(() => {
     ektour.getCompanyInfo()
       .then(response => { setCompanyData(response) })
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
   },[]);
   
   return (
+    <ErrorBoundary FallbackComponent={ExceptionHandler}>
     <div className={styles.app}>
       <BrowserRouter>
 
@@ -64,11 +78,11 @@ export default function App({ ektour }) {
             <Bus />
           }></Route>
 
-          <Route path='/estimate' element={
+          {/* <Route path='/estimate' element={
             <RequestEstimate
 
             />
-          }></Route>
+          }></Route> */}
 
           <Route path='/estimate/list/:page' element={
             <EstimateList
@@ -77,13 +91,19 @@ export default function App({ ektour }) {
           }></Route>
 
           <Route path='/estimate/list/:page/:estimateId' element={
-            <EstimateList
+            <EstimateDetail
               ektour={ektour}
             />
           }></Route>
 
           <Route path='/estimate/my/list/:page' element={
             <MyEstimateList
+              ektour={ektour}
+            />
+          }></Route>
+
+          <Route path='/estimate/my/list/:page/:estimateId' element={
+            <EstimateDetail
               ektour={ektour}
             />
           }></Route>
@@ -107,5 +127,6 @@ export default function App({ ektour }) {
 
       </BrowserRouter>
     </div>
+    </ErrorBoundary>
   );
 }

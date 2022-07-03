@@ -5,29 +5,24 @@ import EstimateListItem from '../estimateListItem/estimateListItem';
 import { Box, Pagination, Stack } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const EstimateList = ({ ektour }) => {
+const EstimateList = ({ ektour, props }) => {
 
   const navigate = useNavigate();
   
-  const { page } = useParams(1);
+  const { page } = useParams();
   
   const [requestDataList, setRequestDataList] = useState();
   const [allPage, setAllPage] = useState();
 
   useEffect(() => {
-    console.log('EstimateList 컴포넌트 렌더');
-    ektour.getTotalPageNum()
-    .then(pages => {
-      setAllPage(pages);
-    })
-    .catch(error => console.log(error));
-
     ektour.getEstimateListByPage(page)
     .then(response => {
       console.log(response);
-      setRequestDataList(response);
+      if (response.totalPage < parseInt(page) || 1 > parseInt(page)) navigate('/error');
+      setRequestDataList(response.estimateList);
+      setAllPage(response.totalPage);
     })
-    .catch(error => console.log(error));
+    .catch(error => { console.log(error); });
   }, [page]);
 
   const handleChangePage = (event, value) => {
@@ -35,7 +30,7 @@ const EstimateList = ({ ektour }) => {
   }
 
   return (
-    <main>
+    <>
       <section className={styles.estimateList}>
         <SubHeader menu='견적 목록' />
         <section className={styles.dataListContainer}>
@@ -70,16 +65,17 @@ const EstimateList = ({ ektour }) => {
           }
           <Stack spacing={0} m={1}>
             <Pagination 
-              count={allPage} 
+              count={allPage}
+              page={parseInt(page)} 
               shape='rounded' 
               size='small'
-              onChange={handleChangePage} 
+              onChange={handleChangePage}
               sx={{ margin: '0 auto' }}
             />
           </Stack>
         </section>
       </section>
-    </main>
+    </>
   )
 };
 
