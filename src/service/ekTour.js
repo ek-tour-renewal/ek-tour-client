@@ -36,7 +36,7 @@ class Ektour {
   }
 
   // 등록자의 핸드폰 번호와 패스워드 확인 후 유효하면 해당 등록자의 견적 요청 목록 반환
-  async getMyEstimateListByForm(form, pageNumber) {
+  async getMyEstimateListByFormAndPage(form, pageNumber) {
     const { phone, password } = form;
     const response = await this.ektour.post(`/estimate/search/my?page=${pageNumber - 1}`, {
       phone: phone,
@@ -46,8 +46,13 @@ class Ektour {
   }
 
   // 견적 ID로 견적 요청 상세 조회
-  async getEstimateDetailByEstimateId(estimateId) {
-    const response = await this.ektour.get(`/${estimateId}`);
+  async getEstimateDetailByEstimateByFormAndId(form, estimateId) {
+    const response = await this.ektour.get(`/${estimateId}`, form);
+    return response.data;
+  }
+
+  async getCompanyInfo() {
+    const response = await this.ektour.get('/admin/info');
     return response.data;
   }
 

@@ -15,6 +15,7 @@ const EstimateList = ({ ektour }) => {
   const [allPage, setAllPage] = useState();
 
   useEffect(() => {
+    console.log('EstimateList 컴포넌트 렌더');
     ektour.getTotalPageNum()
     .then(pages => {
       setAllPage(pages);

@@ -34,8 +34,20 @@ export default function MyEstimate(props, { ektour }) {
   const onSubmit = (e) => {
     e.preventDefault();
     var form = {phone: myInfo.firstNum + myInfo.middleNum + myInfo.lastNum, password: myInfo.password};
+    navigate('/estimate/my/list/1', {
+      state: {
+        phone: form.phone,
+        password: form.password
+      }
+    });
     if (props.estimateId) {
-      
+      axios.post('/estimate/' + props.estimateId, form)
+      .then((response) => {
+        navigate('', {
+          
+        });
+      })
+      .catch((error) => { console.log(error); });
     } else {
       axios.post('/estimate/search/my', form)
       .then((response) => {
@@ -43,7 +55,7 @@ export default function MyEstimate(props, { ektour }) {
           console.log('정보 틀림');
         }
         props.onClose();
-        navigate('/estimate/my/list/' + 1);
+        
       })
       .catch((error) => { console.log(error); });
     }

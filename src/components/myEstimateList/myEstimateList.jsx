@@ -1,23 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './myEstimateList.module.css';
 import SubHeader from '../subHeader/subHeader';
 import EstimateListItem from '../estimateListItem/estimateListItem';
 import { Box, Pagination, Stack } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const MyEstimateList = ({ ektour }) => {
 
   const navigate = useNavigate();
-
   const { page } = useParams(1);
 
-  const [requestDataList, setRequestDataList] = useState();
-  const [allPage, setAllPage] = useState('1');
-
-  useEffect(() => {
-    
-  })
+  const location = useLocation();
+  const form = location.state;
 
   const handleChangePage = (event, value) => {
     navigate('/estimate/my/list/' + value);
@@ -37,7 +32,7 @@ const MyEstimateList = ({ ektour }) => {
             <span className={styles.vehicleType}>차량구분</span>
             <span className={styles.createdDate}>요청일</span>
           </div>
-          {
+          {/* {
             requestDataList ? requestDataList.map((e) => {
               return (
                 <EstimateListItem 
@@ -55,10 +50,10 @@ const MyEstimateList = ({ ektour }) => {
             <Box p={5}>
               견적 요청 내역이 없습니다.
             </Box>
-          }
+          } */}
           <Stack spacing={0} m={1}>
             <Pagination
-              count={allPage} 
+              count={1} 
               shape='rounded' 
               size='small'
               onChange={handleChangePage} 
