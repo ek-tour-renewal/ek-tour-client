@@ -119,42 +119,7 @@ const FloatingActionButton = (props) => {
                   fontWeight: 'bold',
                   color: '#42772F'
                 }}>
-                무통장 입금 안내
-              </Typography>
-
-              <Typography
-                sx={{
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                  color: '#7A5E29',
-                  mb: '5px'
-                }}>
-                810137-04-006627
-              </Typography>
-
-              <Typography
-                sx={{
-                  color: '#CA904C',
-                  fontWeight: 'bold',
-                  mb: '5px'
-                }}>
-                KB 국민은행
-              </Typography>
-
-              <Typography sx={{ fontSize: '15px' }}>
-                예금주 이케이투어
-              </Typography>
-
-              <Divider variant="middle" sx={{ m: '15px 0' }} />
-
-              <Typography
-                variant='h6'
-                sx={{
-                  pb: '8px',
-                  fontWeight: 'bold',
-                  color: '#42772F'
-                }}>
-                문의 안내
+                상담문의
               </Typography>
 
               <Typography
@@ -191,6 +156,41 @@ const FloatingActionButton = (props) => {
                 }}>
                 <EmailRoundedIcon sx={{ color: '#5A4231', mr: '5px' }} />
                 이메일 : ektour0917@naver.com
+              </Typography>
+
+              <Divider variant="middle" sx={{ m: '15px 0' }} />
+
+              <Typography
+                variant='h6'
+                sx={{
+                  pb: '8px',
+                  fontWeight: 'bold',
+                  color: '#42772F'
+                }}>
+                무통장 입금 안내
+              </Typography>
+
+              <Typography
+                sx={{
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  color: '#7A5E29',
+                  mb: '5px'
+                }}>
+                810137-04-006627
+              </Typography>
+
+              <Typography
+                sx={{
+                  color: '#CA904C',
+                  fontWeight: 'bold',
+                  mb: '5px'
+                }}>
+                KB 국민은행
+              </Typography>
+
+              <Typography sx={{ fontSize: '15px' }}>
+                예금주 이케이투어
               </Typography>
 
             </Box>
