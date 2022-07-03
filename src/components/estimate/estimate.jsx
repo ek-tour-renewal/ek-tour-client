@@ -28,9 +28,9 @@ const Estimate = () => {
     memberCount: "",
     departDate: new Date().toISOString().slice(0, 16),
     arrivalDate: new Date().toISOString().slice(0, 16),
-    departPlace: "서울",
+    departPlace: "[서울]",
     departPlaceDetail: "",
-    arrivalPlace: "서울",
+    arrivalPlace: "[서울]",
     arrivalPlaceDetail: "",
     memo: "",
     stopPlace: "",
@@ -41,6 +41,12 @@ const Estimate = () => {
 
   const openDetail = () => {
     setVisible(!visible);
+  };
+
+  // 세금계산서 true, false 변환
+  const convertBool = (str) => {
+    if (str == "true") return true;
+    else return false;
   };
 
   // 서버로 견적요청 post
@@ -65,9 +71,9 @@ const Estimate = () => {
         stopPlace: estimateForm.stopPlace,
         wayType: estimateForm.wayType,
         payment: estimateForm.payment,
-        taxBill: Boolean(estimateForm.taxBill),
+        taxBill: convertBool(estimateForm.taxBill),
       };
-      console.log(data);
+      // console.log(data);
       axios
         .post("/estimate", data)
         .then((response) => {
@@ -103,18 +109,18 @@ const Estimate = () => {
     if (estimateForm.name === "") {
       setNameErrorMsg("이름을 입력해주세요.");
       return false;
-    } 
+    }
     if (estimateForm.phone.includes("-")) {
       setPhoneErrorMsg(`'-' 빼고 숫자만 입력해주세요.`);
       return false;
     } else if (estimateForm.phone === "" || estimateForm.phone.length < 8) {
       setPhoneErrorMsg("연락처를 입력해 주세요.");
       return false;
-    } 
+    }
     if (estimateForm.email === "") {
       setEmailErrorMsg("이메일을 입력해 주세요.");
       return false;
-    } 
+    }
     if (estimateForm.password === "" || estimateForm.password.length < 4) {
       setPasswordErrorMsg("확인용 비밀번호 4자리를 입력해주세요.");
       return false;
@@ -229,22 +235,22 @@ const Estimate = () => {
                 width: "20%",
               }}
             >
-              <MenuItem value={"서울"}>서울</MenuItem>
-              <MenuItem value={"경기"}>경기</MenuItem>
-              <MenuItem value={"강원"}>강원</MenuItem>
-              <MenuItem value={"경북"}>경북</MenuItem>
-              <MenuItem value={"경남"}>경남</MenuItem>
-              <MenuItem value={"전북"}>전북</MenuItem>
-              <MenuItem value={"전남"}>전남</MenuItem>
-              <MenuItem value={"제주"}>제주</MenuItem>
-              <MenuItem value={"충북"}>충북</MenuItem>
-              <MenuItem value={"충남"}>충남</MenuItem>
-              <MenuItem value={"광주"}>광주</MenuItem>
-              <MenuItem value={"대구"}>대구</MenuItem>
-              <MenuItem value={"대전"}>대전</MenuItem>
-              <MenuItem value={"부산"}>부산</MenuItem>
-              <MenuItem value={"울산"}>인천</MenuItem>
-              <MenuItem value={"인천"}>인천</MenuItem>
+              <MenuItem value="[서울]">서울</MenuItem>
+              <MenuItem value="[경기]">경기</MenuItem>
+              <MenuItem value="[강원]">강원</MenuItem>
+              <MenuItem value="[경상]">경북</MenuItem>
+              <MenuItem value="[경상]">경남</MenuItem>
+              <MenuItem value="[전라]">전북</MenuItem>
+              <MenuItem value="[전라]">전남</MenuItem>
+              <MenuItem value="[제주]">제주</MenuItem>
+              <MenuItem value="[충청]">충북</MenuItem>
+              <MenuItem value="[충청]">충남</MenuItem>
+              <MenuItem value="[광주]">광주</MenuItem>
+              <MenuItem value="[대구]">대구</MenuItem>
+              <MenuItem value="[대전]">대전</MenuItem>
+              <MenuItem value="[부산]">부산</MenuItem>
+              <MenuItem value="[울산]">울산</MenuItem>
+              <MenuItem value="[인천]">인천</MenuItem>
             </Select>
             <TextField
               label="출발지 세부정보"
@@ -271,22 +277,22 @@ const Estimate = () => {
                 width: "20%",
               }}
             >
-              <MenuItem value={"서울"}>서울</MenuItem>
-              <MenuItem value={"경기"}>경기</MenuItem>
-              <MenuItem value={"강원"}>강원</MenuItem>
-              <MenuItem value={"경북"}>경북</MenuItem>
-              <MenuItem value={"경남"}>경남</MenuItem>
-              <MenuItem value={"전북"}>전북</MenuItem>
-              <MenuItem value={"전남"}>전남</MenuItem>
-              <MenuItem value={"제주"}>제주</MenuItem>
-              <MenuItem value={"충북"}>충북</MenuItem>
-              <MenuItem value={"충남"}>충남</MenuItem>
-              <MenuItem value={"광주"}>광주</MenuItem>
-              <MenuItem value={"대구"}>대구</MenuItem>
-              <MenuItem value={"대전"}>대전</MenuItem>
-              <MenuItem value={"부산"}>부산</MenuItem>
-              <MenuItem value={"울산"}>인천</MenuItem>
-              <MenuItem value={"인천"}>인천</MenuItem>
+              <MenuItem value="[서울]">서울</MenuItem>
+              <MenuItem value="[경기]">경기</MenuItem>
+              <MenuItem value="[강원]">강원</MenuItem>
+              <MenuItem value="[경상]">경북</MenuItem>
+              <MenuItem value="[경상]">경남</MenuItem>
+              <MenuItem value="[전라]">전북</MenuItem>
+              <MenuItem value="[전라]">전남</MenuItem>
+              <MenuItem value="[제주]">제주</MenuItem>
+              <MenuItem value="[충청]">충북</MenuItem>
+              <MenuItem value="[충청]">충남</MenuItem>
+              <MenuItem value="[광주]">광주</MenuItem>
+              <MenuItem value="[대구]">대구</MenuItem>
+              <MenuItem value="[대전]">대전</MenuItem>
+              <MenuItem value="[부산]">부산</MenuItem>
+              <MenuItem value="[울산]">울산</MenuItem>
+              <MenuItem value="[인천]">인천</MenuItem>
             </Select>
             <TextField
               label="도착지 세부정보"
@@ -386,33 +392,51 @@ const Estimate = () => {
               }}
               spacing={2}
             >
-              <RadioGroup
-                row
-                defaultValue="왕복"
-                onChange={handleValueChange}
-              >
-                <FormControlLabel name="wayType" value="왕복" control={<Radio />} label="왕복"/>
-                <FormControlLabel name="wayType" value="편도" control={<Radio />} label="편도"/>
+              <RadioGroup row defaultValue="왕복" onChange={handleValueChange}>
+                <FormControlLabel
+                  name="wayType"
+                  value="왕복"
+                  control={<Radio />}
+                  label="왕복"
+                />
+                <FormControlLabel
+                  name="wayType"
+                  value="편도"
+                  control={<Radio />}
+                  label="편도"
+                />
               </RadioGroup>
-              <RadioGroup
-                row
-                defaultValue="현금"
-                onChange={handleValueChange}
-              >
-                <FormControlLabel name="payment" value="현금" control={<Radio />} label="현금"/>
-                <FormControlLabel name="payment" value="카드" control={<Radio />} label="카드"/>
+              <RadioGroup row defaultValue="현금" onChange={handleValueChange}>
+                <FormControlLabel
+                  name="payment"
+                  value="현금"
+                  control={<Radio />}
+                  label="현금"
+                />
+                <FormControlLabel
+                  name="payment"
+                  value="카드"
+                  control={<Radio />}
+                  label="카드"
+                />
               </RadioGroup>
-              <RadioGroup
-                row
-                defaultValue={true}
-                onChange={handleValueChange}
-              >
-                <FormControlLabel name="taxBill" value={true} control={<Radio />} label="세금계산서 발급"/>
-                <FormControlLabel name="taxBill" value={false} control={<Radio />} label="발급안함" />
+              <RadioGroup row defaultValue={true} onChange={handleValueChange}>
+                <FormControlLabel
+                  name="taxBill"
+                  value={true}
+                  control={<Radio />}
+                  label="세금계산서 발급"
+                />
+                <FormControlLabel
+                  name="taxBill"
+                  value={false}
+                  control={<Radio />}
+                  label="발급안함"
+                />
               </RadioGroup>
             </Stack>
             <Grid item xs={12}>
-            <TextField
+              <TextField
                 label="인원"
                 type="number"
                 name="memberCount"
@@ -420,7 +444,7 @@ const Estimate = () => {
                 size="small"
                 onChange={handleValueChange}
               />
-              </Grid>
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 label="기타 메모 사항"
