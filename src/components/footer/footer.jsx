@@ -12,7 +12,7 @@ const Footer = (props) => {
           <li>법인등록번호 {props.companyData.registrationNum}</li>
           <li>일반여행업등록법인 (국내여행/해외여행)</li>
         </ul>
-        <li className={styles.siteAddress}>copyright. www.ekhanabus.com All Right Reserved.</li>
+        <li className={styles.siteAddress}>copyright. www.ekhanabus.co.kr All Right Reserved.</li>
       </section>
       <section className={styles.detail}>
         <li>주소 {props.companyData.address}</li>

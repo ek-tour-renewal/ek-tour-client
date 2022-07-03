@@ -10,6 +10,7 @@ import {
   RadioGroup,
   Radio,
   FormControlLabel,
+  Paper,
 } from "@mui/material";
 import axios from "axios";
 
@@ -130,7 +131,7 @@ const Estimate = (props) => {
   };
 
   return (
-    <section className={styles.estimate}>
+    <Paper sx={{width: '50%', marginTop: '2em', padding: '1em 0', borderRadius: '20px'}} elevation={10}>
       <p className={styles.estimateBox}>실시간 견적요청</p>
       <form className={styles.data}>
         <Grid
@@ -483,7 +484,7 @@ const Estimate = (props) => {
           </button>
         </li>
       </form>
-    </section>
+    </Paper>
   );
 };
 
