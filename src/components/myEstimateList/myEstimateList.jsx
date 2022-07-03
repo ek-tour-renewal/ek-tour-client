@@ -6,13 +6,18 @@ import { Box, Pagination, Stack } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
-const MyEstimateList = ({ form, data, pages, ektour }) => {
+const MyEstimateList = ({ ektour }) => {
 
   const navigate = useNavigate();
 
   const { page } = useParams(1);
 
-  const [requestDataList, setRequestDataList] = useState(data);
+  const [requestDataList, setRequestDataList] = useState();
+  const [allPage, setAllPage] = useState('1');
+
+  useEffect(() => {
+    
+  })
 
   const handleChangePage = (event, value) => {
     navigate('/estimate/my/list/' + value);
@@ -44,7 +49,6 @@ const MyEstimateList = ({ form, data, pages, ektour }) => {
                   arrivalPlace={e.arrivalPlace}
                   vehicleType={e.vehicleType}
                   createdDate={e.createdDate}
-                  ektour={ektour}
                 />
               );
             }) :
@@ -54,7 +58,7 @@ const MyEstimateList = ({ form, data, pages, ektour }) => {
           }
           <Stack spacing={0} m={1}>
             <Pagination
-              count={pages} 
+              count={allPage} 
               shape='rounded' 
               size='small'
               onChange={handleChangePage} 

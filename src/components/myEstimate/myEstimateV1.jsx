@@ -39,6 +39,9 @@ export default function MyEstimate(props, { ektour }) {
     } else {
       axios.post('/estimate/search/my', form)
       .then((response) => {
+        if (!response.data) {
+          console.log('정보 틀림');
+        }
         props.onClose();
         navigate('/estimate/my/list/' + 1);
       })

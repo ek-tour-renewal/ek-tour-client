@@ -1,11 +1,12 @@
 @value makerYellow, makerBrown from '../../common/colors.css';
 
-.smallBus {
+.limousine {
   width: 70%;
   margin: auto;
+  margin-top: 2em;
 }
 
-.smallBusTitle {
+.limousineTitle {
   width: max-content;
   padding: 0.5em 1.8em;
   margin-left: 6em;
@@ -20,17 +21,16 @@
   padding: 1em 0;
 }
 
-.busDetail {
+.limousineDetail {
   text-align: start;
-}
-
-.busPersonnelDetail{
-  text-align: end;
+  margin-left: 6em;
+  margin-bottom: 2rem;
 }
 
 .busImageTitle {
   font-size: 1.2em;
   width: max-content;
+  margin-left: 4em;
   padding: 0.3em 0.5em;
   border-bottom: 4px solid makerBrown;
 }

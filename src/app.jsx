@@ -4,7 +4,7 @@ import Footer from './components/footer/footer';
 import Header from './components/header/header';
 import Main from './components/main/main';
 import Company from './components/company/company';
-import BusNotice from './components/busNotice/busNotice';
+import Bus from './components/bus/bus';
 import EstimateList from './components/estimateList/estimateList';
 import RequestEstimate from './components/requestEstimate/requestEstimate';
 import ServiceCenter from './components/serviceCenter/serviceCenter';
@@ -43,7 +43,7 @@ export default function App({ ektour }) {
           }></Route>
 
           <Route path='/bus' element={
-            <BusNotice
+            <Bus
             
             />
           }></Route>
