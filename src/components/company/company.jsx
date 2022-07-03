@@ -1,14 +1,11 @@
 import React from 'react';
-import SubHeader from '../subHeader/subHeader';
 import styles from './company.module.css';
 
-const Company = ({ menu }) => {
+const Company = (props) => {
 
   return (
     <main>
       <section className={styles.company}>
-        <SubHeader menu='회사 소개' />
-        <section>
           <div className={styles.shortContentContainer}>
             <p className={styles.shortContent}>고객의 행복을 함께 만들어갑니다.</p>
           </div>
@@ -63,10 +60,9 @@ const Company = ({ menu }) => {
             </ul>
             <div className={styles.ceo}>
               <p>대표이사</p>
-              <p className={styles.ceoName}>배 승 원</p>
+              <p className={styles.ceoName}>{props.companyData.adminName}</p>
             </div>
           </div>
-        </section>
       </section>
     </main >
   );

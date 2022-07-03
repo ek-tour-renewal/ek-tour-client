@@ -4,14 +4,10 @@ class Ektour {
   }
 
   // 회사 정보 요청
-  // async getCompanyData(data) {
-  //   const response = await this.ektour.get('/estimate', {
-  //     params: {
-
-  //     },
-  //   });
-  //   return response;
-  // }
+  async getCompanyInfo() {
+    const response = await this.ektour.get('/admin/info', {});
+    return response.data;
+  }
 
   // 견적 요청 (정보 보내기)
   async createEstimate(data) {

@@ -22,7 +22,7 @@ li {
 .detail {
   text-align: start;
   color: makerWhite;
-  margin: 1.2em 0;
+  margin: 1.2em 1em;
 }
 
 .title {
@@ -32,7 +32,7 @@ li {
 
 .siteAddress {
   color: makerBrown;
-  width: 90%;
+  width: 100%;
   font-size: 1.1em;
 }
 
@@ -59,6 +59,7 @@ li {
     flex: 50%;
     width: 100%;
     padding-left: 2em;
+    margin: 1.2em 0;
   }
 }
 
