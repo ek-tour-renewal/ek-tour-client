@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './app.module.css';
 import Footer from './components/footer/footer';
 import Header from './components/header/header';
@@ -15,16 +15,36 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MyEstimateList from './components/myEstimateList/myEstimateList';
 
 export default function App({ ektour }) {
+  const [companyData, setCompanyData] = useState({
+    adminName: null,
+    infoHandlerName: null,
+    businessNum: null,
+    registrationNum: null,
+    address: null,
+    tel: null,
+    fax: null,
+    phone: null,
+    email: null,
+    accountBank: null,
+    accountNum: null,
+    accountHolder: null,
+  });
 
+  useEffect(() => {
+    ektour.getCompanyInfo()
+      .then(response => { setCompanyData(response) })
+      .catch(error => console.log(error))
+  },[]);
+  
   return (
     <div className={styles.app}>
       <BrowserRouter>
 
-        <Header 
+        <Header
           ektour={ektour}
         />
 
-        <SideMenu 
+        <SideMenu
           ektour={ektour}
         />
 
@@ -35,7 +55,9 @@ export default function App({ ektour }) {
           }></Route>
 
           <Route path='/introduce' element={
-            <Company />
+            <Company
+            companyData={companyData}
+          />
           }></Route>
 
           <Route path='/bus' element={
@@ -44,7 +66,7 @@ export default function App({ ektour }) {
 
           <Route path='/estimate' element={
             <RequestEstimate
-            
+
             />
           }></Route>
 
@@ -75,10 +97,14 @@ export default function App({ ektour }) {
           }></Route>
         </Routes>
 
-        <FloatingActionButton />
+        <FloatingActionButton
+          companyData={companyData}
+        />
 
-        <Footer/>
-      
+        <Footer
+          companyData={companyData}
+        />
+
       </BrowserRouter>
     </div>
   );

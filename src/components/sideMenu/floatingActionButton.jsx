@@ -17,6 +17,7 @@ const FloatingActionButton = (props) => {
     navigate('/service-center');
     handleClickServiceCenterDetail();
   }
+  
 
   return (
     <Box>
@@ -95,7 +96,7 @@ const FloatingActionButton = (props) => {
                   color: '#7A5E29',
                   mb: '5px'
                 }}>
-                02.3432.6545
+                {props.companyData.tel}
               </Typography>
 
               <Typography sx={{ fontSize: '16px', mb: '5px' }}>
@@ -132,7 +133,7 @@ const FloatingActionButton = (props) => {
                   alignItems: 'center'
                 }}>
                 <PhoneRoundedIcon sx={{ mr: '5px' }} />
-                010-6387-6086
+                {props.companyData.phone}
               </Typography>
 
               <Typography
@@ -155,7 +156,7 @@ const FloatingActionButton = (props) => {
                   alignItems: 'center'
                 }}>
                 <EmailRoundedIcon sx={{ color: '#5A4231', mr: '5px' }} />
-                이메일 : ektour0917@naver.com
+                이메일 : {props.companyData.email}
               </Typography>
 
               <Divider variant="middle" sx={{ m: '15px 0' }} />
@@ -177,7 +178,7 @@ const FloatingActionButton = (props) => {
                   color: '#7A5E29',
                   mb: '5px'
                 }}>
-                810137-04-006627
+                {props.companyData.accountNum}
               </Typography>
 
               <Typography
@@ -186,11 +187,11 @@ const FloatingActionButton = (props) => {
                   fontWeight: 'bold',
                   mb: '5px'
                 }}>
-                KB 국민은행
+                {props.companyData.accountBank}
               </Typography>
 
               <Typography sx={{ fontSize: '15px' }}>
-                예금주 이케이투어
+                예금주 {props.companyData.accountHolder}
               </Typography>
 
             </Box>

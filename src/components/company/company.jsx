@@ -60,7 +60,7 @@ const Company = (props) => {
             </ul>
             <div className={styles.ceo}>
               <p>대표이사</p>
-              <p className={styles.ceoName}>배 승 원</p>
+              <p className={styles.ceoName}>{props.companyData.adminName}</p>
             </div>
           </div>
       </section>
