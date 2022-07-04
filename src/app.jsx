@@ -12,11 +12,14 @@ import SideMenu from './components/sideMenu/sideMenu';
 import FloatingActionButton from './components/sideMenu/floatingActionButton';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MyEstimateList from './components/myEstimateList/myEstimateList';
-import { Divider, Stack, Typography } from '@mui/material';
+import { Box, Divider, Stack, Typography } from '@mui/material';
 import { ErrorBoundary } from 'react-error-boundary';
 import EstimateDetail from './components/estimateDetail/estimateDetail';
 import NotFoundPage from './components/notFoundPage/notFoundPage';
-import { BrowserView, isMobile, MobileView } from 'react-device-detect';
+import { BrowserView, isBrowser, MobileView } from 'react-device-detect';
+import HeaderAppBar from './components/mobileComponents/headerAppBar/headerAppBar';
+import ScrollUpButton from './components/mobileComponents/headerAppBar/scrollUpButton';
+import CompanyMobile from './components/mobileComponents/headerAppBar/company';
 
 function ExceptionHandler({error}) {
   return (
@@ -45,14 +48,15 @@ export default function App({ ektour }) {
   });
 
   useEffect(() => {
-    console.log(isMobile);
     ektour.getCompanyInfo()
       .then(response => { setCompanyData(response) })
       .catch(error => console.log(error));
   },[]);
   
-  if (!isMobile) {
+  // PC 렌더링
+  if (isBrowser) {
     return (
+      <BrowserView>
       <ErrorBoundary FallbackComponent={ExceptionHandler}>
       <div className={styles.app}>
         <BrowserRouter>
@@ -131,13 +135,49 @@ export default function App({ ektour }) {
         </BrowserRouter>
       </div>
       </ErrorBoundary>
+      </BrowserView>
     );
   }
+  // 모바일 렌더링
   else {
     return (
-      <>
-        모바일
-      </>
+      <MobileView>
+        <BrowserRouter>
+
+          {/* 헤더 AppBar */}
+          <HeaderAppBar 
+
+          />
+          d?
+          {/* 컨텐츠 라우팅 */}
+          <Routes>
+            <Route path='/' element={
+              <Box margin={200} />
+            }></Route>
+
+            <Route path='/mobile' element={
+              <Box margin={200} />
+            }></Route>
+
+            <Route path='/mobile/introduce' element={
+              <CompanyMobile />
+            }></Route>
+
+            <Route path='/*' element={
+              '에러 페이지'
+            }></Route>
+          </Routes>
+
+          {/* 스크롤 맨 위로 보내는 버튼 */}
+          <ScrollUpButton />
+
+          {/* 푸터(회사 정보 렌더) */}
+          <Footer
+            companyData={companyData}
+          />
+
+        </BrowserRouter>
+      </MobileView>
     );
   }
 }
