@@ -5,7 +5,7 @@ import EstimateListItem from '../estimateListItem/estimateListItem';
 import { Box, Pagination, Stack } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const EstimateList = ({ ektour, props }) => {
+const EstimateList = ({ ektour }) => {
 
   const navigate = useNavigate();
   
@@ -18,7 +18,7 @@ const EstimateList = ({ ektour, props }) => {
     ektour.getEstimateListByPage(page)
     .then(response => {
       console.log(response);
-      if (response.totalPage < parseInt(page) || 1 > parseInt(page)) navigate('/error');
+      if (response.totalPage < parseInt(page) || 1 > parseInt(page)) throw new Error("해당 페이지를 찾을 수 없습니다");
       setRequestDataList(response.estimateList);
       setAllPage(response.totalPage);
     })

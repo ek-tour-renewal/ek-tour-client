@@ -43,12 +43,12 @@ const Header = (props, { ektour }) => {
   const handleClickMain = () => { navigate('/'); }
 
   return (
-    <AppBar 
+    <AppBar
       sx={{
         borderTop: '4px solid #EC9F46',
         backgroundColor: '#FCFCFC',
         userSelect: 'none',
-        position: 'sticky',
+        position: 'static',
         top: 0,
         paddingBottom: '2em'
       }}>
