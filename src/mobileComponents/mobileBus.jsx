@@ -2,6 +2,7 @@ import { Box, ImageList, ImageListItem, Typography } from '@mui/material';
 import React from 'react';
 
 const MobileBus = (props) => {
+  // 이미지 폴더만 가져와서 map으로 가져오는 방법은 없나
   const smallBusImages = [
     { url: './image/smallBusExterior.jpg' },
     { url: './image/smallBus/interior1.jpg' },
@@ -45,12 +46,12 @@ const MobileBus = (props) => {
   function HeaderTypography(props) {
     return (
       <Typography
-      sx={{
-        color: '#5A4231',
-        fontSize: '18px',
-        fontWeight: 'bold',
-        m: '15px 0'
-      }}>
+        sx={{
+          color: '#5A4231',
+          fontSize: '18px',
+          fontWeight: 'bold',
+          m: '15px 0'
+        }}>
         {props.busType}
       </Typography>
     )
@@ -58,18 +59,29 @@ const MobileBus = (props) => {
 
   function ImgSlider(props) {
     return (
-      <Box sx={{display: 'flex', flexWrap: 'wrap', m: '0 auto', width: '85%'}}>
-      <img src={props.imgPaths[0].url} width= '300px'></img>
-      <ImageList 
-      cols={props.imgPaths.length} 
-      gap={3} 
-      sx={{ width: '240px', m: 'auto' }}>
-        {props.imgPaths.map((img) => (
-          <ImageListItem sx={{ width: '200px' }}>
-            <img src={`${img.url}`} alt="bus interior" />
-          </ImageListItem>
-        ))}
-      </ImageList>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          m: '1em auto',
+          p: '0.5em',
+          width: '85%'
+        }}>
+        <img src={props.imgPaths[0].url} width='300px'></img>
+        <ImageList
+          cols={props.imgPaths.length}
+          gap={3}
+          sx={{
+            width: '240px',
+            m: 'auto',
+            border: '2px solid #5A4231'
+          }}>
+          {props.imgPaths.map((img) => (
+            <ImageListItem sx={{ width: '200px' }}>
+              <img src={`${img.url}`} alt="bus interior" />
+            </ImageListItem>
+          ))}
+        </ImageList>
       </Box>
     )
   };
