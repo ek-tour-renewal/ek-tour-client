@@ -107,6 +107,7 @@ const Estimate = (props) => {
   };
 
   const validate = () => {
+    var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
     if (estimateForm.name === "") {
       setNameErrorMsg("이름을 입력해주세요.");
       return false;
@@ -118,7 +119,7 @@ const Estimate = (props) => {
       setPhoneErrorMsg("연락처를 입력해 주세요.");
       return false;
     }
-    if (estimateForm.email === "") {
+    if (estimateForm.email === "" | regEmail.test(estimateForm.email) === false) {
       setEmailErrorMsg("이메일을 입력해 주세요.");
       return false;
     }
