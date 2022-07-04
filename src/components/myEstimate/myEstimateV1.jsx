@@ -2,7 +2,7 @@ import { Alert, Box, Button, Dialog, DialogContent, DialogTitle, Divider, IconBu
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import LoadingButton from '@mui/lab/LoadingButton';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 
@@ -12,9 +12,11 @@ import axios from 'axios';
 // estimateId : 확인할 견적의 ID
 // userName : 확인할 견적의 등록자명
 // ektour : 통신 처리할 ektour Class
-export default function MyEstimate(props, { ektour }) {
+export default function MyEstimate(props) {
 
   const navigate = useNavigate();
+
+  const { page } = useParams();
 
   const defaultMessage = '견적 확인은 등록 시 입력한 핸드폰 번호와 비밀번호로 확인합니다.';
   const [loading, setLoading] = useState(false);
@@ -59,6 +61,7 @@ export default function MyEstimate(props, { ektour }) {
             setMessage('핸드폰 번호 / 비밀번호를 다시 확인해주세요.');
           } else {
             // 검증 성공, 응답 데이터(견적 상세 정보) push
+            navigate(`/estimate/list/${page}/${props.estimateId}`);
           }
         })
         .catch((error) => { console.log(error.response) })
