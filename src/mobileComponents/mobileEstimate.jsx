@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, memo } from 'react';
 import Select from '@mui/material/Select';
 import {
   MenuItem,
@@ -13,9 +13,8 @@ import {
   Button,
 } from '@mui/material';
 import axios from 'axios';
-import { Container, width } from '@mui/system';
 
-const MobileEstimate = (props) => {
+const MobileEstimate = memo((props) => {
   const buttonRef = useRef();
   const [visible, setVisible] = useState(false);
 
@@ -500,6 +499,6 @@ const MobileEstimate = (props) => {
       </form>
     </Paper>
   )
-};
+});
 
 export default MobileEstimate;
