@@ -16,6 +16,7 @@ import { Divider, Stack, Typography } from '@mui/material';
 import { ErrorBoundary } from 'react-error-boundary';
 import EstimateDetail from './components/estimateDetail/estimateDetail';
 import NotFoundPage from './components/notFoundPage/notFoundPage';
+import { BrowserView, isMobile, MobileView } from 'react-device-detect';
 
 function ExceptionHandler({error}) {
   return (
@@ -44,89 +45,99 @@ export default function App({ ektour }) {
   });
 
   useEffect(() => {
+    console.log(isMobile);
     ektour.getCompanyInfo()
       .then(response => { setCompanyData(response) })
       .catch(error => console.log(error));
   },[]);
   
-  return (
-    <ErrorBoundary FallbackComponent={ExceptionHandler}>
-    <div className={styles.app}>
-      <BrowserRouter>
+  if (!isMobile) {
+    return (
+      <ErrorBoundary FallbackComponent={ExceptionHandler}>
+      <div className={styles.app}>
+        <BrowserRouter>
 
-        <Header
-          ektour={ektour}
-        />
+          <Header
+            ektour={ektour}
+          />
 
-        <SideMenu
-          ektour={ektour}
-        />
+          <SideMenu
+            ektour={ektour}
+          />
 
-        {/* 페이지 라우팅 */}
-        <Routes>
-          <Route path='/' element={
-            <Main />
-          }></Route>
+          {/* 페이지 라우팅 */}
+          <Routes>
+            <Route path='/' element={
+              <Main />
+            }></Route>
 
-          <Route path='/introduce' element={
-            <Company
+            <Route path='/introduce' element={
+              <Company
+              companyData={companyData}
+            />
+            }></Route>
+
+            <Route path='/bus' element={
+              <Bus />
+            }></Route>
+
+            {/* <Route path='/estimate' element={
+              <RequestEstimate
+
+              />
+            }></Route> */}
+
+            <Route path='/estimate/list/:page' element={
+              <EstimateList
+                ektour={ektour}
+              />
+            }></Route>
+
+            <Route path='/estimate/list/:page/:estimateId' element={
+              <EstimateDetail
+                ektour={ektour}
+              />
+            }></Route>
+
+            <Route path='/estimate/my/list/:page' element={
+              <MyEstimateList
+                ektour={ektour}
+              />
+            }></Route>
+
+            <Route path='/estimate/my/list/:page/:estimateId' element={
+              <EstimateDetail
+                ektour={ektour}
+              />
+            }></Route>
+
+            <Route path='/service-center' element={
+              <ServiceCenter />
+            }></Route>
+
+            <Route path='*' element={
+              <NotFoundPage />
+            }></Route>
+          </Routes>
+
+          <FloatingActionButton
             companyData={companyData}
           />
-          }></Route>
 
-          <Route path='/bus' element={
-            <Bus />
-          }></Route>
+          <Footer
+            companyData={companyData}
+          />
 
-          {/* <Route path='/estimate' element={
-            <RequestEstimate
-
-            />
-          }></Route> */}
-
-          <Route path='/estimate/list/:page' element={
-            <EstimateList
-              ektour={ektour}
-            />
-          }></Route>
-
-          <Route path='/estimate/list/:page/:estimateId' element={
-            <EstimateDetail
-              ektour={ektour}
-            />
-          }></Route>
-
-          <Route path='/estimate/my/list/:page' element={
-            <MyEstimateList
-              ektour={ektour}
-            />
-          }></Route>
-
-          <Route path='/estimate/my/list/:page/:estimateId' element={
-            <EstimateDetail
-              ektour={ektour}
-            />
-          }></Route>
-
-          <Route path='/service-center' element={
-            <ServiceCenter />
-          }></Route>
-
-          <Route path='*' element={
-            <NotFoundPage />
-          }></Route>
-        </Routes>
-
-        <FloatingActionButton
-          companyData={companyData}
-        />
-
-        <Footer
-          companyData={companyData}
-        />
-
-      </BrowserRouter>
-    </div>
-    </ErrorBoundary>
-  );
+        </BrowserRouter>
+      </div>
+      </ErrorBoundary>
+    );
+  }
+  else {
+    return (
+      <>
+        모바일
+      </>
+    );
+  }
 }
