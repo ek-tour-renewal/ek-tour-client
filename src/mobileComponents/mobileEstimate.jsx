@@ -139,6 +139,7 @@ const MobileEstimate = memo((props) => {
         m: 'auto',
         mt: '2em',
         p: '1em 0',
+        backgroundColor: '#FFFACB',
         borderRadius: '20px'
       }} >
       <Typography
