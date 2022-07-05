@@ -10,7 +10,7 @@ export default function ScrollUpButton() {
 
   const handleScroll = () => { 
     setScroll(window.pageYOffset);
-    if (scroll > 300) setShow(true);
+    if (scroll > 600) setShow(true);
     else setShow(false);
   }
 
@@ -18,6 +18,11 @@ export default function ScrollUpButton() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setScroll(0);
   }
+
+  useEffect(() => {
+    if (scroll > 600) setShow(true);
+  }, [scroll]);
+
 
   useEffect(() => {
     const watch = () => window.addEventListener('scroll', handleScroll);

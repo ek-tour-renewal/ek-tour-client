@@ -13,7 +13,6 @@ import {
   Button,
 } from '@mui/material';
 import axios from 'axios';
-import { Container, width } from '@mui/system';
 
 const MobileEstimate = (props) => {
   const buttonRef = useRef();
@@ -79,6 +78,7 @@ const MobileEstimate = (props) => {
       axios
         .post('/estimate', data)
         .then((response) => {
+          console.log(response.data);
           alert('견적을 요청했습니다.');
         })
         .catch((error) => {
@@ -174,7 +174,7 @@ const MobileEstimate = (props) => {
           />
           <TextField
             label='연락처'
-            type='text'
+            type='tel'
             name='phone'
             variant='outlined'
             size='small'
