@@ -144,7 +144,7 @@ const FloatingActionButton = (props) => {
                   alignItems: 'center'
                 }}>
                 <img src='/image/kakaotalk.png' alt='kakaotalk logo' height='25px' />
-                &nbsp; 카톡 상담 : seanpapa
+                &nbsp; 카톡 상담 : {props.companyData.kakaoTalkId}
               </Typography>
 
               <Typography

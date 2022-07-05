@@ -42,14 +42,6 @@ export default function HeaderAppBar() {
       <Drawer open={menu} onClose={handleCloseMenu} anchor='top' style={{zIndex: '1250'}}>
         <Box m={3.4} />
         <List>
-          <ListItem disablePadding>
-            <ListItemButton onClick={handleClickCompany}>
-              <ListItemIcon>
-                <BusinessIcon />
-              </ListItemIcon>
-              <ListItemText primary='회사 소개' />
-            </ListItemButton>
-          </ListItem>
           {/* <Divider /> */}
           <ListItem disablePadding>
             <ListItemButton onClick={handleClickMyEstimate}>

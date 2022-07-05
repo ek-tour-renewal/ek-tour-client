@@ -56,7 +56,7 @@ export default function MyEstimate(props) {
       if (props.estimateId) { // 모든 견적 목록 -> 견적 상세보기
         axios.post('/estimate/' + props.estimateId, form)
         .then((response) => {
-          if (response.data.length < 1) {
+          if (!response.data.hasOwnProperty('id')) {
             setMessage('핸드폰 번호 / 비밀번호를 다시 확인해주세요.');
           } else {
             // 검증 성공, 응답 데이터(견적 상세 정보) push

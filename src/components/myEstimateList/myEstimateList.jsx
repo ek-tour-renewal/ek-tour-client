@@ -35,7 +35,7 @@ const MyEstimateList = ({ ektour }) => {
     <>
       <section className={styles.myEstimateList}>
         <SubHeader menu='내 견적 목록' />
-        <Box>
+        <section className={styles.dataListContainer}>
           <div className={styles.dataList}>
             <span className={styles.id}>순번</span>
             <span className={styles.name}>등록자</span>
@@ -75,7 +75,7 @@ const MyEstimateList = ({ ektour }) => {
               sx={{ margin: '0 auto' }}
             />
           </Stack>
-        </Box>
+        </section>
       </section>
     </>
   )

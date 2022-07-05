@@ -160,8 +160,6 @@ export default function App({ ektour }) {
               <Route path='/' element={<MobileMain />}></Route>
 
               <Route path='/mobile' element={<MobileMain />}></Route>
-              
-              <Route path='/mobile/introduce' element={<CompanyMobile />}></Route>
 
               <Route path='/mobile/myestimate' element={
                 <RequestForm />
