@@ -48,18 +48,16 @@ class Ektour {
   }
 
   // 나의 견적 정보 수정 요청
-  // async putData(data) {
-  //   const response = await this.ektour.put('', data);
-  //   return response;
-  // }
+  async putEstimateDetail(estimateId, form) {
+    const response = await this.ektour.put(`/estimate/${estimateId}`, form);
+    return response.data;
+  }
 
   // 나의 견적 정보 삭제 요청
-  // async deleteData(data) {
-  //   const response = await this.ektour.put('/estimate/estimateId', {
-  //     data,
-  // });
-  //   return response;
-  // }
+  async deleteEstimate(estimateId) {
+    const response = await this.ektour.put(`/estimate/${estimateId}`);
+    return response;
+  }
 
 }
 

@@ -7,7 +7,7 @@ import Ektour from './service/ekTour';
 import axios from 'axios';
 
 const httpClient = axios.create({
-  baseURL: 'http://52.79.242.242',
+  baseURL: 'http://52.79.242.242:8080',
 });
 
 const ektour = new Ektour(httpClient);
