@@ -1,46 +1,46 @@
-import { Box, ImageList, ImageListItem, Typography } from '@mui/material';
+import { Box, ImageList, ImageListItem, Typography, ImageListItemBar  } from '@mui/material';
 import React from 'react';
 
 const MobileBus = (props) => {
-  // 이미지 폴더만 가져와서 map으로 가져오는 방법은 없나
+  // 이미지 폴더만 가져와서 map으로 가져오는 방법은 없을까
   const smallBusImages = [
-    { url: './image/smallBusExterior.jpg' },
-    { url: './image/smallBus/interior1.jpg' },
-    { url: './image/smallBus/interior2.jpg' },
-    { url: './image/smallBus/interior3.jpg' },
-    { url: './image/smallBus/interior4.jpg' },
-    { url: './image/smallBus/interior5.jpg' },
-    { url: './image/smallBus/interior6.jpg' },
+    { url: './image/smallBusExterior.jpg', title: '외부' },
+    { url: './image/smallBus/interior1.jpg', title: '내부 편의시설' },
+    { url: './image/smallBus/interior2.jpg', title: '내부 편의시설' },
+    { url: './image/smallBus/interior3.jpg', title: '내부 편의시설' },
+    { url: './image/smallBus/interior4.jpg', title: '내부 편의시설' },
+    { url: './image/smallBus/interior5.jpg', title: '내부 편의시설' },
+    { url: './image/smallBus/interior6.jpg', title: '내부 편의시설' },
   ];
   const limousineImages = [
-    { url: './image/limousineExterior.jpg' },
-    { url: './image/limousine/interior1.jpg' },
-    { url: './image/limousine/interior2.jpg' },
-    { url: './image/limousine/interior3.jpg' },
-    { url: './image/limousine/interior4.jpg' },
-    { url: './image/limousine/interior5.jpg' },
-    { url: './image/limousine/interior6.jpg' },
-    { url: './image/limousine/interior7.jpg' },
-    { url: './image/limousine/interior8.jpg' },
-    { url: './image/limousine/interior9.jpg' },
-    { url: './image/limousine/interior10.jpg' },
-    { url: './image/limousine/interior11.jpg' },
+    { url: './image/limousineExterior.jpg', title: '외부' },
+    { url: './image/limousine/interior1.jpg', title: '내부 편의시설' },
+    { url: './image/limousine/interior2.jpg', title: '내부 편의시설' },
+    { url: './image/limousine/interior3.jpg', title: '내부 편의시설' },
+    { url: './image/limousine/interior4.jpg', title: '내부 편의시설' },
+    { url: './image/limousine/interior5.jpg', title: '내부 편의시설' },
+    { url: './image/limousine/interior6.jpg', title: '내부 편의시설' },
+    { url: './image/limousine/interior7.jpg', title: '내부 편의시설' },
+    { url: './image/limousine/interior8.jpg', title: '내부 편의시설' },
+    { url: './image/limousine/interior9.jpg', title: '내부 편의시설' },
+    { url: './image/limousine/interior10.jpg', title: '내부 편의시설' },
+    { url: './image/limousine/interior11.jpg', title: '내부 편의시설' },
   ];
   const bigBusImages = [
-    { url: './image/bigBusExterior.jpg' },
-    { url: './image/bigBus/interior1.jpg' },
-    { url: './image/bigBus/interior2.jpg' },
-    { url: './image/bigBus/interior3.jpg' },
-    { url: './image/bigBus/interior4.jpg' },
-    { url: './image/bigBus/interior5.jpg' },
-    { url: './image/bigBus/interior6.jpg' },
-    { url: './image/bigBus/interior7.jpg' },
-    { url: './image/bigBus/interior8.jpg' },
-    { url: './image/bigBus/interior9.jpg' },
-    { url: './image/bigBus/interior10.jpg' },
-    { url: './image/bigBus/interior11.jpg' },
-    { url: './image/bigBus/interior12.jpg' },
-    { url: './image/bigBus/interior13.jpg' },
+    { url: './image/bigBusExterior.jpg', title: '외부' },
+    { url: './image/bigBus/interior1.jpg', title: '내부 편의시설' },
+    { url: './image/bigBus/interior2.jpg', title: '내부 편의시설' },
+    { url: './image/bigBus/interior3.jpg', title: '내부 편의시설' },
+    { url: './image/bigBus/interior4.jpg', title: '내부 편의시설' },
+    { url: './image/bigBus/interior5.jpg', title: '내부 편의시설' },
+    { url: './image/bigBus/interior6.jpg', title: '내부 편의시설' },
+    { url: './image/bigBus/interior7.jpg', title: '내부 편의시설' },
+    { url: './image/bigBus/interior8.jpg', title: '내부 편의시설' },
+    { url: './image/bigBus/interior9.jpg', title: '내부 편의시설' },
+    { url: './image/bigBus/interior10.jpg', title: '내부 편의시설' },
+    { url: './image/bigBus/interior11.jpg', title: '내부 편의시설' },
+    { url: './image/bigBus/interior12.jpg', title: '내부 편의시설' },
+    { url: './image/bigBus/interior13.jpg', title: '내부 편의시설' },
   ];
 
   function HeaderTypography(props) {
@@ -61,24 +61,26 @@ const MobileBus = (props) => {
     return (
       <Box
         sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
           m: '1em auto',
           p: '0.5em',
           width: '85%'
         }}>
-        <img src={props.imgPaths[0].url} width='300px'></img>
         <ImageList
           cols={props.imgPaths.length}
           gap={3}
           sx={{
-            width: '240px',
+            width: '255px',
             m: 'auto',
-            border: '2px solid #5A4231'
+            border: '3px solid #D3D3D3',
+            borderRadius: '10px'
           }}>
           {props.imgPaths.map((img) => (
-            <ImageListItem sx={{ width: '200px' }}>
-              <img src={`${img.url}`} alt="bus interior" />
+            <ImageListItem sx={{ width: '240px' }}>
+              <img src={`${img.url}`} alt='bus interior' />
+              <ImageListItemBar
+                title={img.title}
+                position='below'
+              />
             </ImageListItem>
           ))}
         </ImageList>
@@ -98,7 +100,7 @@ const MobileBus = (props) => {
       }}>
       <Typography
         sx={{
-          width: 'max-content',
+          width: '90%',
           p: '10px',
           m: 'auto',
           mb: '30px',
