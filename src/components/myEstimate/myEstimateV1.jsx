@@ -30,7 +30,6 @@ export default function MyEstimate(props) {
 
   const handleValueChange = (e) => {
     const {name, value} = e.target;
-    if (value.length > 4) return;
     setMyInfo({
       ...myInfo,
       [name]: value

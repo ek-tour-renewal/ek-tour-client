@@ -2,7 +2,8 @@ import React from 'react';
 import styles from './footer.module.css';
 
 const Footer = (props) => {
-    return (
+
+  return (
     <footer className={styles.footer}>
       <section className={styles.detail}>
         <h1 className={styles.title}>주식회사 이케이투어</h1>

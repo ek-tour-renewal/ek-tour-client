@@ -12,13 +12,19 @@ import SideMenu from './components/sideMenu/sideMenu';
 import FloatingActionButton from './components/sideMenu/floatingActionButton';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MyEstimateList from './components/myEstimateList/myEstimateList';
-import { Divider, Stack, Typography } from '@mui/material';
+import { Box, Divider, Stack, Typography } from '@mui/material';
 import { ErrorBoundary } from 'react-error-boundary';
 import EstimateDetail from './components/estimateDetail/estimateDetail';
 import NotFoundPage from './components/notFoundPage/notFoundPage';
-import { BrowserView, isMobile, MobileView } from 'react-device-detect';
+import { BrowserView, isBrowser, MobileView } from 'react-device-detect';
+import HeaderAppBar from './mobileComponents/headerAppBar';
+import CompanyMobile from './mobileComponents/mobileCompany';
+import MobileMain from './mobileComponents/mobileMain';
+import RequestForm from './mobileComponents/myEstimate/mobileRequestForm';
+import MobileMyEstimateList from './mobileComponents/myEstimate/mobileMyEstimateList';
 
 function ExceptionHandler({error}) {
+
   return (
     <Stack p={10} spacing={3}>
       <Typography variant='h4' sx={{color: 'red', fontWeight: 'bold'}}>에러 발생</Typography>
@@ -29,6 +35,7 @@ function ExceptionHandler({error}) {
 }
 
 export default function App({ ektour }) {
+
   const [companyData, setCompanyData] = useState({
     adminName: null,
     infoHandlerName: null,
@@ -45,14 +52,15 @@ export default function App({ ektour }) {
   });
 
   useEffect(() => {
-    console.log(isMobile);
     ektour.getCompanyInfo()
       .then(response => { setCompanyData(response) })
       .catch(error => console.log(error));
-  },[]);
+  }, []);
   
-  if (!isMobile) {
+  // PC 렌더링
+  if (isBrowser) {
     return (
+      <BrowserView>
       <ErrorBoundary FallbackComponent={ExceptionHandler}>
       <div className={styles.app}>
         <BrowserRouter>
@@ -131,13 +139,55 @@ export default function App({ ektour }) {
         </BrowserRouter>
       </div>
       </ErrorBoundary>
+      </BrowserView>
     );
   }
+  // 모바일 렌더링
   else {
     return (
-      <>
-        모바일
-      </>
+      <MobileView>
+        <ErrorBoundary>
+          <BrowserRouter>
+            <Box sx={{display: 'flex', flexDirection: 'column', height: '100vh'}}>
+            <Box sx={{flex: 1}}>
+            
+            {/* 헤더 AppBar */}
+            <HeaderAppBar />
+
+            {/* 컨텐츠 라우팅 */}
+            <Routes>
+              <Route path='/' element={<MobileMain />}></Route>
+
+              <Route path='/mobile' element={<MobileMain />}></Route>
+              
+              <Route path='/mobile/introduce' element={<CompanyMobile />}></Route>
+
+              <Route path='/mobile/myestimate' element={
+                <RequestForm />
+              }></Route>
+
+              <Route path='/mobile/myestimate/list/:page' element={
+                <MobileMyEstimateList 
+                  ektour={ektour}
+                />
+              }></Route>
+
+              <Route path='/mobile/service-center' element={
+                '고객센터'
+              }></Route>
+
+              <Route path='/*' element={
+                '에러 페이지'
+              }></Route>
+            </Routes>
+
+            </Box>
+            {/* 푸터(회사 정보 렌더) */}
+            <Footer companyData={companyData} />
+            </Box>
+          </BrowserRouter>
+        </ErrorBoundary>
+      </MobileView>
     );
   }
 }

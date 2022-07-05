@@ -78,6 +78,7 @@ const MobileEstimate = memo((props) => {
       axios
         .post('/estimate', data)
         .then((response) => {
+          console.log(response.data);
           alert('견적을 요청했습니다.');
         })
         .catch((error) => {
@@ -176,7 +177,7 @@ const MobileEstimate = memo((props) => {
           />
           <TextField
             label='연락처'
-            type='text'
+            type='tel'
             name='phone'
             variant='outlined'
             size='small'
