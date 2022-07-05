@@ -1,4 +1,6 @@
 import { Divider, Grid, ListItem, ListItemButton } from "@mui/material";
+import axios from "axios";
+import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export default function MobileMyEstimateItem(props) {
@@ -6,9 +8,11 @@ export default function MobileMyEstimateItem(props) {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { page } = useParams();
-
+  
   const handleClickItem = () => {
-    navigate(`/mobile/myestimate/list/${page}/${props.id}`, { state: { form: state.form }});
+    navigate(`/mobile/myestimate/list/${page}/${props.id}`, { state: { 
+      form: state.form
+    }});
   }
   
   return (

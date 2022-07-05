@@ -14,6 +14,7 @@ export default function HeaderAppBar() {
   const [menu, setMenu] = useState(false);
 
   const handleClickLogo = () => {
+    setMenu(false);
     navigate('/mobile');
   }
 
