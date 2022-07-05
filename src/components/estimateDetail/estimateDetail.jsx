@@ -25,6 +25,7 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import { useEffect } from "react";
+import axios from "axios";
 
 
 const Cell = (props) => {
@@ -99,6 +100,15 @@ export default function EstimateDetail({ ektour }) {
     return true;
   };
 
+  // 견적 삭제
+  const deleteEstimate = () => {
+    axios.delete(`/estimate/${estimateId}`)
+    .then((response) => {})
+    .catch((error) => {console.log(error)});
+  alert("해당 견적을 삭제했습니다.");
+  window.location.href="http://ekhanabus.co.kr/estmiate/list/1"
+  }
+
   // 견적 수정 모드 boolean
   const [modify, setModify] = useState(false);
   const handleClickModifyEstimate = () => {
@@ -106,7 +116,7 @@ export default function EstimateDetail({ ektour }) {
     let validateResult = validate();
     setModify(!modify);
     if (modify == true && validateResult == true) {
-      ektour.putEstimateDetail(estimateId, info)
+      axios.put(`/estimate/${estimateId}`, info)
         .then((response) => {})
         .catch((error) => {console.log(error)});
       alert("견적 요청 내용이 수정되었습니다.");
@@ -534,7 +544,7 @@ export default function EstimateDetail({ ektour }) {
             정말로 해당 견적 요청을 삭제하시겠습니까?
           </Alert>
           <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
-            <Button>예</Button>
+            <Button onClick={deleteEstimate}>예</Button>
             <Button onClick={handleCloseDeleteDialog}>아니오</Button>
           </Box>
         </DialogContent>
