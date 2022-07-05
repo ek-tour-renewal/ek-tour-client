@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Pagination, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, CircularProgress, Grid, List, Pagination, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -24,41 +24,48 @@ export default function MobileMyEstimateList({ ektour }) {
   }, [page]);
 
   const handleChangePage = (event, value) => {
-    navigate('/mobile/myestimate/list/' + value, { state: { form: state.form } });
+    navigate(`/mobile/myestimate/list/${value}`, { state: { form: state.form } });
   }
 
   return (
-    <Box mt='30%'>
+    <Box mt='20%'>
       <Typography variant="h6" component='div' m={2} p={1} 
         sx={{display: 'flex', justifyContent: 'center', bgcolor: '#ffc476', borderRadius: '14px', color: 'white', fontWeight: 'bold'}}>
         요청한 견적 목록
       </Typography>
 
+      <Typography variant='caption'>요청일 순으로 조회됩니다.</Typography>
+
       <Table size='small'>
         <TableHead>
-          <TableRow sx={{ '& th': {bgcolor: '#fff4e5'} }}>
-            <TableCell align='center'><strong>등록자</strong></TableCell>
-            <TableCell align='center'><strong>여행구분</strong></TableCell>
-            <TableCell align='center'><strong>요청일</strong></TableCell>
+          <TableRow sx={{ '& th': {bgcolor: '#fff4e5', borderTop: '2px solid #8B4513', borderBottom: '2px solid #8B4513'} }}>
+            <TableCell>
+              <Grid container>
+                <Grid item xs={3} sx={{fontWeight: 'bold'}}>등록자</Grid>
+                <Grid item xs={4} sx={{fontWeight: 'bold'}}>여행구분</Grid>
+                <Grid item xs={5} sx={{fontWeight: 'bold'}}>요청일</Grid>
+              </Grid>
+            </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {
-            estimateList ? estimateList.map((e) => {
-              return (
-                <MobileMyEstimateItem 
-                  key={e.id}
-                  id={e.id}
-                  name={e.name}
-                  travelType={e.travelType}
-                  createdDate={e.createdDate}
-                />
-              )
-            })
-            : <TableRow><TableCell colSpan={3} align='center'><CircularProgress /></TableCell></TableRow>
-          }
-        </TableBody>
       </Table>
+      <List disablePadding>
+      {
+        estimateList ? estimateList.map((e) => {
+          return (
+            <MobileMyEstimateItem 
+              key={e.id}
+              id={e.id}
+              name={e.name}
+              travelType={e.travelType}
+              createdDate={e.createdDate}
+              ektour={ektour}
+            />
+          )
+        })
+        : <CircularProgress />
+      }
+      </List>
 
       <Pagination
         count={allPage}

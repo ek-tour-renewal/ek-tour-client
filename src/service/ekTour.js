@@ -35,9 +35,15 @@ class Ektour {
     return response.data;
   }
 
+  // 견적 ID, 요청 폼으로 견적 요청 상세 조회
+  async getEstimateDetailByIdAndForm(form, estimateId) {
+    const response = await this.ektour.post(`/estimate/${estimateId}`, form);
+    return response.data;
+  }
+
   // 견적 ID로 견적 요청 상세 조회
-  async getEstimateDetailByEstimateByFormAndId(form, estimateId) {
-    const response = await this.ektour.get(`/${estimateId}`, form);
+  async getEstimateDetailById(estimateId) {
+    const response = await this.ektour.get(`/estimate/${estimateId}`);
     return response.data;
   }
 

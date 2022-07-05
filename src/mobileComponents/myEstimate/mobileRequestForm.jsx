@@ -62,7 +62,7 @@ export default function RequestForm() {
   }
   
   return (
-    <Box p={2} mt='30%'>
+    <Box p={2} mt='20%'>
       {
         globalErr.length < 1
         ? <Alert icon={<SearchIcon />} severity='warning'><AlertTitle sx={{wordBreak: 'keep-all'}}><strong>요청한 견적을 확인합니다.</strong></AlertTitle><Typography variant='caption' component='div' sx={{wordBreak: 'keep-all'}}>견적 등록 시 입력한 핸드폰 번호와 비밀번호 4자리를 입력해 주세요.</Typography></Alert>

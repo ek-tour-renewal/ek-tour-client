@@ -22,6 +22,7 @@ import CompanyMobile from './mobileComponents/mobileCompany';
 import MobileMain from './mobileComponents/mobileMain';
 import RequestForm from './mobileComponents/myEstimate/mobileRequestForm';
 import MobileMyEstimateList from './mobileComponents/myEstimate/mobileMyEstimateList';
+import MobileMyEstimateDetail from './mobileComponents/myEstimate/mobileMyEstimateDetail';
 
 function ExceptionHandler({error}) {
 
@@ -168,6 +169,12 @@ export default function App({ ektour }) {
 
               <Route path='/mobile/myestimate/list/:page' element={
                 <MobileMyEstimateList 
+                  ektour={ektour}
+                />
+              }></Route>
+
+              <Route path='/mobile/myestimate/list/:page/:estimateId' element={
+                <MobileMyEstimateDetail
                   ektour={ektour}
                 />
               }></Route>
