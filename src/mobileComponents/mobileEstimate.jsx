@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, memo } from 'react';
 import Select from '@mui/material/Select';
 import {
   MenuItem,
@@ -13,9 +13,8 @@ import {
   Button,
 } from '@mui/material';
 import axios from 'axios';
-import { Container, width } from '@mui/system';
 
-const MobileEstimate = (props) => {
+const MobileEstimate = memo((props) => {
   const buttonRef = useRef();
   const [visible, setVisible] = useState(false);
 
@@ -140,17 +139,19 @@ const MobileEstimate = (props) => {
         m: 'auto',
         mt: '2em',
         p: '1em 0',
+        backgroundColor: '#FFFACB',
         borderRadius: '20px'
       }} >
       <Typography
         sx={{
-          width: 'max-content',
+          width: '85%',
           p: '10px',
           m: 'auto',
           mb: '15px',
           borderRadius: '10px',
           backgroundColor: '#EC9F46',
-          color: '#FCFCFC'
+          color: '#FCFCFC',
+          textAlign: 'center'
         }}>
         실시간 견적요청
       </Typography >
@@ -169,7 +170,8 @@ const MobileEstimate = (props) => {
             sx={{
               width: '45%',
               mb: '7px',
-              mr: '2px'
+              mr: '2px',
+              backgroundColor: '#FCFCFC'
             }}
           />
           <TextField
@@ -185,7 +187,8 @@ const MobileEstimate = (props) => {
             inputProps={{ maxLength: 11 }}
             sx={{
               width: '45%',
-              mb: '7px'
+              mb: '7px',
+              backgroundColor: '#FCFCFC'
             }}
           />
           <TextField
@@ -202,7 +205,8 @@ const MobileEstimate = (props) => {
             sx={{
               width: '45%',
               mb: '7px',
-              mr: '2px'
+              mr: '2px',
+              backgroundColor: '#FCFCFC'
             }}
           />
           <TextField
@@ -217,10 +221,11 @@ const MobileEstimate = (props) => {
             helperText={emailErrorMsg}
             sx={{
               width: '45%',
-              mb: '15px'
+              mb: '15px',
+              backgroundColor: '#FCFCFC'
             }}
           />
-          <Box sx={{width: '90%', m: '0 auto'}}>
+          <Box sx={{ width: '90%', m: '0 auto' }}>
             <TextField
               label='출발일자'
               type='datetime-local'
@@ -231,7 +236,8 @@ const MobileEstimate = (props) => {
               size='small'
               sx={{
                 width: '100%',
-                mb: '15px'
+                mb: '15px',
+                backgroundColor: '#FCFCFC'
               }}
             />
             <TextField
@@ -244,12 +250,20 @@ const MobileEstimate = (props) => {
               size='small'
               sx={{
                 width: '100%',
-                mb: '15px'
+                mb: '15px',
+                backgroundColor: '#FCFCFC'
               }}
             />
           </Box>
 
-          <Stack direction='row' sx={{ width: '90%', m: '0 auto', justifyContent: 'center', mb: '15px' }}>
+          <Stack
+            direction='row'
+            sx={{
+              width: '90%',
+              m: '0 auto',
+              justifyContent: 'center',
+              mb: '15px'
+            }}>
             <Select
               labelId='departPlace'
               name='departPlace'
@@ -257,7 +271,7 @@ const MobileEstimate = (props) => {
               value={estimateForm.departPlace}
               defaultValue={estimateForm.departPlace}
               size='small'
-              sx={{ width: '30%' }}>
+              sx={{ width: '30%', backgroundColor: '#FCFCFC' }}>
               <MenuItem value='[서울]'>서울</MenuItem>
               <MenuItem value='[경기]'>경기</MenuItem>
               <MenuItem value='[강원]'>강원</MenuItem>
@@ -284,13 +298,21 @@ const MobileEstimate = (props) => {
               size='small'
               sx={{
                 ml: 1,
-                width: '70%'
+                width: '70%',
+                backgroundColor: '#FCFCFC'
               }}
               onChange={handleValueChange}
             />
           </Stack>
 
-          <Stack direction='row' sx={{ width: '90%', m: '0 auto', justifyContent: 'center', mb: '15px' }}>
+          <Stack
+            direction='row'
+            sx={{
+              width: '90%',
+              m: '0 auto',
+              justifyContent: 'center',
+              mb: '15px'
+            }}>
             <Select
               labelId='arrivalPlace'
               name='arrivalPlace'
@@ -298,7 +320,7 @@ const MobileEstimate = (props) => {
               value={estimateForm.arrivalPlace}
               defaultValue={estimateForm.arrivalPlace}
               size='small'
-              sx={{ width: '30%' }}>
+              sx={{ width: '30%', backgroundColor: '#FCFCFC' }}>
               <MenuItem value='[서울]'>서울</MenuItem>
               <MenuItem value='[경기]'>경기</MenuItem>
               <MenuItem value='[강원]'>강원</MenuItem>
@@ -325,7 +347,8 @@ const MobileEstimate = (props) => {
               size='small'
               sx={{
                 ml: 1,
-                width: '70%'
+                width: '70%',
+                backgroundColor: '#FCFCFC'
               }}
               onChange={handleValueChange}
             />
@@ -339,7 +362,8 @@ const MobileEstimate = (props) => {
             onChange={handleValueChange}
             sx={{
               width: '90%',
-              mb: '15px'
+              mb: '15px',
+              backgroundColor: '#FCFCFC'
             }}
           />
 
@@ -351,7 +375,7 @@ const MobileEstimate = (props) => {
               size='small'
               value={estimateForm.travelType}
               defaultValue={estimateForm.travelType}
-              sx={{ width: '58%' }}>
+              sx={{ width: '58%', backgroundColor: '#FCFCFC' }}>
               <MenuItem value={'일반여행'}>일반여행</MenuItem>
               <MenuItem value={'관혼상제'}>관혼상제</MenuItem>
               <MenuItem value={'학교단체'}>학교단체</MenuItem>
@@ -365,7 +389,7 @@ const MobileEstimate = (props) => {
               variant='outlined'
               size='small'
               onChange={handleValueChange}
-              sx={{ width: '30%', ml: 1 }}
+              sx={{ width: '30%', ml: 1, backgroundColor: '#FCFCFC' }}
             />
           </Stack>
 
@@ -381,7 +405,7 @@ const MobileEstimate = (props) => {
                 size='small'
                 value={estimateForm.vehicleType}
                 defaultValue={estimateForm.vehicleType}
-                sx={{ width: '50%' }}
+                sx={{ width: '50%', backgroundColor: '#FCFCFC' }}
               >
                 <MenuItem value={'25인승 소형'}>25인승 소형</MenuItem>
                 <MenuItem value={'28인승 리무진'}>28인승 리무진</MenuItem>
@@ -393,7 +417,7 @@ const MobileEstimate = (props) => {
                 onChange={handleValueChange}
                 size='small'
                 name='vehicleNumber'
-                sx={{ ml: 1, width: '38%' }}>
+                sx={{ ml: 1, width: '38%', backgroundColor: '#FCFCFC' }}>
                 <MenuItem value='1'>1대</MenuItem>
                 <MenuItem value='2'>2대</MenuItem>
                 <MenuItem value='3'>3대</MenuItem>
@@ -406,14 +430,14 @@ const MobileEstimate = (props) => {
                 <MenuItem value='10'>10대 이상</MenuItem>
               </Select>
             </Stack>
-            <Stack 
-            direction='row' 
-            sx={{ 
-              display: 'flex', 
-              flexWrap: 'wrap', 
-              justifyContent: 'center',
-               mb: '5px' 
-               }}>
+            <Stack
+              direction='row'
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                mb: '5px'
+              }}>
               <RadioGroup row defaultValue='왕복' onChange={handleValueChange}>
                 <FormControlLabel
                   name='wayType'
@@ -443,22 +467,22 @@ const MobileEstimate = (props) => {
                 />
               </RadioGroup>
               <RadioGroup
-              row
-              defaultValue={true}
-              onChange={handleValueChange}>
-              <FormControlLabel
-                name='taxBill'
-                value={true}
-                control={<Radio />}
-                label='세금계산서 발급'
-              />
-              <FormControlLabel
-                name='taxBill'
-                value={false}
-                control={<Radio />}
-                label='발급안함'
-              />
-            </RadioGroup>
+                row
+                defaultValue={true}
+                onChange={handleValueChange}>
+                <FormControlLabel
+                  name='taxBill'
+                  value={true}
+                  control={<Radio />}
+                  label='세금계산서 발급'
+                />
+                <FormControlLabel
+                  name='taxBill'
+                  value={false}
+                  control={<Radio />}
+                  label='발급안함'
+                />
+              </RadioGroup>
             </Stack>
             <TextField
               label='기타 메모 사항'
@@ -469,7 +493,7 @@ const MobileEstimate = (props) => {
               multiline
               minRows={1}
               autoComplete='off'
-              sx={{ width: '90%', mb: '15px' }}
+              sx={{ width: '90%', mb: '15px', backgroundColor: '#FCFCFC' }}
             />
           </Box>
         )}
@@ -500,6 +524,6 @@ const MobileEstimate = (props) => {
       </form>
     </Paper>
   )
-};
+});
 
 export default MobileEstimate;
