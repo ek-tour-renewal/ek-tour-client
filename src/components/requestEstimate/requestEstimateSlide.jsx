@@ -36,7 +36,7 @@ const RequestEstimateSlide = (props) => {
     stopPlace: "",
     wayType: "왕복",
     payment: "현금",
-    taxBill: false,
+    taxBill: "발급",
   });
 
   // state 값 변화 처리
@@ -85,11 +85,6 @@ const RequestEstimateSlide = (props) => {
     return true;
   };
 
-  // 세금계산서 true, false 변환
-  const convertBool = (str) => {
-    if (str == "true") return true;
-    else return false;
-  };
 
   // 서버로 견적요청 post
   const onSubmit = (event) => {
@@ -112,7 +107,7 @@ const RequestEstimateSlide = (props) => {
         stopPlace: info.stopPlace,
         wayType: info.wayType,
         payment: info.payment,
-        taxBill: convertBool(info.taxBill),
+        taxBill: info.taxBill,
       };
       // console.log(data);
       axios
@@ -452,13 +447,13 @@ const RequestEstimateSlide = (props) => {
                 >
                   <FormControlLabel
                     name="taxBill"
-                    value={true}
+                    value="발급"
                     control={<Radio />}
                     label="세금계산서 발급"
                   />
                   <FormControlLabel
                     name="taxBill"
-                    value={false}
+                    value="발급"
                     control={<Radio />}
                     label="발급안함"
                   />

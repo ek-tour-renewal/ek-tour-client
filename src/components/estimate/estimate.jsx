@@ -37,17 +37,11 @@ const Estimate = (props) => {
     stopPlace: "",
     wayType: "왕복",
     payment: "현금",
-    taxBill: false,
+    taxBill: "발급",
   });
 
   const openDetail = () => {
     setVisible(!visible);
-  };
-
-  // 세금계산서 true, false 변환
-  const convertBool = (str) => {
-    if (str == "true") return true;
-    else return false;
   };
 
   // 서버로 견적요청 post
@@ -72,7 +66,7 @@ const Estimate = (props) => {
         stopPlace: estimateForm.stopPlace,
         wayType: estimateForm.wayType,
         payment: estimateForm.payment,
-        taxBill: convertBool(estimateForm.taxBill),
+        taxBill: estimateForm.taxBill,
       };
       // console.log(data);
       axios
@@ -119,12 +113,12 @@ const Estimate = (props) => {
       setPhoneErrorMsg("연락처를 입력해 주세요.");
       return false;
     }
-    if (estimateForm.email === "" | regEmail.test(estimateForm.email) === false) {
-      setEmailErrorMsg("이메일을 입력해 주세요.");
+    if (regEmail.test(estimateForm.email) === false) {
+      setEmailErrorMsg("이메일 형식에 맞게 입력 해 주세요.");
       return false;
     }
     if (estimateForm.password === "" || estimateForm.password.length < 4) {
-      setPasswordErrorMsg("확인용 비밀번호 4자리를 입력해주세요.");
+      setPasswordErrorMsg("확인용 비밀번호 숫자 4자리를 입력해주세요.");
       return false;
     }
     resetErrorMsg();
@@ -425,13 +419,13 @@ const Estimate = (props) => {
               <RadioGroup row defaultValue={true} onChange={handleValueChange}>
                 <FormControlLabel
                   name="taxBill"
-                  value={true}
+                  value="발급"
                   control={<Radio />}
                   label="세금계산서 발급"
                 />
                 <FormControlLabel
                   name="taxBill"
-                  value={false}
+                  value="발급안함"
                   control={<Radio />}
                   label="발급안함"
                 />
