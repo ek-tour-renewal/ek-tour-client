@@ -10,7 +10,7 @@ input {
 
 .estimate {
   width: 50%;
-  margin-top: 2em;
+  margin: 2em 0;
 }
 
 .estimateBox {

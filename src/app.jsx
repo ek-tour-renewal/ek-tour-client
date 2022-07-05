@@ -50,6 +50,7 @@ export default function App({ ektour }) {
     accountBank: null,
     accountNum: null,
     accountHolder: null,
+    kakaoTalkId: null,
   });
 
   useEffect(() => {
