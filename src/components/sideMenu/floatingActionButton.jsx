@@ -33,7 +33,7 @@ const FloatingActionButton = (props) => {
             position: 'fixed',
             right: '2%',
             bottom: '5%',
-            backgroundColor: '#EC9F46',
+            backgroundColor: '#5A4231',
             color: '#FCFCFC',
             fontSize: '1.3em',
             p: '1em',

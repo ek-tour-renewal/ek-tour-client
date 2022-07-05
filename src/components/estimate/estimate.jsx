@@ -126,7 +126,7 @@ const Estimate = (props) => {
   };
 
   return (
-    <Paper sx={{width: '50%', marginTop: '2em', padding: '1em 0', borderRadius: '20px'}} elevation={10}>
+    <Paper sx={{width: '50%', m: '2em 0', padding: '1em 0', borderRadius: '20px'}} elevation={10}>
       <p className={styles.estimateBox}>실시간 견적요청</p>
       <form className={styles.data}>
         <Grid
