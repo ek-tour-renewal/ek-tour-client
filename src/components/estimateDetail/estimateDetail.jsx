@@ -150,6 +150,7 @@ export default function EstimateDetail({ ektour }) {
     const titleElement = document.getElementsByTagName("title")[0];
     titleElement.innerHTML = `이케이하나관광-견적상세내역`;
 
+    console.log(state);
     if (!state) throw new Error('잘못된 접근입니다.');
 
     ektour

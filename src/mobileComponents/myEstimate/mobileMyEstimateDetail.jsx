@@ -106,13 +106,6 @@ export default function MobileMyEstimateDetail({ ektour }) {
   const [emailErrorMsg, setEmailErrorMsg] = useState(null);
   const [passwordErrorMsg, setPasswordErrorMsg] = useState(null);
 
-  const resetErrorMsg = () => {
-    setNameErrorMsg(null);
-    setPhoneErrorMsg(null);
-    setEmailErrorMsg(null);
-    setPasswordErrorMsg(null);
-  };
-
   const validate = () => {
     var flag = true;
     var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
@@ -143,16 +136,19 @@ export default function MobileMyEstimateDetail({ ektour }) {
       setModify(false); return;
     }
     setLoading(true);
-    axios.put(`/estimate/${info.id}`, info)
-    .then(response => {
-      setSuccess(true);
-      setData(info);
-    })
-    .catch(error => { console.log(error); })
-    .finally(() => {
-      setModify(false);
-      setLoading(false);
-    });
+    if (validate()) {
+      axios.put(`/estimate/${info.id}`, info)
+      .then(response => {
+        setSuccess(true);
+        setData(info);
+      })
+      .catch(error => { console.log(error); })
+      .finally(() => {
+        setModify(false);
+        setLoading(false);
+      });
+    }
+    setLoading(false);
   }
 
   const handleClickDeleteEstimate = () => {
