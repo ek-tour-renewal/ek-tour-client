@@ -11,32 +11,33 @@ import {
   InputLabel,
   Select,
   MenuItem,
-} from "@mui/material";
-import React, { useState } from "react";
-import styles from "./requestEstimateSlide.module.css";
-import axios from "axios";
+  FormLabel
+} from '@mui/material';
+import React, { useState } from 'react';
+import styles from './requestEstimateSlide.module.css';
+import axios from 'axios';
 
 const RequestEstimateSlide = (props) => {
   const [info, setInfo] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
-    travelType: "일반여행",
-    vehicleType: "25인승 소형",
-    vehicleNumber: "1",
-    memberCount: "",
+    name: '',
+    email: '',
+    phone: '',
+    password: '',
+    travelType: '일반여행',
+    vehicleType: '25인승 소형',
+    vehicleNumber: '1',
+    memberCount: '',
     departDate: new Date().toISOString().slice(0, 16),
     arrivalDate: new Date().toISOString().slice(0, 16),
-    departPlace: "[서울]",
-    departPlaceDetail: "",
-    arrivalPlace: "[서울]",
-    arrivalPlaceDetail: "",
-    memo: "",
-    stopPlace: "",
-    wayType: "왕복",
-    payment: "현금",
-    taxBill: "발급",
+    departPlace: '[서울]',
+    departPlaceDetail: '',
+    arrivalPlace: '[서울]',
+    arrivalPlaceDetail: '',
+    memo: '',
+    stopPlace: '',
+    wayType: '왕복',
+    payment: '현금',
+    taxBill: '발급',
   });
 
   // state 값 변화 처리
@@ -61,30 +62,29 @@ const RequestEstimateSlide = (props) => {
   };
 
   const validate = () => {
+    var flag = true;
     var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-    if (info.name === "") {
-      setNameErrorMsg("이름을 입력해주세요.");
-      return false;
-    }
-    if (info.phone.includes("-")) {
+    if (info.name === '') {
+      setNameErrorMsg('이름을 입력해주세요.');
+      flag = false;
+    } else setNameErrorMsg('');
+    if (info.phone.includes('-')) {
       setPhoneErrorMsg(`'-' 빼고 숫자만 입력해주세요.`);
-      return false;
-    } else if (info.phone === "" || info.phone.length < 8) {
-      setPhoneErrorMsg("연락처를 입력해 주세요.");
-      return false;
-    }
-    if (info.email === "" | regEmail.test(info.email) === false) {
-      setEmailErrorMsg("이메일을 입력해 주세요.");
-      return false;
-    }
-    if (info.password === "" || info.password.length < 4) {
-      setPasswordErrorMsg("확인용 비밀번호 4자리를 입력해주세요.");
-      return false;
-    }
-    resetErrorMsg();
-    return true;
+      flag = false;
+    } else if (info.phone === '' || info.phone.length < 8) {
+      setPhoneErrorMsg('연락처를 입력해 주세요.');
+      flag = false;
+    } else setPhoneErrorMsg('');
+    if (info.email.length > 0 && regEmail.test(info.email) === false) {
+      setEmailErrorMsg('이메일을 입력해 주세요.');
+      flag = false;
+    } else setEmailErrorMsg('');
+    if (info.password === '' || info.password.length < 4) {
+      setPasswordErrorMsg('확인용 비밀번호 4자리를 입력해주세요.');
+      flag = false;
+    } else setPasswordErrorMsg('');
+    return flag;
   };
-
 
   // 서버로 견적요청 post
   const onSubmit = (event) => {
@@ -111,36 +111,36 @@ const RequestEstimateSlide = (props) => {
       };
       // console.log(data);
       axios
-        .post("/estimate", data)
+        .post('/estimate', data)
         .then((response) => {
-          alert("견적을 요청했습니다.");
+          alert('견적을 요청했습니다.');
         })
         .catch((error) => {
           console.log(error);
         });
     } else {
-      alert("필수 정보를 입력해주세요.");
+      alert('필수 정보를 입력해주세요.');
     }
   };
 
   return (
     <Drawer
-      id="drawer"
-      anchor="right"
+      id='drawer'
+      anchor='right'
       open={props.open}
       onClose={props.handleCloseRequestEstimate}
     >
       <header className={styles.header}>
         <Typography
           sx={{
-            width: "100%",
-            color: "#FCFCFC",
-            backgroundColor: "#EC9F46",
-            textAlign: "center",
-            padding: "1rem 0",
-            fontSize: "1.5em",
-            fontWeight: "bold",
-            borderRadius: "1rem",
+            width: '100%',
+            color: '#FCFCFC',
+            backgroundColor: '#EC9F46',
+            textAlign: 'center',
+            padding: '1rem 0',
+            fontSize: '1.5em',
+            fontWeight: 'bold',
+            borderRadius: '1rem',
           }}
         >
           견적요청하기
@@ -153,49 +153,49 @@ const RequestEstimateSlide = (props) => {
             <div className={styles.personalDataContainer}>
               <TextField
                 value={info.name}
-                label="이름"
+                label='이름'
                 onChange={handleValueChange}
-                name="name"
-                autoComplete="off"
+                name='name'
+                autoComplete='off'
                 error={nameErrorMsg ? true : false}
                 helperText={nameErrorMsg}
               />
               <TextField
                 value={info.email}
-                label="이메일"
+                label='이메일'
                 onChange={handleValueChange}
-                name="email"
-                autoComplete="off"
+                name='email'
+                autoComplete='off'
                 error={emailErrorMsg ? true : false}
                 helperText={emailErrorMsg}
                 sx={{
-                  marginLeft: 10,
+                  ml: 10
                 }}
               />
             </div>
             <div className={styles.personalDataContainer}>
               <TextField
                 value={info.phone}
-                label="연락처"
+                label='연락처'
                 inputProps={{ maxLength: 11 }}
                 onChange={handleValueChange}
-                name="phone"
-                autoComplete="off"
+                name='phone'
+                autoComplete='off'
                 error={phoneErrorMsg ? true : false}
                 helperText={phoneErrorMsg}
               />
               <TextField
                 value={info.password}
-                label="확인용 비밀번호"
+                label='확인용 비밀번호'
                 inputProps={{ maxLength: 4 }}
                 onChange={handleValueChange}
-                name="password"
-                type="password"
-                autoComplete="off"
+                name='password'
+                type='password'
+                autoComplete='off'
                 error={passwordErrorMsg ? true : false}
                 helperText={passwordErrorMsg}
                 sx={{
-                  marginLeft: 10,
+                  ml: 10
                 }}
               />
             </div>
@@ -208,7 +208,7 @@ const RequestEstimateSlide = (props) => {
               연락처(핸드폰 번호)와 비밀번호는 견적 내용 확인시 필요합니다.
             </li>
             <li className={styles.detailEstimate}>
-              경유지가 있거나 기타 요구사항이 있으시면 정확한 견적을 위해 반드시{" "}
+              경유지가 있거나 기타 요구사항이 있으시면 정확한 견적을 위해 반드시{' '}
               <br /> 기입해 주시기 바랍니다.
             </li>
           </ol>
@@ -220,23 +220,23 @@ const RequestEstimateSlide = (props) => {
                   value={info.travelType}
                   defaultValue={info.travelType}
                   onChange={handleValueChange}
-                  name="travelType"
+                  name='travelType'
                 >
-                  <MenuItem value="일반여행">일반여행</MenuItem>
-                  <MenuItem value="관혼상제">관혼상제</MenuItem>
-                  <MenuItem value="학교단체">학교단체</MenuItem>
-                  <MenuItem value="기타단체">기타단체</MenuItem>
+                  <MenuItem value='일반여행'>일반여행</MenuItem>
+                  <MenuItem value='관혼상제'>관혼상제</MenuItem>
+                  <MenuItem value='학교단체'>학교단체</MenuItem>
+                  <MenuItem value='기타단체'>기타단체</MenuItem>
                 </Select>
                 <TextField
                   value={info.memberCount}
-                  label="인원"
+                  label='인원'
                   onChange={handleValueChange}
-                  name="memberCount"
-                  autoComplete="off"
+                  name='memberCount'
+                  autoComplete='off'
                   sx={{
-                    marginLeft: 10,
-                    marginRight: 1,
-                    width: "7rem",
+                    ml: 10,
+                    mr: 1,
+                    width: '7rem'
                   }}
                 />
                 명
@@ -248,61 +248,59 @@ const RequestEstimateSlide = (props) => {
                     value={info.vehicleType}
                     defaultValue={info.vehicleType}
                     onChange={handleValueChange}
-                    name="vehicleType"
-                    sx={{
-                      width: "10rem",
-                    }}
+                    name='vehicleType'
+                    sx={{ width: '10rem' }}
                   >
-                    <MenuItem value="25인승 소형">25인승 소형</MenuItem>
-                    <MenuItem value="28인승 리무진">28인승 리무진</MenuItem>
-                    <MenuItem value="45인승 대형">45인승 대형</MenuItem>
+                    <MenuItem value='25인승 소형'>25인승 소형</MenuItem>
+                    <MenuItem value='28인승 리무진'>28인승 리무진</MenuItem>
+                    <MenuItem value='45인승 대형'>45인승 대형</MenuItem>
                   </Select>
                 </span>
                 <span>
-                  <InputLabel sx={{ marginLeft: 10 }}>차량대수</InputLabel>
+                  <InputLabel sx={{ ml: 10 }}>차량대수</InputLabel>
                   <Select
                     value={info.vehicleNumber}
                     defaultValue={info.vehicleNumber}
                     onChange={handleValueChange}
-                    name="vehicleNumber"
+                    name='vehicleNumber'
                     sx={{
-                      marginLeft: 10,
-                      width: "8rem",
+                      ml: 10,
+                      width: '8rem'
                     }}
                   >
-                    <MenuItem value="1">1대</MenuItem>
-                    <MenuItem value="2">2대</MenuItem>
-                    <MenuItem value="3">3대</MenuItem>
-                    <MenuItem value="4">4대</MenuItem>
-                    <MenuItem value="5">5대</MenuItem>
-                    <MenuItem value="6">6대</MenuItem>
-                    <MenuItem value="7">7대</MenuItem>
-                    <MenuItem value="8">8대</MenuItem>
-                    <MenuItem value="9">9대</MenuItem>
-                    <MenuItem value="10">10대 이상</MenuItem>
+                    <MenuItem value='1'>1대</MenuItem>
+                    <MenuItem value='2'>2대</MenuItem>
+                    <MenuItem value='3'>3대</MenuItem>
+                    <MenuItem value='4'>4대</MenuItem>
+                    <MenuItem value='5'>5대</MenuItem>
+                    <MenuItem value='6'>6대</MenuItem>
+                    <MenuItem value='7'>7대</MenuItem>
+                    <MenuItem value='8'>8대</MenuItem>
+                    <MenuItem value='9'>9대</MenuItem>
+                    <MenuItem value='10'>10대 이상</MenuItem>
                   </Select>
                 </span>
               </div>
               <TextField
-                label="출발일자"
-                type="datetime-local"
-                name="departDate"
+                label='출발일자'
+                type='datetime-local'
+                name='departDate'
                 value={info.departDate}
                 onChange={handleValueChange}
                 sx={{
-                  marginBottom: 2,
-                  width: "50%",
+                  mb: 2,
+                  width: '50%'
                 }}
               />
               <TextField
-                label="귀행일자"
-                type="datetime-local"
-                name="arrivalDate"
+                label='귀행일자'
+                type='datetime-local'
+                name='arrivalDate'
                 value={info.arrivalDate}
                 onChange={handleValueChange}
                 sx={{
-                  marginBottom: 1,
-                  width: "50%",
+                  mb: 1,
+                  width: '50%'
                 }}
               />
               <div className={styles.departContainer}>
@@ -311,37 +309,37 @@ const RequestEstimateSlide = (props) => {
                   value={info.departPlace}
                   defaultValue={info.departPlace}
                   onChange={handleValueChange}
-                  name="departPlace"
+                  name='departPlace'
                   sx={{
-                    width: "7rem",
+                    width: '7rem'
                   }}
                 >
-                  <MenuItem value="[서울]">서울</MenuItem>
-                  <MenuItem value="[경기]">경기</MenuItem>
-                  <MenuItem value="[강원]">강원</MenuItem>
-                  <MenuItem value="[경상]">경북</MenuItem>
-                  <MenuItem value="[경상]">경남</MenuItem>
-                  <MenuItem value="[전라]">전북</MenuItem>
-                  <MenuItem value="[전라]">전남</MenuItem>
-                  <MenuItem value="[제주]">제주</MenuItem>
-                  <MenuItem value="[충청]">충북</MenuItem>
-                  <MenuItem value="[충청]">충남</MenuItem>
-                  <MenuItem value="[광주]">광주</MenuItem>
-                  <MenuItem value="[대구]">대구</MenuItem>
-                  <MenuItem value="[대전]">대전</MenuItem>
-                  <MenuItem value="[부산]">부산</MenuItem>
-                  <MenuItem value="[울산]">울산</MenuItem>
-                  <MenuItem value="[인천]">인천</MenuItem>
+                  <MenuItem value='[서울]'>서울</MenuItem>
+                  <MenuItem value='[경기]'>경기</MenuItem>
+                  <MenuItem value='[강원]'>강원</MenuItem>
+                  <MenuItem value='[경상]'>경북</MenuItem>
+                  <MenuItem value='[경상]'>경남</MenuItem>
+                  <MenuItem value='[전라]'>전북</MenuItem>
+                  <MenuItem value='[전라]'>전남</MenuItem>
+                  <MenuItem value='[제주]'>제주</MenuItem>
+                  <MenuItem value='[충청]'>충북</MenuItem>
+                  <MenuItem value='[충청]'>충남</MenuItem>
+                  <MenuItem value='[광주]'>광주</MenuItem>
+                  <MenuItem value='[대구]'>대구</MenuItem>
+                  <MenuItem value='[대전]'>대전</MenuItem>
+                  <MenuItem value='[부산]'>부산</MenuItem>
+                  <MenuItem value='[울산]'>울산</MenuItem>
+                  <MenuItem value='[인천]'>인천</MenuItem>
                 </Select>
                 <TextField
-                  label="세부정보"
-                  name="departPlaceDetail"
+                  label='세부정보'
+                  name='departPlaceDetail'
                   value={info.departPlaceDetail}
                   onChange={handleValueChange}
-                  autoComplete="off"
+                  autoComplete='off'
                   sx={{
-                    marginLeft: 3,
-                    width: "60%",
+                    ml: 3,
+                    width: '60%'
                   }}
                 />
               </div>
@@ -351,125 +349,157 @@ const RequestEstimateSlide = (props) => {
                   value={info.arrivalPlace}
                   defaultValue={info.arrivalPlace}
                   onChange={handleValueChange}
-                  name="arrivalPlace"
-                  sx={{
-                    width: "7rem",
-                  }}
+                  name='arrivalPlace'
+                  sx={{ width: '7rem' }}
                 >
-                  <MenuItem value="[서울]">서울</MenuItem>
-                  <MenuItem value="[경기]">경기</MenuItem>
-                  <MenuItem value="[강원]">강원</MenuItem>
-                  <MenuItem value="[경상]">경북</MenuItem>
-                  <MenuItem value="[경상]">경남</MenuItem>
-                  <MenuItem value="[전라]">전북</MenuItem>
-                  <MenuItem value="[전라]">전남</MenuItem>
-                  <MenuItem value="[제주]">제주</MenuItem>
-                  <MenuItem value="[충청]">충북</MenuItem>
-                  <MenuItem value="[충청]">충남</MenuItem>
-                  <MenuItem value="[광주]">광주</MenuItem>
-                  <MenuItem value="[대구]">대구</MenuItem>
-                  <MenuItem value="[대전]">대전</MenuItem>
-                  <MenuItem value="[부산]">부산</MenuItem>
-                  <MenuItem value="[울산]">울산</MenuItem>
-                  <MenuItem value="[인천]">인천</MenuItem>
+                  <MenuItem value='[서울]'>서울</MenuItem>
+                  <MenuItem value='[경기]'>경기</MenuItem>
+                  <MenuItem value='[강원]'>강원</MenuItem>
+                  <MenuItem value='[경상]'>경북</MenuItem>
+                  <MenuItem value='[경상]'>경남</MenuItem>
+                  <MenuItem value='[전라]'>전북</MenuItem>
+                  <MenuItem value='[전라]'>전남</MenuItem>
+                  <MenuItem value='[제주]'>제주</MenuItem>
+                  <MenuItem value='[충청]'>충북</MenuItem>
+                  <MenuItem value='[충청]'>충남</MenuItem>
+                  <MenuItem value='[광주]'>광주</MenuItem>
+                  <MenuItem value='[대구]'>대구</MenuItem>
+                  <MenuItem value='[대전]'>대전</MenuItem>
+                  <MenuItem value='[부산]'>부산</MenuItem>
+                  <MenuItem value='[울산]'>울산</MenuItem>
+                  <MenuItem value='[인천]'>인천</MenuItem>
                 </Select>
                 <TextField
-                  label="세부정보"
-                  name="arrivalPlaceDetail"
+                  label='세부정보'
+                  name='arrivalPlaceDetail'
                   value={info.arrivalPlaceDetail}
                   onChange={handleValueChange}
-                  autoComplete="off"
+                  autoComplete='off'
                   sx={{
-                    marginLeft: 3,
-                    width: "60%",
+                    ml: 3,
+                    width: '60%'
                   }}
                 />
               </div>
               <TextField
-                label="경유지"
-                name="stopPlace"
+                label='경유지'
+                name='stopPlace'
                 value={info.stopPlace}
                 onChange={handleValueChange}
-                autoComplete="off"
+                autoComplete='off'
                 sx={{
-                  marginBottom: 1,
-                  width: "60%",
+                  mb: 1,
+                  width: '60%'
                 }}
               />
               <Stack
-                direction="row"
+                direction='row'
                 sx={{
-                  margin: "0 auto",
-                  marginTop: 3,
+                  m: 'auto',
+                  mb: 1
                 }}
                 spacing={2}
               >
-                <RadioGroup
-                  row
-                  defaultValue="왕복"
-                  onChange={handleValueChange}
-                >
-                  <FormControlLabel
-                    name="wayType"
-                    value="왕복"
-                    control={<Radio />}
-                    label="왕복"
-                  />
-                  <FormControlLabel
-                    name="wayType"
-                    value="편도"
-                    control={<Radio />}
-                    label="편도"
-                  />
-                </RadioGroup>
-                <RadioGroup
-                  row
-                  defaultValue="현금"
-                  onChange={handleValueChange}
-                >
-                  <FormControlLabel
-                    name="payment"
-                    value="현금"
-                    control={<Radio />}
-                    label="현금"
-                  />
-                  <FormControlLabel
-                    name="payment"
-                    value="카드"
-                    control={<Radio />}
-                    label="카드"
-                  />
-                </RadioGroup>
-                <RadioGroup
-                  row
-                  defaultValue={true}
-                  onChange={handleValueChange}
-                >
-                  <FormControlLabel
-                    name="taxBill"
-                    value="발급"
-                    control={<Radio />}
-                    label="세금계산서 발급"
-                  />
-                  <FormControlLabel
-                    name="taxBill"
-                    value="발급"
-                    control={<Radio />}
-                    label="발급안함"
-                  />
-                </RadioGroup>
+
+                <Stack
+                  sx={{
+                    width: '100%',
+                    border: '1px solid lightgrey',
+                    borderRadius: '10px',
+                    p: 1,
+                    pr: 0,
+                    mb: 1
+                  }}>
+                  <FormLabel>왕복 구분</FormLabel>
+                  <RadioGroup
+                    defaultValue='왕복'
+                    onChange={handleValueChange}
+                  >
+                    <FormControlLabel
+                      name='wayType'
+                      value='왕복'
+                      control={<Radio />}
+                      label='왕복'
+                    />
+                    <FormControlLabel
+                      name='wayType'
+                      value='편도'
+                      control={<Radio />}
+                      label='편도'
+                    />
+                  </RadioGroup>
+                </Stack>
+
+                <Stack
+                  sx={{
+                    width: '100%',
+                    border: '1px solid lightgrey',
+                    borderRadius: '10px',
+                    p: 1,
+                    pr: 0,
+                    mb: 1
+                  }}>
+                  <FormLabel>결제 방법</FormLabel>
+                  <RadioGroup
+                    defaultValue='현금'
+                    onChange={handleValueChange}
+                  >
+                    <FormControlLabel
+                      name='payment'
+                      value='현금'
+                      control={<Radio />}
+                      label='현금'
+                    />
+                    <FormControlLabel
+                      name='payment'
+                      value='카드'
+                      control={<Radio />}
+                      label='카드'
+                    />
+                  </RadioGroup>
+                </Stack>
+
+                <Stack
+                  sx={{
+                    width: '100%',
+                    border: '1px solid lightgrey',
+                    borderRadius: '10px',
+                    p: 1,
+                    pr: 0,
+                    mb: 2
+                  }}>
+                  <FormLabel>세금 계산서</FormLabel>
+                  <RadioGroup
+                    row
+                    defaultValue='발급'
+                    onChange={handleValueChange}
+                  >
+                    <FormControlLabel
+                      name='taxBill'
+                      value='발급'
+                      control={<Radio />}
+                      label='발급'
+                    />
+                    <FormControlLabel
+                      name='taxBill'
+                      value='발급안함'
+                      control={<Radio />}
+                      label='발급안함'
+                    />
+                  </RadioGroup>
+                </Stack>
               </Stack>
               <TextField
-                label="기타 메모 사항"
-                type="text"
-                name="memo"
-                variant="outlined"
+                label='기타 메모 사항'
+                type='text'
+                name='memo'
+                variant='outlined'
                 onChange={handleValueChange}
                 multiline
                 minRows={3}
                 value={info.memo}
-                autoComplete="off"
-                sx={{ width: "500px", marginBottom: 2 }}
+                autoComplete='off'
+                sx={{ width: '500px', mb: 2 }}
               />
             </div>
           </section>
@@ -492,40 +522,40 @@ const RequestEstimateSlide = (props) => {
           </ol>
           <Box
             sx={{
-              width: "100%",
-              textAlign: "center",
-              marginRight: "10px",
-              marginTop: "10px",
+              width: '100%',
+              textAlign: 'center',
+              mr: '10px',
+              mt: '10px',
             }}
           >
             <Button
               onClick={onSubmit}
               sx={{
-                borderRadius: "5px",
-                width: "max-content",
-                marginRight: "10px",
-                backgroundColor: "#FFCC49",
-                color: "#5A4231",
-                border: "none",
-                "&:hover": {
-                  backgroundColor: "rgba(255, 250, 203, 0.7)",
-                  border: "none",
+                borderRadius: '5px',
+                width: 'max-content',
+                mr: '10px',
+                backgroundColor: '#FFCC49',
+                color: '#5A4231',
+                border: 'none',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 250, 203, 0.7)',
+                  border: 'none',
                 },
               }}
             >
               견적요청
             </Button>
             <Button
-              type="button"
+              type='button'
               sx={{
-                borderRadius: "5px",
-                width: "max-content",
-                backgroundColor: "#FFCC49",
-                color: "#5A4231",
-                border: "none",
-                "&:hover": {
-                  backgroundColor: "rgba(255, 250, 203, 0.7)",
-                  border: "none",
+                borderRadius: '5px',
+                width: 'max-content',
+                backgroundColor: '#FFCC49',
+                color: '#5A4231',
+                border: 'none',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 250, 203, 0.7)',
+                  border: 'none',
                 },
               }}
               onClick={props.handleCloseRequestEstimate}

@@ -4,25 +4,11 @@ import Looks3RoundedIcon from '@mui/icons-material/Looks3Rounded';
 import Looks4RoundedIcon from '@mui/icons-material/Looks4Rounded';
 import Looks5RoundedIcon from '@mui/icons-material/Looks5Rounded';
 import Looks6RoundedIcon from '@mui/icons-material/Looks6Rounded';
-import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent } from '@mui/lab';
-import { Box, Typography } from '@mui/material';
+import { Box, Container, Stack, Typography } from '@mui/material';
 import React from 'react';
 
 
 const UseNotice = (props) => {
-  function UseTypography (props) {
-    return (
-      <Typography
-      sx={{
-        fontSize: 'small',
-        fontWeight: 'bold',
-        color: '#5A4231'
-        }}>
-        {props.contents}
-      </Typography>
-    )
-  };
-
   return (
     <Box
       sx={{
@@ -43,77 +29,44 @@ const UseNotice = (props) => {
         }}>
         이용 안내
       </Typography>
-      <Timeline position="alternate">
-        <TimelineItem sx={{ width: '100%', p: 0 }}>
-          <TimelineSeparator>
-          <TimelineConnector />
-            <LooksOneRoundedIcon sx={{ color: '#D3D3D3' }} />
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent sx={{ pt: 0, m: 'auto' }}>
-            <UseTypography contents='견적요청' />
-            <UseTypography contents='전화상담' />
-          </TimelineContent>
-        </TimelineItem>
 
-        <TimelineItem sx={{ width: '100%', p: 0 }}>
-          <TimelineSeparator>
-          <TimelineConnector />
-            <LooksTwoRoundedIcon sx={{ color: '#D3D3D3' }} />
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent sx={{ pt: 0, m: 'auto' }}>
-            <UseTypography contents='상담 후' />
-            <UseTypography contents='견적서 제공' />
-          </TimelineContent>
-        </TimelineItem>
+      <Container
+      sx={{m: '16px auto', width: 'max-content'}}>
+      <Stack direction='row' sx={{mb: '16px'}}>
+      <LooksOneRoundedIcon sx={{ color: '#D3D3D3', mr: '10px' }} />
+      <Typography>견적요청 / 전화상담</Typography>
+      </Stack>
 
-        <TimelineItem sx={{ width: '100%', p: 0 }}>
-          <TimelineSeparator>
-          <TimelineConnector />
-            <Looks3RoundedIcon sx={{ color: '#D3D3D3' }} />
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent sx={{ pt: 0, m: 'auto' }}>
-          <UseTypography contents='계약금 입금' />
-          <UseTypography contents='계약서 작성' />
-          </TimelineContent>
-        </TimelineItem>
+      <Stack direction='row' sx={{mb: '16px'}}>
+        <LooksTwoRoundedIcon sx={{ color: '#D3D3D3', mr: '10px' }} />
+      <Typography>상담 후 견적서 제공</Typography>
+      </Stack>
+      
 
-        <TimelineItem sx={{ width: '100%', p: 0 }}>
-          <TimelineSeparator>
-          <TimelineConnector />
-            <Looks4RoundedIcon sx={{ color: '#D3D3D3' }} />
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent sx={{ pt: 0, m: 'auto' }}>
-          <UseTypography contents='배차' />
-          </TimelineContent>
-        </TimelineItem>
+      <Stack direction='row' sx={{mb: '16px'}}>
+      <Looks3RoundedIcon sx={{ color: '#D3D3D3', mr: '10px' }} />
+      <Typography>계약금 입금 / 계약서 작성</Typography>
+      </Stack>
+      
 
-        <TimelineItem sx={{ width: '100%', p: 0 }}>
-          <TimelineSeparator>
-          <TimelineConnector />
-            <Looks5RoundedIcon sx={{ color: '#D3D3D3' }} />
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent sx={{ pt: 0, m: 'auto' }}>
-          <UseTypography contents='배차 후 기사님' />
-          <UseTypography contents='확인 전화' />
-          </TimelineContent>
-        </TimelineItem>
+      <Stack direction='row' sx={{mb: '16px'}}>
+      <Looks4RoundedIcon sx={{ color: '#D3D3D3', mr: '10px' }} />
+      <Typography>배차</Typography>
+      </Stack>
+      
 
-        <TimelineItem sx={{ width: '100%', p: 0 }}>
-          <TimelineSeparator>
-          <TimelineConnector />
-            <Looks6RoundedIcon sx={{ color: '#D3D3D3' }} />
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent sx={{ pt: 0, m: 'auto' }}>
-          <UseTypography contents='당일 출발' />
-          </TimelineContent>
-        </TimelineItem>
-      </Timeline>
+      <Stack direction='row' sx={{mb: '16px'}}>
+      <Looks5RoundedIcon sx={{ color: '#D3D3D3', mr: '10px' }} />
+      <Typography>배차 후 기사님 확인전화</Typography>
+      </Stack>
+      
+
+      <Stack direction='row'>
+      <Looks6RoundedIcon sx={{ color: '#D3D3D3', mr: '10px' }} />
+      <Typography>당일출발</Typography>
+      </Stack>
+
+      </Container>
     </Box>
   )
 };
