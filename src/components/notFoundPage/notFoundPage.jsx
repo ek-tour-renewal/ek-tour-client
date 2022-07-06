@@ -1,7 +1,11 @@
 import { Divider, Stack, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function NotFoundPage({error}) {
+  useEffect(() => {
+    const titleElement = document.querySelector("title");
+    titleElement.innerHTML = `이케이하나관광-NotFound`;
+  }, []);
 
   return (
     <Stack p={10} spacing={3}>

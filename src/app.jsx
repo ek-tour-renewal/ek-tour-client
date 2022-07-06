@@ -25,7 +25,6 @@ import MobileMyEstimateDetail from './mobileComponents/myEstimate/mobileMyEstima
 import MobileServiceCenter from './mobileComponents/serviceCenter/mobileServiceCenter';
 
 function ExceptionHandler({error}) {
-
   return (
     <Stack p={10} spacing={3}>
       <Typography variant='h4' sx={{color: 'red', fontWeight: 'bold'}}>에러 발생</Typography>

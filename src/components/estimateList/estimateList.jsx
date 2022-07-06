@@ -6,15 +6,16 @@ import { Box, Pagination, Stack } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const EstimateList = ({ ektour }) => {
-
   const navigate = useNavigate();
-  
   const { page } = useParams();
   
   const [requestDataList, setRequestDataList] = useState();
   const [allPage, setAllPage] = useState();
 
   useEffect(() => {
+    const titleElement = document.querySelector("title");
+    titleElement.innerHTML = `이케이하나관광-견적목록`;
+
     ektour.getEstimateListByPage(page)
     .then(response => {
       console.log(response);

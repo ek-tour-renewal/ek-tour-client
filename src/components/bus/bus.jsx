@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BigBus from './bigBus';
 import Limousine from './limousine';
 import SmallBus from './smallBus';
@@ -8,6 +8,11 @@ import BusNotice from './busNotice';
 
 const Bus = (props) => {
   const [busState, setBusState] = useState('notice');
+
+  useEffect(() => {
+    const titleElement = document.querySelector("title");
+    titleElement.innerHTML = `이케이하나관광-버스안내`;
+  }, []);
 
   function BusButton(props) {
     return (
