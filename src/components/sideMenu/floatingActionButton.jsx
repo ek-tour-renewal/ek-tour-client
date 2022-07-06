@@ -32,7 +32,7 @@ const FloatingActionButton = (props) => {
           sx={{
             position: 'fixed',
             right: '2%',
-            bottom: '5%',
+            bottom: '6%',
             backgroundColor: '#5A4231',
             color: '#FCFCFC',
             fontSize: '1.3em',
@@ -44,7 +44,7 @@ const FloatingActionButton = (props) => {
               transform: 'scale(1.02)'
             }
           }}>
-          상담문의
+          상담문의&nbsp;&nbsp;
           <ChatIcon sx={{ marginLeft: '5px', fontSize: '1.3em' }} />
         </Fab>
       </Tooltip>

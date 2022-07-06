@@ -18,11 +18,11 @@ import EstimateDetail from './components/estimateDetail/estimateDetail';
 import NotFoundPage from './components/notFoundPage/notFoundPage';
 import { BrowserView, isBrowser, MobileView } from 'react-device-detect';
 import HeaderAppBar from './mobileComponents/headerAppBar';
-import CompanyMobile from './mobileComponents/mobileCompany';
-import MobileMain from './mobileComponents/mobileMain';
+import MobileMain from './mobileComponents/main/mobileMain';
 import RequestForm from './mobileComponents/myEstimate/mobileRequestForm';
 import MobileMyEstimateList from './mobileComponents/myEstimate/mobileMyEstimateList';
 import MobileMyEstimateDetail from './mobileComponents/myEstimate/mobileMyEstimateDetail';
+import MobileServiceCenter from './mobileComponents/serviceCenter/mobileServiceCenter';
 
 function ExceptionHandler({error}) {
 
@@ -150,7 +150,7 @@ export default function App({ ektour }) {
       <MobileView>
         <ErrorBoundary>
           <BrowserRouter>
-            <Box sx={{display: 'flex', flexDirection: 'column', height: '100vh'}}>
+            <Box sx={{display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw'}}>
             <Box sx={{flex: 1}}>
             
             {/* 헤더 AppBar */}
@@ -179,11 +179,13 @@ export default function App({ ektour }) {
               }></Route>
 
               <Route path='/mobile/service-center' element={
-                '고객센터'
+                <MobileServiceCenter 
+                  companyData={companyData}
+                />
               }></Route>
 
               <Route path='/*' element={
-                '에러 페이지'
+                <NotFoundPage />
               }></Route>
             </Routes>
 
