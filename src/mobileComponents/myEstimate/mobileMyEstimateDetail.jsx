@@ -92,6 +92,7 @@ export default function MobileMyEstimateDetail({ ektour }) {
   useEffect(() => {
     ektour.getEstimateDetailByIdAndForm(state.form, estimateId)
     .then(response => {
+      console.log(response);
       setData(response);
       setInfo(response);
     })
@@ -99,6 +100,43 @@ export default function MobileMyEstimateDetail({ ektour }) {
       console.log(error);
     })
   }, []);
+
+  const [nameErrorMsg, setNameErrorMsg] = useState(null);
+  const [phoneErrorMsg, setPhoneErrorMsg] = useState(null);
+  const [emailErrorMsg, setEmailErrorMsg] = useState(null);
+  const [passwordErrorMsg, setPasswordErrorMsg] = useState(null);
+
+  const resetErrorMsg = () => {
+    setNameErrorMsg(null);
+    setPhoneErrorMsg(null);
+    setEmailErrorMsg(null);
+    setPasswordErrorMsg(null);
+  };
+
+  const validate = () => {
+    var flag = true;
+    var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    if (info.name === '') {
+      setNameErrorMsg('이름을 입력해주세요.');
+      flag = false;
+    } else setNameErrorMsg('');
+    if (info.phone.includes('-')) {
+      setPhoneErrorMsg(`'-' 빼고 숫자만 입력해주세요.`);
+      flag = false;
+    } else if (info.phone === '' || info.phone.length < 8) {
+      setPhoneErrorMsg('연락처를 입력해 주세요.');
+      flag = false;
+    } else setPhoneErrorMsg('');
+    if (info.email.length > 0 && regEmail.test(info.email) === false) {
+      setEmailErrorMsg('이메일을 형식에 맞게 입력해주세요.');
+      flag = false;
+    } else setEmailErrorMsg('');
+    if (info.password === '' || info.password.length < 4) {
+      setPasswordErrorMsg('확인용 비밀번호 4자리를 입력해주세요.');
+      flag = false;
+    } else setPasswordErrorMsg('');
+    return flag;
+  };
 
   const handleModifyEstimate = () => {
     if(info === data) {
@@ -108,7 +146,7 @@ export default function MobileMyEstimateDetail({ ektour }) {
     axios.put(`/estimate/${info.id}`, info)
     .then(response => {
       setSuccess(true);
-      setData(...info);
+      setData(info);
     })
     .catch(error => { console.log(error); })
     .finally(() => {
@@ -151,7 +189,8 @@ export default function MobileMyEstimateDetail({ ektour }) {
           <TableRow>
             <Cell type='label' element='등록자' />
             <Cell element={
-              <TextField name='name' size='small' value={info.name} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              <TextField name='name' size='small' value={info.name} onChange={handleValueChange} inputProps={{ readOnly: !modify }} 
+                error={nameErrorMsg ? true : false} helperText={nameErrorMsg} />
             } />
           </TableRow>
           <TableRow>
@@ -290,7 +329,7 @@ export default function MobileMyEstimateDetail({ ektour }) {
       </Snackbar>
 
       <Snackbar open={fail} autoHideDuration={3000} onClose={handleCloseSnackBar}>
-        <Alert severity="success" sx={{ width: '100%' }}>
+        <Alert severity="error" sx={{ width: '100%' }}>
           오류가 발생했습니다. 잠시 후 다시 시도해주세요.
         </Alert>
       </Snackbar>

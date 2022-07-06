@@ -27,8 +27,8 @@ const RequestEstimateSlide = (props) => {
     vehicleType: '25인승 소형',
     vehicleNumber: '1',
     memberCount: '',
-    departDate: new Date().toISOString().slice(0, 16),
-    arrivalDate: new Date().toISOString().slice(0, 16),
+    departDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
+    arrivalDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
     departPlace: '[서울]',
     departPlaceDetail: '',
     arrivalPlace: '[서울]',
@@ -76,7 +76,7 @@ const RequestEstimateSlide = (props) => {
       flag = false;
     } else setPhoneErrorMsg('');
     if (info.email.length > 0 && regEmail.test(info.email) === false) {
-      setEmailErrorMsg('이메일을 입력해 주세요.');
+      setEmailErrorMsg('이메일을 형식에 맞게 입력해주세요.');
       flag = false;
     } else setEmailErrorMsg('');
     if (info.password === '' || info.password.length < 4) {
