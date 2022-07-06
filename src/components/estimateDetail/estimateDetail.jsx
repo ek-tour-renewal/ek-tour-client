@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TableCell from "@mui/material/TableCell";
-import SubHeader from "../subHeader/subHeader";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import {
   Alert,
   AlertTitle,
   Box,
   Button,
-  ButtonGroup,
   Dialog,
   DialogContent,
   MenuItem,
@@ -173,8 +171,6 @@ export default function EstimateDetail({ ektour }) {
   return (
     <>
       <Box mb={3}>
-        <SubHeader menu="견적 상세 내역" />
-        <ArrowCircleRightIcon style={{}} />
         <Table
           stickyHeader
           size="small"
