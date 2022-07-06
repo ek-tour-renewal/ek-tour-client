@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, Button, Dialog, DialogContent, FormControlLabel, Radio, RadioGroup, Snackbar, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Alert, AlertTitle, Button, Dialog, DialogContent, FormControlLabel, MenuItem, Radio, RadioGroup, Select, Snackbar, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -175,13 +175,13 @@ export default function MobileMyEstimateDetail({ ektour }) {
           <TableRow>
             <Cell type='label' element='여행 구분' />
             <Cell element={
-              <TextField name='travelType' size='small' value={info.travelType} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              <Select labelId="travelType" name="travelType" onChange={handleValueChange} size="small" value={info.travelType}><MenuItem value={"일반여행"}>일반여행</MenuItem><MenuItem value={"관혼상제"}>관혼상제</MenuItem><MenuItem value={"학교단체"}>학교단체</MenuItem><MenuItem value={"기타단체"}>기타단체</MenuItem></Select>
             } />
           </TableRow>
           <TableRow>
             <Cell type='label' element='차량 구분' />
             <Cell element={
-              <TextField name='vehicleType' size='small' value={info.vehicleType} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              <Select labelId="vehicleType" name="vehicleType" onChange={handleValueChange} size="small" value={info.vehicleType}><MenuItem value={"25인승 소형"}>25인승 소형</MenuItem><MenuItem value={"28인승 리무진"}>28인승 리무진</MenuItem><MenuItem value={"45인승 대형"}>45인승 대형</MenuItem></Select>           
             } />
           </TableRow>
           <TableRow>
