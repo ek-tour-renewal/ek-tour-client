@@ -520,13 +520,13 @@ const MobileEstimate = memo((props) => {
                       sx={{ justifyContent: 'center' }}>
                       <FormControlLabel
                         name='taxBill'
-                        value={true}
+                        value='발급'
                         control={<Radio />}
                         label='발급'
                       />
                       <FormControlLabel
                         name='taxBill'
-                        value={false}
+                        value='발급안함'
                         control={<Radio />}
                         label='발급안함'
                       />
