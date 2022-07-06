@@ -105,8 +105,8 @@ export default function EstimateDetail({ ektour }) {
     axios.delete(`/estimate/${estimateId}`)
     .then((response) => {})
     .catch((error) => {console.log(error)});
-  alert("해당 견적을 삭제했습니다.");
-  window.location.href="http://ekhanabus.co.kr/estmiate/list/1"
+    alert("해당 견적을 삭제했습니다.");
+    window.history.back();
   }
 
   // 견적 수정 모드 boolean

@@ -1,6 +1,9 @@
-import { Button, FormControlLabel, MenuItem, Radio, RadioGroup, Select, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Alert, AlertTitle, Button, Dialog, DialogContent, FormControlLabel, Radio, RadioGroup, Snackbar, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Box } from "@mui/system";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import Loading from "../Loading";
 
 const Cell = (props) => {
   if (props.type === 'label')
@@ -14,6 +17,17 @@ export default function MobileMyEstimateDetail({ ektour }) {
   const navigate = useNavigate();
   const { page, estimateId } = useParams();
   const { state } = useLocation();
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [successDelete, setSuccessDelete] = useState(false);
+  const [fail, setFail] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+
+  const handleClickDelete = () => { setOpenDelete(true); }
+  const handleCloseDeleteDialog = () => { setOpenDelete(false); }
+
+  const handleCloseSnackBar = () => { setSuccess(false); setFail(false); setSuccessDelete(false); }
 
   const [data, setData] = useState({
     id: 0,
@@ -87,23 +101,52 @@ export default function MobileMyEstimateDetail({ ektour }) {
   }, []);
 
   const handleModifyEstimate = () => {
+    if(info === data) {
+      setModify(false); return;
+    }
+    setLoading(true);
+    axios.put(`/estimate/${info.id}`, info)
+    .then(response => {
+      setSuccess(true);
+      setData(...info);
+    })
+    .catch(error => { console.log(error); })
+    .finally(() => {
+      setModify(false);
+      setLoading(false);
+    });
+  }
 
+  const handleClickDeleteEstimate = () => {
+    setLoading(true);
+    axios.delete(`/estimate/${info.id}`)
+    .then(response => {
+      setOpenDelete(false);
+      setSuccessDelete(true);
+      window.history.back();
+    })
+    .catch(error => {
+      console.log(error);
+      setFail(true);
+    })
+    .finally(() => {
+      setLoading(false);
+    })
   }
 
   return (
     <>
-      <TableContainer sx={{maxHeight: '50vh'}}>
+      <TableContainer sx={{maxHeight: '55vh'}}>
       <Table stickyHeader size='small'>
         <TableHead>
           <TableRow sx={{ '& th': {bgcolor: '#FFD0AF', pt: 1, borderBottom: '2px solid #AE905E'} }}>
-            <TableCell align='center'><strong>정보</strong></TableCell>
-            <TableCell colSpan={4}><strong>요청 내용</strong></TableCell>
+            <TableCell colSpan={5}><strong>스크롤하여 확인하세요.</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           <TableRow>
             <Cell type='label' element='요청일' />
-            <Cell element={data.createdDate} />
+            <Cell element={data.createdDate.slice(0, -3)} />
           </TableRow>
           <TableRow>
             <Cell type='label' element='등록자' />
@@ -219,17 +262,54 @@ export default function MobileMyEstimateDetail({ ektour }) {
         </TableBody>
       </Table>
       </TableContainer>
-      <Stack direction='row' sx={{display: 'flex', justifyContent: 'center'}} mt={1}>
+      <Stack direction='row' sx={{display: 'flex', justifyContent: 'center'}} mt={1} spacing={1}>
+        <Button onClick={handleClickDelete} color='error'>삭제</Button>
         {
           modify
           ? <>
-              <Button onClick={handleModifyEstimate}>수정완료</Button>
+              <Button onClick={handleModifyEstimate} color='success'>수정완료</Button>
               <Button onClick={handleCancleModify}>수정취소</Button>
             </>
           : <Button onClick={handleModifyState}>수정</Button>
         }
         <Button href='javascript:history.back()'>뒤로</Button>
       </Stack>
+
+      <Loading open={loading} />
+
+      <Snackbar open={success} autoHideDuration={3000} onClose={handleCloseSnackBar}>
+        <Alert severity="success" sx={{ width: '100%' }}>
+          견적 요청 내용을 수정했습니다.
+        </Alert>
+      </Snackbar>
+
+      <Snackbar open={successDelete} autoHideDuration={3000} onClose={handleCloseSnackBar}>
+        <Alert severity="success" sx={{ width: '100%' }}>
+          견적 요청 내용을 삭제했습니다.
+        </Alert>
+      </Snackbar>
+
+      <Snackbar open={fail} autoHideDuration={3000} onClose={handleCloseSnackBar}>
+        <Alert severity="success" sx={{ width: '100%' }}>
+          오류가 발생했습니다. 잠시 후 다시 시도해주세요.
+        </Alert>
+      </Snackbar>
+
+      {/* 삭제 여부 묻는 다이얼로그 */}
+      <Dialog open={openDelete} onClose={handleCloseDeleteDialog}>
+        <DialogContent>
+          <Alert severity="error">
+            <AlertTitle>
+              <strong style={{ fontSize: 18 }}>견적 요청 삭제</strong>
+            </AlertTitle>
+            정말로 해당 견적 요청을 삭제하시겠습니까?
+          </Alert>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
+            <Button onClick={handleClickDeleteEstimate}>예</Button>
+            <Button onClick={handleCloseDeleteDialog}>아니오</Button>
+          </Box>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileBus from './mobileBus';
 import MobileEstimate from './mobileEstimate';
-import ScrollUpButton from './scrollUpButton';
+import ScrollUpButton from '../scrollUpButton';
 
 const MobileMain = (props) => {
 

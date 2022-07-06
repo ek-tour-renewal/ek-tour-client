@@ -13,10 +13,8 @@
 }
 
 .shortContent {
-  width: max-content;
+  width: 100%;
   padding: 0.2em 0.5em;
-  padding-left: 1em;
-  padding-right: 3em;
   margin-bottom: 2.5em;
   background-color: makerYellow;
   color: makerBrown;
@@ -43,15 +41,16 @@
 
 .contents {
   width: 80%;
- text-align: left;
- display: flex;
- flex-direction: column;
- margin: auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 
 .contentDetail {
   margin-bottom: 0.8em;
   width: 100%;
+  word-break: keep-all;
 }
 
 .ceo {

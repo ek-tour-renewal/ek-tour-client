@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Grid, List, Pagination, Table, TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Grid, List, Pagination, Stack, Table, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -58,7 +58,7 @@ export default function MobileMyEstimateList({ ektour }) {
               id={e.id}
               name={e.name}
               travelType={e.travelType}
-              createdDate={e.createdDate}
+              createdDate={e.createdDate.slice(0, -3)}
               ektour={ektour}
             />
           )
@@ -75,6 +75,10 @@ export default function MobileMyEstimateList({ ektour }) {
         onChange={handleChangePage} 
         sx={{ display: 'flex', justifyContent: 'center' }}
       />
+
+      <Stack>
+        <Button href='javascript:history.back()'>뒤로</Button>
+      </Stack>
     </Box>
   );
 }

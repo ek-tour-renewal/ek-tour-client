@@ -4,6 +4,7 @@ import Loading from '../Loading';
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function RequestForm() {
 
@@ -82,7 +83,7 @@ export default function RequestForm() {
         </Stack>
       </Stack>
 
-      <Loading open={loading} />
+      { loading ? <Loading open={true} /> : <></> }
     </Box>
   );
 }
