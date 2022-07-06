@@ -12,13 +12,22 @@ import {
   Typography,
   Button,
   FormLabel,
-  Container
+  Container,
+  Snackbar,
+  Alert
 } from '@mui/material';
 import axios from 'axios';
+import Loading from '../Loading';
 
 const MobileEstimate = memo((props) => {
   const buttonRef = useRef();
   const [visible, setVisible] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [fail, setFail] = useState(false);
+
+  const handleCloseSnackBar = () => { setSuccess(false); setFail(false); }
 
   const [estimateForm, setEstimateForm] = useState({
     name: '',
@@ -29,8 +38,8 @@ const MobileEstimate = memo((props) => {
     vehicleType: '25인승 소형',
     vehicleNumber: '1',
     memberCount: '',
-    departDate: new Date().toISOString().slice(0, 16),
-    arrivalDate: new Date().toISOString().slice(0, 16),
+    departDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
+    arrivalDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
     departPlace: '[서울]',
     departPlaceDetail: '',
     arrivalPlace: '[서울]',
@@ -39,21 +48,16 @@ const MobileEstimate = memo((props) => {
     stopPlace: '',
     wayType: '왕복',
     payment: '현금',
-    taxBill: false,
+    taxBill: '발급',
   });
 
   const openDetail = () => {
     setVisible(!visible);
   };
 
-  // 세금계산서 true, false 변환
-  const convertBool = (str) => {
-    if (str == 'true') return true;
-    else return false;
-  };
-
   // 서버로 견적요청 post
   const onSubmit = (event) => {
+    setLoading(true);
     event.preventDefault();
     if (validate()) {
       const data = {
@@ -68,25 +72,30 @@ const MobileEstimate = memo((props) => {
         departDate: estimateForm.departDate,
         departPlace: estimateForm.departPlace + estimateForm.departPlaceDetail,
         arrivalDate: estimateForm.arrivalDate,
-        arrivalPlace:
-          estimateForm.arrivalPlace + estimateForm.arrivalPlaceDetail,
+        arrivalPlace: estimateForm.arrivalPlace + estimateForm.arrivalPlaceDetail,
         memo: estimateForm.memo,
         stopPlace: estimateForm.stopPlace,
         wayType: estimateForm.wayType,
         payment: estimateForm.payment,
-        taxBill: convertBool(estimateForm.taxBill),
+        taxBill: estimateForm.taxBill,
       };
       // console.log(data);
-      axios
-        .post('/estimate', data)
-        .then((response) => {
-          console.log(response.data);
-          alert('견적을 요청했습니다.');
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      axios.post('/estimate', data)
+      .then((response) => {
+        console.log(response.data);
+        alert('견적을 요청했습니다.');
+        window.location.reload();
+        setSuccess(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        setFail(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
     }
+    setLoading(false);
   };
 
   const handleValueChange = (event) => {
@@ -102,36 +111,29 @@ const MobileEstimate = memo((props) => {
   const [emailErrorMsg, setEmailErrorMsg] = useState(null);
   const [passwordErrorMsg, setPasswordErrorMsg] = useState(null);
 
-  const resetErrorMsg = () => {
-    setNameErrorMsg(null);
-    setPhoneErrorMsg(null);
-    setEmailErrorMsg(null);
-    setPasswordErrorMsg(null);
-  };
-
   const validate = () => {
+    var flag = true;
     var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
     if (estimateForm.name === '') {
       setNameErrorMsg('이름을 입력해주세요.');
-      return false;
-    }
+      flag = false;
+    } else setNameErrorMsg('');
     if (estimateForm.phone.includes('-')) {
       setPhoneErrorMsg(`'-' 빼고 숫자만 입력해주세요.`);
-      return false;
+      flag = false;
     } else if (estimateForm.phone === '' || estimateForm.phone.length < 8) {
       setPhoneErrorMsg('연락처를 입력해 주세요.');
-      return false;
-    }
-    if (estimateForm.email === '' | regEmail.test(estimateForm.email) === false) {
-      setEmailErrorMsg('이메일을 입력해 주세요.');
-      return false;
-    }
+      flag = false;
+    } else setPhoneErrorMsg('');
+    if (regEmail.test(estimateForm.email) === false && estimateForm.email.length > 0) {
+      setEmailErrorMsg('이메일 형식에 맞게 입력 해 주세요.');
+      flag = false;
+    } else setEmailErrorMsg('');
     if (estimateForm.password === '' || estimateForm.password.length < 4) {
-      setPasswordErrorMsg('확인용 비밀번호 4자리를 입력해주세요.');
-      return false;
-    }
-    resetErrorMsg();
-    return true;
+      setPasswordErrorMsg('확인용 비밀번호 숫자 4자리를 입력해주세요.');
+      flag = false;
+    } else setPasswordErrorMsg('');
+    return flag;
   };
 
   return (
@@ -453,7 +455,7 @@ const MobileEstimate = memo((props) => {
                     <FormLabel>왕복 구분</FormLabel>
                     <RadioGroup
                       row
-                      defaultValue='왕복'
+                      value={estimateForm.wayType}
                       onChange={handleValueChange}
                       sx={{ justifyContent: 'center' }}>
                       <FormControlLabel
@@ -484,7 +486,7 @@ const MobileEstimate = memo((props) => {
                     <FormLabel>결제 방법</FormLabel>
                     <RadioGroup
                       row
-                      defaultValue='현금'
+                      value={estimateForm.payment}
                       onChange={handleValueChange}
                       sx={{ justifyContent: 'center' }}>
                       <FormControlLabel
@@ -515,7 +517,7 @@ const MobileEstimate = memo((props) => {
                     <FormLabel>세금 계산서</FormLabel>
                     <RadioGroup
                       row
-                      defaultValue={true}
+                      value={estimateForm.taxBill}
                       onChange={handleValueChange}
                       sx={{ justifyContent: 'center' }}>
                       <FormControlLabel
@@ -528,7 +530,7 @@ const MobileEstimate = memo((props) => {
                         name='taxBill'
                         value='발급안함'
                         control={<Radio />}
-                        label='발급안함'
+                        label='발급 안 함'
                       />
                     </RadioGroup>
                   </Stack>
@@ -552,7 +554,7 @@ const MobileEstimate = memo((props) => {
           <Button
             type='submit'
             onClick={onSubmit}
-            sx={{
+            style={{
               backgroundColor: '#5A4231',
               color: '#FCFCFC',
               padding: '5px 10px',
@@ -572,6 +574,20 @@ const MobileEstimate = memo((props) => {
           </Button>
         </Box>
       </form>
+
+      <Loading open={loading} />
+
+      <Snackbar open={success} autoHideDuration={3000} onClose={handleCloseSnackBar}>
+        <Alert severity="success" sx={{ width: '100%' }}>
+          작성하신 견적을 요청했습니다.
+        </Alert>
+      </Snackbar>
+
+      <Snackbar open={fail} autoHideDuration={3000} onClose={handleCloseSnackBar}>
+        <Alert severity="error" sx={{ width: '100%' }}>
+          오류가 발생했습니다. 잠시 후 다시 시도해주세요.
+        </Alert>
+      </Snackbar>
     </Paper>
   )
 });

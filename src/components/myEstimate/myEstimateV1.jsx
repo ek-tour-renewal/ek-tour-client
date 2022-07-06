@@ -61,7 +61,9 @@ export default function MyEstimate(props) {
               setMessage('핸드폰 번호 / 비밀번호를 다시 확인해주세요.');
             } else {
               // 검증 성공, 응답 데이터(견적 상세 정보) push
-              navigate(`/estimate/list/${page}/${props.estimateId}`);
+              navigate(`/estimate/list/${page}/${props.estimateId}`, {state: {
+                form: { phone: form.phone, password: form.password }
+              }});
             }
           })
           .catch((error) => { console.log(error.response) })

@@ -39,10 +39,8 @@ const Estimate = (props) => {
     vehicleType: '25인승 소형',
     vehicleNumber: '1',
     memberCount: '',
-    departDate: new Date().toISOString().slice(0, 16),
-    departTime: '',
-    arrivalDate: new Date().toISOString().slice(0, 16),
-    arrivalTime: '',
+    departDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
+    arrivalDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
     departPlace: '[서울]',
     departPlaceDetail: '',
     arrivalPlace: '[서울]',
@@ -87,6 +85,7 @@ const Estimate = (props) => {
       axios.post('/estimate', data)
         .then((response) => {
           alert('견적을 요청했습니다.');
+          window.location.reload();
         })
         .catch((error) => {
           console.log(error);
