@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './company.module.css';
 
 const Company = (props) => {
+  useEffect(() => {
+    const titleElement = document.querySelector("title");
+    titleElement.innerHTML = `이케이하나관광-회사소개`;
+  }, []);
 
   return (
     <main>

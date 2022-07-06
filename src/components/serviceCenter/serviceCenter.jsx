@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './serviceCenter.module.css';
-import SubHeader from '../subHeader/subHeader';
 
-const ServiceCenter = ({ menu, changeMenu, }) => {
+const ServiceCenter = (props) => {
+  useEffect(() => {
+    const titleElement = document.querySelector("title");
+    titleElement.innerHTML = `이케이하나관광-고객센터`;
+  }, []);
 
   return (
     <main>
     <section className={styles.serviceCenter}>
-      <SubHeader menu={menu} />
       {/* 이용안내 */}
       <h1 className={styles.title}>이용안내</h1>
       <ul className={styles.useInfo}>

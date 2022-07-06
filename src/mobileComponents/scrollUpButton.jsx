@@ -15,8 +15,8 @@ export default function ScrollUpButton() {
   }
 
   const handleClickButton = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setScroll(0);
+    window.scrollTo({ top: 205, behavior: 'smooth' });
+    setScroll(205);
   }
 
   useEffect(() => {

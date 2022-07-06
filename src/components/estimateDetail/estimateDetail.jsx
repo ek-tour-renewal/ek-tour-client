@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TableCell from "@mui/material/TableCell";
 import SubHeader from "../subHeader/subHeader";
@@ -24,9 +24,7 @@ import {
   RadioGroup,
   FormControlLabel,
 } from "@mui/material";
-import { useEffect } from "react";
 import axios from "axios";
-
 
 const Cell = (props) => {
   if (props.type === "label")
@@ -159,6 +157,9 @@ export default function EstimateDetail({ ektour }) {
 
   // 페이지 들어가면 데이터 서버로부터 가져온 데이터 세팅
   useEffect(() => {
+    const titleElement = document.getElementsByTagName("title")[0];
+    titleElement.innerHTML = `이케이하나관광-견적상세내역`;
+
     ektour
       .getEstimateDetailById(estimateId)
       .then((response) => {

@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import MobileBus from './mobileBus';
 import MobileEstimate from './mobileEstimate';
 import ScrollUpButton from '../scrollUpButton';
+import Banner from './banner';
+import UseNotice from './useNotice';
 
 const MobileMain = (props) => {
 
@@ -16,8 +18,10 @@ const MobileMain = (props) => {
 
   return (
     <Box>
+      <Banner />
       <MobileEstimate />
       <MobileBus />
+      <UseNotice />
 
       {/* 스크롤 맨 위로 보내는 버튼 */}
       <ScrollUpButton />

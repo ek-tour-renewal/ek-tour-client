@@ -16,6 +16,9 @@ const MyEstimateList = ({ ektour }) => {
   const [allPage, setAllPage] = useState();
 
   useEffect(() => {
+      const titleElement = document.querySelector("title");
+      titleElement.innerHTML = `이케이하나관광-내 견적 목록`;
+    
     if (!state) throw new Error('잘못된 접근입니다.');
     ektour.getMyEstimateListByFormAndPage(state.form, page)
     .then(response => {

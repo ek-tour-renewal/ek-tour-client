@@ -11,6 +11,8 @@ import {
   Paper,
   Typography,
   Button,
+  FormLabel,
+  Container
 } from '@mui/material';
 import axios from 'axios';
 
@@ -138,7 +140,7 @@ const MobileEstimate = memo((props) => {
       sx={{
         width: '90%',
         m: 'auto',
-        mt: '2em',
+        mt: '1em',
         p: '1em 0',
         backgroundColor: '#FFFACB',
         borderRadius: '20px'
@@ -393,110 +395,157 @@ const MobileEstimate = memo((props) => {
               sx={{ width: '30%', ml: 1, backgroundColor: '#FCFCFC' }}
             />
           </Stack>
-
         </Box>
-
         {visible && (
-          <Box sx={{ display: 'block', padding: '0 5px', textAlign: 'center' }}>
-            <Stack direction='row' sx={{ justifyContent: 'center', mb: '15px' }}>
-              <Select
-                labelId='vehicleType'
-                name='vehicleType'
+            <Box sx={{ display: 'block', padding: '0 5px', textAlign: 'center' }}>
+              <Stack direction='row' sx={{ justifyContent: 'center', mb: '15px' }}>
+                <Select
+                  labelId='vehicleType'
+                  name='vehicleType'
+                  onChange={handleValueChange}
+                  size='small'
+                  value={estimateForm.vehicleType}
+                  defaultValue={estimateForm.vehicleType}
+                  sx={{ width: '50%', backgroundColor: '#FCFCFC' }}
+                >
+                  <MenuItem value={'25인승 소형'}>25인승 소형</MenuItem>
+                  <MenuItem value={'28인승 리무진'}>28인승 리무진</MenuItem>
+                  <MenuItem value={'45인승 대형'}>45인승 대형</MenuItem>
+                </Select>
+                <Select
+                  value={estimateForm.vehicleNumber}
+                  defaultValue={estimateForm.vehicleNumber}
+                  onChange={handleValueChange}
+                  size='small'
+                  name='vehicleNumber'
+                  sx={{ ml: 1, width: '38%', backgroundColor: '#FCFCFC' }}>
+                  <MenuItem value='1'>1대</MenuItem>
+                  <MenuItem value='2'>2대</MenuItem>
+                  <MenuItem value='3'>3대</MenuItem>
+                  <MenuItem value='4'>4대</MenuItem>
+                  <MenuItem value='5'>5대</MenuItem>
+                  <MenuItem value='6'>6대</MenuItem>
+                  <MenuItem value='7'>7대</MenuItem>
+                  <MenuItem value='8'>8대</MenuItem>
+                  <MenuItem value='9'>9대</MenuItem>
+                  <MenuItem value='10'>10대 이상</MenuItem>
+                </Select>
+              </Stack>
+
+              <Container>
+                <Stack
+                  direction='row'
+                  sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    mb: '5px'
+                  }}>
+                  <Stack
+                    sx={{
+                      width: '100%',
+                      backgroundColor: '#FCFCFC',
+                      border: '1px solid lightgrey',
+                      borderRadius: '10px',
+                      p: 1,
+                      pr: 0,
+                      mb: 1
+                    }}>
+                    <FormLabel>왕복 구분</FormLabel>
+                    <RadioGroup
+                      row
+                      defaultValue='왕복'
+                      onChange={handleValueChange}
+                      sx={{ justifyContent: 'center' }}>
+                      <FormControlLabel
+                        name='wayType'
+                        value='왕복'
+                        control={<Radio />}
+                        label='왕복'
+                      />
+                      <FormControlLabel
+                        name='wayType'
+                        value='편도'
+                        control={<Radio />}
+                        label='편도'
+                      />
+                    </RadioGroup>
+                  </Stack>
+
+                  <Stack
+                    sx={{
+                      width: '100%',
+                      backgroundColor: '#FCFCFC',
+                      border: '1px solid lightgrey',
+                      borderRadius: '10px',
+                      p: 1,
+                      pr: 0,
+                      mb: 1
+                    }}>
+                    <FormLabel>결제 방법</FormLabel>
+                    <RadioGroup
+                      row
+                      defaultValue='현금'
+                      onChange={handleValueChange}
+                      sx={{ justifyContent: 'center' }}>
+                      <FormControlLabel
+                        name='payment'
+                        value='현금'
+                        control={<Radio />}
+                        label='현금'
+                      />
+                      <FormControlLabel
+                        name='payment'
+                        value='카드'
+                        control={<Radio />}
+                        label='카드'
+                      />
+                    </RadioGroup>
+                  </Stack>
+
+                  <Stack
+                    sx={{
+                      width: '100%',
+                      backgroundColor: '#FCFCFC',
+                      border: '1px solid lightgrey',
+                      borderRadius: '10px',
+                      p: 1,
+                      pr: 0,
+                      mb: 2
+                    }}>
+                    <FormLabel>세금 계산서</FormLabel>
+                    <RadioGroup
+                      row
+                      defaultValue={true}
+                      onChange={handleValueChange}
+                      sx={{ justifyContent: 'center' }}>
+                      <FormControlLabel
+                        name='taxBill'
+                        value={true}
+                        control={<Radio />}
+                        label='발급'
+                      />
+                      <FormControlLabel
+                        name='taxBill'
+                        value={false}
+                        control={<Radio />}
+                        label='발급안함'
+                      />
+                    </RadioGroup>
+                  </Stack>
+                </Stack>
+              </Container>
+              <TextField
+                label='기타 메모 사항'
+                type='text'
+                name='memo'
+                variant='outlined'
                 onChange={handleValueChange}
-                size='small'
-                value={estimateForm.vehicleType}
-                defaultValue={estimateForm.vehicleType}
-                sx={{ width: '50%', backgroundColor: '#FCFCFC' }}
-              >
-                <MenuItem value={'25인승 소형'}>25인승 소형</MenuItem>
-                <MenuItem value={'28인승 리무진'}>28인승 리무진</MenuItem>
-                <MenuItem value={'45인승 대형'}>45인승 대형</MenuItem>
-              </Select>
-              <Select
-                value={estimateForm.vehicleNumber}
-                defaultValue={estimateForm.vehicleNumber}
-                onChange={handleValueChange}
-                size='small'
-                name='vehicleNumber'
-                sx={{ ml: 1, width: '38%', backgroundColor: '#FCFCFC' }}>
-                <MenuItem value='1'>1대</MenuItem>
-                <MenuItem value='2'>2대</MenuItem>
-                <MenuItem value='3'>3대</MenuItem>
-                <MenuItem value='4'>4대</MenuItem>
-                <MenuItem value='5'>5대</MenuItem>
-                <MenuItem value='6'>6대</MenuItem>
-                <MenuItem value='7'>7대</MenuItem>
-                <MenuItem value='8'>8대</MenuItem>
-                <MenuItem value='9'>9대</MenuItem>
-                <MenuItem value='10'>10대 이상</MenuItem>
-              </Select>
-            </Stack>
-            <Stack
-              direction='row'
-              sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-                mb: '5px'
-              }}>
-              <RadioGroup row defaultValue='왕복' onChange={handleValueChange}>
-                <FormControlLabel
-                  name='wayType'
-                  value='왕복'
-                  control={<Radio />}
-                  label='왕복'
-                />
-                <FormControlLabel
-                  name='wayType'
-                  value='편도'
-                  control={<Radio />}
-                  label='편도'
-                />
-              </RadioGroup>
-              <RadioGroup row defaultValue='현금' onChange={handleValueChange}>
-                <FormControlLabel
-                  name='payment'
-                  value='현금'
-                  control={<Radio />}
-                  label='현금'
-                />
-                <FormControlLabel
-                  name='payment'
-                  value='카드'
-                  control={<Radio />}
-                  label='카드'
-                />
-              </RadioGroup>
-              <RadioGroup
-                row
-                defaultValue={true}
-                onChange={handleValueChange}>
-                <FormControlLabel
-                  name='taxBill'
-                  value={true}
-                  control={<Radio />}
-                  label='세금계산서 발급'
-                />
-                <FormControlLabel
-                  name='taxBill'
-                  value={false}
-                  control={<Radio />}
-                  label='발급안함'
-                />
-              </RadioGroup>
-            </Stack>
-            <TextField
-              label='기타 메모 사항'
-              type='text'
-              name='memo'
-              variant='outlined'
-              onChange={handleValueChange}
-              multiline
-              minRows={1}
-              autoComplete='off'
-              sx={{ width: '90%', mb: '15px', backgroundColor: '#FCFCFC' }}
-            />
-          </Box>
+                multiline
+                minRows={1}
+                autoComplete='off'
+                sx={{ width: '90%', mb: '15px', backgroundColor: '#FCFCFC' }}
+              />
+            </Box>
         )}
         {/* 견적요청 버튼 */}
         <Box sx={{ textAlign: 'center' }}>
