@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import MyEstimate from '../myEstimate/myEstimateV1';
 import styles from './estimateListItem.module.css';
 
@@ -7,6 +7,7 @@ const EstimateListItem = (props, { ektour }) => {
 
   const navigate = useNavigate();
   const { page } = useParams();
+  const { state } = useLocation();
 
   const [open, setOpen] = useState(false);
 
@@ -21,7 +22,7 @@ const EstimateListItem = (props, { ektour }) => {
 
   const handleClickListItem = () => {
     // 내 견적 목록에서 요청 (바로 견적 상세보기로)
-    if (props.myEstimate) navigate(`/estimate/my/list/${page}/${props.id}`);
+    if (props.myEstimate) navigate(`/estimate/my/list/${page}/${props.id}`, { state : { form: state.form } });
 
     // 모든 견적 목록에서 요청 (요청 폼 거쳐서 상세보기로)
     else setOpen(true);
