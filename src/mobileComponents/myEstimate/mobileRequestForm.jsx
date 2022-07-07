@@ -80,7 +80,7 @@ export default function RequestForm() {
         </Stack>
       </Stack>
 
-      { loading ? <Loading open={true} /> : <></> }
+      <Loading open={loading} />
     </Box>
   );
 }

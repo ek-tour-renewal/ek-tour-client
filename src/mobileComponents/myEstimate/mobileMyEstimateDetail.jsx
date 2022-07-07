@@ -185,26 +185,29 @@ export default function MobileMyEstimateDetail({ ektour }) {
           <TableRow>
             <Cell type='label' element='등록자' />
             <Cell element={
-              <TextField name='name' size='small' value={info.name} onChange={handleValueChange} inputProps={{ readOnly: !modify }} 
+              <TextField name='name' size='small' value={info.name} onChange={handleValueChange} inputProps={{ readOnly: true }} 
                 error={nameErrorMsg ? true : false} helperText={nameErrorMsg} />
             } />
           </TableRow>
           <TableRow>
             <Cell type='label' element='이메일' />
             <Cell element={
-              <TextField name='email' size='small' value={info.email} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              <TextField name='email' size='small' value={info.email} onChange={handleValueChange} inputProps={{ readOnly: !modify }}
+                error={emailErrorMsg ? true : false} helperText={emailErrorMsg} />
             } />
           </TableRow>
           <TableRow>
             <Cell type='label' element='핸드폰' />
             <Cell element={
-              <TextField name='phone' size='small' value={info.phone} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              <TextField name='phone' size='small' value={info.phone} onChange={handleValueChange} inputProps={{ readOnly: !modify }}
+                error={phoneErrorMsg ? true : false} helperText={phoneErrorMsg} />
             } />
           </TableRow>
           <TableRow>
             <Cell type='label' element='비밀번호' />
             <Cell element={
-              <TextField name='password' size='small' value={info.password} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              <TextField name='password' size='small' value={info.password} onChange={handleValueChange} inputProps={{ readOnly: true }}
+                error={passwordErrorMsg ? true : false} helperText={passwordErrorMsg} />
             } />
           </TableRow>
           <TableRow>
