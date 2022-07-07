@@ -1,4 +1,4 @@
-import { Box, Typography, Paper, Button, MobileStepper } from '@mui/material';
+import { Box, Typography, Paper, Button, MobileStepper, Container } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
@@ -10,45 +10,45 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const MobileBus = (props) => {
   const smallBusImages = [
-    { label: 'smallBus exterior', url: './image/smallBusExterior.jpg' },
-    { label: 'smallBus interior1', url: './image/smallBus/interior1.jpg' },
-    { label: 'smallBus interior2', url: './image/smallBus/interior2.jpg' },
-    { label: 'smallBus interior3', url: './image/smallBus/interior3.jpg' },
-    { label: 'smallBus interior4', url: './image/smallBus/interior4.jpg' },
-    { label: 'smallBus interior5', url: './image/smallBus/interior5.jpg' },
-    { label: 'smallBus interior6', url: './image/smallBus/interior6.jpg' }
+    { label: '외관', url: './image/smallBusExterior.jpg' },
+    { label: '내부1', url: './image/smallBus/interior1.jpg' },
+    { label: '내부2', url: './image/smallBus/interior2.jpg' },
+    { label: '내부3', url: './image/smallBus/interior3.jpg' },
+    { label: '내부4', url: './image/smallBus/interior4.jpg' },
+    { label: '내부5', url: './image/smallBus/interior5.jpg' },
+    { label: '내부6', url: './image/smallBus/interior6.jpg' }
   ];
 
   const limousineImages = [
-    { label: 'limousine exterior', url: './image/limousineExterior.jpg' },
-    { label: 'limousine interior1', url: './image/limousine/interior1.jpg' },
-    { label: 'limousine interior2', url: './image/limousine/interior2.jpg' },
-    { label: 'limousine interior3', url: './image/limousine/interior3.jpg' },
-    { label: 'limousine interior4', url: './image/limousine/interior4.jpg' },
-    { label: 'limousine interior5', url: './image/limousine/interior5.jpg' },
-    { label: 'limousine interior6', url: './image/limousine/interior6.jpg' },
-    { label: 'limousine interior7', url: './image/limousine/interior7.jpg' },
-    { label: 'limousine interior8', url: './image/limousine/interior8.jpg' },
-    { label: 'limousine interior9', url: './image/limousine/interior9.jpg' },
-    { label: 'limousine interior10', url: './image/limousine/interior10.jpg' },
-    { label: 'limousine interior11', url: './image/limousine/interior11.jpg' }
+    { label: '외관', url: './image/limousineExterior.jpg' },
+    { label: '내부1', url: './image/limousine/interior1.jpg' },
+    { label: '내부2', url: './image/limousine/interior2.jpg' },
+    { label: '내부3', url: './image/limousine/interior3.jpg' },
+    { label: '내부4', url: './image/limousine/interior4.jpg' },
+    { label: '내부5', url: './image/limousine/interior5.jpg' },
+    { label: '내부6', url: './image/limousine/interior6.jpg' },
+    { label: '내부7', url: './image/limousine/interior7.jpg' },
+    { label: '내부8', url: './image/limousine/interior8.jpg' },
+    { label: '내부9', url: './image/limousine/interior9.jpg' },
+    { label: '내부10', url: './image/limousine/interior10.jpg' },
+    { label: '내부11', url: './image/limousine/interior11.jpg' }
   ];
 
   const bigBusImages = [
-    { label: 'bigBus exterior', url: './image/bigBusExterior.jpg' },
-    { label: 'bigBus interior1', url: './image/bigBus/interior1.jpg' },
-    { label: 'bigBus interior2', url: './image/bigBus/interior2.jpg' },
-    { label: 'bigBus interior3', url: './image/bigBus/interior3.jpg' },
-    { label: 'bigBus interior4', url: './image/bigBus/interior4.jpg' },
-    { label: 'bigBus interior5', url: './image/bigBus/interior5.jpg' },
-    { label: 'bigBus interior6', url: './image/bigBus/interior6.jpg' },
-    { label: 'bigBus interior7', url: './image/bigBus/interior7.jpg' },
-    { label: 'bigBus interior8', url: './image/bigBus/interior8.jpg' },
-    { label: 'bigBus interior9', url: './image/bigBus/interior9.jpg' },
-    { label: 'bigBus interior10', url: './image/bigBus/interior10.jpg' },
-    { label: 'bigBus interior11', url: './image/bigBus/interior11.jpg' },
-    { label: 'bigBus interior12', url: './image/bigBus/interior12.jpg' },
-    { label: 'bigBus interior13', url: './image/bigBus/interior13.jpg' }
+    { label: '외관', url: './image/bigBusExterior.jpg' },
+    { label: '내부1', url: './image/bigBus/interior1.jpg' },
+    { label: '내부2', url: './image/bigBus/interior2.jpg' },
+    { label: '내부3', url: './image/bigBus/interior3.jpg' },
+    { label: '내부4', url: './image/bigBus/interior4.jpg' },
+    { label: '내부5', url: './image/bigBus/interior5.jpg' },
+    { label: '내부6', url: './image/bigBus/interior6.jpg' },
+    { label: '내부7', url: './image/bigBus/interior7.jpg' },
+    { label: '내부8', url: './image/bigBus/interior8.jpg' },
+    { label: '내부9', url: './image/bigBus/interior9.jpg' },
+    { label: '내부10', url: './image/bigBus/interior10.jpg' },
+    { label: '내부11', url: './image/bigBus/interior11.jpg' },
+    { label: '내부12', url: './image/bigBus/interior12.jpg' },
+    { label: '내부13', url: './image/bigBus/interior13.jpg' }
   ];
 
   const theme = useTheme();
@@ -107,7 +107,7 @@ const MobileBus = (props) => {
       </Typography>
       <HeaderTypography busType={'25인승 소형'} />
 
-      <Box sx={{ maxWidth: '250px', flexGrow: 1, border: '2px solid #D3D3D3', borderRadius: '10px', m:'0 auto' }}>
+      <Box sx={{ maxWidth: '250px', flexGrow: 1, border: '2px solid #D3D3D3', borderRadius: '10px', m: '0 auto' }}>
         <Paper
           square
           elevation={0}
@@ -116,40 +116,44 @@ const MobileBus = (props) => {
             alignItems: 'center',
             height: 50,
             pl: 2,
-            bgcolor: 'background.default', 
+            bgcolor: 'background.default',
             borderRadius: '10px'
           }}
         >
           <Typography>{smallBusImages[activeStep].label}</Typography>
         </Paper>
-        <AutoPlaySwipeableViews
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={activeStep}
-          onChangeIndex={handleStepChange}
-          enableMouseEvents
-        >
-          {smallBusImages.map((step, index) => (
-            <div key={step.label}>
-              {Math.abs(activeStep - index) <= 2 ? (
-                <Box
-                  component="img"
-                  sx={{
-                    height: '150px',
-                    display: 'block',
-                    maxWidth: '230px',
-                    overflow: 'hidden',
-                    width: '100%',
-                    m: '0 auto'
-                  }}
-                  src={step.url}
-                  alt={step.label}
-                />
-              ) : null}
-            </div>
-          ))}
-        </AutoPlaySwipeableViews>
+
+        <Box sx={{ display: 'flex' }}>
+          <AutoPlaySwipeableViews
+            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+            index={activeStep}
+            onChangeIndex={handleStepChange}
+            enableMouseEvents
+          >
+            {smallBusImages.map((step, index) => (
+              <div key={step.label}>
+                {Math.abs(activeStep - index) <= 2 ? (
+                  <Box
+                    component="img"
+                    sx={{
+                      height: '150px',
+                      display: 'block',
+                      maxWidth: '230px',
+                      overflow: 'hidden',
+                      width: '100%',
+                      m: '0 auto'
+                    }}
+                    src={step.url}
+                    alt={step.label}
+                  />
+                ) : null}
+              </div>
+            ))}
+          </AutoPlaySwipeableViews>
+        </Box>
+
         <MobileStepper
-        sx={{borderRadius: '10px'}}
+          sx={{ borderRadius: '10px' }}
           variant='text'
           steps={smallBusImages.length}
           position="static"
@@ -159,23 +163,19 @@ const MobileBus = (props) => {
               size="small"
               onClick={handleNext}
               disabled={activeStep === smallBusImages.length - 1}
+              sx={{ color: '#EC9F46' }}
             >
-              Next
-              {theme.direction === 'rtl' ? (
-                <KeyboardArrowLeft />
-              ) : (
-                <KeyboardArrowRight />
-              )}
+              <KeyboardArrowRight />
             </Button>
           }
           backButton={
-            <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-              {theme.direction === 'rtl' ? (
-                <KeyboardArrowRight />
-              ) : (
-                <KeyboardArrowLeft />
-              )}
-              Back
+            <Button
+              size="small"
+              onClick={handleBack}
+              disabled={activeStep === 0}
+              sx={{ color: '#EC9F46' }}
+            >
+              <KeyboardArrowLeft />
             </Button>
           }
         />
@@ -183,7 +183,7 @@ const MobileBus = (props) => {
 
       <HeaderTypography busType={'28인승 리무진'} />
 
-      <Box sx={{ maxWidth: '250px', flexGrow: 1, border: '2px solid #D3D3D3', borderRadius: '10px', m:'0 auto' }}>
+      <Box sx={{ maxWidth: '250px', flexGrow: 1, border: '2px solid #D3D3D3', borderRadius: '10px', m: '0 auto' }}>
         <Paper
           square
           elevation={0}
@@ -225,7 +225,7 @@ const MobileBus = (props) => {
           ))}
         </AutoPlaySwipeableViews>
         <MobileStepper
-        sx={{borderRadius: '10px'}}
+          sx={{ borderRadius: '10px' }}
           variant='text'
           steps={limousineImages.length}
           position="static"
@@ -235,23 +235,19 @@ const MobileBus = (props) => {
               size="small"
               onClick={handleLimousineNext}
               disabled={limousineStep === limousineImages.length - 1}
+              sx={{ color: '#EC9F46' }}
             >
-              Next
-              {theme.direction === 'rtl' ? (
-                <KeyboardArrowLeft />
-              ) : (
-                <KeyboardArrowRight />
-              )}
+              <KeyboardArrowRight />
             </Button>
           }
           backButton={
-            <Button size="small" onClick={handleLimousineBack} disabled={limousineStep === 0}>
-              {theme.direction === 'rtl' ? (
-                <KeyboardArrowRight />
-              ) : (
-                <KeyboardArrowLeft />
-              )}
-              Back
+            <Button
+              size="small"
+              onClick={handleLimousineBack}
+              disabled={limousineStep === 0}
+              sx={{ color: '#EC9F46' }}
+            >
+              <KeyboardArrowLeft />
             </Button>
           }
         />
@@ -259,7 +255,7 @@ const MobileBus = (props) => {
 
       <HeaderTypography busType={'45인승 대형'} />
 
-      <Box sx={{ maxWidth: '250px', flexGrow: 1, border: '2px solid #D3D3D3', borderRadius: '10px', m:'0 auto' }}>
+      <Box sx={{ maxWidth: '250px', flexGrow: 1, border: '2px solid #D3D3D3', borderRadius: '10px', m: '0 auto' }}>
         <Paper
           square
           elevation={0}
@@ -301,7 +297,7 @@ const MobileBus = (props) => {
           ))}
         </AutoPlaySwipeableViews>
         <MobileStepper
-        sx={{borderRadius: '10px'}}
+          sx={{ borderRadius: '10px' }}
           variant='text'
           steps={bigBusImages.length}
           position="static"
@@ -311,23 +307,19 @@ const MobileBus = (props) => {
               size="small"
               onClick={handleBigBusNext}
               disabled={bigBusStep === bigBusImages.length - 1}
+              sx={{ color: '#EC9F46' }}
             >
-              Next
-              {theme.direction === 'rtl' ? (
-                <KeyboardArrowLeft />
-              ) : (
-                <KeyboardArrowRight />
-              )}
+              <KeyboardArrowRight />
             </Button>
           }
           backButton={
-            <Button size="small" onClick={handleBigBusBack} disabled={bigBusStep === 0}>
-              {theme.direction === 'rtl' ? (
-                <KeyboardArrowRight />
-              ) : (
-                <KeyboardArrowLeft />
-              )}
-              Back
+            <Button
+              size="small"
+              onClick={handleBigBusBack}
+              disabled={bigBusStep === 0}
+              sx={{ color: '#EC9F46' }}
+            >
+              <KeyboardArrowLeft />
             </Button>
           }
         />

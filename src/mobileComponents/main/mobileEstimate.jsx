@@ -20,8 +20,6 @@ import axios from 'axios';
 import Loading from '../Loading';
 
 const MobileEstimate = memo((props) => {
-  const buttonRef = useRef();
-  const [visible, setVisible] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -50,10 +48,6 @@ const MobileEstimate = memo((props) => {
     payment: '현금',
     taxBill: '발급',
   });
-
-  const openDetail = () => {
-    setVisible(!visible);
-  };
 
   // 서버로 견적요청 post
   const onSubmit = (event) => {
@@ -398,8 +392,7 @@ const MobileEstimate = memo((props) => {
             />
           </Stack>
         </Box>
-        {visible && (
-            <Box sx={{ display: 'block', padding: '0 5px', textAlign: 'center' }}>
+        <Box sx={{ display: 'block', padding: '0 5px', textAlign: 'center' }}>
               <Stack direction='row' sx={{ justifyContent: 'center', mb: '15px' }}>
                 <Select
                   labelId='vehicleType'
@@ -548,7 +541,6 @@ const MobileEstimate = memo((props) => {
                 sx={{ width: '90%', mb: '15px', backgroundColor: '#FCFCFC' }}
               />
             </Box>
-        )}
         {/* 견적요청 버튼 */}
         <Box sx={{ textAlign: 'center' }}>
           <Button
@@ -561,16 +553,6 @@ const MobileEstimate = memo((props) => {
               borderRadius: '10px'
             }}>
             견적요청
-          </Button>
-        </Box>
-        <Box
-          sx={{ textAlign: 'end', mr: 1 }}>
-          <Button
-            type='button'
-            ref={buttonRef}
-            onClick={openDetail}
-            sx={{ color: '#5A4231' }}>
-            {visible ? (buttonRef.current.value = '간략요청') : '상세요청'}
           </Button>
         </Box>
       </form>
