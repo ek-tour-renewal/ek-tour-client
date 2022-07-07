@@ -16,10 +16,12 @@ const MyEstimateList = ({ ektour }) => {
   const [allPage, setAllPage] = useState();
 
   useEffect(() => {
-      const titleElement = document.querySelector("title");
-      titleElement.innerHTML = `이케이하나관광-내 견적 목록`;
+    const titleElement = document.querySelector("title");
+    titleElement.innerHTML = `이케이하나관광-내 견적 목록`;
     
     if (!state) throw new Error('잘못된 접근입니다.');
+
+    console.log(state.form);
     ektour.getMyEstimateListByFormAndPage(state.form, page)
     .then(response => {
       if (response.totalPage < parseInt(page) || 1 > parseInt(page)) navigate('/error');
@@ -31,7 +33,7 @@ const MyEstimateList = ({ ektour }) => {
   }, [page]);
 
   const handleChangePage = (event, value) => {
-    navigate('/estimate/my/list/' + value, { state: { form: state.form } });
+    navigate(`/estimate/my/list/${page}/${value}`, { state: { form: state.form } });
   }
 
   return (
@@ -63,10 +65,7 @@ const MyEstimateList = ({ ektour }) => {
                   myEstimate={'true'}
                 />
               );
-            }) :
-            <Box p={5}>
-              견적 요청 내역이 없습니다.
-            </Box>
+            }) : <Box p={5}>견적 요청 내역이 없습니다.</Box>
           }
           <Stack spacing={0} m={1}>
             <Pagination

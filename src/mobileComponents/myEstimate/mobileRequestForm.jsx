@@ -29,14 +29,12 @@ export default function RequestForm() {
     }
     else if (form.phone.includes('-')) {
       setPhoneErr('- 빼고 입력해주세요.');
-      flag = false
-    }
-    else setPhoneErr('');
+      flag = false;
+    } else setPhoneErr('');
     if (form.password.length < 4) {
       setPwErr('비밀번호 4자리를 입력해주세요.');
-      flag = false
-    }
-    else setPwErr('');
+      flag = false;
+    } else setPwErr('');
     return flag;
   }
 

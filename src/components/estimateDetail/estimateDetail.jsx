@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import TableCell from "@mui/material/TableCell";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
+
 import {
   Alert,
   AlertTitle,
@@ -47,11 +47,11 @@ const Cell = (props) => {
 export default function EstimateDetail({ ektour }) {
   const navigate = useNavigate();
   const { page, estimateId } = useParams();
+  const { state } = useLocation();
 
   const [openUpdate, setOpenUpdate] = useState(false);
-  const handleClickUpdateDialog = () => {
-    setOpenUpdate(true);
-  };
+  const handleClickUpdateDialog = () => { setOpenUpdate(true); };
+  const handleCloseUpdateDialog = () => { setOpenUpdate(false); }
 
   const [openDelete, setOpenDelete] = useState(false);
   const handleCloseDeleteDialog = () => {
@@ -64,36 +64,29 @@ export default function EstimateDetail({ ektour }) {
   const [emailErrorMsg, setEmailErrorMsg] = useState(null);
   const [passwordErrorMsg, setPasswordErrorMsg] = useState(null);
 
-  const resetErrorMsg = () => {
-    setNameErrorMsg(null);
-    setPhoneErrorMsg(null);
-    setEmailErrorMsg(null);
-    setPasswordErrorMsg(null);
-  };
-
   const validate = () => {
+    var flag = true;
     var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-    if (info.name === "") {
-      setNameErrorMsg("이름을 입력해주세요.");
-      return false;
-    }
-    if (info.phone.includes("-")) {
+    if (info.name === '') {
+      setNameErrorMsg('이름을 입력해주세요.');
+      flag = false;
+    } else setNameErrorMsg('');
+    if (info.phone.includes('-')) {
       setPhoneErrorMsg(`'-' 빼고 숫자만 입력해주세요.`);
-      return false;
-    } else if (info.phone === "" || info.phone.length < 8) {
-      setPhoneErrorMsg("연락처를 입력해 주세요.");
-      return false;
-    }
-    if (regEmail.test(info.email) === false) {
-      setEmailErrorMsg("이메일 형식에 맞게 입력 해 주세요.");
-      return false;
-    }
-    if (info.password === "" || info.password.length < 4) {
-      setPasswordErrorMsg("확인용 비밀번호 숫자 4자리를 입력해주세요.");
-      return false;
-    }
-    resetErrorMsg();
-    return true;
+      flag = false;
+    } else if (info.phone === '' || info.phone.length < 8) {
+      setPhoneErrorMsg('연락처를 입력해 주세요.');
+      flag = false;
+    } else setPhoneErrorMsg('');
+    if (info.email.length > 0 && regEmail.test(info.email) === false) {
+      setEmailErrorMsg('이메일을 형식에 맞게 입력해주세요.');
+      flag = false;
+    } else setEmailErrorMsg('');
+    if (info.password === '' || info.password.length < 4) {
+      setPasswordErrorMsg('확인용 비밀번호 4자리를 입력해주세요.');
+      flag = false;
+    } else setPasswordErrorMsg('');
+    return flag;
   };
 
   // 견적 삭제
@@ -108,19 +101,18 @@ export default function EstimateDetail({ ektour }) {
   // 견적 수정 모드 boolean
   const [modify, setModify] = useState(false);
   const handleClickModifyEstimate = () => {
+    setOpenUpdate(false);
     console.log(info);
     let validateResult = validate();
     setModify(!modify);
     if (modify == true && validateResult == true) {
       axios.put(`/estimate/${estimateId}`, info)
-        .then((response) => {})
-        .catch((error) => {console.log(error)});
+      .then((response) => {})
+      .catch((error) => {console.log(error)});
       alert("견적 요청 내용이 수정되었습니다.");
     }
   };
-  const handleCloseUpdateDialog = () => {
-    setOpenUpdate(false);
-  };
+
   const handleClickDeleteEstimate = () => {
     setOpenDelete(true);
   };
@@ -158,9 +150,13 @@ export default function EstimateDetail({ ektour }) {
     const titleElement = document.getElementsByTagName("title")[0];
     titleElement.innerHTML = `이케이하나관광-견적상세내역`;
 
+    console.log(state);
+    if (!state) throw new Error('잘못된 접근입니다.');
+
     ektour
       .getEstimateDetailById(estimateId)
       .then((response) => {
+        if(!response.hasOwnProperty('id')) navigate('/error');
         setInfo(response);
       })
       .catch((error) => {
@@ -202,13 +198,11 @@ export default function EstimateDetail({ ektour }) {
                   sx={{ display: "flex", justifyContent: "flex-end" }}
                   spacing={2}
                 >
-                  <Button
-                    onClick={handleClickModifyEstimate}
-                    variant="contained"
-                    color={modify ? "success" : "primary"}
-                  >
-                    {modify ? "수정 완료" : "수정"}
-                  </Button>
+                  {
+                    modify
+                    ? <Button onClick={handleClickUpdateDialog} variant="contained">수정완료</Button>
+                    : <Button onClick={handleClickModifyEstimate} variant="contained">수정</Button>
+                  }
                   <Button
                     onClick={handleClickDeleteEstimate}
                     variant="contained"
@@ -465,22 +459,22 @@ export default function EstimateDetail({ ektour }) {
               <Cell element={
                 <>
                 <RadioGroup row defaultValue={info.wayType} onChange={handleValueChange}>
-                <FormControlLabel
-                  name="wayType"
-                  value="왕복"
-                  control={<Radio />}
-                  label="왕복"
-                  disabled={!modify}
-                  checked={info.wayType === "왕복"}
-                />
-                <FormControlLabel
-                  name="wayType"
-                  value="편도"
-                  control={<Radio />}
-                  label="편도"
-                  disabled={!modify}
-                  checked={info.wayType === "편도"}
-                />
+                  <FormControlLabel
+                    name="wayType"
+                    value="왕복"
+                    control={<Radio />}
+                    label="왕복"
+                    disabled={!modify}
+                    checked={info.wayType === "왕복"}
+                  />
+                  <FormControlLabel
+                    name="wayType"
+                    value="편도"
+                    control={<Radio />}
+                    label="편도"
+                    disabled={!modify}
+                    checked={info.wayType === "편도"}
+                  />
                 </RadioGroup>
                 </>
               }/>
@@ -557,8 +551,8 @@ export default function EstimateDetail({ ektour }) {
             작성하진 정보를 반영하여 견적 요청을 수정합니다.
           </Alert>
           <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
-            <Button>예</Button>
-            <Button onClose={handleCloseUpdateDialog}>아니오</Button>
+            <Button onClick={handleClickModifyEstimate}>예</Button>
+            <Button onClick={handleCloseUpdateDialog}>아니오</Button>
           </Box>
         </DialogContent>
       </Dialog>

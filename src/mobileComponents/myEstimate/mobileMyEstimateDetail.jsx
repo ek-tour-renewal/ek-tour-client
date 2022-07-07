@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, Button, Dialog, DialogContent, FormControlLabel, Radio, RadioGroup, Snackbar, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Alert, AlertTitle, Button, Dialog, DialogContent, FormControlLabel, MenuItem, Radio, RadioGroup, Select, Snackbar, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -92,6 +92,7 @@ export default function MobileMyEstimateDetail({ ektour }) {
   useEffect(() => {
     ektour.getEstimateDetailByIdAndForm(state.form, estimateId)
     .then(response => {
+      console.log(response);
       setData(response);
       setInfo(response);
     })
@@ -100,21 +101,54 @@ export default function MobileMyEstimateDetail({ ektour }) {
     })
   }, []);
 
+  const [nameErrorMsg, setNameErrorMsg] = useState(null);
+  const [phoneErrorMsg, setPhoneErrorMsg] = useState(null);
+  const [emailErrorMsg, setEmailErrorMsg] = useState(null);
+  const [passwordErrorMsg, setPasswordErrorMsg] = useState(null);
+
+  const validate = () => {
+    var flag = true;
+    var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    if (info.name === '') {
+      setNameErrorMsg('이름을 입력해주세요.');
+      flag = false;
+    } else setNameErrorMsg('');
+    if (info.phone.includes('-')) {
+      setPhoneErrorMsg(`'-' 빼고 숫자만 입력해주세요.`);
+      flag = false;
+    } else if (info.phone === '' || info.phone.length < 8) {
+      setPhoneErrorMsg('연락처를 입력해 주세요.');
+      flag = false;
+    } else setPhoneErrorMsg('');
+    if (info.email.length > 0 && regEmail.test(info.email) === false) {
+      setEmailErrorMsg('이메일을 형식에 맞게 입력해주세요.');
+      flag = false;
+    } else setEmailErrorMsg('');
+    if (info.password === '' || info.password.length < 4) {
+      setPasswordErrorMsg('확인용 비밀번호 4자리를 입력해주세요.');
+      flag = false;
+    } else setPasswordErrorMsg('');
+    return flag;
+  };
+
   const handleModifyEstimate = () => {
     if(info === data) {
       setModify(false); return;
     }
     setLoading(true);
-    axios.put(`/estimate/${info.id}`, info)
-    .then(response => {
-      setSuccess(true);
-      setData(...info);
-    })
-    .catch(error => { console.log(error); })
-    .finally(() => {
-      setModify(false);
-      setLoading(false);
-    });
+    if (validate()) {
+      axios.put(`/estimate/${info.id}`, info)
+      .then(response => {
+        setSuccess(true);
+        setData(info);
+      })
+      .catch(error => { console.log(error); })
+      .finally(() => {
+        setModify(false);
+        setLoading(false);
+      });
+    }
+    setLoading(false);
   }
 
   const handleClickDeleteEstimate = () => {
@@ -151,7 +185,8 @@ export default function MobileMyEstimateDetail({ ektour }) {
           <TableRow>
             <Cell type='label' element='등록자' />
             <Cell element={
-              <TextField name='name' size='small' value={info.name} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              <TextField name='name' size='small' value={info.name} onChange={handleValueChange} inputProps={{ readOnly: !modify }} 
+                error={nameErrorMsg ? true : false} helperText={nameErrorMsg} />
             } />
           </TableRow>
           <TableRow>
@@ -175,13 +210,13 @@ export default function MobileMyEstimateDetail({ ektour }) {
           <TableRow>
             <Cell type='label' element='여행 구분' />
             <Cell element={
-              <TextField name='travelType' size='small' value={info.travelType} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              <Select labelId="travelType" name="travelType" onChange={handleValueChange} size="small" value={info.travelType}><MenuItem value={"일반여행"}>일반여행</MenuItem><MenuItem value={"관혼상제"}>관혼상제</MenuItem><MenuItem value={"학교단체"}>학교단체</MenuItem><MenuItem value={"기타단체"}>기타단체</MenuItem></Select>
             } />
           </TableRow>
           <TableRow>
             <Cell type='label' element='차량 구분' />
             <Cell element={
-              <TextField name='vehicleType' size='small' value={info.vehicleType} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              <Select labelId="vehicleType" name="vehicleType" onChange={handleValueChange} size="small" value={info.vehicleType}><MenuItem value={"25인승 소형"}>25인승 소형</MenuItem><MenuItem value={"28인승 리무진"}>28인승 리무진</MenuItem><MenuItem value={"45인승 대형"}>45인승 대형</MenuItem></Select>           
             } />
           </TableRow>
           <TableRow>
@@ -290,7 +325,7 @@ export default function MobileMyEstimateDetail({ ektour }) {
       </Snackbar>
 
       <Snackbar open={fail} autoHideDuration={3000} onClose={handleCloseSnackBar}>
-        <Alert severity="success" sx={{ width: '100%' }}>
+        <Alert severity="error" sx={{ width: '100%' }}>
           오류가 발생했습니다. 잠시 후 다시 시도해주세요.
         </Alert>
       </Snackbar>
