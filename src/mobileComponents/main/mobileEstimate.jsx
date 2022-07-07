@@ -27,6 +27,8 @@ const MobileEstimate = memo((props) => {
 
   const handleCloseSnackBar = () => { setSuccess(false); setFail(false); }
 
+  let currentDateTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+
   const [estimateForm, setEstimateForm] = useState({
     name: '',
     email: '',
@@ -36,17 +38,17 @@ const MobileEstimate = memo((props) => {
     vehicleType: '25인승 소형',
     vehicleNumber: '1',
     memberCount: '',
-    departDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
-    arrivalDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
+    departDate: currentDateTime,
+    arrivalDate: currentDateTime,
     departPlace: '[서울]',
     departPlaceDetail: '',
     arrivalPlace: '[서울]',
     arrivalPlaceDetail: '',
     memo: '',
     stopPlace: '',
-    wayType: '왕복',
-    payment: '현금',
-    taxBill: '발급',
+    wayType: '',
+    payment: '',
+    taxBill: '',
   });
 
   // 서버로 견적요청 post
@@ -162,6 +164,7 @@ const MobileEstimate = memo((props) => {
             name='name'
             variant='outlined'
             size='small'
+            value={estimateForm.name}
             // autoComplete='off'
             onChange={handleValueChange}
             error={nameErrorMsg ? true : false}
@@ -179,6 +182,7 @@ const MobileEstimate = memo((props) => {
             name='phone'
             variant='outlined'
             size='small'
+            value={estimateForm.phone}
             // autoComplete='off'
             onChange={handleValueChange}
             error={phoneErrorMsg ? true : false}
@@ -196,6 +200,7 @@ const MobileEstimate = memo((props) => {
             name='password'
             variant='outlined'
             size='small'
+            value={estimateForm.password}
             // autoComplete='off'
             onChange={handleValueChange}
             error={passwordErrorMsg ? true : false}
@@ -214,6 +219,7 @@ const MobileEstimate = memo((props) => {
             name='email'
             variant='outlined'
             size='small'
+            value={estimateForm.email}
             // autoComplete='off'
             onChange={handleValueChange}
             error={emailErrorMsg ? true : false}
@@ -232,6 +238,7 @@ const MobileEstimate = memo((props) => {
               InputLabelProps={{ shrink: true }}
               value={estimateForm.departDate}
               onChange={handleValueChange}
+              inputProps={{ min: currentDateTime }}
               size='small'
               sx={{
                 width: '100%',
@@ -246,6 +253,7 @@ const MobileEstimate = memo((props) => {
               InputLabelProps={{ shrink: true }}
               onChange={handleValueChange}
               value={estimateForm.arrivalDate}
+              inputProps={{ min: currentDateTime }}
               size='small'
               sx={{
                 width: '100%',
@@ -268,7 +276,6 @@ const MobileEstimate = memo((props) => {
               name='departPlace'
               onChange={handleValueChange}
               value={estimateForm.departPlace}
-              defaultValue={estimateForm.departPlace}
               size='small'
               sx={{ width: '30%', backgroundColor: '#FCFCFC' }}>
               <MenuItem value='[서울]'>서울</MenuItem>
@@ -294,6 +301,7 @@ const MobileEstimate = memo((props) => {
               name='departPlaceDetail'
               variant='outlined'
               autoComplete='off'
+              value={estimateForm.departPlaceDetail}
               size='small'
               sx={{
                 ml: 1,
@@ -317,7 +325,6 @@ const MobileEstimate = memo((props) => {
               name='arrivalPlace'
               onChange={handleValueChange}
               value={estimateForm.arrivalPlace}
-              defaultValue={estimateForm.arrivalPlace}
               size='small'
               sx={{ width: '30%', backgroundColor: '#FCFCFC' }}>
               <MenuItem value='[서울]'>서울</MenuItem>
@@ -373,7 +380,6 @@ const MobileEstimate = memo((props) => {
               onChange={handleValueChange}
               size='small'
               value={estimateForm.travelType}
-              defaultValue={estimateForm.travelType}
               sx={{ width: '58%', backgroundColor: '#FCFCFC' }}>
               <MenuItem value={'일반여행'}>일반여행</MenuItem>
               <MenuItem value={'관혼상제'}>관혼상제</MenuItem>
@@ -387,6 +393,7 @@ const MobileEstimate = memo((props) => {
               name='memberCount'
               variant='outlined'
               size='small'
+              value={estimateForm.memberCount}
               onChange={handleValueChange}
               sx={{ width: '30%', ml: 1, backgroundColor: '#FCFCFC' }}
             />
@@ -400,7 +407,6 @@ const MobileEstimate = memo((props) => {
                   onChange={handleValueChange}
                   size='small'
                   value={estimateForm.vehicleType}
-                  defaultValue={estimateForm.vehicleType}
                   sx={{ width: '50%', backgroundColor: '#FCFCFC' }}
                 >
                   <MenuItem value={'25인승 소형'}>25인승 소형</MenuItem>
@@ -409,7 +415,6 @@ const MobileEstimate = memo((props) => {
                 </Select>
                 <Select
                   value={estimateForm.vehicleNumber}
-                  defaultValue={estimateForm.vehicleNumber}
                   onChange={handleValueChange}
                   size='small'
                   name='vehicleNumber'
@@ -535,6 +540,7 @@ const MobileEstimate = memo((props) => {
                 name='memo'
                 variant='outlined'
                 onChange={handleValueChange}
+                value={estimateForm.memo}
                 multiline
                 minRows={1}
                 autoComplete='off'

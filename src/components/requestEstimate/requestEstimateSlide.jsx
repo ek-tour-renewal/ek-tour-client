@@ -18,6 +18,9 @@ import styles from './requestEstimateSlide.module.css';
 import axios from 'axios';
 
 const RequestEstimateSlide = (props) => {
+
+  let currentDateTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+
   const [info, setInfo] = useState({
     name: '',
     email: '',
@@ -27,8 +30,8 @@ const RequestEstimateSlide = (props) => {
     vehicleType: '25인승 소형',
     vehicleNumber: '1',
     memberCount: '',
-    departDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
-    arrivalDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
+    departDate: currentDateTime,
+    arrivalDate: currentDateTime,
     departPlace: '[서울]',
     departPlaceDetail: '',
     arrivalPlace: '[서울]',
@@ -53,13 +56,6 @@ const RequestEstimateSlide = (props) => {
   const [phoneErrorMsg, setPhoneErrorMsg] = useState(null);
   const [emailErrorMsg, setEmailErrorMsg] = useState(null);
   const [passwordErrorMsg, setPasswordErrorMsg] = useState(null);
-
-  const resetErrorMsg = () => {
-    setNameErrorMsg(null);
-    setPhoneErrorMsg(null);
-    setEmailErrorMsg(null);
-    setPasswordErrorMsg(null);
-  };
 
   const validate = () => {
     var flag = true;
@@ -287,6 +283,7 @@ const RequestEstimateSlide = (props) => {
                 name='departDate'
                 value={info.departDate}
                 onChange={handleValueChange}
+                inputProps={{ min: currentDateTime }}
                 sx={{
                   mb: 2,
                   width: '50%'
@@ -298,6 +295,7 @@ const RequestEstimateSlide = (props) => {
                 name='arrivalDate'
                 value={info.arrivalDate}
                 onChange={handleValueChange}
+                inputProps={{ min: currentDateTime }}
                 sx={{
                   mb: 1,
                   width: '50%'
