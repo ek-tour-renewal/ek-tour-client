@@ -29,6 +29,8 @@ export default function MobileMyEstimateDetail({ ektour }) {
 
   const handleCloseSnackBar = () => { setSuccess(false); setFail(false); setSuccessDelete(false); }
 
+  let currentDateTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+
   const [data, setData] = useState({
     id: 0,
     name: '',
@@ -48,7 +50,6 @@ export default function MobileMyEstimateDetail({ ektour }) {
     wayType: '',
     payment: '',
     taxBill: '',
-    visibility: true,
     createdDate: '',
     ip: ''
   });
@@ -72,7 +73,6 @@ export default function MobileMyEstimateDetail({ ektour }) {
     wayType: '',
     payment: '',
     taxBill: '',
-    visibility: true,
     createdDate: '',
     ip: ''
   });
@@ -185,8 +185,15 @@ export default function MobileMyEstimateDetail({ ektour }) {
           <TableRow>
             <Cell type='label' element='등록자' />
             <Cell element={
-              <TextField name='name' size='small' value={info.name} onChange={handleValueChange} inputProps={{ readOnly: true }} 
+              <TextField name='name' size='small' value={info.name} onChange={handleValueChange} inputProps={{ disabled: true }} 
                 error={nameErrorMsg ? true : false} helperText={nameErrorMsg} />
+            } />
+          </TableRow>
+          <TableRow>
+            <Cell type='label' element='비밀번호' />
+            <Cell element={
+              <TextField name='password' size='small' value={info.password} onChange={handleValueChange} inputProps={{ disabled: true }}
+                error={passwordErrorMsg ? true : false} helperText={passwordErrorMsg} />
             } />
           </TableRow>
           <TableRow>
@@ -201,13 +208,6 @@ export default function MobileMyEstimateDetail({ ektour }) {
             <Cell element={
               <TextField name='phone' size='small' value={info.phone} onChange={handleValueChange} inputProps={{ readOnly: !modify }}
                 error={phoneErrorMsg ? true : false} helperText={phoneErrorMsg} />
-            } />
-          </TableRow>
-          <TableRow>
-            <Cell type='label' element='비밀번호' />
-            <Cell element={
-              <TextField name='password' size='small' value={info.password} onChange={handleValueChange} inputProps={{ readOnly: true }}
-                error={passwordErrorMsg ? true : false} helperText={passwordErrorMsg} />
             } />
           </TableRow>
           <TableRow>
@@ -243,7 +243,7 @@ export default function MobileMyEstimateDetail({ ektour }) {
           <TableRow>
             <Cell type='label' element='출발 일자' />
             <Cell element={
-              <TextField type='datetime-local' name='departDate' size='small' value={info.departDate} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              <TextField type='datetime-local' name='departDate' size='small' value={info.departDate} onChange={handleValueChange} inputProps={{ readOnly: !modify, min: currentDateTime }} />
             } />
           </TableRow>
           <TableRow>
@@ -255,7 +255,7 @@ export default function MobileMyEstimateDetail({ ektour }) {
           <TableRow>
             <Cell type='label' element='귀행 일자' />
             <Cell element={
-              <TextField type='datetime-local' name='arrivalDate' size='small' value={info.arrivalDate} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              <TextField type='datetime-local' name='arrivalDate' size='small' value={info.arrivalDate} onChange={handleValueChange} inputProps={{ readOnly: !modify, min: currentDateTime }} />
             } />
           </TableRow>
           <TableRow>
