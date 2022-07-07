@@ -58,16 +58,6 @@ const Header = (props, { ektour }) => {
         </span>
         <nav className={styles.navbarContainer}>
           <ul className={styles.navbarMenu}>
-            <li className={styles.request}>
-              <HeaderButton
-                buttonText='견적요청하기'
-                onClick={handleOpenRequestEstimate}
-              />
-              <RequestEstimateSlide
-                handleCloseRequestEstimate={handleCloseRequestEstimate}
-                open={requestOpen}
-              />
-            </li>
             <li className={styles.myEstimate}>
               <HeaderButton
                 buttonText='나의견적확인'
