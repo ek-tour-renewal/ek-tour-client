@@ -168,7 +168,7 @@ const MobileEstimate = memo((props) => {
             name='name'
             variant='outlined'
             size='small'
-            autoComplete='off'
+            // autoComplete='off'
             onChange={handleValueChange}
             error={nameErrorMsg ? true : false}
             helperText={nameErrorMsg}
@@ -185,7 +185,7 @@ const MobileEstimate = memo((props) => {
             name='phone'
             variant='outlined'
             size='small'
-            autoComplete='off'
+            // autoComplete='off'
             onChange={handleValueChange}
             error={phoneErrorMsg ? true : false}
             helperText={phoneErrorMsg}
@@ -202,7 +202,7 @@ const MobileEstimate = memo((props) => {
             name='password'
             variant='outlined'
             size='small'
-            autoComplete='off'
+            // autoComplete='off'
             onChange={handleValueChange}
             error={passwordErrorMsg ? true : false}
             helperText={passwordErrorMsg}
@@ -220,7 +220,7 @@ const MobileEstimate = memo((props) => {
             name='email'
             variant='outlined'
             size='small'
-            autoComplete='off'
+            // autoComplete='off'
             onChange={handleValueChange}
             error={emailErrorMsg ? true : false}
             helperText={emailErrorMsg}
