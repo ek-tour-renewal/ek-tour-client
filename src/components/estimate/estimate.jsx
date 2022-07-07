@@ -20,7 +20,6 @@ import {
 import axios from 'axios';
 import styled from '@emotion/styled';
 import Loading from '../../mobileComponents/Loading';
-import { DatePicker } from '@mui/lab';
 
 const Space = styled(Box)({
   marginTop: '22px',
@@ -31,6 +30,8 @@ const Estimate = (props) => {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  let currentDateTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+
   const [estimateForm, setEstimateForm] = useState({
     name: '',
     email: '',
@@ -40,17 +41,17 @@ const Estimate = (props) => {
     vehicleType: '25인승 소형',
     vehicleNumber: '1',
     memberCount: '',
-    departDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
-    arrivalDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
+    departDate: currentDateTime,
+    arrivalDate: currentDateTime,
     departPlace: '[서울]',
     departPlaceDetail: '',
     arrivalPlace: '[서울]',
     arrivalPlaceDetail: '',
     memo: '',
     stopPlace: '',
-    wayType: '왕복',
-    payment: '현금',
-    taxBill: '발급',
+    wayType: '',
+    payment: '',
+    taxBill: '',
   });
 
   const openDetail = () => {
@@ -272,16 +273,15 @@ const Estimate = (props) => {
               </Typography>
             </Stack>
             <Stack direction='row' spacing={2}>
-              {/* <TextField
+              <TextField
                 size='small'
                 label='출발일자'
                 type='datetime-local'
                 name='departDate'
+                inputProps={{ min: currentDateTime }}
                 value={estimateForm.departDate}
                 onChange={handleValueChange}
-              /> */}
-              <DatePicker
-                locale="ko"/>
+              />
               <Box>
                 <Select
                   size='small'
@@ -344,6 +344,7 @@ const Estimate = (props) => {
                 label='귀행일자'
                 type='datetime-local'
                 name='arrivalDate'
+                inputProps={{ min: currentDateTime }}
                 onChange={handleValueChange}
                 value={estimateForm.arrivalDate}
               />

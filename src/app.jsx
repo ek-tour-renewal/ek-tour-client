@@ -80,6 +80,10 @@ export default function App({ ektour }) {
               <Main />
             }></Route>
 
+            <Route path='/mobile' element={
+              <Main />
+            }></Route>
+
             <Route path='/introduce' element={
               <Company
               companyData={companyData}

@@ -50,13 +50,21 @@ export default function EstimateDetail({ ektour }) {
   const { state } = useLocation();
 
   const [openUpdate, setOpenUpdate] = useState(false);
-  const handleClickUpdateDialog = () => { setOpenUpdate(true); };
-  const handleCloseUpdateDialog = () => { setOpenUpdate(false); }
+  const handleClickUpdateDialog = () => { 
+    if(info === data) {
+      setModify(false); 
+      return;
+    }
+    setOpenUpdate(true); 
+  };
+  const handleCloseUpdateDialog = () => { 
+    setOpenUpdate(false);
+    setInfo(data);
+    setModify(false);
+  }
 
   const [openDelete, setOpenDelete] = useState(false);
-  const handleCloseDeleteDialog = () => {
-    setOpenDelete(false);
-  };
+  const handleCloseDeleteDialog = () => { setOpenDelete(false); };
 
   // 수정 - 유효성 검사
   const [nameErrorMsg, setNameErrorMsg] = useState(null);
@@ -100,14 +108,16 @@ export default function EstimateDetail({ ektour }) {
 
   // 견적 수정 모드 boolean
   const [modify, setModify] = useState(false);
+
   const handleClickModifyEstimate = () => {
     setOpenUpdate(false);
     console.log(info);
-    let validateResult = validate();
     setModify(!modify);
-    if (modify == true && validateResult == true) {
+    if (modify === true && validate()) {
       axios.put(`/estimate/${estimateId}`, info)
-      .then((response) => {})
+      .then((response) => {
+        setData(info);
+      })
       .catch((error) => {console.log(error)});
       alert("견적 요청 내용이 수정되었습니다.");
     }
@@ -116,15 +126,17 @@ export default function EstimateDetail({ ektour }) {
   const handleClickDeleteEstimate = () => {
     setOpenDelete(true);
   };
+  
+  let currentDateTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16);
 
-  // 서버로부터 받아온 견적요청 상세보기 데이터
+  // 수정 요청용 데이터
   const [info, setInfo] = useState({
     name: "",
     email: "",
     phone: "",
     password: "",
-    travelType: "일반여행",
-    vehicleType: "25인승 소형",
+    travelType: "",
+    vehicleType: "",
     vehicleNumber: "1",
     memberCount: "",
     departDate: new Date().toISOString().slice(0, 16),
@@ -133,9 +145,30 @@ export default function EstimateDetail({ ektour }) {
     arrivalPlace: "[서울]",
     memo: "",
     stopPlace: "",
-    wayType: "왕복",
-    payment: "현금",
-    taxBill: "발급",
+    wayType: "",
+    payment: "",
+    taxBill: "",
+  });
+  
+  // 서버로부터 받아온 견적요청 상세보기 데이터
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    travelType: "",
+    vehicleType: "",
+    vehicleNumber: "1",
+    memberCount: "",
+    departDate: new Date().toISOString().slice(0, 16),
+    arrivalDate: new Date().toISOString().slice(0, 16),
+    departPlace: "[서울]",
+    arrivalPlace: "[서울]",
+    memo: "",
+    stopPlace: "",
+    wayType: "",
+    payment: "",
+    taxBill: "",
   });
   const handleValueChange = (e) => {
     const { name, value } = e.target;
@@ -157,6 +190,7 @@ export default function EstimateDetail({ ektour }) {
       .getEstimateDetailById(estimateId)
       .then((response) => {
         if(!response.hasOwnProperty('id')) navigate('/error');
+        setData(response);
         setInfo(response);
       })
       .catch((error) => {
@@ -200,7 +234,7 @@ export default function EstimateDetail({ ektour }) {
                 >
                   {
                     modify
-                    ? <Button onClick={handleClickUpdateDialog} variant="contained">수정완료</Button>
+                    ? <Button onClick={handleClickUpdateDialog} variant="contained">수정 완료/취소</Button>
                     : <Button onClick={handleClickModifyEstimate} variant="contained">수정</Button>
                   }
                   <Button
@@ -228,7 +262,7 @@ export default function EstimateDetail({ ektour }) {
                 element={
                   <TextField
                     size="small"
-                    InputProps={{ readOnly: !modify }}
+                    InputProps={{ disabled: true }}
                     name="name"
                     value={info.name}
                     onChange={handleValueChange}
@@ -237,18 +271,19 @@ export default function EstimateDetail({ ektour }) {
                   />
                 }
               />
-              <Cell element="이메일" type="label" />
+              <Cell element="비밀번호" type="label" />
               <Cell
                 element={
                   <TextField
                     size="small"
-                    InputProps={{ readOnly: !modify }}
-                    name="email"
-                    value={info.email}
+                    InputProps={{ disabled: true }}
+                    inputProps={{ maxLength: 4 }}
+                    name="password"
+                    value={info.password}
+                    type="text"
                     onChange={handleValueChange}
-                    error={emailErrorMsg ? true : false}
-                    helperText={emailErrorMsg}
-                    
+                    error={passwordErrorMsg ? true : false}
+                    helperText={passwordErrorMsg}
                   />
                 }
               />
@@ -269,19 +304,18 @@ export default function EstimateDetail({ ektour }) {
                   />
                 }
               />
-              <Cell element="비밀번호" type="label" />
+              <Cell element="이메일" type="label" />
               <Cell
                 element={
                   <TextField
                     size="small"
                     InputProps={{ readOnly: !modify }}
-                    inputProps={{ maxLength: 4 }}
-                    name="password"
-                    value={info.password}
-                    type="text"
+                    name="email"
+                    value={info.email}
                     onChange={handleValueChange}
-                    error={passwordErrorMsg ? true : false}
-                    helperText={passwordErrorMsg}
+                    error={emailErrorMsg ? true : false}
+                    helperText={emailErrorMsg}
+                    
                   />
                 }
               />
