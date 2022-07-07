@@ -86,13 +86,12 @@ const Estimate = (props) => {
         })
         .catch((error) => {
           console.log(error);
-        })
+          })
         .finally(() => {
           setLoading(false);
         });
     }
     setLoading(false);
-    alert('정확한 정보를 입력해 주세요.');
   };
 
   const handleValueChange = (event) => {
@@ -108,6 +107,8 @@ const Estimate = (props) => {
   const [vehicleNumberErrorMsg, setVehicleNumberErrorMsg] = useState('');
   const [departPlaceDetailErrorMsg, setDepartPlaceDetailErrorMsg] = useState('');
   const [arrivalPlaceDetailErrorMSg, setArrivalPlaceDetailErrorMsg] = useState('');
+  const [memberCountErrorMSg, setMemberCountErrorMsg] = useState('');
+
 
   const validate = () => {
     var flag = true;
@@ -115,38 +116,52 @@ const Estimate = (props) => {
     if (estimateForm.name === '') {
       setNameErrorMsg('이름을 입력해주세요.');
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else setNameErrorMsg('');
     if (estimateForm.phone.includes('-')) {
       setPhoneErrorMsg(`'-' 빼고 숫자만 입력해주세요.`);
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else if (estimateForm.phone === '' || estimateForm.phone.length < 8) {
       setPhoneErrorMsg('연락처를 입력해 주세요.');
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else setPhoneErrorMsg('');
     if (regEmail.test(estimateForm.email) === false && estimateForm.email.length > 0) {
       setEmailErrorMsg('이메일 형식에 맞게 입력 해 주세요.');
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else setEmailErrorMsg('');
     if (estimateForm.password === '' || estimateForm.password.length < 4) {
       setPasswordErrorMsg('확인용 비밀번호 숫자 4자리를 입력해주세요.');
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else setPasswordErrorMsg('');
     if (estimateForm.vehicleType === '') {
       setVehicleTypeErrorMsg('차량 종류를 선택해 주세요.');
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else setVehicleTypeErrorMsg('');
     if (estimateForm.vehicleNumber === '') {
       setVehicleNumberErrorMsg('차량 대수를 선택해 주세요.');
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else setVehicleNumberErrorMsg('');
     if (estimateForm.departPlaceDetail === '') {
       setDepartPlaceDetailErrorMsg('출발지 세부정보를 입력해 주세요.');
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else setDepartPlaceDetailErrorMsg('');
     if (estimateForm.arrivalPlaceDetail === '') {
       setArrivalPlaceDetailErrorMsg('도착지 세부정보를 입력해 주세요.');
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else setArrivalPlaceDetailErrorMsg('');
+    if (/^[0-9]+$/.test(estimateForm.memberCount) === false && estimateForm.memberCount.length > 0) {
+      setMemberCountErrorMsg('숫자로 입력해 주세요.');
+      flag = false;
+      alert('정확한 정보를 입력해 주세요.');
+    } else setMemberCountErrorMsg('');
     return flag;
   };
 
@@ -441,22 +456,26 @@ const Estimate = (props) => {
 
         <Space />
 
-        <Box sx={{ width: '100px', margin: '0 auto' }}>
+        <Box sx={{ width: '200px', margin: '0 auto' }}>
           <Stack
             direction='row'
-            justifyContent='flex-start'>
-            <Typography variant='caption' color='gray'>인원 수</Typography>
+            justifyContent='flex-start'
+            >
+            <Typography variant='caption' color='gray' sx={{width: '135px'}}>인원 수</Typography>
           </Stack>
+          <FormControl sx={{ mb: 1 }} error={memberCountErrorMSg ? true : false}>
           <OutlinedInput
             type='text'
             name='memberCount'
             variant='outlined'
             size='small'
             onChange={handleValueChange}
-            onKeyDown={ inputNumber }
+            onKeyDown={inputNumber}
             endAdornment={<InputAdornment position='end'>명</InputAdornment>}
-            sx={{ width: '100px' }}
+            sx={{ width: '100px', margin: '0 auto' }}
           />
+          <FormHelperText>{memberCountErrorMSg}</FormHelperText>
+          </FormControl>
         </Box>
 
         <Space />
