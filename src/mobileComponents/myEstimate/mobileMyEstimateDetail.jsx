@@ -243,7 +243,7 @@ export default function MobileMyEstimateDetail({ ektour }) {
           <TableRow>
             <Cell type='label' element='출발 일자' />
             <Cell element={
-              <TextField name='departDate' size='small' value={info.departDate} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              <TextField type='datetime-local' name='departDate' size='small' value={info.departDate} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
             } />
           </TableRow>
           <TableRow>
@@ -255,7 +255,7 @@ export default function MobileMyEstimateDetail({ ektour }) {
           <TableRow>
             <Cell type='label' element='귀행 일자' />
             <Cell element={
-              <TextField name='arrivalDate' size='small' value={info.arrivalDate} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              <TextField type='datetime-local' name='arrivalDate' size='small' value={info.arrivalDate} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
             } />
           </TableRow>
           <TableRow>

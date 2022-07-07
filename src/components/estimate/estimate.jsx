@@ -20,6 +20,7 @@ import {
 import axios from 'axios';
 import styled from '@emotion/styled';
 import Loading from '../../mobileComponents/Loading';
+import { DatePicker } from '@mui/lab';
 
 const Space = styled(Box)({
   marginTop: '22px',
@@ -273,7 +274,7 @@ const Estimate = (props) => {
               </Typography>
             </Stack>
             <Stack direction='row' spacing={2}>
-              <TextField
+              {/* <TextField
                 size='small'
                 label='출발일자'
                 type='datetime-local'
@@ -281,7 +282,9 @@ const Estimate = (props) => {
                 inputProps={{ min: currentDateTime }}
                 value={estimateForm.departDate}
                 onChange={handleValueChange}
-              />
+              /> */}
+              <DatePicker
+                locale="ko"/>
               <Box>
                 <Select
                   size='small'
