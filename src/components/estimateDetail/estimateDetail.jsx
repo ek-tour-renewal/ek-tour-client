@@ -294,7 +294,7 @@ export default function EstimateDetail({ ektour }) {
                 element={
                   <TextField
                     size="small"
-                    InputProps={{ readOnly: !modify }}
+                    InputProps={{ disabled: true }}
                     inputProps={{ maxLength: 11 }}
                     name="phone"
                     value={info.phone}

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useCallback } from 'react';
 import HistoryEduOutlinedIcon from '@mui/icons-material/HistoryEduOutlined';
 import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
 import Select from '@mui/material/Select';
@@ -15,7 +15,9 @@ import {
   Button,
   Box,
   OutlinedInput,
-  InputAdornment
+  InputAdornment,
+  FormHelperText,
+  FormControl
 } from '@mui/material';
 import axios from 'axios';
 import styled from '@emotion/styled';
@@ -26,8 +28,6 @@ const Space = styled(Box)({
 });
 
 const Estimate = (props) => {
-  const buttonRef = useRef();
-  const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
   let currentDateTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16);
@@ -37,9 +37,9 @@ const Estimate = (props) => {
     email: '',
     phone: '',
     password: '',
-    travelType: '일반여행',
-    vehicleType: '25인승 소형',
-    vehicleNumber: '1',
+    travelType: '',
+    vehicleType: '',
+    vehicleNumber: '',
     memberCount: '',
     departDate: currentDateTime,
     arrivalDate: currentDateTime,
@@ -53,11 +53,6 @@ const Estimate = (props) => {
     payment: '',
     taxBill: '',
   });
-
-  const openDetail = () => {
-    console.log(estimateForm.arrivalDate);
-    setVisible(!visible);
-  };
 
   // 서버로 견적요청 post
   const onSubmit = (event) => {
@@ -91,11 +86,12 @@ const Estimate = (props) => {
         })
         .catch((error) => {
           console.log(error);
-        })
+          })
         .finally(() => {
           setLoading(false);
         });
-    } setLoading(false);
+    }
+    setLoading(false);
   };
 
   const handleValueChange = (event) => {
@@ -107,6 +103,12 @@ const Estimate = (props) => {
   const [phoneErrorMsg, setPhoneErrorMsg] = useState('');
   const [emailErrorMsg, setEmailErrorMsg] = useState('');
   const [passwordErrorMsg, setPasswordErrorMsg] = useState('');
+  const [vehicleTypeErrorMsg, setVehicleTypeErrorMsg] = useState('');
+  const [vehicleNumberErrorMsg, setVehicleNumberErrorMsg] = useState('');
+  const [departPlaceDetailErrorMsg, setDepartPlaceDetailErrorMsg] = useState('');
+  const [arrivalPlaceDetailErrorMSg, setArrivalPlaceDetailErrorMsg] = useState('');
+  const [memberCountErrorMSg, setMemberCountErrorMsg] = useState('');
+
 
   const validate = () => {
     var flag = true;
@@ -114,24 +116,60 @@ const Estimate = (props) => {
     if (estimateForm.name === '') {
       setNameErrorMsg('이름을 입력해주세요.');
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else setNameErrorMsg('');
     if (estimateForm.phone.includes('-')) {
       setPhoneErrorMsg(`'-' 빼고 숫자만 입력해주세요.`);
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else if (estimateForm.phone === '' || estimateForm.phone.length < 8) {
       setPhoneErrorMsg('연락처를 입력해 주세요.');
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else setPhoneErrorMsg('');
     if (regEmail.test(estimateForm.email) === false && estimateForm.email.length > 0) {
       setEmailErrorMsg('이메일 형식에 맞게 입력 해 주세요.');
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else setEmailErrorMsg('');
     if (estimateForm.password === '' || estimateForm.password.length < 4) {
       setPasswordErrorMsg('확인용 비밀번호 숫자 4자리를 입력해주세요.');
       flag = false;
+      alert('정확한 정보를 입력해 주세요.');
     } else setPasswordErrorMsg('');
+    if (estimateForm.vehicleType === '') {
+      setVehicleTypeErrorMsg('차량 종류를 선택해 주세요.');
+      flag = false;
+      alert('정확한 정보를 입력해 주세요.');
+    } else setVehicleTypeErrorMsg('');
+    if (estimateForm.vehicleNumber === '') {
+      setVehicleNumberErrorMsg('차량 대수를 선택해 주세요.');
+      flag = false;
+      alert('정확한 정보를 입력해 주세요.');
+    } else setVehicleNumberErrorMsg('');
+    if (estimateForm.departPlaceDetail === '') {
+      setDepartPlaceDetailErrorMsg('출발지 세부정보를 입력해 주세요.');
+      flag = false;
+      alert('정확한 정보를 입력해 주세요.');
+    } else setDepartPlaceDetailErrorMsg('');
+    if (estimateForm.arrivalPlaceDetail === '') {
+      setArrivalPlaceDetailErrorMsg('도착지 세부정보를 입력해 주세요.');
+      flag = false;
+      alert('정확한 정보를 입력해 주세요.');
+    } else setArrivalPlaceDetailErrorMsg('');
+    if (/^[0-9]+$/.test(estimateForm.memberCount) === false && estimateForm.memberCount.length > 0) {
+      setMemberCountErrorMsg('숫자로 입력해 주세요.');
+      flag = false;
+      alert('정확한 정보를 입력해 주세요.');
+    } else setMemberCountErrorMsg('');
     return flag;
   };
+
+  const inputNumber = (event) => {
+    if (!/^[0-9]+$/.test(event.key) && event.key.length ===1) { event.preventDefault() };
+  }
+
+  
 
   return (
     <Paper
@@ -177,7 +215,8 @@ const Estimate = (props) => {
             error={phoneErrorMsg ? true : false}
             helperText={phoneErrorMsg}
             inputProps={{ maxLength: 11 }}
-          />
+            onKeyDown={ inputNumber }
+            />
         </Stack>
 
         <Space />
@@ -202,6 +241,7 @@ const Estimate = (props) => {
             error={passwordErrorMsg ? true : false}
             helperText={passwordErrorMsg}
             inputProps={{ maxLength: 4 }}
+            onKeyDown={ inputNumber }
           />
         </Stack>
 
@@ -210,27 +250,41 @@ const Estimate = (props) => {
         <Stack direction='row' spacing={3} sx={{ display: 'flex', justifyContent: 'center' }}>
           <Stack sx={{ width: '33%' }}>
             <Typography variant='caption' sx={{ textAlign: 'left' }}>여행 구분</Typography>
-            <Select labelId='travelType' name='travelType' onChange={handleValueChange} size='small' value={estimateForm.travelType}><MenuItem value={'일반여행'}>일반여행</MenuItem><MenuItem value={'관혼상제'}>관혼상제</MenuItem><MenuItem value={'학교단체'}>학교단체</MenuItem><MenuItem value={'기타단체'}>기타단체</MenuItem></Select>
+            <Select
+              labelId='travelType'
+              name='travelType'
+              onChange={handleValueChange}
+              size='small'
+              value={estimateForm.travelType}>
+              <MenuItem value={'일반여행'}>일반여행</MenuItem>
+              <MenuItem value={'관혼상제'}>관혼상제</MenuItem>
+              <MenuItem value={'학교단체'}>학교단체</MenuItem>
+              <MenuItem value={'기타단체'}>기타단체</MenuItem>
+            </Select>
           </Stack>
-          <Stack sx={{ width: '33%' }}>
+          <FormControl sx={{ m: 1, width: '33%' }} error={vehicleTypeErrorMsg ? true : false}>
             <Typography variant='caption' sx={{ textAlign: 'left' }}>차량 구분</Typography>
             <Select
               labelId='vehicleType'
               name='vehicleType'
               onChange={handleValueChange}
               size='small'
-              value={estimateForm.vehicleType}>
+              value={estimateForm.vehicleType}
+              >
               <MenuItem value={'25인승 소형'}>25인승 소형</MenuItem>
               <MenuItem value={'28인승 리무진'}>28인승 리무진</MenuItem>
               <MenuItem value={'45인승 대형'}>45인승 대형</MenuItem>
             </Select>
-          </Stack>
-          <Stack sx={{ width: '33%' }}>
+            <FormHelperText>{vehicleTypeErrorMsg}</FormHelperText>
+          </FormControl>
+
+          <FormControl sx={{ m: 1, width: '33%' }} error={vehicleNumberErrorMsg ? true : false}>
             <Typography variant='caption' sx={{ textAlign: 'left' }}>차량 대수</Typography>
             <Select
               value={estimateForm.vehicleNumber}
               onChange={handleValueChange}
-              size='small' name='vehicleNumber'>
+              size='small' name='vehicleNumber'
+              >
               <MenuItem value='1'>1대</MenuItem>
               <MenuItem value='2'>2대</MenuItem>
               <MenuItem value='3'>3대</MenuItem>
@@ -242,7 +296,8 @@ const Estimate = (props) => {
               <MenuItem value='9'>9대</MenuItem>
               <MenuItem value='10'>10대 이상</MenuItem>
             </Select>
-          </Stack>
+            <FormHelperText>{vehicleNumberErrorMsg}</FormHelperText>
+          </FormControl>
         </Stack>
 
         <Space />
@@ -313,6 +368,8 @@ const Estimate = (props) => {
                   name='departPlaceDetail'
                   autoComplete='off'
                   onChange={handleValueChange}
+                  error={departPlaceDetailErrorMsg ? true : false}
+                  helperText={departPlaceDetailErrorMsg}
                 />
               </Box>
             </Stack>
@@ -379,6 +436,8 @@ const Estimate = (props) => {
                   name='arrivalPlaceDetail'
                   autoComplete='off'
                   onChange={handleValueChange}
+                  error={arrivalPlaceDetailErrorMSg ? true : false}
+                  helperText={arrivalPlaceDetailErrorMSg}
                 />
               </Box>
             </Stack>
@@ -387,115 +446,116 @@ const Estimate = (props) => {
 
         <Space />
 
-        {visible &&
-          (<>
-            <TextField
-              label='경유지'
-              type='text'
-              name='stopPlace'
-              size='small'
-              onChange={handleValueChange}
-              multiline />
+        <TextField
+          label='경유지'
+          type='text'
+          name='stopPlace'
+          size='small'
+          onChange={handleValueChange}
+          multiline />
 
-            <Space />
-
-            <Box sx={{ width: '100px', margin: '0 auto' }}>
-              <Stack
-                direction='row'
-                justifyContent='flex-start'>
-                <Typography variant='caption' color='gray'>인원 수</Typography>
-              </Stack>
-              <OutlinedInput
-                type='tel'
-                name='memberCount'
-                variant='outlined'
-                size='small'
-                onChange={handleValueChange}
-                endAdornment={<InputAdornment position='end'>명</InputAdornment>}
-                sx={{ width: '100px' }}
-              />
-            </Box>
-
-            <Space />
-
-            <Stack
-              direction='row'
-              spacing={3}
-              sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
-
-              <Stack sx={{ border: '1px solid lightgray', borderRadius: '10px', width: '33%', p: 2 }}>
-                <FormLabel sx={{ textAlign: 'left' }}>왕복 구분</FormLabel>
-                <RadioGroup value={estimateForm.wayType} onChange={handleValueChange}>
-                  <FormControlLabel
-                    name='wayType'
-                    value='왕복'
-                    control={<Radio />}
-                    label='왕복'
-                  />
-                  <FormControlLabel
-                    name='wayType'
-                    value='편도'
-                    control={<Radio />}
-                    label='편도'
-                  />
-                </RadioGroup>
-              </Stack>
-
-              <Stack sx={{ border: '1px solid lightgray', borderRadius: '10px', width: '33%', p: 2 }}>
-                <FormLabel sx={{ textAlign: 'left' }}>결제 방식</FormLabel>
-                <RadioGroup value={estimateForm.payment} onChange={handleValueChange}>
-                  <FormControlLabel
-                    name='payment'
-                    value='현금'
-                    control={<Radio />}
-                    label='현금'
-                  />
-                  <FormControlLabel
-                    name='payment'
-                    value='카드'
-                    control={<Radio />}
-                    label='카드'
-                  />
-                </RadioGroup>
-              </Stack>
-
-              <Stack sx={{ border: '1px solid lightgray', borderRadius: '10px', width: '33%', p: 2 }}>
-                <FormLabel sx={{ textAlign: 'left' }}>세금 계산서</FormLabel>
-                <RadioGroup value={estimateForm.taxBill} onChange={handleValueChange}>
-                  <FormControlLabel
-                    name='taxBill'
-                    value='발급'
-                    control={<Radio />}
-                    label='발급'
-                  />
-                  <FormControlLabel
-                    name='taxBill'
-                    value='발급안함'
-                    control={<Radio />}
-                    label='발급 안함'
-                  />
-                </RadioGroup>
-              </Stack>
-            </Stack>
-
-            <Space />
-
-            <Space />
-
-            <TextField
-              label='기타 메모 사항'
-              type='text'
-              name='memo'
-              onChange={handleValueChange}
-              multiline
-              minRows={3}
-              autoComplete='off'
-            />
-          </>)
-        }
         <Space />
 
-        <Stack direction='row' sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ width: '200px', margin: '0 auto' }}>
+          <Stack
+            direction='row'
+            justifyContent='flex-start'
+            >
+            <Typography variant='caption' color='gray' sx={{width: '135px'}}>인원 수</Typography>
+          </Stack>
+          <FormControl sx={{ mb: 1 }} error={memberCountErrorMSg ? true : false}>
+          <OutlinedInput
+            type='text'
+            name='memberCount'
+            variant='outlined'
+            size='small'
+            onChange={handleValueChange}
+            onKeyDown={inputNumber}
+            endAdornment={<InputAdornment position='end'>명</InputAdornment>}
+            sx={{ width: '100px', margin: '0 auto' }}
+          />
+          <FormHelperText>{memberCountErrorMSg}</FormHelperText>
+          </FormControl>
+        </Box>
+
+        <Space />
+
+        <Stack
+          direction='row'
+          spacing={3}
+          sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
+
+          <Stack sx={{ border: '1px solid lightgray', borderRadius: '10px', width: '33%', p: 2 }}>
+            <FormLabel sx={{ textAlign: 'left' }}>왕복 구분</FormLabel>
+            <RadioGroup value={estimateForm.wayType} onChange={handleValueChange}>
+              <FormControlLabel
+                name='wayType'
+                value='왕복'
+                control={<Radio />}
+                label='왕복'
+              />
+              <FormControlLabel
+                name='wayType'
+                value='편도'
+                control={<Radio />}
+                label='편도'
+              />
+            </RadioGroup>
+          </Stack>
+
+          <Stack sx={{ border: '1px solid lightgray', borderRadius: '10px', width: '33%', p: 2 }}>
+            <FormLabel sx={{ textAlign: 'left' }}>결제 방식</FormLabel>
+            <RadioGroup value={estimateForm.payment} onChange={handleValueChange}>
+              <FormControlLabel
+                name='payment'
+                value='현금'
+                control={<Radio />}
+                label='현금'
+              />
+              <FormControlLabel
+                name='payment'
+                value='카드'
+                control={<Radio />}
+                label='카드'
+              />
+            </RadioGroup>
+          </Stack>
+
+          <Stack sx={{ border: '1px solid lightgray', borderRadius: '10px', width: '33%', p: 2 }}>
+            <FormLabel sx={{ textAlign: 'left' }}>세금 계산서</FormLabel>
+            <RadioGroup value={estimateForm.taxBill} onChange={handleValueChange}>
+              <FormControlLabel
+                name='taxBill'
+                value='발급'
+                control={<Radio />}
+                label='발급'
+              />
+              <FormControlLabel
+                name='taxBill'
+                value='발급안함'
+                control={<Radio />}
+                label='발급 안함'
+              />
+            </RadioGroup>
+          </Stack>
+        </Stack>
+
+        <Space />
+
+        <Space />
+
+        <TextField
+          label='기타 메모 사항'
+          type='text'
+          name='memo'
+          onChange={handleValueChange}
+          multiline
+          minRows={3}
+          autoComplete='off'
+        />
+        <Space />
+
+        <Stack direction='row' sx={{ display: 'flex', justifyContent: 'center', mb: '30px' }}>
           <Button
             type='submit'
             onClick={onSubmit}
@@ -507,12 +567,6 @@ const Estimate = (props) => {
           </Button>
         </Stack>
 
-      </Stack>
-
-      <Stack direction='row' sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button ref={buttonRef} onClick={openDetail} sx={{ width: '100px' }}>
-          {visible ? (buttonRef.current.value = '간략요청') : '상세요청'}
-        </Button>
       </Stack>
 
       <Loading open={loading} />

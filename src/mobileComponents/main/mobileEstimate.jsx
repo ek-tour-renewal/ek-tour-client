@@ -14,7 +14,11 @@ import {
   FormLabel,
   Container,
   Snackbar,
-  Alert
+  Alert,
+  OutlinedInput,
+  InputLabel,
+  FormControl,
+  FormHelperText
 } from '@mui/material';
 import axios from 'axios';
 import Loading from '../Loading';
@@ -34,9 +38,9 @@ const MobileEstimate = memo((props) => {
     email: '',
     phone: '',
     password: '',
-    travelType: '일반여행',
-    vehicleType: '25인승 소형',
-    vehicleNumber: '1',
+    travelType: '',
+    vehicleType: '',
+    vehicleNumber: '',
     memberCount: '',
     departDate: currentDateTime,
     arrivalDate: currentDateTime,
@@ -92,6 +96,7 @@ const MobileEstimate = memo((props) => {
       });
     }
     setLoading(false);
+    alert('정확한 정보를 입력해 주세요.');
   };
 
   const handleValueChange = (event) => {
@@ -106,6 +111,10 @@ const MobileEstimate = memo((props) => {
   const [phoneErrorMsg, setPhoneErrorMsg] = useState(null);
   const [emailErrorMsg, setEmailErrorMsg] = useState(null);
   const [passwordErrorMsg, setPasswordErrorMsg] = useState(null);
+  const [vehicleTypeErrorMsg, setVehicleTypeErrorMsg] = useState('');
+  const [vehicleNumberErrorMsg, setVehicleNumberErrorMsg] = useState('');
+  const [departPlaceDetailErrorMsg, setDepartPlaceDetailErrorMsg] = useState('');
+  const [arrivalPlaceDetailErrorMSg, setArrivalPlaceDetailErrorMsg] = useState('');
 
   const validate = () => {
     var flag = true;
@@ -129,6 +138,22 @@ const MobileEstimate = memo((props) => {
       setPasswordErrorMsg('확인용 비밀번호 숫자 4자리를 입력해주세요.');
       flag = false;
     } else setPasswordErrorMsg('');
+    if (estimateForm.vehicleType === '') {
+      setVehicleTypeErrorMsg('차량 종류를 선택해 주세요.');
+      flag = false;
+    } else setVehicleTypeErrorMsg('');
+    if (estimateForm.vehicleNumber === '') {
+      setVehicleNumberErrorMsg('차량 대수를 선택해 주세요.');
+      flag = false;
+    } else setVehicleNumberErrorMsg('');
+    if (estimateForm.departPlaceDetail === '') {
+      setDepartPlaceDetailErrorMsg('출발지 세부정보를 입력해 주세요.');
+      flag = false;
+    } else setDepartPlaceDetailErrorMsg('');
+    if (estimateForm.arrivalPlaceDetail === '') {
+      setArrivalPlaceDetailErrorMsg('도착지 세부정보를 입력해 주세요.');
+      flag = false;
+    } else setArrivalPlaceDetailErrorMsg('');
     return flag;
   };
 
@@ -309,6 +334,8 @@ const MobileEstimate = memo((props) => {
                 backgroundColor: '#FCFCFC'
               }}
               onChange={handleValueChange}
+              error={departPlaceDetailErrorMsg ? true : false}
+                  helperText={departPlaceDetailErrorMsg}
             />
           </Stack>
 
@@ -357,6 +384,8 @@ const MobileEstimate = memo((props) => {
                 backgroundColor: '#FCFCFC'
               }}
               onChange={handleValueChange}
+              error={arrivalPlaceDetailErrorMSg ? true : false}
+                  helperText={arrivalPlaceDetailErrorMSg}
             />
           </Stack>
           <TextField
@@ -374,18 +403,22 @@ const MobileEstimate = memo((props) => {
           />
 
           <Stack direction='row' sx={{ justifyContent: 'center', mb: '15px' }}>
+          <FormControl sx={{width: '58%'}}>
+              <InputLabel id='travelType'>여행구분</InputLabel>
             <Select
               labelId='travelType'
+              input={<OutlinedInput label="여행구분" />}
               name='travelType'
               onChange={handleValueChange}
               size='small'
               value={estimateForm.travelType}
-              sx={{ width: '58%', backgroundColor: '#FCFCFC' }}>
+              sx={{ backgroundColor: '#FCFCFC' }}>
               <MenuItem value={'일반여행'}>일반여행</MenuItem>
               <MenuItem value={'관혼상제'}>관혼상제</MenuItem>
               <MenuItem value={'학교단체'}>학교단체</MenuItem>
               <MenuItem value={'기타단체'}>기타단체</MenuItem>
             </Select>
+            </FormControl>
 
             <TextField
               label='인원'
@@ -398,27 +431,35 @@ const MobileEstimate = memo((props) => {
               sx={{ width: '30%', ml: 1, backgroundColor: '#FCFCFC' }}
             />
           </Stack>
-        </Box>
-        <Box sx={{ display: 'block', padding: '0 5px', textAlign: 'center' }}>
               <Stack direction='row' sx={{ justifyContent: 'center', mb: '15px' }}>
+              <FormControl sx={{width: '45%'}} error={vehicleTypeErrorMsg ? true : false}>
+              <InputLabel id='vehicleType'>차량구분</InputLabel>
                 <Select
                   labelId='vehicleType'
+                  input={<OutlinedInput label="차량구분" />}
                   name='vehicleType'
                   onChange={handleValueChange}
                   size='small'
                   value={estimateForm.vehicleType}
-                  sx={{ width: '50%', backgroundColor: '#FCFCFC' }}
+                  sx={{ backgroundColor: '#FCFCFC' }}
                 >
                   <MenuItem value={'25인승 소형'}>25인승 소형</MenuItem>
                   <MenuItem value={'28인승 리무진'}>28인승 리무진</MenuItem>
                   <MenuItem value={'45인승 대형'}>45인승 대형</MenuItem>
                 </Select>
+                <FormHelperText>{vehicleTypeErrorMsg}</FormHelperText>
+                </FormControl>
+                
+                <FormControl sx={{width: '45%'}} error={vehicleNumberErrorMsg ? true : false}>
+              <InputLabel id='vehicleNumber'>차량대수</InputLabel>
                 <Select
+                labelId='vehicleNumber'
+                input={<OutlinedInput label="차량대수" />}
                   value={estimateForm.vehicleNumber}
                   onChange={handleValueChange}
                   size='small'
                   name='vehicleNumber'
-                  sx={{ ml: 1, width: '38%', backgroundColor: '#FCFCFC' }}>
+                  sx={{ ml: 1, backgroundColor: '#FCFCFC' }}>
                   <MenuItem value='1'>1대</MenuItem>
                   <MenuItem value='2'>2대</MenuItem>
                   <MenuItem value='3'>3대</MenuItem>
@@ -430,6 +471,8 @@ const MobileEstimate = memo((props) => {
                   <MenuItem value='9'>9대</MenuItem>
                   <MenuItem value='10'>10대 이상</MenuItem>
                 </Select>
+                <FormHelperText>{vehicleNumberErrorMsg}</FormHelperText>
+                 </FormControl>
               </Stack>
 
               <Container>
