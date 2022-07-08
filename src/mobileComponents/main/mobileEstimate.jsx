@@ -158,6 +158,10 @@ const MobileEstimate = memo((props) => {
     return flag;
   };
 
+  const inputNumber = (event) => {
+    if (!/^[0-9]+$/.test(event.key) && event.key.length === 1) { event.preventDefault() };
+  }
+
   return (
     <Paper
       elevation={10}
@@ -507,7 +511,7 @@ const MobileEstimate = memo((props) => {
             </FormControl>
 
             <TextField
-              label='인원'
+              label='인원수'
               type='number'
               name='memberCount'
               variant='outlined'

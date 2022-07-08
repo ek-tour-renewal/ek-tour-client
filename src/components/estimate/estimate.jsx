@@ -506,18 +506,17 @@ const Estimate = (props) => {
             >
             <Typography variant='caption' color='gray' sx={{width: '135px'}}>인원수</Typography>
           </Stack>
-          <FormControl sx={{ mb: 1 }} error={memberCountErrorMSg ? true : false}>
-          <OutlinedInput
-            type='text'
-            name='memberCount'
-            variant='outlined'
-            size='small'
-            onChange={handleValueChange}
-            onKeyDown={inputNumber}
-            endAdornment={<InputAdornment position='end'>명</InputAdornment>}
-            sx={{ width: '100px', margin: '0 auto' }}
-          />
-          <FormHelperText>{memberCountErrorMSg}</FormHelperText>
+          <FormControl sx={{ mb: 1 }}>
+            <OutlinedInput
+              type='text'
+              name='memberCount'
+              variant='outlined'
+              size='small'
+              onChange={handleValueChange}
+              onKeyDown={inputNumber}
+              endAdornment={<InputAdornment position='end'>명</InputAdornment>}
+              sx={{ width: '100px', margin: '0 auto' }}
+            />
           </FormControl>
         </Box>
 
