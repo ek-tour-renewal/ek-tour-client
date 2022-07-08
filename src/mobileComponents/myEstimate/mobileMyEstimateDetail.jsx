@@ -28,7 +28,7 @@ export default function MobileMyEstimateDetail({ ektour }) {
 
   const handleCloseSnackBar = () => { setSuccess(false); setFail(false); setSuccessDelete(false); }
 
-  let currentDateTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+  let currentDateTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
 
   const [data, setData] = useState({
     id: 0,
@@ -41,7 +41,9 @@ export default function MobileMyEstimateDetail({ ektour }) {
     vehicleNumber: '',
     memberCount: '',
     departDate: '',
+    departTime: '',
     arrivalDate: '',
+    arrivalTime: '',
     departPlace: '',
     arrivalPlace: '',
     memo: '',
@@ -63,7 +65,9 @@ export default function MobileMyEstimateDetail({ ektour }) {
     vehicleNumber: '',
     memberCount: '',
     departDate: '',
+    departTime: '',
     arrivalDate: '',
+    arrivalTime: '',
     departPlace: '',
     arrivalPlace: '',
     memo: '',
@@ -168,93 +172,171 @@ export default function MobileMyEstimateDetail({ ektour }) {
 
   return (
     <>
-      <TableContainer sx={{maxHeight: '55vh'}}>
-      <Table stickyHeader size='small'>
-        <TableHead>
-          <TableRow sx={{ '& th': {bgcolor: '#FFD0AF', pt: 1, borderBottom: '2px solid #AE905E'} }}>
-            <TableCell colSpan={5}><strong>스크롤하여 확인하세요.</strong></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <Cell type='label' element='요청일' />
-            <Cell element={data.createdDate.slice(0, -3)} />
-          </TableRow>
-          <TableRow>
-            <Cell type='label' element='등록자' />
-            <Cell element={
-              <TextField name='name' size='small' value={info.name} onChange={handleValueChange} inputProps={{ disabled: true }} 
-                error={nameErrorMsg ? true : false} helperText={nameErrorMsg} />
-            } />
-          </TableRow>
-          <TableRow>
-            <Cell type='label' element='비밀번호' />
-            <Cell element={
-              <TextField name='password' size='small' value={info.password} onChange={handleValueChange} inputProps={{ disabled: true }}
-                error={passwordErrorMsg ? true : false} helperText={passwordErrorMsg} />
-            } />
-          </TableRow>
-          <TableRow>
-            <Cell type='label' element='이메일' />
-            <Cell element={
-              <TextField name='email' size='small' value={info.email} onChange={handleValueChange} inputProps={{ readOnly: !modify }}
-                error={emailErrorMsg ? true : false} helperText={emailErrorMsg} />
-            } />
-          </TableRow>
-          <TableRow>
-            <Cell type='label' element='핸드폰' />
-            <Cell element={
-              <TextField name='phone' size='small' value={info.phone} onChange={handleValueChange} inputProps={{ readOnly: !modify }}
-                error={phoneErrorMsg ? true : false} helperText={phoneErrorMsg} />
-            } />
-          </TableRow>
-          <TableRow>
-            <Cell type='label' element='여행 구분' />
-            <Cell element={
-              <Select labelId="travelType" name="travelType" onChange={handleValueChange} size="small" value={info.travelType}><MenuItem value={"일반여행"}>일반여행</MenuItem><MenuItem value={"관혼상제"}>관혼상제</MenuItem><MenuItem value={"학교단체"}>학교단체</MenuItem><MenuItem value={"기타단체"}>기타단체</MenuItem></Select>
-            } />
-          </TableRow>
-          <TableRow>
-            <Cell type='label' element='차량 구분' />
-            <Cell element={
-              <Select labelId="vehicleType" name="vehicleType" onChange={handleValueChange} size="small" value={info.vehicleType}><MenuItem value={"25인승 소형"}>25인승 소형</MenuItem><MenuItem value={"28인승 리무진"}>28인승 리무진</MenuItem><MenuItem value={"45인승 대형"}>45인승 대형</MenuItem></Select>           
-            } />
-          </TableRow>
-          <TableRow>
-            <Cell type='label' element='차량 대수' />
-            <Cell element={
-              <TextField name='vehicleNumber' size='small' value={info.vehicleNumber} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
-            } />
-          </TableRow>
-          <TableRow>
-            <Cell type='label' element='인원 수' />
-            <Cell element={
-              <TextField name='memberCount' size='small' value={info.memberCount} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
-            } />
-          </TableRow>
-          <TableRow>
-            <Cell type='label' element='출발 장소' />
-            <Cell element={
-              <TextField name='departPlace' size='small' value={info.departPlace} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
-            } />
-          </TableRow>
-          <TableRow>
-            <Cell type='label' element='출발 일자' />
-            <Cell element={
-              <TextField type='datetime-local' name='departDate' size='small' value={info.departDate} onChange={handleValueChange} inputProps={{ readOnly: !modify, min: currentDateTime }} />
-            } />
-          </TableRow>
-          <TableRow>
-            <Cell type='label' element='귀행 장소' />
-            <Cell element={
-              <TextField name='arrivalPlace' size='small' value={info.arrivalPlace} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
-            } />
-          </TableRow>
-          <TableRow>
-            <Cell type='label' element='귀행 일자' />
-            <Cell element={
-              <TextField type='datetime-local' name='arrivalDate' size='small' value={info.arrivalDate} onChange={handleValueChange} inputProps={{ readOnly: !modify, min: currentDateTime }} />
-            } />
+      <TableContainer sx={{ maxHeight: '55vh' }}>
+        <Table stickyHeader size='small'>
+          <TableHead>
+            <TableRow sx={{ '& th': { bgcolor: '#FFD0AF', pt: 1, borderBottom: '2px solid #AE905E' } }}>
+              <TableCell colSpan={5}><strong>스크롤하여 확인하세요.</strong></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <Cell type='label' element='요청일' />
+              <Cell element={data.createdDate.slice(0, -3)} />
+            </TableRow>
+            <TableRow>
+              <Cell type='label' element='등록자' />
+              <Cell element={
+                <TextField name='name' size='small' value={info.name} onChange={handleValueChange} inputProps={{ disabled: true }}
+                  error={nameErrorMsg ? true : false} helperText={nameErrorMsg} />
+              } />
+            </TableRow>
+            <TableRow>
+              <Cell type='label' element='비밀번호' />
+              <Cell element={
+                <TextField name='password' size='small' value={info.password} onChange={handleValueChange} inputProps={{ disabled: true }}
+                  error={passwordErrorMsg ? true : false} helperText={passwordErrorMsg} />
+              } />
+            </TableRow>
+            <TableRow>
+              <Cell type='label' element='이메일' />
+              <Cell element={
+                <TextField name='email' size='small' value={info.email} onChange={handleValueChange} inputProps={{ readOnly: !modify }}
+                  error={emailErrorMsg ? true : false} helperText={emailErrorMsg} />
+              } />
+            </TableRow>
+            <TableRow>
+              <Cell type='label' element='핸드폰' />
+              <Cell element={
+                <TextField name='phone' size='small' value={info.phone} onChange={handleValueChange} inputProps={{ readOnly: !modify }}
+                  error={phoneErrorMsg ? true : false} helperText={phoneErrorMsg} />
+              } />
+            </TableRow>
+            <TableRow>
+              <Cell type='label' element='여행 구분' />
+              <Cell element={
+                <Select labelId="travelType" name="travelType" onChange={handleValueChange} size="small" value={info.travelType}><MenuItem value={"일반여행"}>일반여행</MenuItem><MenuItem value={"관혼상제"}>관혼상제</MenuItem><MenuItem value={"학교단체"}>학교단체</MenuItem><MenuItem value={"기타단체"}>기타단체</MenuItem></Select>
+              } />
+            </TableRow>
+            <TableRow>
+              <Cell type='label' element='차량 구분' />
+              <Cell element={
+                <Select labelId="vehicleType" name="vehicleType" onChange={handleValueChange} size="small" value={info.vehicleType}><MenuItem value={"25인승 소형"}>25인승 소형</MenuItem><MenuItem value={"28인승 리무진"}>28인승 리무진</MenuItem><MenuItem value={"45인승 대형"}>45인승 대형</MenuItem></Select>
+              } />
+            </TableRow>
+            <TableRow>
+              <Cell type='label' element='차량 대수' />
+              <Cell element={
+                <TextField name='vehicleNumber' size='small' value={info.vehicleNumber} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              } />
+            </TableRow>
+            <TableRow>
+              <Cell type='label' element='인원 수' />
+              <Cell element={
+                <TextField name='memberCount' size='small' value={info.memberCount} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              } />
+            </TableRow>
+            <TableRow>
+              <Cell type='label' element='출발 장소' />
+              <Cell element={
+                <TextField name='departPlace' size='small' value={info.departPlace} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              } />
+            </TableRow>
+            <TableRow>
+              <Cell type='label' element='출발 일자' />
+              <Cell element={
+                <Stack direction='row'>
+                <TextField type='date' name='departDate' size='small' value={info.departDate} onChange={handleValueChange} inputProps={{ readOnly: !modify, min: currentDateTime }} />
+                <Select
+                size='small'
+                name='departTime'
+                onChange={handleValueChange}
+                value={info.departTime}
+                MenuProps={{ PaperProps: { sx: { maxHeight: 300 } } }}
+                disabled={!modify}
+                sx={{ backgroundColor: '#FCFCFC', width:'35%', ml: '5px' }}
+                style={{ height: 'fit-content' }}
+              >
+                <MenuItem value='05:00'>05:00</MenuItem><MenuItem value='05:30'>05:30</MenuItem>
+                <MenuItem value='06:00'>06:00</MenuItem><MenuItem value='06:30'>06:30</MenuItem>
+                <MenuItem value='07:00'>07:00</MenuItem><MenuItem value='07:30'>07:30</MenuItem>
+                <MenuItem value='08:00'>08:00</MenuItem><MenuItem value='08:30'>08:30</MenuItem>
+                <MenuItem value='09:00'>09:00</MenuItem><MenuItem value='09:30'>09:30</MenuItem>
+                <MenuItem value='10:00'>10:00</MenuItem><MenuItem value='10:30'>10:30</MenuItem>
+                <MenuItem value='11:00'>11:00</MenuItem><MenuItem value='11:30'>11:30</MenuItem>
+                <MenuItem value='12:00'>12:00</MenuItem><MenuItem value='12:30'>12:30</MenuItem>
+                <MenuItem value='13:00'>13:00</MenuItem><MenuItem value='13:30'>13:30</MenuItem>
+                <MenuItem value='14:00'>14:00</MenuItem><MenuItem value='14:30'>14:30</MenuItem>
+                <MenuItem value='15:00'>15:00</MenuItem><MenuItem value='15:30'>15:30</MenuItem>
+                <MenuItem value='16:00'>16:00</MenuItem><MenuItem value='16:30'>16:30</MenuItem>
+                <MenuItem value='17:00'>17:00</MenuItem><MenuItem value='17:30'>17:30</MenuItem>
+                <MenuItem value='18:00'>18:00</MenuItem><MenuItem value='18:30'>18:30</MenuItem>
+                <MenuItem value='19:00'>19:00</MenuItem><MenuItem value='19:30'>19:30</MenuItem>
+                <MenuItem value='20:00'>20:00</MenuItem><MenuItem value='20:30'>20:30</MenuItem>
+                <MenuItem value='21:00'>21:00</MenuItem><MenuItem value='21:30'>21:30</MenuItem>
+                <MenuItem value='22:00'>22:00</MenuItem><MenuItem value='22:30'>22:30</MenuItem>
+                <MenuItem value='23:00'>23:00</MenuItem><MenuItem value='23:30'>23:30</MenuItem>
+                <MenuItem value='00:00'>00:00</MenuItem><MenuItem value='00:30'>00:30</MenuItem>
+                <MenuItem value='01:00'>01:00</MenuItem><MenuItem value='01:30'>01:30</MenuItem>
+                <MenuItem value='02:00'>02:00</MenuItem><MenuItem value='02:30'>02:30</MenuItem>
+                <MenuItem value='03:00'>03:00</MenuItem><MenuItem value='03:30'>03:30</MenuItem>
+                <MenuItem value='04:00'>04:00</MenuItem><MenuItem value='04:30'>04:30</MenuItem>
+              </Select>
+              </Stack>
+              } />
+            </TableRow>
+            <TableRow>
+              <Cell type='label' element='귀행 장소' />
+              <Cell element={
+                <TextField name='arrivalPlace' size='small' value={info.arrivalPlace} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+              } />
+            </TableRow>
+            <TableRow>
+              <Cell type='label' element='귀행 일자' />
+              <Cell element={
+                <Stack direction='row'>
+                <TextField type='date' name='arrivalDate' size='small' width='60%' value={info.arrivalDate} onChange={handleValueChange} inputProps={{ readOnly: !modify, min: currentDateTime }} />
+                <Select
+                size='small'
+                name='arrivalTime'
+                onChange={handleValueChange}
+                value={info.arrivalTim4}
+                MenuProps={{ PaperProps: { sx: { maxHeight: 300 } } }}
+                disabled={!modify}
+                sx={{ backgroundColor: '#FCFCFC', width:'35%', ml: '5px' }}
+                style={{ height: 'fit-content' }}
+              >
+                <MenuItem value='05:00'>05:00</MenuItem><MenuItem value='05:30'>05:30</MenuItem>
+                <MenuItem value='06:00'>06:00</MenuItem><MenuItem value='06:30'>06:30</MenuItem>
+                <MenuItem value='07:00'>07:00</MenuItem><MenuItem value='07:30'>07:30</MenuItem>
+                <MenuItem value='08:00'>08:00</MenuItem><MenuItem value='08:30'>08:30</MenuItem>
+                <MenuItem value='09:00'>09:00</MenuItem><MenuItem value='09:30'>09:30</MenuItem>
+                <MenuItem value='10:00'>10:00</MenuItem><MenuItem value='10:30'>10:30</MenuItem>
+                <MenuItem value='11:00'>11:00</MenuItem><MenuItem value='11:30'>11:30</MenuItem>
+                <MenuItem value='12:00'>12:00</MenuItem><MenuItem value='12:30'>12:30</MenuItem>
+                <MenuItem value='13:00'>13:00</MenuItem><MenuItem value='13:30'>13:30</MenuItem>
+                <MenuItem value='14:00'>14:00</MenuItem><MenuItem value='14:30'>14:30</MenuItem>
+                <MenuItem value='15:00'>15:00</MenuItem><MenuItem value='15:30'>15:30</MenuItem>
+                <MenuItem value='16:00'>16:00</MenuItem><MenuItem value='16:30'>16:30</MenuItem>
+                <MenuItem value='17:00'>17:00</MenuItem><MenuItem value='17:30'>17:30</MenuItem>
+                <MenuItem value='18:00'>18:00</MenuItem><MenuItem value='18:30'>18:30</MenuItem>
+                <MenuItem value='19:00'>19:00</MenuItem><MenuItem value='19:30'>19:30</MenuItem>
+                <MenuItem value='20:00'>20:00</MenuItem><MenuItem value='20:30'>20:30</MenuItem>
+                <MenuItem value='21:00'>21:00</MenuItem><MenuItem value='21:30'>21:30</MenuItem>
+                <MenuItem value='22:00'>22:00</MenuItem><MenuItem value='22:30'>22:30</MenuItem>
+                <MenuItem value='23:00'>23:00</MenuItem><MenuItem value='23:30'>23:30</MenuItem>
+                <MenuItem value='00:00'>00:00</MenuItem><MenuItem value='00:30'>00:30</MenuItem>
+                <MenuItem value='01:00'>01:00</MenuItem><MenuItem value='01:30'>01:30</MenuItem>
+                <MenuItem value='02:00'>02:00</MenuItem><MenuItem value='02:30'>02:30</MenuItem>
+                <MenuItem value='03:00'>03:00</MenuItem><MenuItem value='03:30'>03:30</MenuItem>
+                <MenuItem value='04:00'>04:00</MenuItem><MenuItem value='04:30'>04:30</MenuItem>
+              </Select>
+              </Stack>
+              } />
+
+
+
+
           </TableRow>
           <TableRow>
             <Cell type='label' element='경유지' />
