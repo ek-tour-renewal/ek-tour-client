@@ -43,7 +43,6 @@ export default function MobileMyEstimateDetail({ ektour }) {
     departDate: '',
     departTime: '',
     arrivalDate: '',
-    arrivalTime: '',
     departPlace: '',
     arrivalPlace: '',
     memo: '',
@@ -67,7 +66,6 @@ export default function MobileMyEstimateDetail({ ektour }) {
     departDate: '',
     departTime: '',
     arrivalDate: '',
-    arrivalTime: '',
     departPlace: '',
     arrivalPlace: '',
     memo: '',
@@ -78,10 +76,40 @@ export default function MobileMyEstimateDetail({ ektour }) {
     createdDate: '',
     ip: ''
   });
+  const [infoPlace, setInfoPlace] = useState({
+    departPlace: '',
+    departPlaceDetail: '',
+    departDate: '',
+    departTime: '',
+    arrivalPlace: '',
+    arrivalPlaceDetail: '',
+    arrivalDate: '',
+    arrivalTime: ''
+  });
+  const [dataPlace, setDataPlace] = useState({
+    departPlace: '',
+    departPlaceDetail: '',
+    departDate: '',
+    departTime: '',
+    arrivalPlace: '',
+    arrivalPlaceDetail: '',
+    arrivalDate: '',
+    arrivalTime: ''
+  });
 
   const [modify, setModify] = useState(false);
   const handleCancleModify = () => {
     setInfo(data);
+    setInfoPlace({
+      departPlace: dataPlace.departPlace,
+      departPlaceDetail: dataPlace.departPlaceDetail,
+      departDate: dataPlace.departDate,
+      departTime: dataPlace.departTime,
+      arrivalPlace: dataPlace.arrivalPlace,
+      arrivalPlaceDetail: dataPlace.arrivalPlaceDetail,
+      arrivalDate: dataPlace.arrivalDate,
+      arrivalTime: dataPlace.arrivalTime
+    });
     setModify(false);
   }
   const handleModifyState = () => { setModify(!modify); }
@@ -91,12 +119,45 @@ export default function MobileMyEstimateDetail({ ektour }) {
     setInfo({ ...info, [name] : value });
   }
 
+  const handlePlaceChange = (e) => {
+    const { name, value } = e.target;
+    setInfoPlace({ ...infoPlace, [name]: value });
+  }
+
   useEffect(() => {
     ektour.getEstimateDetailByIdAndForm(state.form, estimateId)
     .then(response => {
       console.log(response);
       setData(response);
       setInfo(response);
+      var dp = response.departPlace.substr(0, 4);
+      var dpd = response.departPlace.substr(4);
+      var dd = response.departDate.substr(0, 10);
+      var dt = response.departDate.substr(11, 16);
+      var ap = response.arrivalPlace.substr(0, 4);
+      var apd = response.arrivalPlace.substr(4);
+      var ad = response.arrivalDate.substr(0, 10);
+      var at = response.arrivalDate.substr(11, 16);
+      setDataPlace({
+        departPlace: dp,
+        departPlaceDetail: dpd,
+        departDate: dd,
+        departTime: dt,
+        arrivalPlace: ap,
+        arrivalPlaceDetail: apd,
+        arrivalDate: ad,
+        arrivalTime: at
+      });
+      setInfoPlace({
+        departPlace: dp,
+        departPlaceDetail: dpd,
+        departDate: dd,
+        departTime: dt,
+        arrivalPlace: ap,
+        arrivalPlaceDetail: apd,
+        arrivalDate: ad,
+        arrivalTime: at
+      });
     })
     .catch(error => {
       console.log(error);
@@ -107,6 +168,8 @@ export default function MobileMyEstimateDetail({ ektour }) {
   const [phoneErrorMsg, setPhoneErrorMsg] = useState(null);
   const [emailErrorMsg, setEmailErrorMsg] = useState(null);
   const [passwordErrorMsg, setPasswordErrorMsg] = useState(null);
+  const [departPlaceDetailErrorMsg, setDepartPlaceDetailErrorMsg] = useState('');
+  const [arrivalPlaceDetailErrorMsg, setArrivalPlaceDetailErrorMsg] = useState('');
 
   const validate = () => {
     var flag = true;
@@ -130,6 +193,14 @@ export default function MobileMyEstimateDetail({ ektour }) {
       setPasswordErrorMsg('확인용 비밀번호 4자리를 입력해주세요.');
       flag = false;
     } else setPasswordErrorMsg('');
+    if (infoPlace.departPlaceDetail === '') {
+      setDepartPlaceDetailErrorMsg('출발지 세부정보를 입력해 주세요.');
+      flag = false;
+    } else setDepartPlaceDetailErrorMsg('');
+    if (infoPlace.arrivalPlaceDetail === '') {
+      setArrivalPlaceDetailErrorMsg('도착지 세부정보를 입력해 주세요.');
+      flag = false;
+    } else setArrivalPlaceDetailErrorMsg('');
     return flag;
   };
 
@@ -139,7 +210,26 @@ export default function MobileMyEstimateDetail({ ektour }) {
     }
     setLoading(true);
     if (validate()) {
-      axios.put(`/estimate/${info.id}`, info)
+      let form = {
+        name: info.name,
+        email: info.email,
+        phone: info.phone,
+        password: info.password,
+        travelType: info.travelType,
+        vehicleType: info.vehicleType,
+        vehicleNumber: info.vehicleNumber,
+        memberCount: info.memberCount,
+        departDate: infoPlace.departDate + 'T' + infoPlace.departTime,
+        arrivalDate: infoPlace.arrivalDate + 'T' + infoPlace.arrivalTime,
+        departPlace: infoPlace.departPlace + infoPlace.departPlaceDetail,
+        arrivalPlace: infoPlace.arrivalPlace + infoPlace.arrivalPlaceDetail,
+        memo: info.memo,
+        stopPlace: info.stopPlace,
+        wayType: info.wayType,
+        payment: info.payment,
+        taxBill: info.taxBill
+      }
+      axios.put(`/estimate/${info.id}`, form)
       .then(response => {
         setSuccess(true);
         setData(info);
@@ -215,19 +305,35 @@ export default function MobileMyEstimateDetail({ ektour }) {
             <TableRow>
               <Cell type='label' element='여행 구분' />
               <Cell element={
-                <Select labelId="travelType" name="travelType" onChange={handleValueChange} size="small" value={info.travelType}><MenuItem value={"일반여행"}>일반여행</MenuItem><MenuItem value={"관혼상제"}>관혼상제</MenuItem><MenuItem value={"학교단체"}>학교단체</MenuItem><MenuItem value={"기타단체"}>기타단체</MenuItem></Select>
+                <Select disabled={!modify} name="travelType" onChange={handleValueChange} size="small" value={info.travelType}><MenuItem value={"일반여행"}>일반여행</MenuItem><MenuItem value={"관혼상제"}>관혼상제</MenuItem><MenuItem value={"학교단체"}>학교단체</MenuItem><MenuItem value={"기타단체"}>기타단체</MenuItem></Select>
               } />
             </TableRow>
             <TableRow>
               <Cell type='label' element='차량 구분' />
               <Cell element={
-                <Select labelId="vehicleType" name="vehicleType" onChange={handleValueChange} size="small" value={info.vehicleType}><MenuItem value={"25인승 소형"}>25인승 소형</MenuItem><MenuItem value={"28인승 리무진"}>28인승 리무진</MenuItem><MenuItem value={"45인승 대형"}>45인승 대형</MenuItem></Select>
+                <Select disabled={!modify} name="vehicleType" onChange={handleValueChange} size="small" value={info.vehicleType}><MenuItem value={"25인승 소형"}>25인승 소형</MenuItem><MenuItem value={"28인승 리무진"}>28인승 리무진</MenuItem><MenuItem value={"45인승 대형"}>45인승 대형</MenuItem></Select>
               } />
             </TableRow>
             <TableRow>
               <Cell type='label' element='차량 대수' />
               <Cell element={
-                <TextField name='vehicleNumber' size='small' value={info.vehicleNumber} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+                <Select
+                  size="small"
+                  disabled={!modify}
+                  name="vehicleNumber"
+                  value={info.vehicleNumber}
+                  onChange={handleValueChange}>
+                  <MenuItem value="1">1대</MenuItem>
+                  <MenuItem value="2">2대</MenuItem>
+                  <MenuItem value="3">3대</MenuItem>
+                  <MenuItem value="4">4대</MenuItem>
+                  <MenuItem value="5">5대</MenuItem>
+                  <MenuItem value="6">6대</MenuItem>
+                  <MenuItem value="7">7대</MenuItem>
+                  <MenuItem value="8">8대</MenuItem>
+                  <MenuItem value="9">9대</MenuItem>
+                  <MenuItem value="10">10대 이상</MenuItem>
+                </Select>              
               } />
             </TableRow>
             <TableRow>
@@ -239,98 +345,150 @@ export default function MobileMyEstimateDetail({ ektour }) {
             <TableRow>
               <Cell type='label' element='출발 장소' />
               <Cell element={
-                <TextField name='departPlace' size='small' value={info.departPlace} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+                <Stack direction='row'>
+                  <Select
+                    disabled={!modify}
+                    size='small'
+                    labelId='departPlace'
+                    name='departPlace'
+                    onChange={handlePlaceChange}
+                    value={infoPlace.departPlace}>
+                    <MenuItem value='[서울]'>서울</MenuItem>
+                    <MenuItem value='[경기]'>경기</MenuItem>
+                    <MenuItem value='[강원]'>강원</MenuItem>
+                    <MenuItem value='[경북]'>경북</MenuItem>
+                    <MenuItem value='[경남]'>경남</MenuItem>
+                    <MenuItem value='[전북]'>전북</MenuItem>
+                    <MenuItem value='[전남]'>전남</MenuItem>
+                    <MenuItem value='[제주]'>제주</MenuItem>
+                    <MenuItem value='[충북]'>충북</MenuItem>
+                    <MenuItem value='[충남]'>충남</MenuItem>
+                    <MenuItem value='[광주]'>광주</MenuItem>
+                    <MenuItem value='[대구]'>대구</MenuItem>
+                    <MenuItem value='[대전]'>대전</MenuItem>
+                    <MenuItem value='[부산]'>부산</MenuItem>
+                    <MenuItem value='[울산]'>울산</MenuItem>
+                    <MenuItem value='[인천]'>인천</MenuItem>
+                  </Select>
+                  <TextField name='departPlaceDetail' size='small' value={infoPlace.departPlaceDetail} onChange={handlePlaceChange} 
+                    inputProps={{ readOnly: !modify }} error={departPlaceDetailErrorMsg ? true : false} helperText={departPlaceDetailErrorMsg} />
+                </Stack>
               } />
             </TableRow>
             <TableRow>
               <Cell type='label' element='출발 일자' />
               <Cell element={
                 <Stack direction='row'>
-                <TextField type='date' name='departDate' size='small' value={info.departDate} onChange={handleValueChange} inputProps={{ readOnly: !modify, min: currentDateTime }} />
-                <Select
-                size='small'
-                name='departTime'
-                onChange={handleValueChange}
-                value={info.departTime}
-                MenuProps={{ PaperProps: { sx: { maxHeight: 300 } } }}
-                disabled={!modify}
-                sx={{ backgroundColor: '#FCFCFC', width:'35%', ml: '5px' }}
-                style={{ height: 'fit-content' }}
-              >
-                <MenuItem value='05:00'>05:00</MenuItem><MenuItem value='05:30'>05:30</MenuItem>
-                <MenuItem value='06:00'>06:00</MenuItem><MenuItem value='06:30'>06:30</MenuItem>
-                <MenuItem value='07:00'>07:00</MenuItem><MenuItem value='07:30'>07:30</MenuItem>
-                <MenuItem value='08:00'>08:00</MenuItem><MenuItem value='08:30'>08:30</MenuItem>
-                <MenuItem value='09:00'>09:00</MenuItem><MenuItem value='09:30'>09:30</MenuItem>
-                <MenuItem value='10:00'>10:00</MenuItem><MenuItem value='10:30'>10:30</MenuItem>
-                <MenuItem value='11:00'>11:00</MenuItem><MenuItem value='11:30'>11:30</MenuItem>
-                <MenuItem value='12:00'>12:00</MenuItem><MenuItem value='12:30'>12:30</MenuItem>
-                <MenuItem value='13:00'>13:00</MenuItem><MenuItem value='13:30'>13:30</MenuItem>
-                <MenuItem value='14:00'>14:00</MenuItem><MenuItem value='14:30'>14:30</MenuItem>
-                <MenuItem value='15:00'>15:00</MenuItem><MenuItem value='15:30'>15:30</MenuItem>
-                <MenuItem value='16:00'>16:00</MenuItem><MenuItem value='16:30'>16:30</MenuItem>
-                <MenuItem value='17:00'>17:00</MenuItem><MenuItem value='17:30'>17:30</MenuItem>
-                <MenuItem value='18:00'>18:00</MenuItem><MenuItem value='18:30'>18:30</MenuItem>
-                <MenuItem value='19:00'>19:00</MenuItem><MenuItem value='19:30'>19:30</MenuItem>
-                <MenuItem value='20:00'>20:00</MenuItem><MenuItem value='20:30'>20:30</MenuItem>
-                <MenuItem value='21:00'>21:00</MenuItem><MenuItem value='21:30'>21:30</MenuItem>
-                <MenuItem value='22:00'>22:00</MenuItem><MenuItem value='22:30'>22:30</MenuItem>
-                <MenuItem value='23:00'>23:00</MenuItem><MenuItem value='23:30'>23:30</MenuItem>
-                <MenuItem value='00:00'>00:00</MenuItem><MenuItem value='00:30'>00:30</MenuItem>
-                <MenuItem value='01:00'>01:00</MenuItem><MenuItem value='01:30'>01:30</MenuItem>
-                <MenuItem value='02:00'>02:00</MenuItem><MenuItem value='02:30'>02:30</MenuItem>
-                <MenuItem value='03:00'>03:00</MenuItem><MenuItem value='03:30'>03:30</MenuItem>
-                <MenuItem value='04:00'>04:00</MenuItem><MenuItem value='04:30'>04:30</MenuItem>
-              </Select>
+                  <TextField type='date' name='departDate' size='small' value={infoPlace.departDate} onChange={handlePlaceChange} inputProps={{ readOnly: !modify, min: currentDateTime }} />
+                  <Select
+                  size='small'
+                  name='departTime'
+                  onChange={handlePlaceChange}
+                  value={infoPlace.departTime}
+                  MenuProps={{ PaperProps: { sx: { maxHeight: 300 } } }}
+                  disabled={!modify}
+                  sx={{ backgroundColor: '#FCFCFC', width:'35%', ml: '5px' }}
+                  style={{ height: 'fit-content' }}>
+                  <MenuItem value='05:00'>05:00</MenuItem><MenuItem value='05:30'>05:30</MenuItem>
+                  <MenuItem value='06:00'>06:00</MenuItem><MenuItem value='06:30'>06:30</MenuItem>
+                  <MenuItem value='07:00'>07:00</MenuItem><MenuItem value='07:30'>07:30</MenuItem>
+                  <MenuItem value='08:00'>08:00</MenuItem><MenuItem value='08:30'>08:30</MenuItem>
+                  <MenuItem value='09:00'>09:00</MenuItem><MenuItem value='09:30'>09:30</MenuItem>
+                  <MenuItem value='10:00'>10:00</MenuItem><MenuItem value='10:30'>10:30</MenuItem>
+                  <MenuItem value='11:00'>11:00</MenuItem><MenuItem value='11:30'>11:30</MenuItem>
+                  <MenuItem value='12:00'>12:00</MenuItem><MenuItem value='12:30'>12:30</MenuItem>
+                  <MenuItem value='13:00'>13:00</MenuItem><MenuItem value='13:30'>13:30</MenuItem>
+                  <MenuItem value='14:00'>14:00</MenuItem><MenuItem value='14:30'>14:30</MenuItem>
+                  <MenuItem value='15:00'>15:00</MenuItem><MenuItem value='15:30'>15:30</MenuItem>
+                  <MenuItem value='16:00'>16:00</MenuItem><MenuItem value='16:30'>16:30</MenuItem>
+                  <MenuItem value='17:00'>17:00</MenuItem><MenuItem value='17:30'>17:30</MenuItem>
+                  <MenuItem value='18:00'>18:00</MenuItem><MenuItem value='18:30'>18:30</MenuItem>
+                  <MenuItem value='19:00'>19:00</MenuItem><MenuItem value='19:30'>19:30</MenuItem>
+                  <MenuItem value='20:00'>20:00</MenuItem><MenuItem value='20:30'>20:30</MenuItem>
+                  <MenuItem value='21:00'>21:00</MenuItem><MenuItem value='21:30'>21:30</MenuItem>
+                  <MenuItem value='22:00'>22:00</MenuItem><MenuItem value='22:30'>22:30</MenuItem>
+                  <MenuItem value='23:00'>23:00</MenuItem><MenuItem value='23:30'>23:30</MenuItem>
+                  <MenuItem value='00:00'>00:00</MenuItem><MenuItem value='00:30'>00:30</MenuItem>
+                  <MenuItem value='01:00'>01:00</MenuItem><MenuItem value='01:30'>01:30</MenuItem>
+                  <MenuItem value='02:00'>02:00</MenuItem><MenuItem value='02:30'>02:30</MenuItem>
+                  <MenuItem value='03:00'>03:00</MenuItem><MenuItem value='03:30'>03:30</MenuItem>
+                  <MenuItem value='04:00'>04:00</MenuItem><MenuItem value='04:30'>04:30</MenuItem>
+                </Select>
               </Stack>
               } />
             </TableRow>
             <TableRow>
               <Cell type='label' element='귀행 장소' />
               <Cell element={
-                <TextField name='arrivalPlace' size='small' value={info.arrivalPlace} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+                <Stack direction='row'>
+                  <Select
+                    disabled={!modify}
+                    size='small'
+                    labelId='arrivalPlace'
+                    name='arrivalPlace'
+                    onChange={handlePlaceChange}
+                    value={infoPlace.arrivalPlace}>
+                    <MenuItem value='[서울]'>서울</MenuItem>
+                    <MenuItem value='[경기]'>경기</MenuItem>
+                    <MenuItem value='[강원]'>강원</MenuItem>
+                    <MenuItem value='[경북]'>경북</MenuItem>
+                    <MenuItem value='[경남]'>경남</MenuItem>
+                    <MenuItem value='[전북]'>전북</MenuItem>
+                    <MenuItem value='[전남]'>전남</MenuItem>
+                    <MenuItem value='[제주]'>제주</MenuItem>
+                    <MenuItem value='[충북]'>충북</MenuItem>
+                    <MenuItem value='[충남]'>충남</MenuItem>
+                    <MenuItem value='[광주]'>광주</MenuItem>
+                    <MenuItem value='[대구]'>대구</MenuItem>
+                    <MenuItem value='[대전]'>대전</MenuItem>
+                    <MenuItem value='[부산]'>부산</MenuItem>
+                    <MenuItem value='[울산]'>울산</MenuItem>
+                    <MenuItem value='[인천]'>인천</MenuItem>
+                  </Select>
+                  <TextField name='arrivalPlaceDetail' size='small' value={infoPlace.arrivalPlaceDetail} 
+                    onChange={handlePlaceChange} inputProps={{ readOnly: !modify }} />
+                </Stack>
               } />
             </TableRow>
             <TableRow>
               <Cell type='label' element='귀행 일자' />
               <Cell element={
                 <Stack direction='row'>
-                <TextField type='date' name='arrivalDate' size='small' width='60%' value={info.arrivalDate} onChange={handleValueChange} inputProps={{ readOnly: !modify, min: currentDateTime }} />
-                <Select
-                size='small'
-                name='arrivalTime'
-                onChange={handleValueChange}
-                value={info.arrivalTim4}
-                MenuProps={{ PaperProps: { sx: { maxHeight: 300 } } }}
-                disabled={!modify}
-                sx={{ backgroundColor: '#FCFCFC', width:'35%', ml: '5px' }}
-                style={{ height: 'fit-content' }}
-              >
-                <MenuItem value='05:00'>05:00</MenuItem><MenuItem value='05:30'>05:30</MenuItem>
-                <MenuItem value='06:00'>06:00</MenuItem><MenuItem value='06:30'>06:30</MenuItem>
-                <MenuItem value='07:00'>07:00</MenuItem><MenuItem value='07:30'>07:30</MenuItem>
-                <MenuItem value='08:00'>08:00</MenuItem><MenuItem value='08:30'>08:30</MenuItem>
-                <MenuItem value='09:00'>09:00</MenuItem><MenuItem value='09:30'>09:30</MenuItem>
-                <MenuItem value='10:00'>10:00</MenuItem><MenuItem value='10:30'>10:30</MenuItem>
-                <MenuItem value='11:00'>11:00</MenuItem><MenuItem value='11:30'>11:30</MenuItem>
-                <MenuItem value='12:00'>12:00</MenuItem><MenuItem value='12:30'>12:30</MenuItem>
-                <MenuItem value='13:00'>13:00</MenuItem><MenuItem value='13:30'>13:30</MenuItem>
-                <MenuItem value='14:00'>14:00</MenuItem><MenuItem value='14:30'>14:30</MenuItem>
-                <MenuItem value='15:00'>15:00</MenuItem><MenuItem value='15:30'>15:30</MenuItem>
-                <MenuItem value='16:00'>16:00</MenuItem><MenuItem value='16:30'>16:30</MenuItem>
-                <MenuItem value='17:00'>17:00</MenuItem><MenuItem value='17:30'>17:30</MenuItem>
-                <MenuItem value='18:00'>18:00</MenuItem><MenuItem value='18:30'>18:30</MenuItem>
-                <MenuItem value='19:00'>19:00</MenuItem><MenuItem value='19:30'>19:30</MenuItem>
-                <MenuItem value='20:00'>20:00</MenuItem><MenuItem value='20:30'>20:30</MenuItem>
-                <MenuItem value='21:00'>21:00</MenuItem><MenuItem value='21:30'>21:30</MenuItem>
-                <MenuItem value='22:00'>22:00</MenuItem><MenuItem value='22:30'>22:30</MenuItem>
-                <MenuItem value='23:00'>23:00</MenuItem><MenuItem value='23:30'>23:30</MenuItem>
-                <MenuItem value='00:00'>00:00</MenuItem><MenuItem value='00:30'>00:30</MenuItem>
-                <MenuItem value='01:00'>01:00</MenuItem><MenuItem value='01:30'>01:30</MenuItem>
-                <MenuItem value='02:00'>02:00</MenuItem><MenuItem value='02:30'>02:30</MenuItem>
-                <MenuItem value='03:00'>03:00</MenuItem><MenuItem value='03:30'>03:30</MenuItem>
-                <MenuItem value='04:00'>04:00</MenuItem><MenuItem value='04:30'>04:30</MenuItem>
-              </Select>
+                  <TextField type='date' name='arrivalDate' size='small' width='60%' value={infoPlace.arrivalDate} onChange={handlePlaceChange} inputProps={{ readOnly: !modify, min: currentDateTime }} />
+                  <Select
+                  size='small'
+                  name='arrivalTime'
+                  onChange={handlePlaceChange}
+                  value={infoPlace.arrivalTime}
+                  MenuProps={{ PaperProps: { sx: { maxHeight: 300 } } }}
+                  disabled={!modify}
+                  sx={{ backgroundColor: '#FCFCFC', width:'35%', ml: '5px' }}
+                  style={{ height: 'fit-content' }}>
+                  <MenuItem value='05:00'>05:00</MenuItem><MenuItem value='05:30'>05:30</MenuItem>
+                  <MenuItem value='06:00'>06:00</MenuItem><MenuItem value='06:30'>06:30</MenuItem>
+                  <MenuItem value='07:00'>07:00</MenuItem><MenuItem value='07:30'>07:30</MenuItem>
+                  <MenuItem value='08:00'>08:00</MenuItem><MenuItem value='08:30'>08:30</MenuItem>
+                  <MenuItem value='09:00'>09:00</MenuItem><MenuItem value='09:30'>09:30</MenuItem>
+                  <MenuItem value='10:00'>10:00</MenuItem><MenuItem value='10:30'>10:30</MenuItem>
+                  <MenuItem value='11:00'>11:00</MenuItem><MenuItem value='11:30'>11:30</MenuItem>
+                  <MenuItem value='12:00'>12:00</MenuItem><MenuItem value='12:30'>12:30</MenuItem>
+                  <MenuItem value='13:00'>13:00</MenuItem><MenuItem value='13:30'>13:30</MenuItem>
+                  <MenuItem value='14:00'>14:00</MenuItem><MenuItem value='14:30'>14:30</MenuItem>
+                  <MenuItem value='15:00'>15:00</MenuItem><MenuItem value='15:30'>15:30</MenuItem>
+                  <MenuItem value='16:00'>16:00</MenuItem><MenuItem value='16:30'>16:30</MenuItem>
+                  <MenuItem value='17:00'>17:00</MenuItem><MenuItem value='17:30'>17:30</MenuItem>
+                  <MenuItem value='18:00'>18:00</MenuItem><MenuItem value='18:30'>18:30</MenuItem>
+                  <MenuItem value='19:00'>19:00</MenuItem><MenuItem value='19:30'>19:30</MenuItem>
+                  <MenuItem value='20:00'>20:00</MenuItem><MenuItem value='20:30'>20:30</MenuItem>
+                  <MenuItem value='21:00'>21:00</MenuItem><MenuItem value='21:30'>21:30</MenuItem>
+                  <MenuItem value='22:00'>22:00</MenuItem><MenuItem value='22:30'>22:30</MenuItem>
+                  <MenuItem value='23:00'>23:00</MenuItem><MenuItem value='23:30'>23:30</MenuItem>
+                  <MenuItem value='00:00'>00:00</MenuItem><MenuItem value='00:30'>00:30</MenuItem>
+                  <MenuItem value='01:00'>01:00</MenuItem><MenuItem value='01:30'>01:30</MenuItem>
+                  <MenuItem value='02:00'>02:00</MenuItem><MenuItem value='02:30'>02:30</MenuItem>
+                  <MenuItem value='03:00'>03:00</MenuItem><MenuItem value='03:30'>03:30</MenuItem>
+                  <MenuItem value='04:00'>04:00</MenuItem><MenuItem value='04:30'>04:30</MenuItem>
+                </Select>
               </Stack>
               } />
 
