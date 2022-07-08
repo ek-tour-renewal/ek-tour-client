@@ -1,4 +1,4 @@
-import React, { useState, useRef, memo } from 'react';
+import React, { useState, memo } from 'react';
 import Select from '@mui/material/Select';
 import {
   MenuItem,
@@ -94,9 +94,8 @@ const MobileEstimate = memo((props) => {
       .finally(() => {
         setLoading(false);
       });
-    }
+    } else alert('정확한 정보를 입력해 주세요.');
     setLoading(false);
-    alert('정확한 정보를 입력해 주세요.');
   };
 
   const handleValueChange = (event) => {
@@ -303,22 +302,22 @@ const MobileEstimate = memo((props) => {
               value={estimateForm.departPlace}
               size='small'
               sx={{ width: '30%', backgroundColor: '#FCFCFC' }}>
-              <MenuItem value='[서울]'>서울</MenuItem>
-              <MenuItem value='[경기]'>경기</MenuItem>
-              <MenuItem value='[강원]'>강원</MenuItem>
-              <MenuItem value='[경상]'>경북</MenuItem>
-              <MenuItem value='[경상]'>경남</MenuItem>
-              <MenuItem value='[전라]'>전북</MenuItem>
-              <MenuItem value='[전라]'>전남</MenuItem>
-              <MenuItem value='[제주]'>제주</MenuItem>
-              <MenuItem value='[충청]'>충북</MenuItem>
-              <MenuItem value='[충청]'>충남</MenuItem>
-              <MenuItem value='[광주]'>광주</MenuItem>
-              <MenuItem value='[대구]'>대구</MenuItem>
-              <MenuItem value='[대전]'>대전</MenuItem>
-              <MenuItem value='[부산]'>부산</MenuItem>
-              <MenuItem value='[울산]'>울산</MenuItem>
-              <MenuItem value='[인천]'>인천</MenuItem>
+                <MenuItem value='[서울]'>서울</MenuItem>
+                <MenuItem value='[경기]'>경기</MenuItem>
+                <MenuItem value='[강원]'>강원</MenuItem>
+                <MenuItem value='[경북]'>경북</MenuItem>
+                <MenuItem value='[경남]'>경남</MenuItem>
+                <MenuItem value='[전북]'>전북</MenuItem>
+                <MenuItem value='[전남]'>전남</MenuItem>
+                <MenuItem value='[제주]'>제주</MenuItem>
+                <MenuItem value='[충북]'>충북</MenuItem>
+                <MenuItem value='[충남]'>충남</MenuItem>
+                <MenuItem value='[광주]'>광주</MenuItem>
+                <MenuItem value='[대구]'>대구</MenuItem>
+                <MenuItem value='[대전]'>대전</MenuItem>
+                <MenuItem value='[부산]'>부산</MenuItem>
+                <MenuItem value='[울산]'>울산</MenuItem>
+                <MenuItem value='[인천]'>인천</MenuItem>
             </Select>
             <TextField
               label='출발지 세부정보'
@@ -357,13 +356,13 @@ const MobileEstimate = memo((props) => {
               <MenuItem value='[서울]'>서울</MenuItem>
               <MenuItem value='[경기]'>경기</MenuItem>
               <MenuItem value='[강원]'>강원</MenuItem>
-              <MenuItem value='[경상]'>경북</MenuItem>
-              <MenuItem value='[경상]'>경남</MenuItem>
-              <MenuItem value='[전라]'>전북</MenuItem>
-              <MenuItem value='[전라]'>전남</MenuItem>
+              <MenuItem value='[경북]'>경북</MenuItem>
+              <MenuItem value='[경남]'>경남</MenuItem>
+              <MenuItem value='[전북]'>전북</MenuItem>
+              <MenuItem value='[전남]'>전남</MenuItem>
               <MenuItem value='[제주]'>제주</MenuItem>
-              <MenuItem value='[충청]'>충북</MenuItem>
-              <MenuItem value='[충청]'>충남</MenuItem>
+              <MenuItem value='[충북]'>충북</MenuItem>
+              <MenuItem value='[충남]'>충남</MenuItem>
               <MenuItem value='[광주]'>광주</MenuItem>
               <MenuItem value='[대구]'>대구</MenuItem>
               <MenuItem value='[대전]'>대전</MenuItem>

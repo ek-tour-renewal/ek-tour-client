@@ -50,16 +50,20 @@ export default function EstimateDetail({ ektour }) {
   const { state } = useLocation();
 
   const [openUpdate, setOpenUpdate] = useState(false);
-  const handleClickUpdateDialog = () => { 
-    if(info === data) {
-      setModify(false); 
-      return;
-    }
-    setOpenUpdate(true); 
-  };
+  const handleClickUpdateDialog = () => { setOpenUpdate(true); }
   const handleCloseUpdateDialog = () => { 
     setOpenUpdate(false);
     setInfo(data);
+    setInfoPlace({
+      departPlace: dataPlace.departPlace,
+      departPlaceDetail: dataPlace.departPlaceDetail,
+      departDate: dataPlace.departDate,
+      departTime: dataPlace.departTime,
+      arrivalPlace: dataPlace.arrivalPlace,
+      arrivalPlaceDetail: dataPlace.arrivalPlaceDetail,
+      arrivalDate: dataPlace.arrivalDate,
+      arrivalTime: dataPlace.arrivalTime
+    });
     setModify(false);
   }
 
@@ -67,10 +71,15 @@ export default function EstimateDetail({ ektour }) {
   const handleCloseDeleteDialog = () => { setOpenDelete(false); };
 
   // 수정 - 유효성 검사
-  const [nameErrorMsg, setNameErrorMsg] = useState(null);
-  const [phoneErrorMsg, setPhoneErrorMsg] = useState(null);
-  const [emailErrorMsg, setEmailErrorMsg] = useState(null);
-  const [passwordErrorMsg, setPasswordErrorMsg] = useState(null);
+  const [nameErrorMsg, setNameErrorMsg] = useState('');
+  const [phoneErrorMsg, setPhoneErrorMsg] = useState('');
+  const [emailErrorMsg, setEmailErrorMsg] = useState('');
+  const [passwordErrorMsg, setPasswordErrorMsg] = useState('');
+  const [vehicleTypeErrorMsg, setVehicleTypeErrorMsg] = useState('');
+  const [vehicleNumberErrorMsg, setVehicleNumberErrorMsg] = useState('');
+  const [departPlaceDetailErrorMsg, setDepartPlaceDetailErrorMsg] = useState('');
+  const [arrivalPlaceDetailErrorMsg, setArrivalPlaceDetailErrorMsg] = useState('');
+  const [memberCountErrorMsg, setMemberCountErrorMsg] = useState('');
 
   const validate = () => {
     var flag = true;
@@ -86,14 +95,34 @@ export default function EstimateDetail({ ektour }) {
       setPhoneErrorMsg('연락처를 입력해 주세요.');
       flag = false;
     } else setPhoneErrorMsg('');
-    if (info.email.length > 0 && regEmail.test(info.email) === false) {
-      setEmailErrorMsg('이메일을 형식에 맞게 입력해주세요.');
+    if (regEmail.test(info.email) === false && info.email.length > 0) {
+      setEmailErrorMsg('이메일 형식에 맞게 입력 해 주세요.');
       flag = false;
     } else setEmailErrorMsg('');
     if (info.password === '' || info.password.length < 4) {
-      setPasswordErrorMsg('확인용 비밀번호 4자리를 입력해주세요.');
+      setPasswordErrorMsg('확인용 비밀번호 숫자 4자리를 입력해주세요.');
       flag = false;
     } else setPasswordErrorMsg('');
+    if (info.vehicleType === '') {
+      setVehicleTypeErrorMsg('차량 종류를 선택해 주세요.');
+      flag = false;
+    } else setVehicleTypeErrorMsg('');
+    if (info.vehicleNumber === '') {
+      setVehicleNumberErrorMsg('차량 대수를 선택해 주세요.');
+      flag = false;
+    } else setVehicleNumberErrorMsg('');
+    if (infoPlace.departPlaceDetail === '') {
+      setDepartPlaceDetailErrorMsg('출발지 세부정보를 입력해 주세요.');
+      flag = false;
+    } else setDepartPlaceDetailErrorMsg('');
+    if (infoPlace.arrivalPlaceDetail === '') {
+      setArrivalPlaceDetailErrorMsg('도착지 세부정보를 입력해 주세요.');
+      flag = false;
+    } else setArrivalPlaceDetailErrorMsg('');
+    if (/^[0-9]+$/.test(info.memberCount) === false && info.memberCount.length > 0) {
+      setMemberCountErrorMsg('숫자로 입력해 주세요.');
+      flag = false;
+    } else setMemberCountErrorMsg('');
     return flag;
   };
 
@@ -111,15 +140,33 @@ export default function EstimateDetail({ ektour }) {
 
   const handleClickModifyEstimate = () => {
     setOpenUpdate(false);
-    console.log(info);
     setModify(!modify);
     if (modify === true && validate()) {
-      axios.put(`/estimate/${estimateId}`, info)
+      let form = {
+        name: info.name,
+        email: info.email,
+        phone: info.phone,
+        password: info.password,
+        travelType: info.travelType,
+        vehicleType: info.vehicleType,
+        vehicleNumber: info.vehicleNumber,
+        memberCount: info.memberCount,
+        departDate: infoPlace.departDate + 'T' + infoPlace.departTime,
+        arrivalDate: infoPlace.arrivalDate + 'T' + infoPlace.arrivalTime,
+        departPlace: infoPlace.departPlace + infoPlace.departPlaceDetail,
+        arrivalPlace: infoPlace.arrivalPlace + infoPlace.arrivalPlaceDetail,
+        memo: info.memo,
+        stopPlace: info.stopPlace,
+        wayType: info.wayType,
+        payment: info.payment,
+        taxBill: info.taxBill
+      }
+      axios.put(`/estimate/${estimateId}`, form)
       .then((response) => {
-        setData(info);
+        alert("견적 요청 내용이 수정되었습니다.");
+        window.location.reload();
       })
       .catch((error) => {console.log(error)});
-      alert("견적 요청 내용이 수정되었습니다.");
     }
   };
 
@@ -127,7 +174,7 @@ export default function EstimateDetail({ ektour }) {
     setOpenDelete(true);
   };
   
-  let currentDateTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+  let currentDate = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
 
   // 수정 요청용 데이터
   const [info, setInfo] = useState({
@@ -149,7 +196,6 @@ export default function EstimateDetail({ ektour }) {
     payment: "",
     taxBill: "",
   });
-  
   // 서버로부터 받아온 견적요청 상세보기 데이터
   const [data, setData] = useState({
     name: "",
@@ -170,6 +216,27 @@ export default function EstimateDetail({ ektour }) {
     payment: "",
     taxBill: "",
   });
+  const [infoPlace, setInfoPlace] = useState({
+    departPlace: '',
+    departPlaceDetail: '',
+    departDate: '',
+    departTime: '',
+    arrivalPlace: '',
+    arrivalPlaceDetail: '',
+    arrivalDate: '',
+    arrivalTime: ''
+  });
+  const [dataPlace, setDataPlace] = useState({
+    departPlace: '',
+    departPlaceDetail: '',
+    departDate: '',
+    departTime: '',
+    arrivalPlace: '',
+    arrivalPlaceDetail: '',
+    arrivalDate: '',
+    arrivalTime: ''
+  });
+
   const handleValueChange = (e) => {
     const { name, value } = e.target;
     setInfo({
@@ -178,12 +245,19 @@ export default function EstimateDetail({ ektour }) {
     });
   };
 
+  const handlePlaceChange = (e) => {
+    const { name, value } = e.target;
+    setInfoPlace({
+      ...infoPlace,
+      [name]: value,
+    });
+  }
+
   // 페이지 들어가면 데이터 서버로부터 가져온 데이터 세팅
   useEffect(() => {
     const titleElement = document.getElementsByTagName("title")[0];
     titleElement.innerHTML = `이케이하나관광-견적상세내역`;
 
-    console.log(state);
     if (!state) throw new Error('잘못된 접근입니다.');
 
     ektour
@@ -192,6 +266,34 @@ export default function EstimateDetail({ ektour }) {
         if(!response.hasOwnProperty('id')) navigate('/error');
         setData(response);
         setInfo(response);
+        var dp = response.departPlace.substr(0, 4);
+        var dpd = response.departPlace.substr(4);
+        var dd = response.departDate.substr(0, 10);
+        var dt = response.departDate.substr(11, 16);
+        var ap = response.arrivalPlace.substr(0, 4);
+        var apd = response.arrivalPlace.substr(4);
+        var ad = response.arrivalDate.substr(0, 10);
+        var at = response.arrivalDate.substr(11, 16);
+        setDataPlace({
+          departPlace: dp,
+          departPlaceDetail: dpd,
+          departDate: dd,
+          departTime: dt,
+          arrivalPlace: ap,
+          arrivalPlaceDetail: apd,
+          arrivalDate: ad,
+          arrivalTime: at
+        });
+        setInfoPlace({
+          departPlace: dp,
+          departPlaceDetail: dpd,
+          departDate: dd,
+          departTime: dt,
+          arrivalPlace: ap,
+          arrivalPlaceDetail: apd,
+          arrivalDate: ad,
+          arrivalTime: at
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -338,15 +440,18 @@ export default function EstimateDetail({ ektour }) {
                   </Select>
                 }
               />
-              <Cell element="인원" type="label" />
+              <Cell element="인원수" type="label" />
               <Cell
                 element={
                   <TextField
                     size="small"
+                    type='number'
                     InputProps={{ readOnly: !modify }}
                     name="memberCount"
                     value={info.memberCount}
                     onChange={handleValueChange}
+                    error={memberCountErrorMsg ? true : false}
+                    helperText={memberCountErrorMsg}
                   />
                 }
               />
@@ -361,6 +466,8 @@ export default function EstimateDetail({ ektour }) {
                     name="vehicleType"
                     value={info.vehicleType}
                     onChange={handleValueChange}
+                    error={vehicleTypeErrorMsg ? true : false}
+                    helperText={vehicleTypeErrorMsg}
                   >
                     <MenuItem value="25인승 소형">25인승 소형</MenuItem>
                     <MenuItem value="28인승 리무진">28인승 리무진</MenuItem>
@@ -377,6 +484,8 @@ export default function EstimateDetail({ ektour }) {
                     name="vehicleNumber"
                     value={info.vehicleNumber}
                     onChange={handleValueChange}
+                    error={vehicleNumberErrorMsg ? true : false}
+                    helperText={vehicleNumberErrorMsg}
                   >
                     <MenuItem value="1">1대</MenuItem>
                     <MenuItem value="2">2대</MenuItem>
@@ -396,25 +505,89 @@ export default function EstimateDetail({ ektour }) {
               <Cell element="출발 일자" type="label" />
               <Cell
                 element={
-                  <TextField
-                    InputProps={{ readOnly: !modify }}
-                    type="datetime-local"
-                    name="departDate"
-                    value={info.departDate}
-                    onChange={handleValueChange}
-                  />
+                  <Stack direction='row'>
+                    <TextField
+                      InputProps={{ readOnly: !modify }}
+                      size="small"
+                      type="date"
+                      name="departDate"
+                      value={infoPlace.departDate}
+                      onChange={handlePlaceChange}
+                      inputProps={{ min: currentDate }}
+                    />
+                    <Select size='small' name='departTime' onChange={handlePlaceChange} value={infoPlace.departTime}
+                      MenuProps={{PaperProps: {sx: {maxHeight: 300}}}} disabled={!modify}>
+                      <MenuItem value='00:00'>00:00</MenuItem><MenuItem value='00:30'>00:30</MenuItem>
+                      <MenuItem value='01:00'>01:00</MenuItem><MenuItem value='01:30'>01:30</MenuItem>
+                      <MenuItem value='02:00'>02:00</MenuItem><MenuItem value='02:30'>02:30</MenuItem>
+                      <MenuItem value='03:00'>03:00</MenuItem><MenuItem value='03:30'>03:30</MenuItem>
+                      <MenuItem value='04:00'>04:00</MenuItem><MenuItem value='04:30'>04:30</MenuItem>
+                      <MenuItem value='05:00'>05:00</MenuItem><MenuItem value='05:30'>05:30</MenuItem>
+                      <MenuItem value='06:00'>06:00</MenuItem><MenuItem value='06:30'>06:30</MenuItem>
+                      <MenuItem value='07:00'>07:00</MenuItem><MenuItem value='07:30'>07:30</MenuItem>
+                      <MenuItem value='08:00'>08:00</MenuItem><MenuItem value='08:30'>08:30</MenuItem>
+                      <MenuItem value='09:00'>09:00</MenuItem><MenuItem value='09:30'>09:30</MenuItem>
+                      <MenuItem value='10:00'>10:00</MenuItem><MenuItem value='10:30'>10:30</MenuItem>
+                      <MenuItem value='11:00'>11:00</MenuItem><MenuItem value='11:30'>11:30</MenuItem>
+                      <MenuItem value='12:00'>12:00</MenuItem><MenuItem value='12:30'>12:30</MenuItem>
+                      <MenuItem value='13:00'>13:00</MenuItem><MenuItem value='13:30'>13:30</MenuItem>
+                      <MenuItem value='14:00'>14:00</MenuItem><MenuItem value='14:30'>14:30</MenuItem>
+                      <MenuItem value='15:00'>15:00</MenuItem><MenuItem value='15:30'>15:30</MenuItem>
+                      <MenuItem value='16:00'>16:00</MenuItem><MenuItem value='16:30'>16:30</MenuItem>
+                      <MenuItem value='17:00'>17:00</MenuItem><MenuItem value='17:30'>17:30</MenuItem>
+                      <MenuItem value='18:00'>18:00</MenuItem><MenuItem value='18:30'>18:30</MenuItem>
+                      <MenuItem value='19:00'>19:00</MenuItem><MenuItem value='19:30'>19:30</MenuItem>
+                      <MenuItem value='20:00'>20:00</MenuItem><MenuItem value='20:30'>20:30</MenuItem>
+                      <MenuItem value='21:00'>21:00</MenuItem><MenuItem value='21:30'>21:30</MenuItem>
+                      <MenuItem value='22:00'>22:00</MenuItem><MenuItem value='22:30'>22:30</MenuItem>
+                      <MenuItem value='23:00'>23:00</MenuItem><MenuItem value='23:30'>23:30</MenuItem>
+                      <MenuItem value='24:00'>24:00</MenuItem>
+                    </Select>
+                  </Stack>
                 }
               />
               <Cell element="도착 일자" type="label" />
               <Cell
                 element={
-                  <TextField
-                    InputProps={{ readOnly: !modify }}
-                    type="datetime-local"
-                    name="arrivalDate"
-                    value={info.arrivalDate}
-                    onChange={handleValueChange}
-                  />
+                  <Stack direction='row'>
+                    <TextField
+                      InputProps={{ readOnly: !modify }}
+                      size="small"
+                      type="date"
+                      name="arrivalDate"
+                      value={infoPlace.arrivalDate}
+                      onChange={handlePlaceChange}
+                      inputProps={{ min: currentDate }}
+                    />
+                    <Select size='small' name='arrivalTime' onChange={handlePlaceChange} value={infoPlace.arrivalTime}
+                      MenuProps={{PaperProps: {sx: {maxHeight: 300}}}} disabled={!modify}>
+                      <MenuItem value='00:00'>00:00</MenuItem><MenuItem value='00:30'>00:30</MenuItem>
+                      <MenuItem value='01:00'>01:00</MenuItem><MenuItem value='01:30'>01:30</MenuItem>
+                      <MenuItem value='02:00'>02:00</MenuItem><MenuItem value='02:30'>02:30</MenuItem>
+                      <MenuItem value='03:00'>03:00</MenuItem><MenuItem value='03:30'>03:30</MenuItem>
+                      <MenuItem value='04:00'>04:00</MenuItem><MenuItem value='04:30'>04:30</MenuItem>
+                      <MenuItem value='05:00'>05:00</MenuItem><MenuItem value='05:30'>05:30</MenuItem>
+                      <MenuItem value='06:00'>06:00</MenuItem><MenuItem value='06:30'>06:30</MenuItem>
+                      <MenuItem value='07:00'>07:00</MenuItem><MenuItem value='07:30'>07:30</MenuItem>
+                      <MenuItem value='08:00'>08:00</MenuItem><MenuItem value='08:30'>08:30</MenuItem>
+                      <MenuItem value='09:00'>09:00</MenuItem><MenuItem value='09:30'>09:30</MenuItem>
+                      <MenuItem value='10:00'>10:00</MenuItem><MenuItem value='10:30'>10:30</MenuItem>
+                      <MenuItem value='11:00'>11:00</MenuItem><MenuItem value='11:30'>11:30</MenuItem>
+                      <MenuItem value='12:00'>12:00</MenuItem><MenuItem value='12:30'>12:30</MenuItem>
+                      <MenuItem value='13:00'>13:00</MenuItem><MenuItem value='13:30'>13:30</MenuItem>
+                      <MenuItem value='14:00'>14:00</MenuItem><MenuItem value='14:30'>14:30</MenuItem>
+                      <MenuItem value='15:00'>15:00</MenuItem><MenuItem value='15:30'>15:30</MenuItem>
+                      <MenuItem value='16:00'>16:00</MenuItem><MenuItem value='16:30'>16:30</MenuItem>
+                      <MenuItem value='17:00'>17:00</MenuItem><MenuItem value='17:30'>17:30</MenuItem>
+                      <MenuItem value='18:00'>18:00</MenuItem><MenuItem value='18:30'>18:30</MenuItem>
+                      <MenuItem value='19:00'>19:00</MenuItem><MenuItem value='19:30'>19:30</MenuItem>
+                      <MenuItem value='20:00'>20:00</MenuItem><MenuItem value='20:30'>20:30</MenuItem>
+                      <MenuItem value='21:00'>21:00</MenuItem><MenuItem value='21:30'>21:30</MenuItem>
+                      <MenuItem value='22:00'>22:00</MenuItem><MenuItem value='22:30'>22:30</MenuItem>
+                      <MenuItem value='23:00'>23:00</MenuItem><MenuItem value='23:30'>23:30</MenuItem>
+                      <MenuItem value='24:00'>24:00</MenuItem>
+                    </Select>
+                  </Stack>
                 }
               />
             </TableRow>
@@ -423,11 +596,38 @@ export default function EstimateDetail({ ektour }) {
               <Cell
                 element={
                   <>
+                    <Select
+                      disabled={!modify}
+                      size='small'
+                      labelId='departPlace'
+                      name='departPlace'
+                      onChange={handlePlaceChange}
+                      value={infoPlace.departPlace}>
+                      <MenuItem value='[서울]'>서울</MenuItem>
+                      <MenuItem value='[경기]'>경기</MenuItem>
+                      <MenuItem value='[강원]'>강원</MenuItem>
+                      <MenuItem value='[경북]'>경북</MenuItem>
+                      <MenuItem value='[경남]'>경남</MenuItem>
+                      <MenuItem value='[전북]'>전북</MenuItem>
+                      <MenuItem value='[전남]'>전남</MenuItem>
+                      <MenuItem value='[제주]'>제주</MenuItem>
+                      <MenuItem value='[충북]'>충북</MenuItem>
+                      <MenuItem value='[충남]'>충남</MenuItem>
+                      <MenuItem value='[광주]'>광주</MenuItem>
+                      <MenuItem value='[대구]'>대구</MenuItem>
+                      <MenuItem value='[대전]'>대전</MenuItem>
+                      <MenuItem value='[부산]'>부산</MenuItem>
+                      <MenuItem value='[울산]'>울산</MenuItem>
+                      <MenuItem value='[인천]'>인천</MenuItem>
+                    </Select>
                     <TextField
                       InputProps={{ readOnly: !modify }}
-                      name="departPlace"
-                      value={info.departPlace}
-                      onChange={handleValueChange}
+                      size="small"
+                      name="departPlaceDetail"
+                      value={infoPlace.departPlaceDetail}
+                      onChange={handlePlaceChange}
+                      error={departPlaceDetailErrorMsg ? true : false}
+                      helperText={departPlaceDetailErrorMsg}
                     />
                   </>
                 }
@@ -436,11 +636,38 @@ export default function EstimateDetail({ ektour }) {
               <Cell
                 element={
                   <>
+                    <Select
+                      disabled={!modify}
+                      size='small'
+                      labelId='arrivalPlace'
+                      name='arrivalPlace'
+                      onChange={handlePlaceChange}
+                      value={infoPlace.arrivalPlace}>
+                      <MenuItem value='[서울]'>서울</MenuItem>
+                      <MenuItem value='[경기]'>경기</MenuItem>
+                      <MenuItem value='[강원]'>강원</MenuItem>
+                      <MenuItem value='[경북]'>경북</MenuItem>
+                      <MenuItem value='[경남]'>경남</MenuItem>
+                      <MenuItem value='[전북]'>전북</MenuItem>
+                      <MenuItem value='[전남]'>전남</MenuItem>
+                      <MenuItem value='[제주]'>제주</MenuItem>
+                      <MenuItem value='[충북]'>충북</MenuItem>
+                      <MenuItem value='[충남]'>충남</MenuItem>
+                      <MenuItem value='[광주]'>광주</MenuItem>
+                      <MenuItem value='[대구]'>대구</MenuItem>
+                      <MenuItem value='[대전]'>대전</MenuItem>
+                      <MenuItem value='[부산]'>부산</MenuItem>
+                      <MenuItem value='[울산]'>울산</MenuItem>
+                      <MenuItem value='[인천]'>인천</MenuItem>
+                    </Select>
                     <TextField
                       InputProps={{ readOnly: !modify }}
-                      name="arrivalPlace"
-                      value={info.arrivalPlace}
-                      onChange={handleValueChange}
+                      size="small"
+                      name="arrivalPlaceDetail"
+                      value={infoPlace.arrivalPlaceDetail}
+                      onChange={handlePlaceChange}
+                      error={arrivalPlaceDetailErrorMsg ? true : false}
+                      helperText={arrivalPlaceDetailErrorMsg}
                     />
                   </>
                 }
