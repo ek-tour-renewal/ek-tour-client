@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import HistoryEduOutlinedIcon from '@mui/icons-material/HistoryEduOutlined';
 import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
 import Select from '@mui/material/Select';
@@ -30,7 +30,7 @@ const Space = styled(Box)({
 const Estimate = (props) => {
   const [loading, setLoading] = useState(false);
 
-  let currentDateTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+  let currentDate = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
 
   const [estimateForm, setEstimateForm] = useState({
     name: '',
@@ -41,8 +41,10 @@ const Estimate = (props) => {
     vehicleType: '',
     vehicleNumber: '',
     memberCount: '',
-    departDate: currentDateTime,
-    arrivalDate: currentDateTime,
+    departDate: currentDate,
+    departTime: '00:00',
+    arrivalDate: currentDate,
+    arrivalTime: '00:00',
     departPlace: '[서울]',
     departPlaceDetail: '',
     arrivalPlace: '[서울]',
@@ -68,9 +70,9 @@ const Estimate = (props) => {
         vehicleType: estimateForm.vehicleType,
         vehicleNumber: Number(estimateForm.vehicleNumber),
         memberCount: Number(estimateForm.memberCount),
-        departDate: estimateForm.departDate,
+        departDate: estimateForm.departDate + 'T' + estimateForm.departTime,
         departPlace: estimateForm.departPlace + estimateForm.departPlaceDetail,
-        arrivalDate: estimateForm.arrivalDate,
+        arrivalDate: estimateForm.arrivalDate + 'T' + estimateForm.arrivalTime,
         arrivalPlace: estimateForm.arrivalPlace + estimateForm.arrivalPlaceDetail,
         memo: estimateForm.memo,
         stopPlace: estimateForm.stopPlace,
@@ -90,7 +92,7 @@ const Estimate = (props) => {
         .finally(() => {
           setLoading(false);
         });
-    }
+    } else alert('정확한 정보를 입력해 주세요.');
     setLoading(false);
   };
 
@@ -109,67 +111,54 @@ const Estimate = (props) => {
   const [arrivalPlaceDetailErrorMSg, setArrivalPlaceDetailErrorMsg] = useState('');
   const [memberCountErrorMSg, setMemberCountErrorMsg] = useState('');
 
-
   const validate = () => {
     var flag = true;
     var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
     if (estimateForm.name === '') {
       setNameErrorMsg('이름을 입력해주세요.');
       flag = false;
-      alert('정확한 정보를 입력해 주세요.');
     } else setNameErrorMsg('');
     if (estimateForm.phone.includes('-')) {
       setPhoneErrorMsg(`'-' 빼고 숫자만 입력해주세요.`);
       flag = false;
-      alert('정확한 정보를 입력해 주세요.');
     } else if (estimateForm.phone === '' || estimateForm.phone.length < 8) {
       setPhoneErrorMsg('연락처를 입력해 주세요.');
       flag = false;
-      alert('정확한 정보를 입력해 주세요.');
     } else setPhoneErrorMsg('');
     if (regEmail.test(estimateForm.email) === false && estimateForm.email.length > 0) {
       setEmailErrorMsg('이메일 형식에 맞게 입력 해 주세요.');
       flag = false;
-      alert('정확한 정보를 입력해 주세요.');
     } else setEmailErrorMsg('');
     if (estimateForm.password === '' || estimateForm.password.length < 4) {
       setPasswordErrorMsg('확인용 비밀번호 숫자 4자리를 입력해주세요.');
       flag = false;
-      alert('정확한 정보를 입력해 주세요.');
     } else setPasswordErrorMsg('');
     if (estimateForm.vehicleType === '') {
       setVehicleTypeErrorMsg('차량 종류를 선택해 주세요.');
       flag = false;
-      alert('정확한 정보를 입력해 주세요.');
     } else setVehicleTypeErrorMsg('');
     if (estimateForm.vehicleNumber === '') {
       setVehicleNumberErrorMsg('차량 대수를 선택해 주세요.');
       flag = false;
-      alert('정확한 정보를 입력해 주세요.');
     } else setVehicleNumberErrorMsg('');
     if (estimateForm.departPlaceDetail === '') {
       setDepartPlaceDetailErrorMsg('출발지 세부정보를 입력해 주세요.');
       flag = false;
-      alert('정확한 정보를 입력해 주세요.');
     } else setDepartPlaceDetailErrorMsg('');
     if (estimateForm.arrivalPlaceDetail === '') {
       setArrivalPlaceDetailErrorMsg('도착지 세부정보를 입력해 주세요.');
       flag = false;
-      alert('정확한 정보를 입력해 주세요.');
     } else setArrivalPlaceDetailErrorMsg('');
     if (/^[0-9]+$/.test(estimateForm.memberCount) === false && estimateForm.memberCount.length > 0) {
       setMemberCountErrorMsg('숫자로 입력해 주세요.');
       flag = false;
-      alert('정확한 정보를 입력해 주세요.');
     } else setMemberCountErrorMsg('');
     return flag;
   };
 
   const inputNumber = (event) => {
-    if (!/^[0-9]+$/.test(event.key) && event.key.length ===1) { event.preventDefault() };
+    if (!/^[0-9]+$/.test(event.key) && event.key.length === 1) { event.preventDefault() };
   }
-
-  
 
   return (
     <Paper
@@ -198,6 +187,7 @@ const Estimate = (props) => {
           }}>
           <TextField
             label='이름'
+            required
             type='text'
             name='name'
             size='small'
@@ -207,6 +197,7 @@ const Estimate = (props) => {
           />
           <TextField
             label='연락처'
+            required
             type='text'
             name='phone'
             size='small'
@@ -216,7 +207,7 @@ const Estimate = (props) => {
             helperText={phoneErrorMsg}
             inputProps={{ maxLength: 11 }}
             onKeyDown={ inputNumber }
-            />
+          />
         </Stack>
 
         <Space />
@@ -233,8 +224,10 @@ const Estimate = (props) => {
           />
           <TextField
             label='확인용 비밀번호'
+            required
             type='password'
             name='password'
+            inputMode='numeric'
             size='small'
             autoComplete='off'
             onChange={handleValueChange}
@@ -248,7 +241,7 @@ const Estimate = (props) => {
         <Space />
 
         <Stack direction='row' spacing={3} sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Stack sx={{ width: '33%' }}>
+          <FormControl sx={{ width: '33%' }}>
             <Typography variant='caption' sx={{ textAlign: 'left' }}>여행 구분</Typography>
             <Select
               labelId='travelType'
@@ -261,9 +254,9 @@ const Estimate = (props) => {
               <MenuItem value={'학교단체'}>학교단체</MenuItem>
               <MenuItem value={'기타단체'}>기타단체</MenuItem>
             </Select>
-          </Stack>
+          </FormControl>
           <FormControl sx={{ m: 1, width: '33%' }} error={vehicleTypeErrorMsg ? true : false}>
-            <Typography variant='caption' sx={{ textAlign: 'left' }}>차량 구분</Typography>
+            <Typography variant='caption' sx={{ textAlign: 'left' }}>차량 구분 *</Typography>
             <Select
               labelId='vehicleType'
               name='vehicleType'
@@ -279,7 +272,7 @@ const Estimate = (props) => {
           </FormControl>
 
           <FormControl sx={{ m: 1, width: '33%' }} error={vehicleNumberErrorMsg ? true : false}>
-            <Typography variant='caption' sx={{ textAlign: 'left' }}>차량 대수</Typography>
+            <Typography variant='caption' sx={{ textAlign: 'left' }}>차량 대수 *</Typography>
             <Select
               value={estimateForm.vehicleNumber}
               onChange={handleValueChange}
@@ -318,25 +311,49 @@ const Estimate = (props) => {
               }}>
               출발 계획
             </Typography>
-            <Stack
-              direction='row'
-              justifyContent='center'>
-              <Typography
-                variant='caption'
-                color='gray'>
-                &nbsp;&nbsp;출발 장소
-              </Typography>
+            <Stack direction='row'>
+              <Typography variant='caption' color='gray' sx={{width: '46%', textAlign:'left'}}>출발 일자</Typography>
+              <Typography variant='caption' color='gray'>출발 장소</Typography>
             </Stack>
             <Stack direction='row' spacing={2}>
-              <TextField
-                size='small'
-                label='출발일자'
-                type='datetime-local'
-                name='departDate'
-                inputProps={{ min: currentDateTime }}
-                value={estimateForm.departDate}
-                onChange={handleValueChange}
-              />
+              <Box>
+                <TextField
+                  size='small'
+                  type='date'
+                  name='departDate'
+                  inputProps={{ min: currentDate }}
+                  value={estimateForm.departDate}
+                  onChange={handleValueChange}
+                />
+                <Select size='small' name='departTime' onChange={handleValueChange} value={estimateForm.departTime}
+                  MenuProps={{PaperProps: {sx: {maxHeight: 300}}}}>
+                  <MenuItem value='00:00'>00:00</MenuItem><MenuItem value='00:30'>00:30</MenuItem>
+                  <MenuItem value='01:00'>01:00</MenuItem><MenuItem value='01:30'>01:30</MenuItem>
+                  <MenuItem value='02:00'>02:00</MenuItem><MenuItem value='02:30'>02:30</MenuItem>
+                  <MenuItem value='03:00'>03:00</MenuItem><MenuItem value='03:30'>03:30</MenuItem>
+                  <MenuItem value='04:00'>04:00</MenuItem><MenuItem value='04:30'>04:30</MenuItem>
+                  <MenuItem value='05:00'>05:00</MenuItem><MenuItem value='05:30'>05:30</MenuItem>
+                  <MenuItem value='06:00'>06:00</MenuItem><MenuItem value='06:30'>06:30</MenuItem>
+                  <MenuItem value='07:00'>07:00</MenuItem><MenuItem value='07:30'>07:30</MenuItem>
+                  <MenuItem value='08:00'>08:00</MenuItem><MenuItem value='08:30'>08:30</MenuItem>
+                  <MenuItem value='09:00'>09:00</MenuItem><MenuItem value='09:30'>09:30</MenuItem>
+                  <MenuItem value='10:00'>10:00</MenuItem><MenuItem value='10:30'>10:30</MenuItem>
+                  <MenuItem value='11:00'>11:00</MenuItem><MenuItem value='11:30'>11:30</MenuItem>
+                  <MenuItem value='12:00'>12:00</MenuItem><MenuItem value='12:30'>12:30</MenuItem>
+                  <MenuItem value='13:00'>13:00</MenuItem><MenuItem value='13:30'>13:30</MenuItem>
+                  <MenuItem value='14:00'>14:00</MenuItem><MenuItem value='14:30'>14:30</MenuItem>
+                  <MenuItem value='15:00'>15:00</MenuItem><MenuItem value='15:30'>15:30</MenuItem>
+                  <MenuItem value='16:00'>16:00</MenuItem><MenuItem value='16:30'>16:30</MenuItem>
+                  <MenuItem value='17:00'>17:00</MenuItem><MenuItem value='17:30'>17:30</MenuItem>
+                  <MenuItem value='18:00'>18:00</MenuItem><MenuItem value='18:30'>18:30</MenuItem>
+                  <MenuItem value='19:00'>19:00</MenuItem><MenuItem value='19:30'>19:30</MenuItem>
+                  <MenuItem value='20:00'>20:00</MenuItem><MenuItem value='20:30'>20:30</MenuItem>
+                  <MenuItem value='21:00'>21:00</MenuItem><MenuItem value='21:30'>21:30</MenuItem>
+                  <MenuItem value='22:00'>22:00</MenuItem><MenuItem value='22:30'>22:30</MenuItem>
+                  <MenuItem value='23:00'>23:00</MenuItem><MenuItem value='23:30'>23:30</MenuItem>
+                  <MenuItem value='24:00'>24:00</MenuItem>
+                </Select>
+              </Box>
               <Box>
                 <Select
                   size='small'
@@ -347,13 +364,13 @@ const Estimate = (props) => {
                   <MenuItem value='[서울]'>서울</MenuItem>
                   <MenuItem value='[경기]'>경기</MenuItem>
                   <MenuItem value='[강원]'>강원</MenuItem>
-                  <MenuItem value='[경상]'>경북</MenuItem>
-                  <MenuItem value='[경상]'>경남</MenuItem>
-                  <MenuItem value='[전라]'>전북</MenuItem>
-                  <MenuItem value='[전라]'>전남</MenuItem>
+                  <MenuItem value='[경북]'>경북</MenuItem>
+                  <MenuItem value='[경남]'>경남</MenuItem>
+                  <MenuItem value='[전북]'>전북</MenuItem>
+                  <MenuItem value='[전남]'>전남</MenuItem>
                   <MenuItem value='[제주]'>제주</MenuItem>
-                  <MenuItem value='[충청]'>충북</MenuItem>
-                  <MenuItem value='[충청]'>충남</MenuItem>
+                  <MenuItem value='[충북]'>충북</MenuItem>
+                  <MenuItem value='[충남]'>충남</MenuItem>
                   <MenuItem value='[광주]'>광주</MenuItem>
                   <MenuItem value='[대구]'>대구</MenuItem>
                   <MenuItem value='[대전]'>대전</MenuItem>
@@ -390,21 +407,49 @@ const Estimate = (props) => {
             >
               귀행 계획
             </Typography>
-            <Stack direction='row' justifyContent='center'>
-              <Typography variant='caption' color='gray'>
-                &nbsp;&nbsp;귀행 장소
-              </Typography>
+            <Stack direction='row'>
+              <Typography variant='caption' color='gray' sx={{width: '46%', textAlign:'left'}}>귀행 일자</Typography>
+              <Typography variant='caption' color='gray'>귀행 장소</Typography>
             </Stack>
             <Stack direction='row' spacing={2}>
-              <TextField
-                size='small'
-                label='귀행일자'
-                type='datetime-local'
-                name='arrivalDate'
-                inputProps={{ min: currentDateTime }}
-                onChange={handleValueChange}
-                value={estimateForm.arrivalDate}
-              />
+              <Box>
+                <TextField
+                  size='small'
+                  type='date'
+                  name='arrivalDate'
+                  inputProps={{ min: currentDate }}
+                  onChange={handleValueChange}
+                  value={estimateForm.arrivalDate}
+                />
+                <Select size='small' name='arrivalTime' onChange={handleValueChange} value={estimateForm.arrivalTime}
+                  MenuProps={{PaperProps: {sx: {maxHeight: 300}}}}>
+                  <MenuItem value='00:00'>00:00</MenuItem><MenuItem value='00:30'>00:30</MenuItem>
+                  <MenuItem value='01:00'>01:00</MenuItem><MenuItem value='01:30'>01:30</MenuItem>
+                  <MenuItem value='02:00'>02:00</MenuItem><MenuItem value='02:30'>02:30</MenuItem>
+                  <MenuItem value='03:00'>03:00</MenuItem><MenuItem value='03:30'>03:30</MenuItem>
+                  <MenuItem value='04:00'>04:00</MenuItem><MenuItem value='04:30'>04:30</MenuItem>
+                  <MenuItem value='05:00'>05:00</MenuItem><MenuItem value='05:30'>05:30</MenuItem>
+                  <MenuItem value='06:00'>06:00</MenuItem><MenuItem value='06:30'>06:30</MenuItem>
+                  <MenuItem value='07:00'>07:00</MenuItem><MenuItem value='07:30'>07:30</MenuItem>
+                  <MenuItem value='08:00'>08:00</MenuItem><MenuItem value='08:30'>08:30</MenuItem>
+                  <MenuItem value='09:00'>09:00</MenuItem><MenuItem value='09:30'>09:30</MenuItem>
+                  <MenuItem value='10:00'>10:00</MenuItem><MenuItem value='10:30'>10:30</MenuItem>
+                  <MenuItem value='11:00'>11:00</MenuItem><MenuItem value='11:30'>11:30</MenuItem>
+                  <MenuItem value='12:00'>12:00</MenuItem><MenuItem value='12:30'>12:30</MenuItem>
+                  <MenuItem value='13:00'>13:00</MenuItem><MenuItem value='13:30'>13:30</MenuItem>
+                  <MenuItem value='14:00'>14:00</MenuItem><MenuItem value='14:30'>14:30</MenuItem>
+                  <MenuItem value='15:00'>15:00</MenuItem><MenuItem value='15:30'>15:30</MenuItem>
+                  <MenuItem value='16:00'>16:00</MenuItem><MenuItem value='16:30'>16:30</MenuItem>
+                  <MenuItem value='17:00'>17:00</MenuItem><MenuItem value='17:30'>17:30</MenuItem>
+                  <MenuItem value='18:00'>18:00</MenuItem><MenuItem value='18:30'>18:30</MenuItem>
+                  <MenuItem value='19:00'>19:00</MenuItem><MenuItem value='19:30'>19:30</MenuItem>
+                  <MenuItem value='20:00'>20:00</MenuItem><MenuItem value='20:30'>20:30</MenuItem>
+                  <MenuItem value='21:00'>21:00</MenuItem><MenuItem value='21:30'>21:30</MenuItem>
+                  <MenuItem value='22:00'>22:00</MenuItem><MenuItem value='22:30'>22:30</MenuItem>
+                  <MenuItem value='23:00'>23:00</MenuItem><MenuItem value='23:30'>23:30</MenuItem>
+                  <MenuItem value='24:00'>24:00</MenuItem>
+                </Select>
+              </Box>
               <Box>
                 <Select
                   size='small'
@@ -415,13 +460,13 @@ const Estimate = (props) => {
                   <MenuItem value='[서울]'>서울</MenuItem>
                   <MenuItem value='[경기]'>경기</MenuItem>
                   <MenuItem value='[강원]'>강원</MenuItem>
-                  <MenuItem value='[경상]'>경북</MenuItem>
-                  <MenuItem value='[경상]'>경남</MenuItem>
-                  <MenuItem value='[전라]'>전북</MenuItem>
-                  <MenuItem value='[전라]'>전남</MenuItem>
+                  <MenuItem value='[경북]'>경북</MenuItem>
+                  <MenuItem value='[경남]'>경남</MenuItem>
+                  <MenuItem value='[전북]'>전북</MenuItem>
+                  <MenuItem value='[전남]'>전남</MenuItem>
                   <MenuItem value='[제주]'>제주</MenuItem>
-                  <MenuItem value='[충청]'>충북</MenuItem>
-                  <MenuItem value='[충청]'>충남</MenuItem>
+                  <MenuItem value='[충북]'>충북</MenuItem>
+                  <MenuItem value='[충남]'>충남</MenuItem>
                   <MenuItem value='[광주]'>광주</MenuItem>
                   <MenuItem value='[대구]'>대구</MenuItem>
                   <MenuItem value='[대전]'>대전</MenuItem>
@@ -461,7 +506,7 @@ const Estimate = (props) => {
             direction='row'
             justifyContent='flex-start'
             >
-            <Typography variant='caption' color='gray' sx={{width: '135px'}}>인원 수</Typography>
+            <Typography variant='caption' color='gray' sx={{width: '135px'}}>인원수</Typography>
           </Stack>
           <FormControl sx={{ mb: 1 }} error={memberCountErrorMSg ? true : false}>
           <OutlinedInput

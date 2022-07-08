@@ -2,7 +2,7 @@ import { Alert, AlertTitle, Button, Dialog, DialogContent, FormControlLabel, Men
 import { Box } from "@mui/system";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Loading from "../Loading";
 
 const Cell = (props) => {
@@ -14,7 +14,6 @@ const Cell = (props) => {
 
 export default function MobileMyEstimateDetail({ ektour }) {
 
-  const navigate = useNavigate();
   const { page, estimateId } = useParams();
   const { state } = useLocation();
 
@@ -53,7 +52,6 @@ export default function MobileMyEstimateDetail({ ektour }) {
     createdDate: '',
     ip: ''
   });
-
   const [info, setInfo] = useState({
     id: 0,
     name: '',
