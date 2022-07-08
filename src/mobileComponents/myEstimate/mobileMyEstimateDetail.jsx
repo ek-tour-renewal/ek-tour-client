@@ -260,6 +260,10 @@ export default function MobileMyEstimateDetail({ ektour }) {
     })
   }
 
+  const inputNumber = (event) => {
+    if (!/^[0-9]+$/.test(event.key) && event.key.length === 1) { event.preventDefault() };
+  }
+
   return (
     <>
       <TableContainer sx={{ maxHeight: '55vh' }}>
@@ -339,7 +343,7 @@ export default function MobileMyEstimateDetail({ ektour }) {
             <TableRow>
               <Cell type='label' element='인원 수' />
               <Cell element={
-                <TextField name='memberCount' size='small' value={info.memberCount} onChange={handleValueChange} inputProps={{ readOnly: !modify }} />
+                <TextField name='memberCount' size='small' value={info.memberCount} onChange={handleValueChange} onKeyDown={inputNumber} inputProps={{ readOnly: !modify }} />
               } />
             </TableRow>
             <TableRow>

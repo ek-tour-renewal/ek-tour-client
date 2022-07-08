@@ -21,6 +21,10 @@ import {
   Radio,
   RadioGroup,
   FormControlLabel,
+  FormHelperText,
+  InputAdornment,
+  OutlinedInput,
+  FormControl,
 } from "@mui/material";
 import axios from "axios";
 
@@ -237,6 +241,10 @@ export default function EstimateDetail({ ektour }) {
     arrivalTime: ''
   });
 
+  const inputNumber = (event) => {
+    if (!/^[0-9]+$/.test(event.key) && event.key.length === 1) { event.preventDefault() };
+  }
+
   const handleValueChange = (e) => {
     const { name, value } = e.target;
     setInfo({
@@ -443,15 +451,17 @@ export default function EstimateDetail({ ektour }) {
               <Cell element="인원수" type="label" />
               <Cell
                 element={
-                  <TextField
-                    size="small"
-                    type='number'
-                    InputProps={{ readOnly: !modify }}
-                    name="memberCount"
+                  <OutlinedInput
+                    type='text'
+                    name='memberCount'
+                    variant='outlined'
+                    size='small'
                     value={info.memberCount}
                     onChange={handleValueChange}
-                    error={memberCountErrorMsg ? true : false}
-                    helperText={memberCountErrorMsg}
+                    onKeyDown={inputNumber}
+                    endAdornment={<InputAdornment position='end'>명</InputAdornment>}
+                    sx={{ width: '100px', margin: '0 auto' }}
+                    inputProps={{ readOnly: !modify }}
                   />
                 }
               />
