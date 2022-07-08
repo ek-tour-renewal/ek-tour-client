@@ -31,7 +31,7 @@ const MobileEstimate = memo((props) => {
 
   const handleCloseSnackBar = () => { setSuccess(false); setFail(false); }
 
-  let currentDateTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+  let currentDateTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
 
   const [estimateForm, setEstimateForm] = useState({
     name: '',
@@ -43,7 +43,9 @@ const MobileEstimate = memo((props) => {
     vehicleNumber: '',
     memberCount: '',
     departDate: currentDateTime,
+    departTime: '05:00',
     arrivalDate: currentDateTime,
+    arrivalTime: '05:00',
     departPlace: '[서울]',
     departPlaceDetail: '',
     arrivalPlace: '[서울]',
@@ -69,9 +71,9 @@ const MobileEstimate = memo((props) => {
         vehicleType: estimateForm.vehicleType,
         vehicleNumber: Number(estimateForm.vehicleNumber),
         memberCount: Number(estimateForm.memberCount),
-        departDate: estimateForm.departDate,
+        departDate: estimateForm.departDate + 'T' + estimateForm.departTime,
         departPlace: estimateForm.departPlace + estimateForm.departPlaceDetail,
-        arrivalDate: estimateForm.arrivalDate,
+        arrivalDate: estimateForm.arrivalDate + 'T' + estimateForm.arrivalTime,
         arrivalPlace: estimateForm.arrivalPlace + estimateForm.arrivalPlaceDetail,
         memo: estimateForm.memo,
         stopPlace: estimateForm.stopPlace,
@@ -81,19 +83,19 @@ const MobileEstimate = memo((props) => {
       };
       // console.log(data);
       axios.post('/estimate', data)
-      .then((response) => {
-        console.log(response.data);
-        alert('견적을 요청했습니다.');
-        window.location.reload();
-        setSuccess(true);
-      })
-      .catch((error) => {
-        console.log(error);
-        setFail(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+        .then((response) => {
+          console.log(response.data);
+          alert('견적을 요청했습니다.');
+          window.location.reload();
+          setSuccess(true);
+        })
+        .catch((error) => {
+          console.log(error);
+          setFail(true);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     } else alert('정확한 정보를 입력해 주세요.');
     setLoading(false);
   };
@@ -254,38 +256,123 @@ const MobileEstimate = memo((props) => {
               backgroundColor: '#FCFCFC'
             }}
           />
-          <Box sx={{ width: '90%', m: '0 auto' }}>
-            <TextField
-              label='출발일자'
-              type='datetime-local'
-              name='departDate'
-              InputLabelProps={{ shrink: true }}
-              value={estimateForm.departDate}
-              onChange={handleValueChange}
-              inputProps={{ min: currentDateTime }}
-              size='small'
-              sx={{
-                width: '100%',
-                mb: '15px',
-                backgroundColor: '#FCFCFC'
+            <Stack 
+            direction='row' 
+            sx={{
+              width: '90%',
+              m: '0 auto',
+              justifyContent: 'center',
+              mb: '15px'
+              }}>
+              <TextField
+                label='출발일자'
+                type='date'
+                name='departDate'
+                InputLabelProps={{ shrink: true }}
+                value={estimateForm.departDate}
+                onChange={handleValueChange}
+                inputProps={{ min: currentDateTime }}
+                size='small'
+                sx={{
+                  width: '100%',
+                  mb: '15px',
+                  backgroundColor: '#FCFCFC'
+                }}
+              />
+              <Select
+                size='small'
+                name='departTime'
+                onChange={handleValueChange}
+                value={estimateForm.departTime}
+                MenuProps={{ PaperProps: { sx: { maxHeight: 300 } } }}
+                sx={{ backgroundColor: '#FCFCFC' }}
+                style={{height: 'fit-content'}}
+              >
+                <MenuItem value='05:00'>05:00</MenuItem><MenuItem value='05:30'>05:30</MenuItem>
+                <MenuItem value='06:00'>06:00</MenuItem><MenuItem value='06:30'>06:30</MenuItem>
+                <MenuItem value='07:00'>07:00</MenuItem><MenuItem value='07:30'>07:30</MenuItem>
+                <MenuItem value='08:00'>08:00</MenuItem><MenuItem value='08:30'>08:30</MenuItem>
+                <MenuItem value='09:00'>09:00</MenuItem><MenuItem value='09:30'>09:30</MenuItem>
+                <MenuItem value='10:00'>10:00</MenuItem><MenuItem value='10:30'>10:30</MenuItem>
+                <MenuItem value='11:00'>11:00</MenuItem><MenuItem value='11:30'>11:30</MenuItem>
+                <MenuItem value='12:00'>12:00</MenuItem><MenuItem value='12:30'>12:30</MenuItem>
+                <MenuItem value='13:00'>13:00</MenuItem><MenuItem value='13:30'>13:30</MenuItem>
+                <MenuItem value='14:00'>14:00</MenuItem><MenuItem value='14:30'>14:30</MenuItem>
+                <MenuItem value='15:00'>15:00</MenuItem><MenuItem value='15:30'>15:30</MenuItem>
+                <MenuItem value='16:00'>16:00</MenuItem><MenuItem value='16:30'>16:30</MenuItem>
+                <MenuItem value='17:00'>17:00</MenuItem><MenuItem value='17:30'>17:30</MenuItem>
+                <MenuItem value='18:00'>18:00</MenuItem><MenuItem value='18:30'>18:30</MenuItem>
+                <MenuItem value='19:00'>19:00</MenuItem><MenuItem value='19:30'>19:30</MenuItem>
+                <MenuItem value='20:00'>20:00</MenuItem><MenuItem value='20:30'>20:30</MenuItem>
+                <MenuItem value='21:00'>21:00</MenuItem><MenuItem value='21:30'>21:30</MenuItem>
+                <MenuItem value='22:00'>22:00</MenuItem><MenuItem value='22:30'>22:30</MenuItem>
+                <MenuItem value='23:00'>23:00</MenuItem><MenuItem value='23:30'>23:30</MenuItem>
+                <MenuItem value='00:00'>00:00</MenuItem><MenuItem value='00:30'>00:30</MenuItem>
+                <MenuItem value='01:00'>01:00</MenuItem><MenuItem value='01:30'>01:30</MenuItem>
+                <MenuItem value='02:00'>02:00</MenuItem><MenuItem value='02:30'>02:30</MenuItem>
+                <MenuItem value='03:00'>03:00</MenuItem><MenuItem value='03:30'>03:30</MenuItem>
+                <MenuItem value='04:00'>04:00</MenuItem><MenuItem value='04:30'>04:30</MenuItem>
+              </Select>
+            </Stack>
+            <Stack 
+            direction='row'
+            sx={{
+              width: '90%',
+              m: '0 auto',
+              justifyContent: 'center',
+              mb: '15px'
               }}
-            />
-            <TextField
-              label='귀행일자'
-              type='datetime-local'
-              name='arrivalDate'
-              InputLabelProps={{ shrink: true }}
-              onChange={handleValueChange}
-              value={estimateForm.arrivalDate}
-              inputProps={{ min: currentDateTime }}
-              size='small'
-              sx={{
-                width: '100%',
-                mb: '15px',
-                backgroundColor: '#FCFCFC'
-              }}
-            />
-          </Box>
+              >
+              <TextField
+                label='귀행일자'
+                type='date'
+                name='arrivalDate'
+                InputLabelProps={{ shrink: true }}
+                onChange={handleValueChange}
+                value={estimateForm.arrivalDate}
+                inputProps={{ min: currentDateTime }}
+                size='small'
+                sx={{
+                  width: '100%',
+                  mb: '15px',
+                  backgroundColor: '#FCFCFC'
+                }}
+              />
+              <Select
+                size='small'
+                name='arrivalTime'
+                onChange={handleValueChange}
+                value={estimateForm.arrivalTime}
+                MenuProps={{ PaperProps: { sx: { maxHeight: 300 } } }}
+                sx={{ backgroundColor: '#FCFCFC' }}
+                style={{height: 'fit-content'}}
+              >
+                <MenuItem value='05:00'>05:00</MenuItem><MenuItem value='05:30'>05:30</MenuItem>
+                <MenuItem value='06:00'>06:00</MenuItem><MenuItem value='06:30'>06:30</MenuItem>
+                <MenuItem value='07:00'>07:00</MenuItem><MenuItem value='07:30'>07:30</MenuItem>
+                <MenuItem value='08:00'>08:00</MenuItem><MenuItem value='08:30'>08:30</MenuItem>
+                <MenuItem value='09:00'>09:00</MenuItem><MenuItem value='09:30'>09:30</MenuItem>
+                <MenuItem value='10:00'>10:00</MenuItem><MenuItem value='10:30'>10:30</MenuItem>
+                <MenuItem value='11:00'>11:00</MenuItem><MenuItem value='11:30'>11:30</MenuItem>
+                <MenuItem value='12:00'>12:00</MenuItem><MenuItem value='12:30'>12:30</MenuItem>
+                <MenuItem value='13:00'>13:00</MenuItem><MenuItem value='13:30'>13:30</MenuItem>
+                <MenuItem value='14:00'>14:00</MenuItem><MenuItem value='14:30'>14:30</MenuItem>
+                <MenuItem value='15:00'>15:00</MenuItem><MenuItem value='15:30'>15:30</MenuItem>
+                <MenuItem value='16:00'>16:00</MenuItem><MenuItem value='16:30'>16:30</MenuItem>
+                <MenuItem value='17:00'>17:00</MenuItem><MenuItem value='17:30'>17:30</MenuItem>
+                <MenuItem value='18:00'>18:00</MenuItem><MenuItem value='18:30'>18:30</MenuItem>
+                <MenuItem value='19:00'>19:00</MenuItem><MenuItem value='19:30'>19:30</MenuItem>
+                <MenuItem value='20:00'>20:00</MenuItem><MenuItem value='20:30'>20:30</MenuItem>
+                <MenuItem value='21:00'>21:00</MenuItem><MenuItem value='21:30'>21:30</MenuItem>
+                <MenuItem value='22:00'>22:00</MenuItem><MenuItem value='22:30'>22:30</MenuItem>
+                <MenuItem value='23:00'>23:00</MenuItem><MenuItem value='23:30'>23:30</MenuItem>
+                <MenuItem value='00:00'>00:00</MenuItem><MenuItem value='00:30'>00:30</MenuItem>
+                <MenuItem value='01:00'>01:00</MenuItem><MenuItem value='01:30'>01:30</MenuItem>
+                <MenuItem value='02:00'>02:00</MenuItem><MenuItem value='02:30'>02:30</MenuItem>
+                <MenuItem value='03:00'>03:00</MenuItem><MenuItem value='03:30'>03:30</MenuItem>
+                <MenuItem value='04:00'>04:00</MenuItem><MenuItem value='04:30'>04:30</MenuItem>
+              </Select>
+            </Stack>
 
           <Stack
             direction='row'
@@ -302,22 +389,22 @@ const MobileEstimate = memo((props) => {
               value={estimateForm.departPlace}
               size='small'
               sx={{ width: '30%', backgroundColor: '#FCFCFC' }}>
-                <MenuItem value='[서울]'>서울</MenuItem>
-                <MenuItem value='[경기]'>경기</MenuItem>
-                <MenuItem value='[강원]'>강원</MenuItem>
-                <MenuItem value='[경북]'>경북</MenuItem>
-                <MenuItem value='[경남]'>경남</MenuItem>
-                <MenuItem value='[전북]'>전북</MenuItem>
-                <MenuItem value='[전남]'>전남</MenuItem>
-                <MenuItem value='[제주]'>제주</MenuItem>
-                <MenuItem value='[충북]'>충북</MenuItem>
-                <MenuItem value='[충남]'>충남</MenuItem>
-                <MenuItem value='[광주]'>광주</MenuItem>
-                <MenuItem value='[대구]'>대구</MenuItem>
-                <MenuItem value='[대전]'>대전</MenuItem>
-                <MenuItem value='[부산]'>부산</MenuItem>
-                <MenuItem value='[울산]'>울산</MenuItem>
-                <MenuItem value='[인천]'>인천</MenuItem>
+              <MenuItem value='[서울]'>서울</MenuItem>
+              <MenuItem value='[경기]'>경기</MenuItem>
+              <MenuItem value='[강원]'>강원</MenuItem>
+              <MenuItem value='[경북]'>경북</MenuItem>
+              <MenuItem value='[경남]'>경남</MenuItem>
+              <MenuItem value='[전북]'>전북</MenuItem>
+              <MenuItem value='[전남]'>전남</MenuItem>
+              <MenuItem value='[제주]'>제주</MenuItem>
+              <MenuItem value='[충북]'>충북</MenuItem>
+              <MenuItem value='[충남]'>충남</MenuItem>
+              <MenuItem value='[광주]'>광주</MenuItem>
+              <MenuItem value='[대구]'>대구</MenuItem>
+              <MenuItem value='[대전]'>대전</MenuItem>
+              <MenuItem value='[부산]'>부산</MenuItem>
+              <MenuItem value='[울산]'>울산</MenuItem>
+              <MenuItem value='[인천]'>인천</MenuItem>
             </Select>
             <TextField
               label='출발지 세부정보'
@@ -334,7 +421,7 @@ const MobileEstimate = memo((props) => {
               }}
               onChange={handleValueChange}
               error={departPlaceDetailErrorMsg ? true : false}
-                  helperText={departPlaceDetailErrorMsg}
+              helperText={departPlaceDetailErrorMsg}
             />
           </Stack>
 
@@ -384,7 +471,7 @@ const MobileEstimate = memo((props) => {
               }}
               onChange={handleValueChange}
               error={arrivalPlaceDetailErrorMSg ? true : false}
-                  helperText={arrivalPlaceDetailErrorMSg}
+              helperText={arrivalPlaceDetailErrorMSg}
             />
           </Stack>
           <TextField
@@ -402,21 +489,21 @@ const MobileEstimate = memo((props) => {
           />
 
           <Stack direction='row' sx={{ justifyContent: 'center', mb: '15px' }}>
-          <FormControl sx={{width: '58%'}}>
+            <FormControl sx={{ width: '58%' }}>
               <InputLabel id='travelType'>여행구분</InputLabel>
-            <Select
-              labelId='travelType'
-              input={<OutlinedInput label="여행구분" />}
-              name='travelType'
-              onChange={handleValueChange}
-              size='small'
-              value={estimateForm.travelType}
-              sx={{ backgroundColor: '#FCFCFC' }}>
-              <MenuItem value={'일반여행'}>일반여행</MenuItem>
-              <MenuItem value={'관혼상제'}>관혼상제</MenuItem>
-              <MenuItem value={'학교단체'}>학교단체</MenuItem>
-              <MenuItem value={'기타단체'}>기타단체</MenuItem>
-            </Select>
+              <Select
+                labelId='travelType'
+                input={<OutlinedInput label="여행구분" />}
+                name='travelType'
+                onChange={handleValueChange}
+                size='small'
+                value={estimateForm.travelType}
+                sx={{ backgroundColor: '#FCFCFC' }}>
+                <MenuItem value={'일반여행'}>일반여행</MenuItem>
+                <MenuItem value={'관혼상제'}>관혼상제</MenuItem>
+                <MenuItem value={'학교단체'}>학교단체</MenuItem>
+                <MenuItem value={'기타단체'}>기타단체</MenuItem>
+              </Select>
             </FormControl>
 
             <TextField
@@ -430,165 +517,165 @@ const MobileEstimate = memo((props) => {
               sx={{ width: '30%', ml: 1, backgroundColor: '#FCFCFC' }}
             />
           </Stack>
-              <Stack direction='row' sx={{ justifyContent: 'center', mb: '15px' }}>
-              <FormControl sx={{width: '45%'}} error={vehicleTypeErrorMsg ? true : false}>
+          <Stack direction='row' sx={{ justifyContent: 'center', mb: '15px' }}>
+            <FormControl sx={{ width: '45%' }} error={vehicleTypeErrorMsg ? true : false}>
               <InputLabel id='vehicleType'>차량구분</InputLabel>
-                <Select
-                  labelId='vehicleType'
-                  input={<OutlinedInput label="차량구분" />}
-                  name='vehicleType'
-                  onChange={handleValueChange}
-                  size='small'
-                  value={estimateForm.vehicleType}
-                  sx={{ backgroundColor: '#FCFCFC' }}
-                >
-                  <MenuItem value={'25인승 소형'}>25인승 소형</MenuItem>
-                  <MenuItem value={'28인승 리무진'}>28인승 리무진</MenuItem>
-                  <MenuItem value={'45인승 대형'}>45인승 대형</MenuItem>
-                </Select>
-                <FormHelperText>{vehicleTypeErrorMsg}</FormHelperText>
-                </FormControl>
-                
-                <FormControl sx={{width: '45%'}} error={vehicleNumberErrorMsg ? true : false}>
+              <Select
+                labelId='vehicleType'
+                input={<OutlinedInput label="차량구분" />}
+                name='vehicleType'
+                onChange={handleValueChange}
+                size='small'
+                value={estimateForm.vehicleType}
+                sx={{ backgroundColor: '#FCFCFC' }}
+              >
+                <MenuItem value={'25인승 소형'}>25인승 소형</MenuItem>
+                <MenuItem value={'28인승 리무진'}>28인승 리무진</MenuItem>
+                <MenuItem value={'45인승 대형'}>45인승 대형</MenuItem>
+              </Select>
+              <FormHelperText>{vehicleTypeErrorMsg}</FormHelperText>
+            </FormControl>
+
+            <FormControl sx={{ width: '45%' }} error={vehicleNumberErrorMsg ? true : false}>
               <InputLabel id='vehicleNumber'>차량대수</InputLabel>
-                <Select
+              <Select
                 labelId='vehicleNumber'
                 input={<OutlinedInput label="차량대수" />}
-                  value={estimateForm.vehicleNumber}
+                value={estimateForm.vehicleNumber}
+                onChange={handleValueChange}
+                size='small'
+                name='vehicleNumber'
+                sx={{ ml: 1, backgroundColor: '#FCFCFC' }}>
+                <MenuItem value='1'>1대</MenuItem>
+                <MenuItem value='2'>2대</MenuItem>
+                <MenuItem value='3'>3대</MenuItem>
+                <MenuItem value='4'>4대</MenuItem>
+                <MenuItem value='5'>5대</MenuItem>
+                <MenuItem value='6'>6대</MenuItem>
+                <MenuItem value='7'>7대</MenuItem>
+                <MenuItem value='8'>8대</MenuItem>
+                <MenuItem value='9'>9대</MenuItem>
+                <MenuItem value='10'>10대 이상</MenuItem>
+              </Select>
+              <FormHelperText>{vehicleNumberErrorMsg}</FormHelperText>
+            </FormControl>
+          </Stack>
+
+          <Container>
+            <Stack
+              direction='row'
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                mb: '5px'
+              }}>
+              <Stack
+                sx={{
+                  width: '100%',
+                  backgroundColor: '#FCFCFC',
+                  border: '1px solid lightgrey',
+                  borderRadius: '10px',
+                  p: 1,
+                  pr: 0,
+                  mb: 1
+                }}>
+                <FormLabel>왕복 구분</FormLabel>
+                <RadioGroup
+                  row
+                  value={estimateForm.wayType}
                   onChange={handleValueChange}
-                  size='small'
-                  name='vehicleNumber'
-                  sx={{ ml: 1, backgroundColor: '#FCFCFC' }}>
-                  <MenuItem value='1'>1대</MenuItem>
-                  <MenuItem value='2'>2대</MenuItem>
-                  <MenuItem value='3'>3대</MenuItem>
-                  <MenuItem value='4'>4대</MenuItem>
-                  <MenuItem value='5'>5대</MenuItem>
-                  <MenuItem value='6'>6대</MenuItem>
-                  <MenuItem value='7'>7대</MenuItem>
-                  <MenuItem value='8'>8대</MenuItem>
-                  <MenuItem value='9'>9대</MenuItem>
-                  <MenuItem value='10'>10대 이상</MenuItem>
-                </Select>
-                <FormHelperText>{vehicleNumberErrorMsg}</FormHelperText>
-                 </FormControl>
+                  sx={{ justifyContent: 'center' }}>
+                  <FormControlLabel
+                    name='wayType'
+                    value='왕복'
+                    control={<Radio />}
+                    label='왕복'
+                  />
+                  <FormControlLabel
+                    name='wayType'
+                    value='편도'
+                    control={<Radio />}
+                    label='편도'
+                  />
+                </RadioGroup>
               </Stack>
 
-              <Container>
-                <Stack
-                  direction='row'
-                  sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    mb: '5px'
-                  }}>
-                  <Stack
-                    sx={{
-                      width: '100%',
-                      backgroundColor: '#FCFCFC',
-                      border: '1px solid lightgrey',
-                      borderRadius: '10px',
-                      p: 1,
-                      pr: 0,
-                      mb: 1
-                    }}>
-                    <FormLabel>왕복 구분</FormLabel>
-                    <RadioGroup
-                      row
-                      value={estimateForm.wayType}
-                      onChange={handleValueChange}
-                      sx={{ justifyContent: 'center' }}>
-                      <FormControlLabel
-                        name='wayType'
-                        value='왕복'
-                        control={<Radio />}
-                        label='왕복'
-                      />
-                      <FormControlLabel
-                        name='wayType'
-                        value='편도'
-                        control={<Radio />}
-                        label='편도'
-                      />
-                    </RadioGroup>
-                  </Stack>
+              <Stack
+                sx={{
+                  width: '100%',
+                  backgroundColor: '#FCFCFC',
+                  border: '1px solid lightgrey',
+                  borderRadius: '10px',
+                  p: 1,
+                  pr: 0,
+                  mb: 1
+                }}>
+                <FormLabel>결제 방법</FormLabel>
+                <RadioGroup
+                  row
+                  value={estimateForm.payment}
+                  onChange={handleValueChange}
+                  sx={{ justifyContent: 'center' }}>
+                  <FormControlLabel
+                    name='payment'
+                    value='현금'
+                    control={<Radio />}
+                    label='현금'
+                  />
+                  <FormControlLabel
+                    name='payment'
+                    value='카드'
+                    control={<Radio />}
+                    label='카드'
+                  />
+                </RadioGroup>
+              </Stack>
 
-                  <Stack
-                    sx={{
-                      width: '100%',
-                      backgroundColor: '#FCFCFC',
-                      border: '1px solid lightgrey',
-                      borderRadius: '10px',
-                      p: 1,
-                      pr: 0,
-                      mb: 1
-                    }}>
-                    <FormLabel>결제 방법</FormLabel>
-                    <RadioGroup
-                      row
-                      value={estimateForm.payment}
-                      onChange={handleValueChange}
-                      sx={{ justifyContent: 'center' }}>
-                      <FormControlLabel
-                        name='payment'
-                        value='현금'
-                        control={<Radio />}
-                        label='현금'
-                      />
-                      <FormControlLabel
-                        name='payment'
-                        value='카드'
-                        control={<Radio />}
-                        label='카드'
-                      />
-                    </RadioGroup>
-                  </Stack>
-
-                  <Stack
-                    sx={{
-                      width: '100%',
-                      backgroundColor: '#FCFCFC',
-                      border: '1px solid lightgrey',
-                      borderRadius: '10px',
-                      p: 1,
-                      pr: 0,
-                      mb: 2
-                    }}>
-                    <FormLabel>세금 계산서</FormLabel>
-                    <RadioGroup
-                      row
-                      value={estimateForm.taxBill}
-                      onChange={handleValueChange}
-                      sx={{ justifyContent: 'center' }}>
-                      <FormControlLabel
-                        name='taxBill'
-                        value='발급'
-                        control={<Radio />}
-                        label='발급'
-                      />
-                      <FormControlLabel
-                        name='taxBill'
-                        value='발급안함'
-                        control={<Radio />}
-                        label='발급 안 함'
-                      />
-                    </RadioGroup>
-                  </Stack>
-                </Stack>
-              </Container>
-              <TextField
-                label='기타 메모 사항'
-                type='text'
-                name='memo'
-                variant='outlined'
-                onChange={handleValueChange}
-                value={estimateForm.memo}
-                multiline
-                minRows={1}
-                autoComplete='off'
-                sx={{ width: '90%', mb: '15px', backgroundColor: '#FCFCFC' }}
-              />
-            </Box>
+              <Stack
+                sx={{
+                  width: '100%',
+                  backgroundColor: '#FCFCFC',
+                  border: '1px solid lightgrey',
+                  borderRadius: '10px',
+                  p: 1,
+                  pr: 0,
+                  mb: 2
+                }}>
+                <FormLabel>세금 계산서</FormLabel>
+                <RadioGroup
+                  row
+                  value={estimateForm.taxBill}
+                  onChange={handleValueChange}
+                  sx={{ justifyContent: 'center' }}>
+                  <FormControlLabel
+                    name='taxBill'
+                    value='발급'
+                    control={<Radio />}
+                    label='발급'
+                  />
+                  <FormControlLabel
+                    name='taxBill'
+                    value='발급안함'
+                    control={<Radio />}
+                    label='발급 안 함'
+                  />
+                </RadioGroup>
+              </Stack>
+            </Stack>
+          </Container>
+          <TextField
+            label='기타 메모 사항'
+            type='text'
+            name='memo'
+            variant='outlined'
+            onChange={handleValueChange}
+            value={estimateForm.memo}
+            multiline
+            minRows={1}
+            autoComplete='off'
+            sx={{ width: '90%', mb: '15px', backgroundColor: '#FCFCFC' }}
+          />
+        </Box>
         {/* 견적요청 버튼 */}
         <Box sx={{ textAlign: 'center' }}>
           <Button
