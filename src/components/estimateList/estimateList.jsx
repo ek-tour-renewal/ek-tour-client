@@ -18,7 +18,6 @@ const EstimateList = ({ ektour }) => {
 
     ektour.getEstimateListByPage(page)
     .then(response => {
-      console.log(response);
       if (response.totalPage < parseInt(page) || 1 > parseInt(page)) throw new Error("해당 페이지를 찾을 수 없습니다");
       setRequestDataList(response.estimateList);
       setAllPage(response.totalPage);

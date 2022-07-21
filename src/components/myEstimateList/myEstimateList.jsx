@@ -21,7 +21,6 @@ const MyEstimateList = ({ ektour }) => {
     
     if (!state) throw new Error('잘못된 접근입니다.');
 
-    console.log(state.form);
     ektour.getMyEstimateListByFormAndPage(state.form, page)
     .then(response => {
       if (response.totalPage < parseInt(page) || 1 > parseInt(page)) navigate('/error');

@@ -127,7 +127,6 @@ export default function MobileMyEstimateDetail({ ektour }) {
   useEffect(() => {
     ektour.getEstimateDetailByIdAndForm(state.form, estimateId)
     .then(response => {
-      console.log(response);
       setData(response);
       setInfo(response);
       var dp = response.departPlace.substr(0, 4);
@@ -302,7 +301,7 @@ export default function MobileMyEstimateDetail({ ektour }) {
             <TableRow>
               <Cell type='label' element='핸드폰' />
               <Cell element={
-                <TextField name='phone' size='small' value={info.phone} onChange={handleValueChange} inputProps={{ readOnly: !modify }}
+                <TextField name='phone' size='small' value={info.phone} onChange={handleValueChange} inputProps={{ readOnly: true }}
                   error={phoneErrorMsg ? true : false} helperText={phoneErrorMsg} />
               } />
             </TableRow>
@@ -450,7 +449,7 @@ export default function MobileMyEstimateDetail({ ektour }) {
                     <MenuItem value='[인천]'>인천</MenuItem>
                   </Select>
                   <TextField name='arrivalPlaceDetail' size='small' value={infoPlace.arrivalPlaceDetail} 
-                    onChange={handlePlaceChange} inputProps={{ readOnly: !modify }} />
+                    onChange={handlePlaceChange} inputProps={{ readOnly: !modify }} error={arrivalPlaceDetailErrorMsg ? true : false} helperText={arrivalPlaceDetailErrorMsg}  />
                 </Stack>
               } />
             </TableRow>
@@ -495,10 +494,6 @@ export default function MobileMyEstimateDetail({ ektour }) {
                 </Select>
               </Stack>
               } />
-
-
-
-
           </TableRow>
           <TableRow>
             <Cell type='label' element='경유지' />
