@@ -57,22 +57,24 @@ export default function MyEstimate(props) {
       if (props.estimateId) { // 모든 견적 목록 -> 견적 상세보기
         axios.post('/estimate/' + props.estimateId, form)
           .then((response) => {
-            if (!response.data.hasOwnProperty('id')) {
+            // 검증 성공, 응답 데이터(견적 상세 정보) push
+            navigate(`/estimate/list/${page}/${props.estimateId}`, {state: {
+              form: { phone: form.phone, password: form.password }
+            }});
+          })
+          .catch((error) => { 
+            console.log(error.response.status);
+            if (error.response.status === 400) {
               setMessage('핸드폰 번호 / 비밀번호를 다시 확인해주세요.');
             } else {
-              // 검증 성공, 응답 데이터(견적 상세 정보) push
-              navigate(`/estimate/list/${page}/${props.estimateId}`, {state: {
-                form: { phone: form.phone, password: form.password }
-              }});
+              setMessage('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
             }
           })
-          .catch((error) => { console.log(error.response) })
           .finally(() => { setLoading(false); });
       }
       else { // 내 견적 목록 확인
         axios.post('/estimate/search/my', form)
           .then((response) => {
-            console.log(response.data);
             if (response.data.length < 1) { // 핸드폰, 비밀번호 틀림
               setMessage('핸드폰 번호 / 비밀번호를 다시 확인해주세요.');
             } else {

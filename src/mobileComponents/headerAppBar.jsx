@@ -1,7 +1,6 @@
 import { AppBar, Box, ButtonBase, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, makeStyles, Stack, Toolbar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
-import BusinessIcon from '@mui/icons-material/Business';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ContentPasteSearchIcon from '@mui/icons-material/ContentPasteSearch';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
@@ -21,7 +20,6 @@ export default function HeaderAppBar() {
   const handleClickMenu = () => { setMenu(!menu); }
   const handleCloseMenu = () => { setMenu(false); }
 
-  const handleClickCompany = () => { navigate('/mobile/introduce'); handleCloseMenu(); }
   const handleClickMyEstimate = () => { navigate('/mobile/myestimate'); handleCloseMenu(); }
   const handleClickServiceCenter = () => { navigate('/mobile/service-center'); handleCloseMenu(); }
 

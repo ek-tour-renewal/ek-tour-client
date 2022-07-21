@@ -54,7 +54,10 @@ export default function EstimateDetail({ ektour }) {
   const { state } = useLocation();
 
   const [openUpdate, setOpenUpdate] = useState(false);
-  const handleClickUpdateDialog = () => { setOpenUpdate(true); }
+  const handleClickUpdateDialog = () => { 
+    if (!validate()) return;
+    setOpenUpdate(true); 
+  }
   const handleCloseUpdateDialog = () => { 
     setOpenUpdate(false);
     setInfo(data);
