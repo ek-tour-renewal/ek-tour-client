@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './serviceCenter.module.css';
 
-const ServiceCenter = (props) => {
+const ServiceCenter = () => {
   useEffect(() => {
     const titleElement = document.querySelector("title");
     titleElement.innerHTML = `이케이하나관광-고객센터`;

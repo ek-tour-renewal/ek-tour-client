@@ -48,7 +48,7 @@ const Cell = (props) => {
     );
 };
 
-export default function EstimateDetail({ ektour }) {
+export default function EstimateDetail() {
   const navigate = useNavigate();
   const { page, estimateId } = useParams();
   const { state } = useLocation();
@@ -266,50 +266,51 @@ export default function EstimateDetail({ ektour }) {
 
   // 페이지 들어가면 데이터 서버로부터 가져온 데이터 세팅
   useEffect(() => {
-    const titleElement = document.getElementsByTagName("title")[0];
-    titleElement.innerHTML = `이케이하나관광-견적상세내역`;
+      const titleElement = document.getElementsByTagName("title")[0];
+      titleElement.innerHTML = `이케이하나관광-견적상세내역`;
 
-    if (!state) throw new Error('잘못된 접근입니다.');
+      if (!state) throw new Error('잘못된 접근입니다.');
 
-    ektour
-      .getEstimateDetailById(estimateId)
-      .then((response) => {
-        if(!response.hasOwnProperty('id')) navigate('/error');
-        setData(response);
-        setInfo(response);
-        var dp = response.departPlace.substr(0, 4);
-        var dpd = response.departPlace.substr(4);
-        var dd = response.departDate.substr(0, 10);
-        var dt = response.departDate.substr(11, 16);
-        var ap = response.arrivalPlace.substr(0, 4);
-        var apd = response.arrivalPlace.substr(4);
-        var ad = response.arrivalDate.substr(0, 10);
-        var at = response.arrivalDate.substr(11, 16);
-        setDataPlace({
-          departPlace: dp,
-          departPlaceDetail: dpd,
-          departDate: dd,
-          departTime: dt,
-          arrivalPlace: ap,
-          arrivalPlaceDetail: apd,
-          arrivalDate: ad,
-          arrivalTime: at
+      axios
+        .getEstimateDetailById(estimateId)
+        .then((response) => {
+          if (!response.hasOwnProperty('id')) navigate('/error');
+          setData(response);
+          setInfo(response);
+          var dp = response.departPlace.substr(0, 4);
+          var dpd = response.departPlace.substr(4);
+          var dd = response.departDate.substr(0, 10);
+          var dt = response.departDate.substr(11, 16);
+          var ap = response.arrivalPlace.substr(0, 4);
+          var apd = response.arrivalPlace.substr(4);
+          var ad = response.arrivalDate.substr(0, 10);
+          var at = response.arrivalDate.substr(11, 16);
+          setDataPlace({
+            departPlace: dp,
+            departPlaceDetail: dpd,
+            departDate: dd,
+            departTime: dt,
+            arrivalPlace: ap,
+            arrivalPlaceDetail: apd,
+            arrivalDate: ad,
+            arrivalTime: at
+          });
+          setInfoPlace({
+            departPlace: dp,
+            departPlaceDetail: dpd,
+            departDate: dd,
+            departTime: dt,
+            arrivalPlace: ap,
+            arrivalPlaceDetail: apd,
+            arrivalDate: ad,
+            arrivalTime: at
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        setInfoPlace({
-          departPlace: dp,
-          departPlaceDetail: dpd,
-          departDate: dd,
-          departTime: dt,
-          arrivalPlace: ap,
-          arrivalPlaceDetail: apd,
-          arrivalDate: ad,
-          arrivalTime: at
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    },
+    []);
 
   return (
     <>

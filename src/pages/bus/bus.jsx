@@ -1,12 +1,12 @@
 import { Button } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
-import BigBus from './bigBus';
-import Limousine from './limousine';
-import SmallBus from './smallBus';
-import BusNotice from './busNotice';
+import BigBus from '../../components/bus/bigBus';
+import Limousine from '../../components/bus/limousine';
+import SmallBus from '../../components/bus/smallBus';
+import BusNotice from '../../components/bus/busNotice';
 
-const Bus = (props) => {
+const Bus = () => {
   const [busState, setBusState] = useState('notice');
 
   useEffect(() => {
@@ -59,13 +59,13 @@ const Bus = (props) => {
         buttonClick={handleClickBigBus} />
       </Box>
 
-      {busState == 'notice' && <BusNotice />}
+      {busState === 'notice' && <BusNotice />}
 
-      {busState == 'smallBus' && <SmallBus />}
+      {busState === 'smallBus' && <SmallBus />}
 
-      {busState == 'limousine' && <Limousine />}
+      {busState === 'limousine' && <Limousine />}
 
-      {busState == 'bigBus' && <BigBus />}
+      {busState === 'bigBus' && <BigBus />}
     </>
   )
 };

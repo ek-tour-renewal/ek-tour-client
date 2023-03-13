@@ -1,44 +1,39 @@
-import React, { useState } from 'react';
-import styles from './myEstimateList.module.css';
-import SubHeader from '../subHeader/subHeader';
-import EstimateListItem from '../estimateListItem/estimateListItem';
+import React, { useEffect, useState } from 'react';
+import styles from './estimateList.module.css';
+import SubHeader from '../../components/subHeader/subHeader';
+import EstimateListItem from '../../components/estimateListItem/estimateListItem';
 import { Box, Pagination, Stack } from '@mui/material';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from "axios";
 
-const MyEstimateList = ({ ektour }) => {
-
+const EstimateList = () => {
   const navigate = useNavigate();
   const { page } = useParams();
-  const { state } = useLocation();
   
   const [requestDataList, setRequestDataList] = useState();
   const [allPage, setAllPage] = useState();
 
   useEffect(() => {
     const titleElement = document.querySelector("title");
-    titleElement.innerHTML = `이케이하나관광-내 견적 목록`;
-    
-    if (!state) throw new Error('잘못된 접근입니다.');
+    titleElement.innerHTML = `이케이하나관광-견적목록`;
 
-    ektour.getMyEstimateListByFormAndPage(state.form, page)
+    axios.getEstimateListByPage(page)
     .then(response => {
-      if (response.totalPage < parseInt(page) || 1 > parseInt(page)) navigate('/error');
+      if (response.totalPage < parseInt(page) || 1 > parseInt(page)) throw new Error("해당 페이지를 찾을 수 없습니다");
       setRequestDataList(response.estimateList);
       setAllPage(response.totalPage);
     })
     .catch(error => { console.log(error); });
-    if (page > allPage) throw new Error('해당 페이지를 찾을 수 없습니다.');
   }, [page]);
 
   const handleChangePage = (event, value) => {
-    navigate(`/estimate/my/list/${page}/${value}`, { state: { form: state.form } });
+    navigate('/estimate/list/' + value);
   }
 
   return (
     <>
-      <section className={styles.myEstimateList}>
-        <SubHeader menu='내 견적 목록' />
+      <section className={styles.estimateList}>
+        <SubHeader menu='견적 목록' />
         <section className={styles.dataListContainer}>
           <div className={styles.dataList}>
             <span className={styles.id}>순번</span>
@@ -61,18 +56,20 @@ const MyEstimateList = ({ ektour }) => {
                   arrivalPlace={e.arrivalPlace}
                   vehicleType={e.vehicleType}
                   createdDate={e.createdDate}
-                  myEstimate={'true'}
                 />
               );
-            }) : <Box p={5}>견적 요청 내역이 없습니다.</Box>
+            }) :
+            <Box p={5}>
+              견적 요청 내역이 없습니다.
+            </Box>
           }
           <Stack spacing={0} m={1}>
-            <Pagination
+            <Pagination 
               count={allPage}
-              page={parseInt(page)}
+              page={parseInt(page)} 
               shape='rounded' 
               size='small'
-              onChange={handleChangePage} 
+              onChange={handleChangePage}
               sx={{ margin: '0 auto' }}
             />
           </Stack>
@@ -82,4 +79,4 @@ const MyEstimateList = ({ ektour }) => {
   )
 };
 
-export default MyEstimateList;
+export default EstimateList;
