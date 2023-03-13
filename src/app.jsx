@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './app.module.css';
-import Footer from './components/footer/footer';
-import Header from './components/header/header';
+import Footer from './components/ui/footer/footer';
+import Header from './components/ui/header/header';
 import Main from './components/main/main';
 import Company from './components/company/company';
 import Bus from './components/bus/bus';

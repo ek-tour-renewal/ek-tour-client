@@ -1,12 +1,7 @@
-@value makerOrange, makerBlack, makerWhite, makerPaleOrange, makerYellow, makerBrown,  makerLightYellow from '../../common/colors.css';
+@value makerOrange, makerBlack, makerWhite, makerPaleOrange, makerYellow, makerBrown,  makerLightYellow from '../../../common/colors.css';
+
 button {
   cursor: pointer;
-}
-
-.navbar {
-  margin-top: 1em;
-  display: flex;
-  justify-content: center;
 }
 
 .logo {
@@ -27,4 +22,5 @@ button {
   justify-content: end;
   border-bottom: 0.5em solid makerOrange;
   margin-bottom: 0;
+  margin-top: 2em;
 }

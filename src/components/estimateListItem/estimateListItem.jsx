@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import MyEstimate from '../myEstimate/myEstimateV1';
+import MyEstimate from '../myEstimate/myEstimateForm';
 import styles from './estimateListItem.module.css';
 
 const EstimateListItem = (props, { ektour }) => {

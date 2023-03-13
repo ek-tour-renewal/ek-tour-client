@@ -1,19 +1,12 @@
+import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import { Alert, Box, Button, Dialog, DialogContent, DialogTitle, Divider, IconButton, MenuItem, Select, Stack, Table, TableBody, TableRow, TextField, Typography } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import LoadingButton from '@mui/lab/LoadingButton';
 import CloseIcon from '@mui/icons-material/Close';
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 
-// props 정보
-// open : Dialog의 open 여부를 결정할 state
-// onClose : Dialog를 close할 function
-// estimateId : 확인할 견적의 ID
-// userName : 확인할 견적의 등록자명
-// ektour : 통신 처리할 ektour Class
-
-export default function MyEstimate(props) {
+export default function MyEstimateForm(props) {
 
   const navigate = useNavigate();
 

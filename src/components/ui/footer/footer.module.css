@@ -1,4 +1,4 @@
-@value makerOrange, makerWhite, makerBrown from '../../common/colors.css';
+@value makerOrange, makerWhite, makerBrown from '../../../common/colors.css';
 ul {
   padding: 0;
 }
