@@ -1,13 +1,11 @@
-@value makerYellow, makerBrown, makerLightGrey from '../../common/colors.css';
+@value makerYellow, makerBrown from '../../common/colors.css';
 
 .busNotice {
-  width: 70%;
-  margin: auto;
-  margin-top: 2em;
+  width: 60vw;
+  margin: 2em auto auto;
 }
 
 .vehicleNoticeTitle {
-  width: 70%;
   margin: auto;
   padding: 0.5em 1.8em;
   font-size: 1.1rem;
@@ -16,12 +14,10 @@
   border-bottom: 4px solid makerBrown;
 }
 
-.Precaution {
-  text-align: center;
-  width: max-content;
+.information {
+  width: 100%;
   margin: auto;
-  margin-bottom: 2em;
-  padding: 0.5em 1em;
+  text-align: center;
 }
 
 .subTitle {
@@ -30,22 +26,25 @@
   margin: 0 3em;
 }
 
-.smallBus,
-.limousine,
-.bigBus {
-  width: 75%;
-  margin: auto;
-  padding: 1em 0;
+.bus {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2em 0;
+}
+
+.bus>div {
+  flex: 0.5;
 }
 
 .smallBus {
   border-top: 3px solid makerBrown;
+  border-bottom: 1px solid makerBrown;
 }
 
 .bigBus {
+  border-top: 1px solid makerBrown;
   border-bottom: 3px solid makerBrown;
 }
 
@@ -53,8 +52,7 @@
   margin: auto;
 }
 
-.busDetail {
-  width: 25;
-  padding-left: 4em;
+.detail {
+  flex: 0.5;
   text-align: start;
 }

@@ -1,6 +1,5 @@
-import { Button } from '@mui/material';
-import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
+import { Button, Box } from '@mui/material';
 import BigBus from '../../components/bus/bigBus';
 import Limousine from '../../components/bus/limousine';
 import SmallBus from '../../components/bus/smallBus';
@@ -35,7 +34,7 @@ const Bus = () => {
         {props.buttonText}
       </Button>
     )
-  };
+  }
 
   const handleClickNotice = () => {setBusState('notice')};
   const handleClickSmallBus = () => {setBusState('smallBus')};
