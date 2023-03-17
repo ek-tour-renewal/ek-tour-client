@@ -13,6 +13,8 @@ const Bus = () => {
     titleElement.innerHTML = `이케이하나관광-버스안내`;
   }, []);
 
+  const handleChangeMode = (mode) => setBusState(mode);
+
   function BusButton(props) {
     return (
       <Button
@@ -36,26 +38,21 @@ const Bus = () => {
     )
   }
 
-  const handleClickNotice = () => {setBusState('notice')};
-  const handleClickSmallBus = () => {setBusState('smallBus')};
-  const handleClickLimousine = () => {setBusState('limousine')};
-  const handleClickBigBus = () => {setBusState('bigBus')};
-
   return (
     <>
       <Box>
         <BusButton 
         buttonText='버스 안내'
-        buttonClick={handleClickNotice} />
+        buttonClick={() => handleChangeMode('notice')} />
         <BusButton 
         buttonText='25인승 소형'
-        buttonClick={handleClickSmallBus} />
+        buttonClick={() => handleChangeMode('smallBus')} />
         <BusButton 
         buttonText='28인승 리무진'
-        buttonClick={handleClickLimousine} />
+        buttonClick={() => handleChangeMode('limousine')} />
         <BusButton 
         buttonText='45인승 대형'
-        buttonClick={handleClickBigBus} />
+        buttonClick={() => handleChangeMode('bigBus')} />
       </Box>
 
       {busState === 'notice' && <BusNotice />}

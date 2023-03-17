@@ -1,11 +1,11 @@
 @value makerYellow, makerBrown from '../../common/colors.css';
 
-.busNotice {
+.container {
   width: 60vw;
   margin: 2em auto auto;
 }
 
-.vehicleNoticeTitle {
+.title {
   margin: auto;
   padding: 0.5em 1.8em;
   font-size: 1.1rem;
@@ -34,7 +34,7 @@
   padding: 2em 0;
 }
 
-.bus>div {
+.bus > div {
   flex: 0.5;
 }
 
@@ -55,4 +55,17 @@
 .detail {
   flex: 0.5;
   text-align: start;
+}
+
+.busDetail {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.imageTitle {
+  font-size: 1.2em;
+  width: max-content;
+  margin: 2em auto;
+  padding: 0.3em 0.5em;
+  border-bottom: 4px solid makerBrown;
 }
