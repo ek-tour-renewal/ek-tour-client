@@ -1,6 +1,7 @@
 @value makerWhite from './common/colors.css';
 
 .app {
+  position: relative;
   width: 100%;
   align-items: center;
   text-align: center;

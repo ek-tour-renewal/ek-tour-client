@@ -5,17 +5,14 @@ h3, h4 {
 }
 
 .serviceCenter {
-  width: 70%;
-  margin: auto;
-  margin-top: 2em;
+  width: 60vw;
+  margin: 2em auto auto;
 }
 
 .title {
-  width: 70%;
-  padding: 0.5em 1.8em;
   margin: auto;
+  padding: 0.5em 1.8em;
   font-size: 1.1rem;
-  color: makerBlack;
   background-color: makerYellow;
   border-top: 4px solid makerBrown;
   border-bottom: 4px solid makerBrown;
@@ -23,6 +20,7 @@ h3, h4 {
 
 .useInfo {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
@@ -39,8 +37,7 @@ h3, h4 {
 }
 
 .useStepNumber {
-  margin: 0;
-  margin-bottom: 0.3em;
+  margin: 0 0 0.3em;
   color: makerLightGrey;
 }
 
@@ -57,12 +54,11 @@ h3, h4 {
   font-size: 0.7rem;
   text-align: start;
   color: makerBrown;
-  margin-left: 15%;
-  margin-top: 2em;
-  margin-bottom: 3em;
+  margin: 2em 10% 3em;
 }
 
 .useInfoDetail {
+  width: 100%;
   list-style: disc;
   margin: 0;
   padding: 0;
@@ -71,36 +67,38 @@ h3, h4 {
 .container {
   color: makerBlack;
   text-align: start;
-  margin-left: 15%;
-  margin-bottom: 2em;
+  margin: 2em 10% 3em;
 }
 
 .list {
+  width: 100%;
   font-size: 0.8rem;
   list-style: disc;
   margin: 1em 0;
 }
 
-.policyDetail, 
-.serviceDetail,
-.accountDetail {
+.detail {
+  width: 100%;
   color: makerGrey;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
-.dateDetail {
+.date {
   color: makerGreen;
   font-size: 0.9rem;
 }
 
-.dateDetailContainer,
-.serviceDetailContainer,
-.accountDetailContainer {
+.detailContainer {
   text-indent: 1.5em;
 }
 
-.serviceNotice, 
-.accountNotice {
+.notice {
   font-size: 1rem;
   color: makerGreen;
+}
+
+@media screen and (max-width: 800px) {
+  .serviceCenter {
+    width: 90vw;
+  }
 }

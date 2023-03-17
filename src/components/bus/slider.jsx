@@ -17,7 +17,6 @@ const Slider = ({ imageList }) => {
   // 이미지 넘김 버튼
   const handleSwipe = (direction) => {
     handleSlide(slideIndex + direction);
-    console.log(slideIndex)
   };
 
   return (

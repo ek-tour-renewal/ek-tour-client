@@ -9,9 +9,9 @@ const Main = () => {
   }, []);
 
   return (
-    <section className={styles.main}>
+    <main className={styles.main}>
       <Estimate />
-    </section>
+    </main>
   )
 };
 
