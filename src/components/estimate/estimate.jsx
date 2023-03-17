@@ -30,7 +30,10 @@ const Space = styled(Box)({
 });
 
 const Estimate = () => {
+  let currentDate = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+
   const [loading, setLoading] = useState(false);
+
   const nameRef = useRef();
   const emailRef = useRef();
   const phoneRef = useRef();
@@ -49,12 +52,9 @@ const Estimate = () => {
   const arrivalPlaceDetailRef = useRef();
   const memoRef = useRef();
   const stopPlaceRef = useRef();
-
-  const [estimateForm, setEstimateForm] = useState({
-    wayType: '',
-    payment: '',
-    taxBill: '',
-  });
+  const wayTypeRef = useRef();
+  const paymentRef = useRef();
+  const taxBillRef = useRef();
 
   const [nameErrorMsg, setNameErrorMsg] = useState('');
   const [phoneErrorMsg, setPhoneErrorMsg] = useState('');
@@ -65,8 +65,6 @@ const Estimate = () => {
   const [departPlaceDetailErrorMsg, setDepartPlaceDetailErrorMsg] = useState('');
   const [arrivalPlaceDetailErrorMSg, setArrivalPlaceDetailErrorMsg] = useState('');
   const [memberCountErrorMSg, setMemberCountErrorMsg] = useState('');
-
-  let currentDate = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
 
   const validate = () => {
     let valid = true;
@@ -132,12 +130,10 @@ const Estimate = () => {
     arrivalPlaceDetailRef.current.value = '';
     memoRef.current.value = '';
     stopPlaceRef.current.value = '';
+    wayTypeRef.current.checked = true;
+    paymentRef.current.checked = true;
+    taxBillRef.current.checked = true;
   }
-
-  const onChangeValue = (event) => {
-    const {name, value} = event.target;
-    setEstimateForm({...estimateForm, [name]: value,});
-  };
 
   const onEnterNumber = (event) => {
     if (!/^[0-9]+$/.test(event.key) && event.key.length === 1) {
@@ -166,9 +162,9 @@ const Estimate = () => {
         arrivalPlace: arrivalPlaceRef.current.value + arrivalPlaceDetailRef.current.value,
         memo: memoRef.current.value,
         stopPlace: stopPlaceRef.current.value,
-        wayType: estimateForm.wayType,
-        payment: estimateForm.payment,
-        taxBill: estimateForm.taxBill,
+        wayType: wayTypeRef.current.checked ? '왕복' : '편도',
+        payment: paymentRef.current.checked ? '현금' : '카드',
+        taxBill: taxBillRef.current.checked ? '발급' : '발금안함'
       };
 
       axios.post('/estimate', data)
@@ -416,11 +412,11 @@ const Estimate = () => {
 
           <Stack sx={{border: '1px solid lightgray', borderRadius: '10px', width: '33%', p: 2}}>
             <FormLabel sx={{textAlign: 'left'}}>왕복 구분</FormLabel>
-            <RadioGroup value={estimateForm.wayType} onChange={onChangeValue}>
+            <RadioGroup defaultValue={'왕복'}>
               <FormControlLabel
                 name='wayType'
                 value='왕복'
-                control={<Radio/>}
+                control={<Radio inputRef={wayTypeRef}/>}
                 label='왕복'
               />
               <FormControlLabel
@@ -434,15 +430,13 @@ const Estimate = () => {
 
           <Stack sx={{border: '1px solid lightgray', borderRadius: '10px', width: '33%', p: 2}}>
             <FormLabel sx={{textAlign: 'left'}}>결제 방식</FormLabel>
-            <RadioGroup value={estimateForm.payment} onChange={onChangeValue}>
+            <RadioGroup defaultValue={'현금'}>
               <FormControlLabel
-                name='payment'
                 value='현금'
-                control={<Radio/>}
+                control={<Radio inputRef={paymentRef}/>}
                 label='현금'
               />
               <FormControlLabel
-                name='payment'
                 value='카드'
                 control={<Radio/>}
                 label='카드'
@@ -452,15 +446,13 @@ const Estimate = () => {
 
           <Stack sx={{border: '1px solid lightgray', borderRadius: '10px', width: '33%', p: 2}}>
             <FormLabel sx={{textAlign: 'left'}}>세금 계산서</FormLabel>
-            <RadioGroup value={estimateForm.taxBill} onChange={onChangeValue}>
+            <RadioGroup defaultValue={'발급'}>
               <FormControlLabel
-                name='taxBill'
                 value='발급'
-                control={<Radio/>}
+                control={<Radio inputRef={taxBillRef}/>}
                 label='발급'
               />
               <FormControlLabel
-                name='taxBill'
                 value='발급안함'
                 control={<Radio/>}
                 label='발급 안함'
