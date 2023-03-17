@@ -13,8 +13,8 @@ import EstimateDetail from "../pages/estimateDetail/estimateDetail";
 import MyEstimateList from "../pages/myEstimateList/myEstimateList";
 import ServiceCenter from "../pages/serviceCenter/serviceCenter";
 import NotFoundPage from "../pages/notFoundPage/notFoundPage";
-import FloatingActionButton from "../components/sideMenu/floatingActionButton";
 import Footer from "../components/ui/footer/footer";
+import InquiryButton from "../components/ui/inquiry/inquiryButton";
 
 export default function BrowserRoute({ExceptionHandler, companyData}) {
   return (
@@ -48,7 +48,7 @@ export default function BrowserRoute({ExceptionHandler, companyData}) {
               }></Route>
 
               <Route path='/estimate/list/:page/:estimateId' element={
-                <EstimateDetail />
+                <EstimateDetail/>
               }></Route>
 
               <Route path='/estimate/my/list/:page' element={
@@ -56,7 +56,7 @@ export default function BrowserRoute({ExceptionHandler, companyData}) {
               }></Route>
 
               <Route path='/estimate/my/list/:page/:estimateId' element={
-                <EstimateDetail />
+                <EstimateDetail/>
               }></Route>
 
               <Route path='/service-center' element={
@@ -68,9 +68,7 @@ export default function BrowserRoute({ExceptionHandler, companyData}) {
               }></Route>
             </Routes>
 
-            <FloatingActionButton
-              companyData={companyData}
-            />
+            <InquiryButton companyData={companyData}/>
 
             <Footer
               companyData={companyData}
