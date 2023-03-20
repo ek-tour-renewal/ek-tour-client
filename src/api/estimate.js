@@ -8,11 +8,17 @@ export async function createEstimate(data) {
 
 // 페이지로 견적 리스트 조회
 export async function getEstimateListByPage(pageNumber) {
-  const response = await axios.get('/estimate/all', {
-    params: {
-      page: pageNumber - 1,
-    },
-  });
+  let response;
+  try {
+    response = await axios.get('/estimate/all', {
+      params: {
+        page: pageNumber - 1,
+      },
+    });
+  } catch (error) {
+    console.log(error)
+  }
+
   return response.data;
 }
 

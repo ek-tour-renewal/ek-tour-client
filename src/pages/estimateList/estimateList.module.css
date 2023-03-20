@@ -1,4 +1,4 @@
-@value makerYellow, makerBrown, makerLightGrey, makerGrey from '../../common/colors.css';
+@value makerOrange, makerYellow, makerBrown, makerLightGrey, makerGrey from '../../common/colors.css';
 
 .estimateList {
   width: 70%;
@@ -21,14 +21,9 @@
   padding: 0.5rem 0;
 }
 
-.id,
-.name,
-.travelType,
-.departPlace,
-.arrivalPlace,
-.vehicleType,
-.createdDate {
-  text-align: center;
+.column {
+  display: flex;
+  justify-content: center;
   align-items: center;
   font-size: 14px;
 }
@@ -80,4 +75,20 @@
 .nextPageButton:hover {
   font-weight: bold;
   color: makerOrange;
+}
+
+@media screen and (max-width: 1024px) {
+  .dataListContainer {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .dataListContainer {
+    width: 100%;
+  }
+
+  .column {
+    font-size: 10px;
+  }
 }
