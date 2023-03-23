@@ -64,7 +64,9 @@ const ServiceCenter = () => {
       <h1 className={styles.title}>취소 및 환불규정</h1>
       <ul className={styles.container}>
         <ul>
-          <li className={styles.list}><h3>전세버스 대절의 취소에 따른 환불은 당사의 취소 및 환불규정에 따라 운임을 환불합니다.</h3></li>
+          <li className={styles.list}>
+            <h3>전세버스 대절의 취소에 따른 환불은 당사의 취소 및 환불규정에 따라 운임을 환불합니다.</h3>
+          </li>
           <ul>
             <li className={styles.detail}>당사의 환불규정은 적합한 상거래 및 상도덕에 준하며 전세버스 표준 약관에 준합니다.</li>
             <li className={styles.detail}>취소 및 환불에 대한 규정은 예약부도에 대한 당사의 손해를 방지하고 장기적으로 고객님들에게 보다 나은 서비스를 제공하는</li>
@@ -79,13 +81,19 @@ const ServiceCenter = () => {
           </ul>
         </ul>
 
-        <li className={styles.list}><h3>차량 사용일 5일전부터 취소에 대한 환불규정이 책정됩니다.</h3></li>
+        <li className={styles.list}>
+          <h3>차량 사용일 5일전부터 취소에 대한 환불규정이 책정됩니다.</h3>
+        </li>
 
         <ul>
-          <li className={styles.list}><h3>취소 및 환불규정은 비수기와 성수기에 구분됩니다.</h3></li>
+          <li className={styles.list}>
+            <h3>취소 및 환불규정은 비수기와 성수기에 구분됩니다.</h3>
+          </li>
 
           <ul>
-            <li className={styles.date}><h4>📅 성수기 : 4월~5월, 9월~10월</h4></li>
+            <li className={styles.date}>
+              <h4>📅 성수기 : 4월~5월, 9월~10월</h4>
+            </li>
             <ul className={styles.detailContainer}>
               <li className={styles.detail}>- 운행예정일 (5일전 이후) 취소시 예약금액의 100% 환불</li>
               <li className={styles.detail}>- 운행예정일 (5일전~3일전까지) 취소시 예약금액의 50% 환불</li>
@@ -95,7 +103,9 @@ const ServiceCenter = () => {
           </ul>
 
           <ul>
-            <li className={styles.date}><h4>📅 비수기 : 성수기 이외 달</h4></li>
+            <li className={styles.date}>
+              <h4>📅 비수기 : 성수기 이외 달</h4>
+            </li>
             <ul className={styles.detailContainer}>
               <li className={styles.detail}>- 운행예정일 (3일전 이후) 취소시 예약금액의 100% 환불</li>
               <li className={styles.detail}>- 운행예정일 (3일전~당일전까지) 취소시 예약금액의 50% 환불</li>
@@ -109,9 +119,13 @@ const ServiceCenter = () => {
       <h1 className={styles.title}>고객센터</h1>
       <ul className={styles.container}>
         <ul>
-          <li className={styles.list}><h3>(주)이케이하나관광은 24시간 상담이 가능하며 카톡으로도 실시간 상담이 가능합니다.</h3></li>
+          <li className={styles.list}>
+            <h3>(주)이케이하나관광은 24시간 상담이 가능하며 카톡으로도 실시간 상담이 가능합니다.</h3>
+          </li>
           <ul className={styles.detail}>
-            <li className={styles.notice}><h4>💻 고객센터 안내</h4></li>
+            <li className={styles.notice}>
+              <h4>💻 고객센터 안내</h4>
+            </li>
             <ul className={styles.detailContainer}>
               <li>전화번호 : 02-3432-6545 팩스번호 : 02-6008-6545</li>
               <li>이메일 상담 : hanatour0914@gmail.com</li>
@@ -120,7 +134,9 @@ const ServiceCenter = () => {
           </ul>
 
           <ul>
-            <li className={styles.notice}><h4>💸 계좌번호 안내</h4></li>
+            <li className={styles.notice}>
+              <h4>💸 계좌번호 안내</h4>
+            </li>
 
             <ul className={styles.detailContainer}>
               <li className={styles.detail}>예금주 : (주)이케이투어</li>
@@ -129,7 +145,9 @@ const ServiceCenter = () => {
           </ul>
         </ul>
 
-        <li className={styles.list}><h3>통장사본과 사업자등록증 사본은 이곳에서 다운로드 가능합니다.</h3></li>
+        <li className={styles.list}>
+          <h3>통장사본과 사업자등록증 사본은 이곳에서 다운로드 가능합니다.</h3>
+        </li>
       </ul>
     </main>
   )

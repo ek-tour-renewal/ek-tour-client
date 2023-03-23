@@ -1,0 +1,64 @@
+@value makerYellow, makerBrown from '../../common/colors.css';
+
+.estimateList {
+  width: 70%;
+  margin: auto;
+}
+
+.dataListContainer {
+  width: 75%;
+  margin: auto;
+}
+
+.dataList {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-weight: bold;
+  color: makerBrown;
+  background-color: makerYellow;
+  border-top: 2px solid makerBrown;
+  border-bottom: 2px solid makerBrown;
+  padding: 0.5rem 0;
+}
+
+.column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+.id,
+.name {
+  width: 50px;
+  height: 20px;
+}
+
+.travelType {
+  width: 70px;
+  height: 20px;
+}
+
+.departPlace,
+.arrivalPlace,
+.vehicleType {
+  width: 130px;
+  height: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+  .dataListContainer {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .dataListContainer {
+    width: 100%;
+  }
+
+  .column {
+    font-size: 10px;
+  }
+}
