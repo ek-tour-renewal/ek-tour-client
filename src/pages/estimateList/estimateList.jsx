@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import styles from './estimateList.module.css';
 import {useNavigate, useParams} from 'react-router-dom';
 import {getEstimateListByPage} from "../../api/estimate";
 import {Box, Pagination, Stack} from '@mui/material';
-import SubHeader from '../../components/subHeader/subHeader';
 import EstimateListItem from '../../components/estimate/estimateListItem';
+import EstimateListLayout from "../../components/layout/estimateList";
 
 const EstimateList = () => {
   const navigate = useNavigate();
@@ -36,54 +35,40 @@ const EstimateList = () => {
   }
 
   return (
-    <main className={styles.estimateList}>
-      <SubHeader menu='견적 목록'/>
+    <EstimateListLayout>
+      <ul>
+        {
+          estimateList ? estimateList.map(data => {
+              return (
+                <EstimateListItem
+                  key={data.id}
+                  id={data.id}
+                  name={data.name}
+                  travelType={data.travelType}
+                  departPlace={data.departPlace}
+                  arrivalPlace={data.arrivalPlace}
+                  vehicleType={data.vehicleType}
+                  createdDate={data.createdDate}
+                />
+              )
+            }) :
+            <Box p={5}>
+              견적 요청 내역이 없습니다.
+            </Box>
+        }
+      </ul>
 
-      <section className={styles.dataListContainer}>
-        <div className={styles.dataList}>
-          <Box className={`${styles.column} ${styles.id}`}>순번</Box>
-          <Box className={`${styles.column} ${styles.name}`}>등록자</Box>
-          <Box className={`${styles.column} ${styles.travelType}`}>여행구분</Box>
-          <Box className={`${styles.column} ${styles.departPlace}`}>출발지</Box>
-          <Box className={`${styles.column} ${styles.arrivalPlace}`}>도착지</Box>
-          <Box className={`${styles.column} ${styles.vehicleType}`}>차량구분</Box>
-          <Box className={`${styles.column} ${styles.createdDate}`}>요청일</Box>
-        </div>
-
-        <ul>
-          {
-            estimateList ? estimateList.map(data => {
-                return (
-                  <EstimateListItem
-                    key={data.id}
-                    id={data.id}
-                    name={data.name}
-                    travelType={data.travelType}
-                    departPlace={data.departPlace}
-                    arrivalPlace={data.arrivalPlace}
-                    vehicleType={data.vehicleType}
-                    createdDate={data.createdDate}
-                  />
-                )
-              }) :
-              <Box p={5}>
-                견적 요청 내역이 없습니다.
-              </Box>
-          }
-        </ul>
-
-        <Stack spacing={0} m={1}>
-          <Pagination
-            count={allPage}
-            page={parseInt(page)}
-            shape='rounded'
-            size='small'
-            onChange={handleChangePage}
-            sx={{margin: '0 auto'}}
-          />
-        </Stack>
-      </section>
-    </main>
+      <Stack spacing={0} m={1}>
+        <Pagination
+          count={allPage}
+          page={parseInt(page)}
+          shape='rounded'
+          size='small'
+          onChange={handleChangePage}
+          sx={{margin: '0 auto'}}
+        />
+      </Stack>
+    </EstimateListLayout>
   )
 };
 
