@@ -2,8 +2,7 @@ import axios from 'axios';
 
 // 견적 요청 (정보 보내기)
 export async function createEstimate(data) {
-  const response = await axios.post('/estimate', data);
-  return response.data;
+  await axios.post('/estimate', data);
 }
 
 // 페이지로 견적 리스트 조회
@@ -32,9 +31,15 @@ export async function getMyEstimateListByFormAndPage(form, pageNumber) {
   return response.data;
 }
 
-// 견적 ID, 요청 폼으로 견적 요청 상세 조회
-export async function getEstimateDetailByIdAndForm(form, estimateId) {
+// 견적 요청 상세 조회
+export async function getEstimateDetail(form, estimateId) {
   const response = await axios.post(`/estimate/${estimateId}`, form);
+  return response.data;
+}
+
+// 나의 견적 요청 목록 조회
+export async function getMyEstimateList(form) {
+  const response = await axios.post('/estimate/search/my', form);
   return response.data;
 }
 

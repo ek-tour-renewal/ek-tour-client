@@ -24,6 +24,7 @@ import TimeSelect from "./TimeSelect";
 import {VehicleNumSelect, VehicleSelect} from "./VehicleSelect";
 import {TravelTypeSelect} from "./TravelTypeSelect";
 import {PlaceSelect} from "./PlaceSelect";
+import {createEstimate} from "../../api/estimate";
 
 const Space = styled(Box)({
   marginTop: '22px',
@@ -142,7 +143,7 @@ const Estimate = () => {
   };
 
   // 서버로 견적요청 post
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
 
     if (validate()) {
@@ -167,7 +168,7 @@ const Estimate = () => {
         taxBill: taxBillRef.current.checked ? '발급' : '발금안함'
       };
 
-      axios.post('/estimate', data)
+      await createEstimate(data)
         .then(() => {
           alert('견적을 요청했습니다.');
           resetEstimateInfo();

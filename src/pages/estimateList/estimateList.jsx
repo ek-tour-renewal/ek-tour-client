@@ -4,7 +4,7 @@ import {useNavigate, useParams} from 'react-router-dom';
 import {getEstimateListByPage} from "../../api/estimate";
 import {Box, Pagination, Stack} from '@mui/material';
 import SubHeader from '../../components/subHeader/subHeader';
-import EstimateListItem from '../../components/estimateListItem/estimateListItem';
+import EstimateListItem from '../../components/estimate/estimateListItem';
 
 const EstimateList = () => {
   const navigate = useNavigate();

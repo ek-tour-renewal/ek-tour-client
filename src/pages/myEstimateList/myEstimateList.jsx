@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styles from './myEstimateList.module.css';
 import SubHeader from '../../components/subHeader/subHeader';
-import EstimateListItem from '../../components/estimateListItem/estimateListItem';
+import EstimateListItem from '../../components/estimate/estimateListItem';
 import {Box, Pagination, Stack} from '@mui/material';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import {useEffect} from 'react';
