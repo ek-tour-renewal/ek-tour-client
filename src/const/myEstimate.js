@@ -1,0 +1,1 @@
+export const MY_NOTICE_MSG = '견적 확인은 등록 시 입력한 핸드폰 번호와 비밀번호로 확인합니다.';
