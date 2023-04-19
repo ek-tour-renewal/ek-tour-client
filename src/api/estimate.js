@@ -47,6 +47,6 @@ export async function putEstimateDetail(estimateId, form) {
 
 // 나의 견적 정보 삭제 요청
 export async function deleteEstimate(estimateId) {
-  const response = await axios.put(`/estimate/${estimateId}`);
+  const response = await axios.delete(`/estimate/${estimateId}`);
   return response;
 }
