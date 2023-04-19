@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './estimateListItem.module.css';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {Box} from "@mui/material";
-import MyEstimate from './myEstimateForm';
+import MyEstimateForm from './myEstimateForm';
 
 const EstimateListItem = (props) => {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ const EstimateListItem = (props) => {
         <Box className={styles.createdDate}>{props.createdDate.substring(0,10)}</Box>
       </li>
 
-      <MyEstimate
+      <MyEstimateForm
         open={open}
         onClose={handleCloseMyEstimate}
         estimateId={props.id}
