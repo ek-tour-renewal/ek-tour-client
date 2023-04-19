@@ -1,11 +1,13 @@
+import React from "react";
 import styles from './estimateList.module.css';
 import {Box} from '@mui/material';
-import SubHeader from '../../components/subHeader/subHeader';
 
 export default function EstimateListLayout({children}) {
   return (
     <main className={styles.estimateList}>
-      <SubHeader menu='견적 목록'/>
+      <section className={styles.subHeader}>
+        <h1 className={styles.title}>견적 목록</h1>
+      </section>
 
       <section className={styles.dataListContainer}>
         <div className={styles.dataList}>
@@ -19,7 +21,6 @@ export default function EstimateListLayout({children}) {
         </div>
 
         {children}
-
       </section>
     </main>
   )

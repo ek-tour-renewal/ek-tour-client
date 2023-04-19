@@ -1,18 +1,17 @@
 import React from "react";
 import {BrowserView} from "react-device-detect";
 import {ErrorBoundary} from "react-error-boundary";
-import styles from "../app.module.css";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Header from "../components/ui/header/header";
-import SideMenu from "../components/sideMenu/sideMenu";
-import Main from "../pages/main/main";
-import Company from "../pages/company/company";
-import Bus from "../pages/bus/bus";
-import EstimateList from "../pages/estimateList/estimateList";
-import EstimateDetail from "../pages/estimateDetail/estimateDetail";
-import MyEstimateList from "../pages/myEstimateList/myEstimateList";
-import ServiceCenter from "../pages/serviceCenter/serviceCenter";
-import NotFoundPage from "../pages/notFoundPage/notFoundPage";
+import SideMenu from "../components/ui/sideMenu/sideMenu";
+import Main from "../pages/main";
+import Company from "../pages/company";
+import Bus from "../pages/bus";
+import EstimateList from "../pages/estimateList";
+import EstimateDetail from "../pages/estimateDetail";
+import MyEstimateList from "../pages/myEstimateList";
+import ServiceCenter from "../pages/serviceCenter";
+import NotFoundPage from "../pages/notFoundPage";
 import Footer from "../components/ui/footer/footer";
 import InquiryButton from "../components/ui/inquiry/inquiryButton";
 
@@ -20,7 +19,7 @@ export default function BrowserRoute({ExceptionHandler, companyData}) {
   return (
     <BrowserView>
       <ErrorBoundary FallbackComponent={ExceptionHandler}>
-        <div className={styles.app}>
+        <div className={'app'}>
           <BrowserRouter>
 
             <Header/>

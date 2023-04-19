@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './main.module.css';
-import Estimate from '../../components/requestEstimate/estimate';
+import Estimate from '../components/estimate/request/estimate';
 
 const Main = () => {
   useEffect(() => {

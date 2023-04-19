@@ -1,10 +1,6 @@
-@value makerYellow, makerBrown, makerBlack from '../../common/colors.css';
-
 .company {
   width: 60%;
-  margin: auto;
-  margin-bottom: 4em;
-  margin-top: 2em;
+  margin: 2em auto 4em;
 }
 
 .shortContentContainer {
@@ -16,22 +12,21 @@
   width: 100%;
   padding: 0.2em 0.5em;
   margin-bottom: 2.5em;
-  background-color: makerYellow;
-  color: makerBrown;
-  box-shadow: 2px 2px 5px 5px makerYellow;
+  background-color: var(--color-yellow);
+  color: var(--color-brown);
+  box-shadow: 2px 2px 5px 5px var(--color-yellow);
   opacity: 60%;
 }
 
 .detail {
-  background-color: makerYellow;
-  color: makerBlack;
+  background-color: var(--color-yellow);
+  color: var(--color-black);
   opacity: 90%;
   padding: 1em 0.5em;
   width: 80%;
   border-radius: 2.5em;
-  box-shadow: 5px 5px 10px 15px makerYellow;
-  margin: 0 auto;
-  margin-bottom: 1.5em;
+  box-shadow: 5px 5px 10px 15px var(--color-yellow);
+  margin: 0 auto 1.5em;
 }
 
 .title {
@@ -64,13 +59,9 @@
   margin-left: 1em;
 }
 
-@media screen and (max-width:1024px) {
+@media screen and (max-width: 1024px) {
   .sideMenu {
     display: none;
-  }
-
-  .mainDetail {
-    flex-direction: 100%;
   }
 
   .contentDetail {
@@ -78,7 +69,7 @@
   }
 }
 
-@media screen and (max-width:920px) {
+@media screen and (max-width: 920px) {
   .shortContent {
     font-size: 0.8em;
   }

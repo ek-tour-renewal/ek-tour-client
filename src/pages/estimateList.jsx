@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import {getEstimateListByPage} from "../../api/estimate";
+import {getEstimateListByPage} from "../api/estimate";
 import {Box, Pagination, Stack} from '@mui/material';
-import EstimateListItem from '../../components/estimate/estimateListItem';
-import EstimateListLayout from "../../components/layout/estimateList";
+import EstimateListItem from '../components/estimate/estimateListItem';
+import EstimateListLayout from "../components/layout/estimateList";
 
 const EstimateList = () => {
   const navigate = useNavigate();

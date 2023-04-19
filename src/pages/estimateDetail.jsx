@@ -8,9 +8,9 @@ import {
   Dialog,
   DialogContent,
 } from '@mui/material';
-import {deleteEstimate, getEstimateDetailById, putEstimateDetail} from '../../api/estimate';
-import ModifyForm from '../../components/myEstimate/modifyForm';
-import ModifyHeader from '../../components/myEstimate/modifyHeader';
+import {deleteEstimate, getEstimateDetailById, putEstimateDetail} from '../api/estimate';
+import ModifyForm from '../components/estimate/modify/modifyForm';
+import ModifyHeader from '../components/estimate/modify/modifyHeader';
 
 export default function EstimateDetail() {
   const navigate = useNavigate();

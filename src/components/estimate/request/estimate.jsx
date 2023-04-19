@@ -1,5 +1,4 @@
 import React, {useState, useRef} from 'react';
-import axios from 'axios';
 import {
   TextField,
   Stack,
@@ -19,12 +18,12 @@ import {
 import styled from '@emotion/styled';
 import HistoryEduOutlinedIcon from '@mui/icons-material/HistoryEduOutlined';
 import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
-import Loading from '../../mobileComponents/Loading';
+import Loading from '../../../mobileComponents/Loading';
 import TimeSelect from "./TimeSelect";
 import {VehicleNumSelect, VehicleSelect} from "./VehicleSelect";
 import {TravelTypeSelect} from "./TravelTypeSelect";
 import {PlaceSelect} from "./PlaceSelect";
-import {createEstimate} from "../../api/estimate";
+import {createEstimate} from "../../../api/estimate";
 
 const Space = styled(Box)({
   marginTop: '22px',
@@ -383,13 +382,8 @@ const Estimate = () => {
 
         <Space/>
 
-        <Box sx={{width: '200px', margin: '0 auto'}}>
-          <Stack
-            direction='row'
-            justifyContent='flex-start'
-          >
-            <Typography variant='caption' color='gray' sx={{width: '135px'}}>인원수</Typography>
-          </Stack>
+        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100px', margin: '0 auto'}}>
+          <Typography variant='caption' sx={{width: '100%', color: 'gray', textAlign: 'start'}}>인원수</Typography>
           <FormControl error={!!memberCountErrorMSg} sx={{mb: 1}}>
             <OutlinedInput
               type='text'
@@ -398,7 +392,7 @@ const Estimate = () => {
               inputRef={memberCountRef}
               onKeyDown={onEnterNumber}
               endAdornment={<InputAdornment position='end'>명</InputAdornment>}
-              sx={{width: '100px', margin: '0 auto'}}
+              sx={{wmargin: '0 auto'}}
             />
             <FormHelperText>{memberCountErrorMSg}</FormHelperText>
           </FormControl>

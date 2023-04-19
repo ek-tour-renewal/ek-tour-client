@@ -1,5 +1,5 @@
 import {Select} from "@mui/material";
-import SelectItem from "../common/Select";
+import SelectItem from "../../common/Select";
 
 export function TravelTypeSelect(props) {
   return (

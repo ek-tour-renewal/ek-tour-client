@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Box } from '@mui/material';
-import BigBus from '../../components/bus/bigBus';
-import Limousine from '../../components/bus/limousine';
-import SmallBus from '../../components/bus/smallBus';
-import BusNotice from '../../components/bus/busNotice';
+import BigBus from '../components/bus/bigBus';
+import Limousine from '../components/bus/limousine';
+import SmallBus from '../components/bus/smallBus';
+import BusNotice from '../components/bus/busNotice';
 
 const Bus = () => {
   const [busState, setBusState] = useState('notice');
