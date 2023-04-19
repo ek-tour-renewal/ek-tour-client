@@ -1,10 +1,8 @@
-@value makerOrange, makerYellow, makerBrown from '../../common/colors.css';
-
 .pageList {
-  color: makerBrown;
-  background-color: makerYellow;
-  border-top: 2px solid makerBrown;
-  border-bottom: 2px solid makerBrown;
+  color: var(--color-brown);
+  background-color: var(--color-yellow);
+  border-top: 2px solid var(--color-brown);
+  border-bottom: 2px solid var(--color-brown);
   padding: 0.3rem 0;
   margin-bottom: 2rem;
   display: flex;
@@ -16,12 +14,12 @@
 .nextPageButton {
   background-color: unset;
   border: none;
-  color: makerBrown;
+  color: var(--color-brown);
   font-size: 1rem;
 }
 
 .prevPageButton:hover,
 .nextPageButton:hover {
   font-weight: bold;
-  color: makerOrange;
+  color: var(--color-orange);
 }

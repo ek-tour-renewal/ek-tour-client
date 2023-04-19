@@ -1,5 +1,3 @@
-@value makerYellow, makerBrown, makerLightGrey, makerGrey from '../../common/colors.css';
-
 .myEstimateList{
   width: 70%;
   margin: auto;
@@ -12,12 +10,12 @@
 
 .dataList {
   font-weight: bold;
-  color: makerBrown;
+  color: var(--color-brown);
   display: flex;
   justify-content: space-evenly;
-  background-color: makerYellow;
-  border-top: 2px solid makerBrown;
-  border-bottom: 2px solid makerBrown;
+  background-color: var(--color-yellow);
+  border-top: 2px solid var(--color-brown);
+  border-bottom: 2px solid var(--color-brown);
   padding: 0.5rem 0;
 }
 
@@ -57,10 +55,10 @@
 }
 
 .pageList {
-  color: makerBrown;
-  background-color: makerYellow;
-  border-top: 2px solid makerBrown;
-  border-bottom: 2px solid makerBrown;
+  color: var(--color-brown);
+  background-color: var(--color-yellow);
+  border-top: 2px solid var(--color-brown);
+  border-bottom: 2px solid var(--color-brown);
   padding: 0.3rem 0;
   margin-bottom: 2rem;
 }
@@ -69,7 +67,7 @@
 .nextPageButton {
   background-color: unset;
   border: none;
-  color: makerBrown;
+  color: var(--color-brown);
   font-size: 1rem;
 }
 
@@ -84,5 +82,5 @@
   border: none;
   font-size: 13px;
   font-weight: bold;
-  color: makerBrown;
+  color: var(--color-brown);
 }

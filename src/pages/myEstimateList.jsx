@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
-import {getMyEstimateList} from "../../api/estimate";
+import {getMyEstimateList} from "../api/estimate";
 import {Box, Pagination, Stack} from '@mui/material';
-import EstimateListLayout from "../../components/layout/estimateList";
-import EstimateListItem from '../../components/estimate/estimateListItem';
+import EstimateListLayout from "../components/layout/estimateList";
+import EstimateListItem from '../components/estimate/estimateListItem';
 
 export default function MyEstimateList() {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './bus.module.css';
+import styles from './busType.module.css';
 import Slider from './slider';
 
 const busImages = [

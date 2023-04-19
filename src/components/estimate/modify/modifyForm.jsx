@@ -14,7 +14,7 @@ import {
   RadioGroup
 } from "@mui/material";
 import styled from "@emotion/styled";
-import SelectItem from "../common/Select";
+import SelectItem from "../../common/Select";
 
 export default function ModifyForm(props) {
   const {data, place, modify, errorMsg, modifyEstimateData, modifyPlaceData} = props;

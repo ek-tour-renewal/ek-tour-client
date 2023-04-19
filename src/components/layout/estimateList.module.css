@@ -1,8 +1,24 @@
-@value makerYellow, makerBrown from '../../common/colors.css';
-
 .estimateList {
   width: 70%;
   margin: auto;
+}
+
+.subHeader {
+  width: 75%;
+  height: 2em;
+  background-color: var(--color-orange);
+  border-radius: 0.5em;
+  padding: 0.7em 0;
+  margin: 1em auto 1.5em;
+}
+
+.title {
+  width: max-content;
+  text-align: start;
+  margin: auto 0;
+  padding-left: 1.5em;
+  font-size: 1.5em;
+  color: var(--color-white);
 }
 
 .dataListContainer {
@@ -15,10 +31,10 @@
   justify-content: space-evenly;
   align-items: center;
   font-weight: bold;
-  color: makerBrown;
-  background-color: makerYellow;
-  border-top: 2px solid makerBrown;
-  border-bottom: 2px solid makerBrown;
+  color: var(--color-brown);
+  background-color: var(--color-yellow);
+  border-top: 2px solid var(--color-brown);
+  border-bottom: 2px solid var(--color-brown);
   padding: 0.5rem 0;
 }
 
@@ -48,12 +64,24 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .subHeader{
+    width: 90%;
+  }
+
   .dataListContainer {
     width: 90%;
   }
 }
 
 @media screen and (max-width: 720px) {
+  .subHeader{
+    width: 100%;
+  }
+
+  .title {
+    font-size: 1.2em;
+  }
+
   .dataListContainer {
     width: 100%;
   }

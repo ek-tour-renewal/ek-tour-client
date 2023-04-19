@@ -1,4 +1,3 @@
-@value makerOrange, makerWhite, makerBrown from '../../../common/colors.css';
 ul {
   padding: 0;
 }
@@ -14,14 +13,14 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: makerOrange;
+  background-color: var(--color-orange);
   user-select: none;
   width: 100%;
 }
 
 .detail {
   text-align: start;
-  color: makerWhite;
+  color: var(--color-white);
   margin: 1.2em 1em;
 }
 
@@ -31,14 +30,14 @@ li {
 }
 
 .siteAddress {
-  color: makerBrown;
+  color: var(--color-brown);
   width: 100%;
   font-size: 1.1em;
 }
 
 .address {
   width: 90%;
-  background-color: makerBrown;
+  background-color: var(--color-brown);
   font-size: 1.1em;
   padding: 0.3em;
 }

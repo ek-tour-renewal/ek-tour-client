@@ -8,7 +8,7 @@ import RequestForm from "../mobileComponents/myEstimate/mobileRequestForm";
 import MobileMyEstimateList from "../mobileComponents/myEstimate/mobileMyEstimateList";
 import MobileMyEstimateDetail from "../mobileComponents/myEstimate/mobileMyEstimateDetail";
 import MobileServiceCenter from "../mobileComponents/serviceCenter/mobileServiceCenter";
-import NotFoundPage from "../pages/notFoundPage/notFoundPage";
+import NotFoundPage from "../pages/notFoundPage";
 import Footer from "../components/ui/footer/footer";
 import React from "react";
 

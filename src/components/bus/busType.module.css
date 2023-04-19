@@ -1,22 +1,24 @@
-@value makerYellow, makerBrown from '../../common/colors.css';
-
 .container {
   width: 60vw;
   margin: 2em auto auto;
 }
 
+.container>section {
+  text-align: center;
+}
+
 .title {
   margin: auto;
+  text-align: center;
   padding: 0.5em 1.8em;
   font-size: 1.1rem;
-  background-color: makerYellow;
-  border-top: 4px solid makerBrown;
-  border-bottom: 4px solid makerBrown;
+  background-color: var(--color-yellow);
+  border-top: 4px solid var(--color-brown);
+  border-bottom: 4px solid var(--color-brown);
 }
 
 .information {
   width: 100%;
-  margin: auto;
   text-align: center;
 }
 
@@ -36,16 +38,17 @@
 
 .bus > div {
   flex: 0.5;
+  text-align: center;
 }
 
 .smallBus {
-  border-top: 3px solid makerBrown;
-  border-bottom: 1px solid makerBrown;
+  border-top: 3px solid var(--color-brown);
+  border-bottom: 1px solid var(--color-brown);
 }
 
 .bigBus {
-  border-top: 1px solid makerBrown;
-  border-bottom: 3px solid makerBrown;
+  border-top: 1px solid var(--color-brown);
+  border-bottom: 3px solid var(--color-brown);
 }
 
 .busStyle {
@@ -67,5 +70,5 @@
   width: max-content;
   margin: 2em auto;
   padding: 0.3em 0.5em;
-  border-bottom: 4px solid makerBrown;
+  border-bottom: 4px solid var(--color-brown);
 }

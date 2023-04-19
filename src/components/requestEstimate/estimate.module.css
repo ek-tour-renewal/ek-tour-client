@@ -1,9 +1,0 @@
-@value makerWhite, makerOrange, makerBrown from '../../common/colors.css';
-
-body {
-  user-select: none;
-}
-
-input {
-  text-align: center;
-}

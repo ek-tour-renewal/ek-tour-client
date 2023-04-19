@@ -1,6 +1,6 @@
 import React from "react";
 import {Select} from "@mui/material";
-import SelectItem from "../common/Select";
+import SelectItem from "../../common/Select";
 
 
 export default function TimeSelect(props) {
