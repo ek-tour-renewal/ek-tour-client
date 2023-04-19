@@ -1,4 +1,4 @@
-import styles from './bus.module.css';
+import styles from './busType.module.css';
 
 const BusNotice = () => {
   return (

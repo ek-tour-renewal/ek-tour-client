@@ -40,7 +40,7 @@ const Bus = () => {
 
   return (
     <>
-      <Box>
+      <Box sx={{textAlign: 'center'}}>
         <BusButton 
         buttonText='버스 안내'
         buttonClick={() => handleChangeMode('notice')} />

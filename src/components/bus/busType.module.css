@@ -3,8 +3,13 @@
   margin: 2em auto auto;
 }
 
+.container>section {
+  text-align: center;
+}
+
 .title {
   margin: auto;
+  text-align: center;
   padding: 0.5em 1.8em;
   font-size: 1.1rem;
   background-color: var(--color-yellow);
@@ -14,7 +19,6 @@
 
 .information {
   width: 100%;
-  margin: auto;
   text-align: center;
 }
 
@@ -34,6 +38,7 @@
 
 .bus > div {
   flex: 0.5;
+  text-align: center;
 }
 
 .smallBus {

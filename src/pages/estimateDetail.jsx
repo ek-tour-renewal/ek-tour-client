@@ -42,23 +42,24 @@ export default function EstimateDetail() {
     }
 
     getEstimateDetailById(estimateId)
-      .then((response) => {
-        if (!response.hasOwnProperty('id')) navigate('/error');
-        setOriginData(response);
-        setModifyData(response);
-        const placeData = {
-          departPlace: response.departPlace.substring(0, 4),
-          departPlaceDetail: response.departPlace.substring(4),
-          departDate: response.departDate.substring(0, 10),
-          departTime: response.departDate.substring(11, 16),
-          arrivalPlace: response.arrivalPlace.substring(0, 4),
-          arrivalPlaceDetail: response.arrivalPlace.substring(4),
-          arrivalDate: response.arrivalDate.substring(0, 10),
-          arrivalTime: response.arrivalDate.substring(11, 16)
-        }
+      .then(res => {
+        if (!res.hasOwnProperty('id')) navigate('/error');
 
+        setOriginData(res);
+        setModifyData(res);
+
+        const placeData = {
+          departPlace: res.departPlace.substring(0, 4),
+          departPlaceDetail: res.departPlace.substring(4),
+          departDate: res.departDate.substring(0, 10),
+          departTime: res.departDate.substring(11, 16),
+          arrivalPlace: res.arrivalPlace.substring(0, 4),
+          arrivalPlaceDetail: res.arrivalPlace.substring(4),
+          arrivalDate: res.arrivalDate.substring(0, 10),
+          arrivalTime: res.arrivalDate.substring(11, 16)
+        }
         setOriginPlace(placeData);
-        setModifyPlace(placeData)
+        setModifyPlace(placeData);
       }).catch((error) => {
       console.log(error);
     });
