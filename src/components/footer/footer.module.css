@@ -36,20 +36,20 @@ li {
   font-size: 1.1em;
 }
 
-.address {
+.contact {
   width: 90%;
   background-color: makerBrown;
   font-size: 1.1em;
   padding: 0.3em;
 }
 
-@media screen and (max-width:1024px) {
+@media screen and (max-width: 1024px) {
   .footer {
     font-size: 0.7em;
   }
 }
 
-@media screen and (max-width:720px) {
+@media screen and (max-width: 720px) {
   .footer {
     flex-direction: column;
     justify-content: start;
@@ -63,7 +63,7 @@ li {
   }
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
   .footer {
     flex-direction: column;
     font-size: 0.5em;
