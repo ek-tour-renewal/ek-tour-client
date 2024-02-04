@@ -8,13 +8,7 @@ import ScrollUpButton from '../scrollUpButton';
 import Banner from './banner';
 import UseNotice from './useNotice';
 
-const MobileMain = (props) => {
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    navigate('/mobile');
-  }, []);
+const MobileMain = () => {
 
   return (
     <Box>
@@ -26,7 +20,7 @@ const MobileMain = (props) => {
       {/* 스크롤 맨 위로 보내는 버튼 */}
       <ScrollUpButton />
     </Box>
-  )
+  );
 };
 
 export default MobileMain;
