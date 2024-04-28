@@ -2,7 +2,7 @@
   "name": "ektour",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://52.79.242.242:8080",
+  "proxy": "http://43.203.49.82:8080",
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
